@@ -3,21 +3,11 @@ global_clearance = 0.5;
 
 layer_thickness = 0.3;
 
-//Main tube diameter - hole [mm]
-main_tube_outer_diameter = 25.4;
-main_tube_inner_diameter = 23.05;
-
-// Nastavení parametrů rotoru
-
-gliding_aggle = 14;         // tenhle úhel by se zřejmě v budoucnu měl počítat z požadované klouzavosti.
-
-rotor_blade_AOA = 1.5;      // nastavení úhlu náběhu rotorového listu
 
 // Rotor Auto-G2
 rotor_blade_rod = true;  // generovat diru pro uhlikove tycky
 rotor_blade_length = 400 - 15;   // délka rotorového listu
 rotor_blade_depth = 45.5;     // hloubka rotorového listu
-
 
 blade_mount_length = 30;
 
@@ -50,25 +40,12 @@ blade_transition_length = 10; // length of blade transition
 
 blade_mount_screw_distance = (16.47+11.86)/2;
 
-/* blade_shell_thickness = 0.4;
-blade_shell_thickness_inner = 0.4;
-blade_shell_thickness_wire = 0.4;
-blade_infill_distance = 25;
-blade_infill_overlap = 0; */
-
 /// Nastaveni pro Slic3r
 blade_shell_thickness = 0.45;
 blade_shell_thickness_inner = 0.43;
 blade_shell_thickness_wire = 0.45;
 blade_infill_distance = 20;
 blade_infill_overlap = 0;
-
-
-//blade_rod_position = [rotor_blade_depth/4 + 5, 0, 0];
-//blade_rod_position2 = [rotor_blade_depth/4 - 5, 0, 0];
-
-//blade_rod_position = [15, 0, 0];
-//blade_rod_position2 = [4, 0.3, 0];
 
 blade_rod1_diameter = 2.58;
 blade_rod2_diameter = 2.58;
@@ -155,34 +132,20 @@ blade_mount_screw = M2_screw_diameter;
 blade_mount_nut = M2_nut_diameter;
 
 
+
+base_patern = 10.16;
+
+
+
+
+tail_pipes_distance = 10.16*5;
+tail_pipes_diameter = M4_screw_diameter;
+tail_pipes_min_wall = 3;
+
+
 //šroub servo
 Servo_screw = 1.5;
 Servo_nut_height = 1;
 Servo_nut_diameter = 2.7;
 
 
-
-//center_of_gravity_position = [main_pilon_position - tan(gliding_aggle)*rotor_height, 0, 0];
-
-
-////podzvozek
-
-radius_undercarriage = 25;
-vzdalenost_x = tan(20) * 131;
-vzdalenost_y = (131 - radius_undercarriage)/tan(79);
-uhel_y = 90 - 20;
-uhel_x = 90 - 79;
-
-maximum_printable_size = 150;
-
-
-////Pitotova trubice
-Pitot_tube_diameter = 4.02 + 1;
-Distance_hole_from_tube = 11.92;  //vzdálenost otvoru pro připevnění od samotné trubičky
-
-
-////Vlečné zařízení
-tow_ring_diameter = 20;
-tow_ring_thickness = 5;
-tow_ring_groove = 2;
-tow_ring_hole_diameter = M3_screw_diameter;
