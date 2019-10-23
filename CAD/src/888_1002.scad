@@ -1,6 +1,5 @@
 //dil pro pripevneni tazneho motoru
-
-//include <Users/parandelic/.ssh/TF-G2/CAD/src/parameters.scad>;
+include <../parameters.scad>
 
 sides_height = 80; //vyska sten
 lenght = 33; //delka sten z vykresu, nepouzity
