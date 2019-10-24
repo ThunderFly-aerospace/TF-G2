@@ -8,7 +8,7 @@ thickness = 3; //sirka sten
 drzak_height = 70; //spatny rozmer so far
 
 base_length = 145; //delka podlozky
-base_width = 55; //sirka podlozky
+base_width = 61; //sirka podlozky
 base_height = 10; //vyska podlozky
 rantl_thickness = 4; //sirka steny podlozky
 niy=13; //pocet der podelne -1
