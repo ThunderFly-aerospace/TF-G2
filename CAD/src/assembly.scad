@@ -23,14 +23,21 @@ for(x = [1, 0])
 				888_1003();
 
 translate([250, 0, -base_thickness*2])
-888_1004();
+	888_1004();
 
 
 translate([250, 0, 0])
-translate([0, 30, 0])
-rotate([90, 0, 90])
-translate([0, -100, -7.5])
-	888_2002();
+	translate([0, 30, 0])
+		rotate([90, 0, 90])
+			translate([0, 0, -18/2])
+				888_2002();
+
+translate([250, 0, 0])
+	rotate([0, 0, 180])
+		translate([0, 30, 0])
+			rotate([90, 0, 90])
+				translate([0, 0, -18/2])
+					888_2002();
 
 
 //888_1005();
