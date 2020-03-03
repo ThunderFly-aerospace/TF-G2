@@ -5,6 +5,7 @@ python:
 install:
   - pip3 install --upgrade pip 
   - pip3 install processor3D
+  - pip3 install git+https://github.com/ThunderFly-aerospace/yagv
   - sudo snap install openscad-nightly
 #  - pip3 install -r requirements.txt
 script:
