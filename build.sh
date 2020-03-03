@@ -1,1 +1,1 @@
-echo("AHOJ")
+echo "AHOJ"
