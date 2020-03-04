@@ -16,6 +16,6 @@ install:
   - sudo snap install openscad-nightly
 #  - pip3 install -r requirements.txt
 script:
-  -  ~/Slic3r.AppImage --no_gui
+  - slic3r --no_gui
   - cd CAD; make
   - ./build.sh
