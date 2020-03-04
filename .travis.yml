@@ -7,7 +7,7 @@ before_install:
   - wget https://github.com/ThunderFly-aerospace/Slic3r/releases/download/TFv0.1/Slic3r-1.3.1-dev-ebe35c30-.AppImage -O ~/Slic3r.AppImage
   - chmod +x ~/Slic3r.AppImage
 install:
-  - sudo apt install -y libc6
+  - sudo apt install -y libc6 build-essential libgtk2.0-dev libwxgtk3.0-dev libwx-perl libmodule-build-perl git cpanminus libextutils-cppguess-perl libboost-all-dev libxmu-dev liblocal-lib-perl wx-common libopengl-perl libwx-glcanvas-perl libtbb-dev libxmu-dev freeglut3-dev libwxgtk-media3.0-dev libboost-thread-dev libboost-system-dev libboost-filesystem-dev libcurl4-openssl-dev
   - pip3 install --upgrade pip
   - pip3 install lxml
   #- pip3 install processor3D
@@ -16,5 +16,6 @@ install:
   - sudo snap install openscad-nightly
 #  - pip3 install -r requirements.txt
 script:
+  -  ~/Slic3r.AppImage --no_gui
   - cd CAD; make
   - ./build.sh
