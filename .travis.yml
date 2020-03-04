@@ -9,5 +9,5 @@ install:
   - sudo snap install openscad-nightly
 #  - pip3 install -r requirements.txt
 script:
-  - cd CAD; make -j2
+  - cd CAD; make
   - ./build.sh
