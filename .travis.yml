@@ -4,7 +4,8 @@ python:
 # command to install dependencies
 install:
   - pip3 install --upgrade pip
-  - pip3 install processor3D lxml
+  - pip3 install lxml
+  - pip3 install git+https://github.com/ThunderFly-aerospace/processor3D.git
   - pip3 install git+https://github.com/ThunderFly-aerospace/yagv
   - sudo snap install openscad-nightly
 #  - pip3 install -r requirements.txt
