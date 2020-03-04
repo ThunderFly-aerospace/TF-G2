@@ -3,6 +3,7 @@ python:
   - "3.7"
 # command to install dependencies
 install:
+  - sudo apt install tree
   - pip3 install --upgrade pip
   - pip3 install lxml
   #- pip3 install processor3D
