@@ -1,3 +1,4 @@
+//@set_slicing_config(../slicing/default.ini)
 include <../parameters.scad>
 
 

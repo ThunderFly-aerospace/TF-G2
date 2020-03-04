@@ -1,5 +1,6 @@
 // drzak podelnych tyci k ocasu
 
+//@set_slicing_config(../slicing/default.ini)
 include <../parameters.scad>
 
 flange_thickness = 3;
@@ -14,7 +15,7 @@ module 888_1005(){
 			// zakladni kostka
 			translate([0, 0, flange_thickness/2])
 				cube([flange_depth, flange_length, flange_thickness], center = true);
-			
+
 			// Kostka pro tyc
 			translate([-flange_depth/2, -tail_pipes_diameter/2- tail_pipes_min_wall - tail_pipes_distance/2, 0])
 				cube([flange_depth, tail_pipes_min_wall*2+tail_pipes_diameter, 2*tail_pipes_min_wall + tail_pipes_diameter + 4]);
@@ -23,7 +24,7 @@ module 888_1005(){
 				cube([flange_depth, tail_pipes_min_wall*2+tail_pipes_diameter, 2*tail_pipes_min_wall + tail_pipes_diameter + 4]);
 		}
 
-		
+
 
 	//  diry pro trubku
 		translate([0, tail_pipes_distance/2, tail_pipes_diameter/2 + tail_pipes_min_wall])
