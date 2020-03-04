@@ -11,5 +11,6 @@ install:
   - sudo snap install openscad-nightly
 #  - pip3 install -r requirements.txt
 script:
+  - tree /home/travis/virtualenv/python3.7.1/lib/
   - cd CAD; make
   - ./build.sh
