@@ -3,6 +3,7 @@ python:
   - "3.7"
 # command to install dependencies
 before_install:
+  - uname -p
   - sudo apt update
 #  - wget https://github.com/ThunderFly-aerospace/Slic3r/releases/download/TFv0.1/Slic3r-1.3.1-dev-ebe35c30-.AppImage -O ~/Slic3r.AppImage
   - wget https://dl.slic3r.org/linux/Slic3r-1.3.0-x86_64.AppImage -O ~/Slic3r.AppImage
