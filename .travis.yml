@@ -11,17 +11,13 @@ before_install:
   - chmod +x ~/Slic3r.AppImage
 install:
   - sudo apt install -y slic3r
-  - ldd --version
   - sudo apt-get install libc-bin=2.27-3ubuntu1
-  - ldd --version
   - pip3 install --upgrade pip
   - pip3 install lxml
-  #- pip3 install processor3D
   - pip3 install git+https://github.com/ThunderFly-aerospace/processor3D.git
   - pip3 install git+https://github.com/ThunderFly-aerospace/yagv
   - sudo snap install openscad-nightly
-#  - pip3 install -r requirements.txt
 script:
 #  - slic3r --no_gui
   - cd CAD; make
-#  - ./build.sh
+  - ./build.sh
