@@ -20,4 +20,4 @@ install:
 script:
 #  - slic3r --no_gui
   - cd CAD; make
-  - ./build.sh
+  - cd ..; ./build.sh
