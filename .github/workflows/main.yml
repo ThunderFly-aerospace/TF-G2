@@ -37,6 +37,6 @@ jobs:
         cd CAD; make
 
     - name: Push
-    - uses: mikeal/publish-to-github-action@master
-      env:
-        GITHUB_TOKEN: ${{ secrets.GitHubToken }}
+      uses: mikeal/publish-to-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GitHubToken }}
