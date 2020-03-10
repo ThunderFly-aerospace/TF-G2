@@ -35,8 +35,13 @@ jobs:
     - name: Make
       run: |
         cd CAD; make
-
-    - name: Push
-      uses: mikeal/publish-to-github-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GitHubToken }}
+        
+    - name: publish-to-git
+      uses: seanmiddleditch/gha-publish-to-git@v1
+      with:
+        branch: master
+        # Destination git host
+        host: # optional, default is github.com
+        # GitHub Token (use `secrets.GITHUB_TOKEN`)
+        github_token: secrets.GitHubToken
+        # Personal Access Token or other https credentials
