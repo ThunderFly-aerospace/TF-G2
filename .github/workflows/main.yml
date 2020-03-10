@@ -26,7 +26,8 @@ jobs:
         sudo apt-get install libc-bin=2.27-3ubuntu1 python3-setuptools
         sudo python3 -m pip install --upgrade pip
         sudo python3 -m pip install lxml
-        sudo python3 -m pip install git+https://github.com/ThunderFly-aerospace/processor3D.git
+        # sudo python3 -m pip install git+https://github.com/ThunderFly-aerospace/processor3D.git
+        sudo python3 -m pip install processor3D
         sudo python3 -m pip install git+https://github.com/ThunderFly-aerospace/yagv
         sudo snap install openscad-nightly
         processor3D
