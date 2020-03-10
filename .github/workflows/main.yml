@@ -35,3 +35,7 @@ jobs:
     - name: Make
       run: |
         cd CAD; make
+
+    - uses: mikeal/publish-to-github-action@master
+        env:
+            GITHUB_TOKEN: ${{ secrets.GitHubToken }}
