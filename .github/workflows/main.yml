@@ -28,8 +28,8 @@ jobs:
         sudo python3 -m pip install lxml
         # sudo python3 -m pip install git+https://github.com/ThunderFly-aerospace/processor3D.git
         sudo python3 -m pip install processor3D
-        # sudo python3 -m pip install git+https://github.com/ThunderFly-aerospace/yagv
-        sudo python3 -m pip install yagv
+        sudo python3 -m pip install git+https://github.com/ThunderFly-aerospace/yagv
+        # sudo python3 -m pip install yagv
         sudo snap install openscad-nightly
 
     - name: Make
