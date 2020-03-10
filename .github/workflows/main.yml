@@ -29,6 +29,7 @@ jobs:
         pip3 install git+https://github.com/ThunderFly-aerospace/processor3D.git
         pip3 install git+https://github.com/ThunderFly-aerospace/yagv
         sudo snap install openscad-nightly
+        processor3D
 
     - name: Make
       run: |
