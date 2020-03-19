@@ -1,21 +1,21 @@
 
 //@set_slicing_config(../slicing/default.ini)
-include <../parameters.scad>
+include <../../parameters.scad>
 
-use <888_1001.scad>
-use <888_1002.scad>
-use <888_1003.scad>
-use <888_1004.scad>
-use <888_1005.scad>
-
+include <position/position_888_1001.scad>
+include <position/position_888_1002.scad>
+include <position/position_888_1006.scad>
+include <position/position_888_1007.scad>
+use <../888_1003.scad>
+use <../888_1004.scad>
+use <../888_1005.scad>
+use <../888_1005.scad>
 
 use <888_2002.scad>
 
 
 888_1001();
 
-
-888_1002();
 
 for(x = [1, 0])
 	mirror([0, x, 0])

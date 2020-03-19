@@ -199,3 +199,27 @@ base_patern = 10;
 rantl_thickness = 4; //sirka steny podlozky
 rantl_height = 8;
 niy=4; //pocet der podelne
+
+
+// Drazak motoru
+
+motor_holder_height = base_patern * 5;
+motor_holder_thickness = 4;
+motor_holder_motor_height = 25;
+motor_holder_side_mount_height = base_patern*2.5;
+pilon_holder_side_mount_height = base_patern*4;
+
+
+// Paraetry pilonu
+
+pilon_height = 250 - pilon_holder_side_mount_height;
+pilot_height_separation = 150 - pilon_holder_side_mount_height;
+pilon_thickness = 3;
+pilon_beam_width = 10;
+pilon_base_length = 50+10;
+
+pilon_top_width = 20;
+pilon_top_length = 20;
+
+pilon_angle = atan2(pilon_height,(base_width-pilon_top_width)/2);
+echo(pilon_angle);

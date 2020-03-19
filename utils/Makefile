@@ -27,5 +27,3 @@ $(AMF_DIR)/%.amf: $(SRC_DIR)/%.scad
 model:
 	echo $(f)
 	processor3D --output_folder $(GIT_ROOT) $(f)
-
-

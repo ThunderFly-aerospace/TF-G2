@@ -1,4 +1,4 @@
-//@set_slicing_config(../slicing/default.ini)
+//@set_slicing_config(slicing/default.ini)
 //nosna podlozka
 
 include <../parameters.scad>
@@ -30,6 +30,19 @@ module 888_1001(){
             for (i=[10:base_patern:base_length-base_patern], j=[-niy/2:niy/2])
                 translate([i,j*base_patern,-0.1])
                     cylinder(h=base_thickness+0.2, d=M3_screw_diameter, $fn=50);
+
+            //Velke otvory ve spodni casti.
+            for (i=[10:base_patern*2:base_length-base_patern], j=[-niy/2,niy/2-1])
+                hull(){
+                    translate([i,j*base_patern,-0.1])
+                        cylinder(h=base_thickness+0.2, d=M3_screw_diameter, $fn=50);
+                    translate([i+base_patern,j*base_patern,-0.1])
+                        cylinder(h=base_thickness+0.2, d=M3_screw_diameter, $fn=50);
+                    translate([i,(j+1)*base_patern,-0.1])
+                        cylinder(h=base_thickness+0.2, d=M3_screw_diameter, $fn=50);
+                    translate([i+base_patern,(j+1)*base_patern,-0.1])
+                        cylinder(h=base_thickness+0.2, d=M3_screw_diameter, $fn=50);
+                }
 
             //dirky v bocnich stenach
 
