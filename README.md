@@ -1,6 +1,6 @@
-Travis-ci: [![Build Status](https://travis-ci.com/ThunderFly-aerospace/TF-G2.svg?branch=master)](https://travis-ci.com/ThunderFly-aerospace/TF-G2)
-
 # TF-G2 
+![Build status](https://github.com/ThunderFly-aerospace/TF-G2/workflows/Build%20repository/badge.svg?branch=master)
+
 Autogyro model for learning purposes.
 
   * High repairability
