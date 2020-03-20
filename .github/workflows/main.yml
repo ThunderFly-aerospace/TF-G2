@@ -34,7 +34,7 @@ jobs:
 
     - name: Make
       run: |
-        cd CAD; make
+        cd CAD/src/printplate; make
 
     #- name: Push
     #  uses: mikeal/publish-to-github-action@master
