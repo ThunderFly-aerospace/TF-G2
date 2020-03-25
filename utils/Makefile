@@ -4,7 +4,12 @@ SOURCES=$(wildcard $(SRC_DIR)/*.scad)
 AMF_TARGETS=$(patsubst $(SRC_DIR)/%.scad, $(AMF_DIR)/%.amf, $(SOURCES))
 GCD_TARGETS=$(patsubst $(SRC_DIR)/%.scad, $(GCD_DIR)/%.gcode, $(SOURCES))
 
-OUTPUT_FOLDER=CAD
+OPENSCAD?=openscad-nightly
+SLICER?=~/Slic3r.AppImage
+
+NAME_PREFIX?=''
+SLIC3R_PROFILE?=''
+PROCESSOR3D_PARAM?=
 
 RED=" \e[91m "
 GRN=" \e[32m "
@@ -15,8 +20,17 @@ all: default
 
 default: $(AMF_TARGETS)
 $(AMF_DIR)/%.amf: $(SRC_DIR)/%.scad
-	@echo ============== $<
-	processor3D --output_folder $(GIT_ROOT)/$(OUTPUT_FOLDER) $<
+	@echo "\n\n"
+	@echo $<
+	@echo "\n"
+	processor3D \
+		--output_folder $(GIT_ROOT)/$(OUTPUT_FOLDER) \
+		--name_prefix $(NAME_PREFIX) \
+		--force \
+		--slic3r_profile $(SLIC3R_PROFILE) \
+		--openscad $(OPENSCAD) \
+		--slicer $(SLICER) \
+		$(PROCESSOR3D_PARAM) $<
 
 
 # gdefault: $(TARGETS)

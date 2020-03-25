@@ -6,7 +6,7 @@ SRC_DIR=../../src/printplate
 # GCD_DIR=../../gcode
 # INI_DIR=../../slicing
 GIT_ROOT=../../../
-OUTPUT_FOLDER=CADa
+OUTPUT_FOLDER=CAD
 NAME_PREFIX=TF-R2
 
 include ../../../utils/Makefile
