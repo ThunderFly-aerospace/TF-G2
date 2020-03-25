@@ -6,14 +6,10 @@ on:
   pull_request:
     branches: [ master ]
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
   build:
-    # The type of runner that the job will run on
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-ubuntu-18.04
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     - uses: actions/checkout@v2
 
@@ -31,6 +27,7 @@ jobs:
         sudo python3 -m pip install git+https://github.com/ThunderFly-aerospace/yagv
         # sudo python3 -m pip install yagv
         sudo snap install openscad-nightly
+        alias openscad=openscad-nightly
 
     - name: Make
       run: |
