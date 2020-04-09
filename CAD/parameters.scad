@@ -212,14 +212,21 @@ pilon_holder_side_mount_height = base_patern*4;
 
 // Paraetry pilonu
 
-pilon_height = 250 - pilon_holder_side_mount_height;
+
+// pilon_height = 250 - pilon_holder_side_mount_height;
+pilon_height = 230 - pilon_holder_side_mount_height;
 pilot_height_separation = 150 - pilon_holder_side_mount_height;
 pilon_thickness = 3;
 pilon_beam_width = 10;
-pilon_base_length = 50+10;
+pilon_base_length = 60;
+pilon_ring_length = 40;
 
 pilon_top_width = 20;
 pilon_top_length = 20;
+
+pilon_ring_width = 45;
+pilon_ring_height_rantl = 12+0.5;
+pilon_ring_height = 3;
 
 pilon_angle = atan2(pilon_height,(base_width-pilon_top_width)/2);
 echo(pilon_angle);
