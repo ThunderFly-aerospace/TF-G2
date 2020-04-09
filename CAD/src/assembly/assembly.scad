@@ -6,6 +6,8 @@ include <position/position_888_1001.scad>
 include <position/position_888_1002.scad>
 include <position/position_888_1006.scad>
 include <position/position_888_1007.scad>
+include <position/position_888_1008.scad>
+include <position/position_888_1009.scad>
 use <../888_1003.scad>
 use <../888_1004.scad>
 use <../888_1005.scad>
