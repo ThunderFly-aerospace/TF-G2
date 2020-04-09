@@ -19,7 +19,7 @@ difference(){
 // zakladni tvar
 		hull(){
 			translate([-base_width/2,-thickness/2,0])
-				cube([base_width,thickness, motor_holder_motor_height + 35/3]);
+				cube([base_width,thickness, motor_holder_motor_height*1.56]);
 		    translate([0, thickness/2, motor_holder_motor_height])
 		        rotate([90,0,0])
 			        cylinder(d=50,h=thickness,$fn=100);
@@ -31,7 +31,7 @@ difference(){
 				cube([30, 1, motor_holder_thickness+4], center = true);
 
 			translate([0, - 10 + motor_holder_thickness/2, 0])
-				cylinder(d = 10, h = motor_holder_thickness, $fn=50);
+				cylinder(d = 10, h = motor_holder_thickness, $fn=80);
 		}
 
 // Bocni priroby
@@ -43,7 +43,7 @@ difference(){
 
 					translate([0, - 10 + motor_holder_thickness/2, 0])
 						rotate([0,90, 0])
-							cylinder(d = 10, h = motor_holder_thickness, $fn=50);
+							cylinder(d = 10, h = motor_holder_thickness, $fn=80);
 				}
 
 	}
@@ -72,14 +72,14 @@ difference(){
 //dira uprostred
         translate([0, thickness/2 + 0.5, motor_holder_motor_height])
             rotate([90,0,0])
-		        cylinder(d=5,h=thickness+1,$fn=100);
+		        cylinder(d=10,h=thickness+1,$fn=100);
 
 // Otvor pro vzduch do motoru
         translate([0, thickness/2 + 0.5, motor_holder_motor_height])
             rotate([90,0,0])
 			difference(){
-		        cylinder(d=35,h=thickness+1,$fn=100);
-		        cylinder(d=15,h=thickness+1,$fn=100);
+		        cylinder(d=36,h=thickness+1,$fn=100);
+		        cylinder(d=17,h=thickness+1,$fn=100);
 				cube([10, 50, 50], center = true);
 				cube([50, 10, 50], center = true);
 			}
