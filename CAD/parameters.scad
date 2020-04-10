@@ -79,13 +79,13 @@ blade_rod2_position = [rotor_blade_depth/4 - 4, 0.2, 0];
 blade_rod3_position = [rotor_blade_depth/4 + 3.5, 0, 0];
 
 
-rotor_head_width =  21.4;    //Rozměr 1 v nákresu
+rotor_head_width =  30;    //Rozměr 1 v nákresu
 pilon_wall_thickness = 4.2;  // Rozměr 2 v nákresu
 horizontal_screw_distance = 14.5;   // Rozměr 4 v nákresu
 vertical_screw_distance = 12;       // rozměr 5 v nkresu
 topscrew_distance_endofpilon = 5;
 
-rotorhead_wall_thickness = 2; // sila tistenych dilu
+rotorhead_wall_thickness = 3; // sila tistenych dilu
 
 
 bearing_outer_diameter = 10.2;    // Rozměr B1 v nákresu s přídavkem na toleranci otvoru
@@ -220,6 +220,7 @@ pilon_thickness = 3;
 pilon_beam_width = 10;
 pilon_base_length = 60;
 pilon_ring_length = 40;
+pilon_ring_thickness = 3;
 
 pilon_top_width = 20;
 pilon_top_length = 20;
@@ -230,3 +231,8 @@ pilon_ring_height = 3;
 
 pilon_angle = atan2(pilon_height,(base_width-pilon_top_width)/2);
 echo(pilon_angle);
+
+pilon_bottom_angle = atan2(pilot_height_separation,(base_width-pilon_ring_width)/2-pilon_thickness*1.5);
+echo(pilon_bottom_angle);
+pilon_top_angle = atan2(pilon_height - pilot_height_separation,(pilon_ring_width - rotor_head_width)/2 - pilon_thickness - pilon_ring_thickness);
+echo(pilon_top_angle);

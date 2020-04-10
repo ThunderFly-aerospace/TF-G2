@@ -8,6 +8,7 @@ include <position/position_888_1006.scad>
 include <position/position_888_1007.scad>
 include <position/position_888_1008.scad>
 include <position/position_888_1009.scad>
+use <rotor_assembly.scad>
 use <../888_1003.scad>
 use <../888_1004.scad>
 use <../888_1005.scad>
@@ -42,5 +43,7 @@ translate([250, 0, 0])
 				translate([0, 0, -18/2])
 					888_2002();
 
+translate([153, 0, 250])
+	rotor_head();
 
 //888_1005();
