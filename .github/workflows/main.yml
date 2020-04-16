@@ -10,6 +10,10 @@ jobs:
   build:
     runs-on: ubuntu-18.04
 
+    env:
+      OPENSCAD_BIN: openscad-nightly
+      SLIC3R_BIN: ~/Slic3r.AppImage
+
     steps:
     - uses: actions/checkout@v2
 
@@ -29,7 +33,7 @@ jobs:
         # sudo python3 -m pip install yagv
         sudo snap install openscad-nightly
         openscad-nightly --version
-        alias openscad=openscad-nightly
+        # alias openscad=openscad-nightly
 
     - name: Make
       run: |
