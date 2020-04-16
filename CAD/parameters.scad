@@ -164,6 +164,8 @@ tail_pipes_distance = 10.16*5;
 tail_pipes_diameter = M4_screw_diameter;
 tail_pipes_min_wall = 3;
 
+elevator_pitch = 2;
+
 //center_of_gravity_position = [main_pilon_position - tan(gliding_aggle)*rotor_height, 0, 0];
 
 
