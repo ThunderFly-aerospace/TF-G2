@@ -26,10 +26,6 @@ $(AMF_DIR)/%.amf: $(SRC_DIR)/%.scad
 	processor3D \
 		--output_folder $(GIT_ROOT)/$(OUTPUT_FOLDER) \
 		--name_prefix $(NAME_PREFIX) \
-		--force \
-		--slic3r_profile $(SLIC3R_PROFILE) \
-		--openscad $(OPENSCAD) \
-		--slicer $(SLICER) \
 		$(PROCESSOR3D_PARAM) $<
 
 
@@ -38,6 +34,6 @@ $(AMF_DIR)/%.amf: $(SRC_DIR)/%.scad
 # #     @echo ============== $<
 #       processor3D --output_folder $(GIT_ROOT) $<
 
-model:
-	echo $(f)
-	processor3D --output_folder $(GIT_ROOT) $(f)
+#model:
+#	echo $(f)
+#	processor3D --output_folder $(GIT_ROOT) $(f)
