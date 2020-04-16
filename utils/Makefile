@@ -23,7 +23,7 @@ $(AMF_DIR)/%.amf: $(SRC_DIR)/%.scad
 	@echo "\n\n"
 	@echo $<
 	@echo "\n"
-	processor3D \
+	-processor3D \
 		--output_folder $(GIT_ROOT)/$(OUTPUT_FOLDER) \
 		--name_prefix $(NAME_PREFIX) \
 		$(PROCESSOR3D_PARAM) $<
