@@ -226,3 +226,6 @@ module tail_horizontal(){
 tail_horizontal();
 //mirror([0, 1, 0])
 //    tail_horizontal();
+
+
+module 888_3001() tail_center();

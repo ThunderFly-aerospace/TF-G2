@@ -70,4 +70,4 @@ module tail_rudder() translate([0, 0, -rudder_below]){
 }
 tail_rudder();
 
-module 888_3004 tail_rudder();
+module 888_3004() tail_rudder();

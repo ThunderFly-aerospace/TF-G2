@@ -49,3 +49,4 @@ module tail_vertical_bottom(){
 }
 
 tail_vertical_bottom();
+module 888_3002() tail_vertical_bottom();

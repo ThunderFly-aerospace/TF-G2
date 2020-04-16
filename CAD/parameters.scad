@@ -216,8 +216,8 @@ pilon_holder_side_mount_height = base_patern*4;
 
 
 // pilon_height = 250 - pilon_holder_side_mount_height;
-pilon_height = 230 - pilon_holder_side_mount_height;
-pilot_height_separation = 150 - pilon_holder_side_mount_height;
+pilon_height = 180 - pilon_holder_side_mount_height;
+pilot_height_separation = 120 - pilon_holder_side_mount_height;
 pilon_thickness = 3;
 pilon_beam_width = 10;
 pilon_base_length = 60;
