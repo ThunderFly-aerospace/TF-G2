@@ -43,7 +43,7 @@ module tail_rudder() translate([0, 0, -rudder_below]){
             }
         }
         translate([depth_max - rudder_depth, 0, -0.5])
-            cylinder(d = 2.5, h = height_bottom_part+rudder_below+1, $fn = 60);
+            cylinder(d = 2.6, h = height_bottom_part+rudder_below+1, $fn = 60);
     }
 
     translate([depth_max - rudder_depth, 0, 0]) difference(){
@@ -71,3 +71,21 @@ module tail_rudder() translate([0, 0, -rudder_below]){
 tail_rudder();
 
 module 888_3004() tail_rudder();
+
+module 888_3004_modif_pipe(){
+        translate([depth_max - rudder_depth, 0, -0.5-rudder_below])
+            cylinder(d = 3.4, h = height_bottom_part+rudder_below+1, $fn = 60);
+
+}
+
+%888_3004_modif_pipe();
+
+
+module 888_3004_modif_hand(){
+    translate([depth_max - rudder_depth, 0, -rudder_below]) hull(){
+        translate([10, 0, 1]) cube([10, 2, 2], center = true);
+        translate([0, 20, 0]) cylinder(d = 7, h=2, $fn=40);
+    }
+}
+
+% 888_3004_modif_hand();

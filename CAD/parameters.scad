@@ -194,7 +194,7 @@ tow_ring_hole_diameter = M3_screw_diameter;
 
 ////Simoniny parametry pro nosník rotoru
 base_length = 290; //delka podlozky
-base_split_position = [0, 145, base_length];
+base_split_position = [0, base_length/2, base_length];
 base_width = 70; //sirka podlozky - vnější šířka nosníku
 base_thickness = 4; //vyska podlozky
 base_patern = 10;

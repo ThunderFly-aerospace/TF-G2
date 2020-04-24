@@ -3,4 +3,4 @@
 //dil pro pripevneni tazneho motoru
 use <../../888_1001.scad>
 
-888_1001();
+translate([base_patern, 0, 0]) 888_1001();
