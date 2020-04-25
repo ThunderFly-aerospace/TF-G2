@@ -6,7 +6,7 @@ include <../parameters.scad>
 sides_height = 90; //vyska sten
 bellow = 5;
 height = 20;
-front_overlap = 0;
+front_overlap = 7;
 back_overlap = 20;
 length = base_length + front_overlap + back_overlap; //delka sten z vykresu, nepouzity
 thickness = 3; //sirka sten
@@ -21,73 +21,58 @@ module 888_1003(){
 		hull(){
 //kvadrik ("spolecny s podlozkou")
             translate([10, -base_thickness -rantl_height/2, 0])
-	           cube([base_length-10, base_thickness + rantl_height, thickness]);
+	           cube([base_length, base_thickness + rantl_height, thickness]);
 
-		    translate([3-front_overlap, 3-bellow, 0])
+		    translate([front_overlap, 3-bellow, 0])
 				cylinder(d = 6, h = thickness);
 
-			translate([3-front_overlap, 3-bellow+10, 0])
+			translate([front_overlap+8, 3-bellow+22, 0])
 				cylinder(d = 6, h = thickness);
 
 			translate([30, 35-bellow, 0])
 				cylinder(d = 12, h = thickness);
 
-			translate([43-front_overlap + 20, -bellow + height + 19, 0])
+			translate([43-front_overlap + 20, -bellow + height + 15, 0])
 				cylinder(d = 30, h = thickness);
 
-			translate([43-front_overlap + 20 + 120, -bellow + height + 19, 0])
+			translate([43-front_overlap + 20 + 150, -bellow + height + 15, 0])
 				cylinder(d = 30, h = thickness);
 
-			translate([-40/2 + back_overlap + base_length, 10-bellow, 0])
+			translate([-40/2 + back_overlap + base_length, 15, 0])
 				cylinder(d = 20, h = thickness);
 
-			translate([-50/2 + back_overlap + base_length - 20, 25-bellow, 0])
-				cylinder(d = 20, h = thickness);
-
-			translate([-80 + base_length, height + 20 - 25, 0])
-				cylinder(d = 30, h = thickness);
-	   	}
+		}
 
 
-        for(x = [10:10:base_length-10])
-	        translate([x, 0, 0])
-	            cylinder(d = M3_screw_diameter, h = 10, center = true, $fn = 50);
-
-		for(x = [10*3:10:10*4])
-	        translate([x, motor_holder_side_mount_height-5, 0])
+        for(x = [20:10:base_length])
+	        translate([x, 0, -0.1])
 	            cylinder(d = M3_screw_diameter, h = 10, center = true, $fn = 50);
 
         //for(x = [10+base_patern, 10+base_patern*2])
-		for(x = [10*3:10:10*18])
-	        translate([x, motor_holder_side_mount_height, 0])
+		for(x = [10*3:10*2:10*26])
+	        translate([x, motor_holder_side_mount_height, -0.1])
 	            cylinder(d = M3_screw_diameter, h = 10, center = true, $fn = 50);
 
-		#for(x = [10*6:10:10*18])
-	        translate([x, pilon_holder_side_mount_height, 0])
+		// Horni rada sroubu pro pylon
+		for(x = [10*8:10:10*21])
+	        translate([x, pilon_holder_side_mount_height, -0.1])
 	            cylinder(d = M3_screw_diameter, h = 10, center = true, $fn = 50);
 
 
 		// otvory ve stene
-		for (i=[0:7])
-			translate([i*28+50, 6.5, 0])
+		for (i=[0:9])
+			translate([i*28+20, 6.5, -0.1])
 				minkowski(){
 					cube([18, 12, 5]);
 					cylinder(d=5, h = 2);
 				}
 
-		for (i=[0:4])
-			translate([i*32+50, 31.5, 0])
+		for (i=[0:5])
+			translate([i*32+40, 31.5, -0.1])
 				minkowski(){
 					cube([18, 3, 5]);
 					cylinder(d=5, h = 2);
 				}
-
-
-		translate([-1*32+50, 6.5, 0])
-			minkowski(){
-				cube([23, 7, 5]);
-				cylinder(d=5, h = 2);
-			}
 
 
 	}
@@ -110,8 +95,8 @@ module 888_1003_part(part = 0){
 
 module 888_1003_crop_visualisation(){
     %for (i=sides_split_positions) {
-        translate([i - front_overlap, 0, 0])
-            cube([0.01, 200, 20], center = true);
+        translate([i - front_overlap, 20, 0])
+            cube([0.01, 80, 10], center = true);
     }
 }
 
