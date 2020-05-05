@@ -6,8 +6,8 @@ SRC_DIR=../../src/assembly/position
 # GCD_DIR=../../gcode
 # INI_DIR=../../slicing
 GIT_ROOT=../../../
-OUTPUT_FOLDER=CADa
+OUTPUT_FOLDER=.
 NAME_PREFIX=TF-G2_assembly
-
+PROCESSOR3D_PARAM=--no_gcode --no_amf
 
 include ../../../utils/Makefile

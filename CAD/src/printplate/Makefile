@@ -8,5 +8,4 @@ SRC_DIR=../../src/printplate
 GIT_ROOT=../../../
 OUTPUT_FOLDER=CAD
 NAME_PREFIX=TF-G2
-
 include ../../../utils/Makefile

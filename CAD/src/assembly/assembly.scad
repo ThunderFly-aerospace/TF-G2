@@ -10,6 +10,9 @@ include <position/position_888_1007.scad>
 include <position/position_888_1008.scad>
 include <position/position_888_1009.scad>
 include <position/position_888_3000.scad>
+include <position/position_888_3006.scad>
+include <position/position_motor.scad>
+include <position/position_tailPipe.scad>
 use <rotor_assembly.scad>
 use <../888_1003.scad>
 use <../888_1004.scad>

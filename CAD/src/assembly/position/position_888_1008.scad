@@ -1,6 +1,7 @@
 //@set_slicing_config(../../slicing/default.ini)
 
 //dil pro pripevneni tazneho motoru
+include <../../../parameters.scad>
 use <../../888_1008.scad>
 
     translate([145, pilon_ring_width/2 - pilon_ring_thickness - pilon_thickness, pilon_holder_side_mount_height+pilot_height_separation])

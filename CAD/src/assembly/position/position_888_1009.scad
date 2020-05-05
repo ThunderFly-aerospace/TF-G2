@@ -1,6 +1,7 @@
 //@set_slicing_config(../../slicing/default.ini)
 
 //Vyztuzovaci ramecek pylonu
+include <../../../parameters.scad>
 use <../../888_1009.scad>
 
     translate([145, 0, pilon_holder_side_mount_height + pilot_height_separation])

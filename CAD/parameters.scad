@@ -166,6 +166,21 @@ tail_pipes_min_wall = 3;
 
 elevator_pitch = 2;
 
+
+/// ruder parametry
+
+rudder_height = 150;
+height_bottom_part = 130;
+rudder_depth_max = 200;
+
+below_rudder_height = 30;
+rudder_depth = 60;
+
+tail_airfoil_n = 80;
+
+
+
+
 //center_of_gravity_position = [main_pilon_position - tan(gliding_aggle)*rotor_height, 0, 0];
 
 
