@@ -20,6 +20,7 @@ join_height = 10;
 wheel_mount_thickness = 7;
 
 module 888_2002()
+
 translate([0, -suspension_bow_diameter/2 - join_height/2, 0]){
 
     intersection(){
@@ -68,7 +69,32 @@ translate([0, -suspension_bow_diameter/2 - join_height/2, 0]){
                         cylinder(d = 6.5, h = 30, center = true);
             }
 
+
 }
+
+uhel = 60;
+thickness = 0.2;
+depth = 10;
+//uhel_v_zavislosti_na_parametrech = tan((suspension_depth/2)/suspension_thickness);
+poloha = sin(uhel)*thickness; //délka tloušťky
+poloha_A = sin(uhel)*thickness; //délka v ose X
+
+translate([depth*2,-1.5,depth/1.25])
+rotate([90,0,-100])
+
+union(){
+translate([poloha*2,0,0])
+	rotate([0,0,uhel])
+		color([0,0,1])
+		cube([depth,thickness,depth]);
+
+translate([poloha_A,poloha_A,0])
+	rotate([0,0,-uhel])
+		color([0,0,1])
+		cube([depth,thickness,depth]);
+
+}
+
 
 
 888_2002();
