@@ -1,6 +1,7 @@
 
 //@set_slicing_config(../slicing/default.ini)
 include <../../parameters.scad>
+include <yasim.scad>
 
 include <position/position_888_1001.scad>
 include <position/position_888_1002.scad>
