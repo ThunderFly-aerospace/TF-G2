@@ -8,7 +8,7 @@ L1 = rotor_head_width;  // Length of the middle part
 T1 = rotorhead_wall_thickness;  // Thickness of the middle wall
 T2 = rotorhead_wall_thickness;  // Thickness of the side walls
 H = 11;  // Hight of the part
-L2 = pilon_top_length;  // Length of the side walls
+L2 = pylon_top_length;  // Length of the side walls
 
 /// Parameters for holes
 RC = M3_screw_diameter/2;  // Radius of the center screw holes
@@ -26,10 +26,10 @@ module body() {
     translate([0,0, 0]) difference() {
         union(){
             translate([0, 0, 0])
-                cube([L1, pilon_top_length, .1], center= true);
+                cube([L1, pylon_top_length, .1], center= true);
             hull(){
                 translate([0, 0, 0])
-                cube([L1, pilon_top_length, 10], center= true);
+                cube([L1, pylon_top_length, 10], center= true);
                 translate([0, 0, -15])
                     rotate([0,90,0])
                         cylinder(d=10, h=L1, center = true, $fn=fn);
@@ -40,8 +40,8 @@ module body() {
 
         }
 
-        translate([25 + rotor_head_width/2, 0, 0]) rotate([0, 90-pilon_top_angle, 0]) cube(50, center = true);
-        translate([-25 - rotor_head_width/2, 0, 0]) rotate([0, pilon_top_angle, 0]) cube(50, center = true);
+        translate([25 + rotor_head_width/2, 0, 0]) rotate([0, 90-pylon_top_angle, 0]) cube(50, center = true);
+        translate([-25 - rotor_head_width/2, 0, 0]) rotate([0, pylon_top_angle, 0]) cube(50, center = true);
 
 
         difference(){
@@ -65,7 +65,7 @@ module Part1(){
 
         translate([0, 0, 5]) rotate([0,90,0]) cylinder(r=RC, h=L1+10, center = true, $fn=fn);
 
-            for(x = [-pilon_top_length/2+5:10:pilon_top_length/2-5])
+            for(x = [-pylon_top_length/2+5:10:pylon_top_length/2-5])
                 translate([0, x, 20])
                     rotate([0, 90, 0])
                         {

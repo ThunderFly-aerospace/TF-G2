@@ -55,7 +55,7 @@ module 888_1003(){
 
 		// Horni rada sroubu pro pylon
 		for(x = [10*8:10:10*21])
-	        translate([x, pilon_holder_side_mount_height, -0.1])
+	        translate([x, pylon_holder_side_mount_height, -0.1])
 	            cylinder(d = M3_screw_diameter, h = 10, center = true, $fn = 50);
 
 
