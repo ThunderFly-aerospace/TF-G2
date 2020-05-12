@@ -1,4 +1,4 @@
-# TF-G2 trainig autogyro
+# TF-G2 training autogyro
 ![Build status](https://github.com/ThunderFly-aerospace/TF-G2/workflows/Build%20repository/badge.svg?branch=master)
 
 
@@ -8,6 +8,7 @@
 
 Autogyro model for UAV pilot training and learning purposes.
 
-  * High repairability and easy maintanance
+  * High repairability and easy maintenance
   * Use of 3D printing flexibility
-  * Predictable behavivour in flight
+  * Predictable behavior in flight
+  * Micro payload load capacity
