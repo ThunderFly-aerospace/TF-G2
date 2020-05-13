@@ -80,10 +80,10 @@ blade_rod3_position = [rotor_blade_depth/4 + 3.5, 0, 0];
 
 
 rotor_head_width =  30;    //Rozměr 1 v nákresu
-pilon_wall_thickness = 4.2;  // Rozměr 2 v nákresu
+pylon_wall_thickness = 4.2;  // Rozměr 2 v nákresu
 horizontal_screw_distance = 14.5;   // Rozměr 4 v nákresu
 vertical_screw_distance = 12;       // rozměr 5 v nkresu
-topscrew_distance_endofpilon = 5;
+topscrew_distance_endofpylon = 5;
 
 rotorhead_wall_thickness = 3; // sila tistenych dilu
 
@@ -181,7 +181,7 @@ tail_airfoil_n = 80;
 
 
 
-//center_of_gravity_position = [main_pilon_position - tan(gliding_aggle)*rotor_height, 0, 0];
+//center_of_gravity_position = [main_pylon_position - tan(gliding_aggle)*rotor_height, 0, 0];
 
 
 base_patern = 10.16;
@@ -224,32 +224,32 @@ motor_holder_height = base_patern * 5;
 motor_holder_thickness = 4;
 motor_holder_motor_height = 25;
 motor_holder_side_mount_height = base_patern*2.5;
-pilon_holder_side_mount_height = base_patern*4;
+pylon_holder_side_mount_height = base_patern*4;
 
 
-// Paraetry pilonu
+// Paraetry pylonu
 
 
-// pilon_height = 250 - pilon_holder_side_mount_height;
-pilon_height = 180 - pilon_holder_side_mount_height;
-pilot_height_separation = 120 - pilon_holder_side_mount_height;
-pilon_thickness = 3;
-pilon_beam_width = 10;
-pilon_base_length = 60;
-pilon_ring_length = 40;
-pilon_ring_thickness = 3;
+// pylon_height = 250 - pylon_holder_side_mount_height;
+pylon_height = 180 - pylon_holder_side_mount_height;
+pilot_height_separation = 120 - pylon_holder_side_mount_height;
+pylon_thickness = 3;
+pylon_beam_width = 10;
+pylon_base_length = 60;
+pylon_ring_length = 40;
+pylon_ring_thickness = 3;
 
-pilon_top_width = 20;
-pilon_top_length = 20;
+pylon_top_width = 20;
+pylon_top_length = 20;
 
-pilon_ring_width = 45;
-pilon_ring_height_rantl = 12+0.5;
-pilon_ring_height = 3;
+pylon_ring_width = 45;
+pylon_ring_height_rantl = 12+0.5;
+pylon_ring_height = 3;
 
-pilon_angle = atan2(pilon_height,(base_width-pilon_top_width)/2);
-echo(pilon_angle);
+pylon_angle = atan2(pylon_height,(base_width-pylon_top_width)/2);
+echo(pylon_angle);
 
-pilon_bottom_angle = atan2(pilot_height_separation,(base_width-pilon_ring_width)/2-pilon_thickness*1.5);
-echo(pilon_bottom_angle);
-pilon_top_angle = atan2(pilon_height - pilot_height_separation,(pilon_ring_width - rotor_head_width)/2 - pilon_thickness - pilon_ring_thickness);
-echo(pilon_top_angle);
+pylon_bottom_angle = atan2(pilot_height_separation,(base_width-pylon_ring_width)/2-pylon_thickness*1.5);
+echo(pylon_bottom_angle);
+pylon_top_angle = atan2(pylon_height - pilot_height_separation,(pylon_ring_width - rotor_head_width)/2 - pylon_thickness - pylon_ring_thickness);
+echo(pylon_top_angle);
