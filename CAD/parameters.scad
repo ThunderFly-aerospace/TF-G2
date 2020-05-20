@@ -224,7 +224,7 @@ motor_holder_height = base_patern * 5;
 motor_holder_thickness = 4;
 motor_holder_motor_height = 25;
 motor_holder_side_mount_height = base_patern*2.5;
-pylon_holder_side_mount_height = base_patern*4;
+pylon_holder_side_mount_height = base_patern*4.5;
 
 
 // Paraetry pylonu
