@@ -7,4 +7,4 @@ use <../888_1003.scad>
 $fn = 50;
 
 888_1003_part(0);
-translate([110, -20, 0]) rotate([0, 0, 180]) 888_1003_part(0);
+translate([0, -20, 0]) mirror([0, 1, 0]) 888_1003_part(0);
