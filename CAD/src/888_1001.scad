@@ -31,17 +31,28 @@ module 888_1001(){
                 translate([i,j*base_patern,-0.1])
                     cylinder(h=base_thickness+0.2, d=M3_screw_diameter, $fn=50);
 
+            //dirky ve dnu
+            for (i=[10*2], j=[0])
+                translate([i,j*base_patern,-0.1])
+                    cylinder(h=base_thickness+0.2, d=M3_screw_diameter, $fn=50);
+
+            %translate([45, 5, 0]) rotate(90) cube([20, 8.5, 10]);
+
+            #for (i=[base_patern*6], j=[base_patern*1.5-29/2, base_patern*1.5+28/2])
+                translate([i,j,-0.1])
+                    cylinder(h=base_thickness+0.2, d=1, $fn=50);
+
             //Velke otvory ve spodni casti.
             for (i=[base_patern:base_patern*2:base_length-base_patern], j=[-1, 1])
                 hull(){
                     translate([i +base_patern/2,j*base_patern/2,-0.1])
-                        cylinder(h=base_thickness+0.2, d=M3_screw_diameter, $fn=50);
+                        cylinder(h=base_thickness+0.2, d=M3_screw_diameter+1, $fn=50);
                     translate([i+base_patern +base_patern/2,j*base_patern/2,-0.1])
-                        cylinder(h=base_thickness+0.2, d=M3_screw_diameter, $fn=50);
+                        cylinder(h=base_thickness+0.2, d=M3_screw_diameter+1, $fn=50);
                     translate([i +base_patern/2,j*(base_width/2-10),-0.1])
-                        cylinder(h=base_thickness+0.2, d=M3_screw_diameter, $fn=50);
+                        cylinder(h=base_thickness+0.2, d=M3_screw_diameter+1, $fn=50);
                     translate([i+base_patern +base_patern/2,j*(base_width/2-10),-0.1])
-                        cylinder(h=base_thickness+0.2, d=M3_screw_diameter, $fn=50);
+                        cylinder(h=base_thickness+0.2, d=M3_screw_diameter+1, $fn=50);
                 }
 
             //dirky v bocnich stenach

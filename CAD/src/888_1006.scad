@@ -35,7 +35,7 @@ translate([0, 0, -rantl_height/2-base_thickness])
             difference(){
                 for (i=[5:batteryself_length/6:batteryself_length], j=[-1, 1])
                     translate([i+5, j*(base_width/4), batteryself_thickness/2])
-                        cube([batteryself_length/7-5, (base_width-5)/2-6, batteryself_thickness+2], center = true);
+                        cube([batteryself_length/7-3, (base_width-5)/2-6, batteryself_thickness+2], center = true);
 
                 for (i=[5:batteryself_length/6:batteryself_length], j=[-1, 1])
                 translate([batteryself_length/2, base_width/2*j, 0])
@@ -45,7 +45,7 @@ translate([0, 0, -rantl_height/2-base_thickness])
 
             for (i=[5:batteryself_length/6:batteryself_length], j=[-1, 1])
                 translate([batteryself_length/2, (base_width/2-8)*j, 0])
-                    cube([20, 2, 10], center = true);
+                    cube([24, 2, 10], center = true);
             //dirky v bocnich stenach
 
                 for(x = [5:10:batteryself_length-5])

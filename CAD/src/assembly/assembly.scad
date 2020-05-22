@@ -1,7 +1,7 @@
 
 //@set_slicing_config(../slicing/default.ini)
 include <../../parameters.scad>
-include <yasim.scad>
+// include <yasim.scad>
 
 include <position/position_888_1001.scad>
 include <position/position_888_1002.scad>
@@ -10,6 +10,7 @@ include <position/position_888_1003.scad>
 include <position/position_888_1007.scad>
 include <position/position_888_1008.scad>
 include <position/position_888_1009.scad>
+include <position/position_888_1013.scad>
 include <position/position_888_3000.scad>
 include <position/position_888_3006.scad>
 include <position/position_motor.scad>
@@ -29,9 +30,6 @@ for(x = [1, 0])
 		translate([0, -base_width/2, 0])
 			rotate([90, 0, 0])
 				888_1003(); */
-
-translate([250, 0, -base_thickness*2])
-	888_1004();
 
 
 translate([250, 0, 0])
