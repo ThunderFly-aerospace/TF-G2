@@ -45,6 +45,21 @@ module 888_1007(){
                     cube([pylon_ring_length, 10, pylon_thickness+1], center = true);
         }
 
+        for(i=[0, 1]) mirror([i, 0, 0])
+        difference(){
+          hull(){
+            #translate([pylon_base_length/2 - 5, 6, -2])
+              cylinder(d = 2, h = pylon_thickness+1);
+
+            translate([pylon_ring_length/2 - 5, pilot_height_separation - 6, -2])
+              cylinder(d = 2, h = pylon_thickness+1);
+          }
+
+          for(y = [0:10])
+            translate([0, y*15, 0])
+              cube([100, 3, pylon_thickness*2+2], center = true);
+        }
+
 
 //  Otvory pro prisroubovani
     for(x = [-pylon_base_length/2+5:10:pylon_base_length/2-5])
