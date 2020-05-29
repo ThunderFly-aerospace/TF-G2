@@ -1,6 +1,5 @@
-//@set_slicing_config(../../slicing/tail_center.ini)
+//@set_slicing_config(../../slicing/default.ini)
 
-//dil pro pripevneni tazneho motoru
 include <../../parameters.scad>
 use <../888_2002.scad>
 

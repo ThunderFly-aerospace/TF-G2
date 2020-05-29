@@ -15,8 +15,9 @@ rotor_blade_AOA = 1.5;      // nastavení úhlu náběhu rotorového listu
 
 // Rotor Auto-G2
 rotor_blade_rod = true;  // generovat diru pro uhlikove tycky
-rotor_blade_length = 400 - 15;   // délka rotorového listu
-rotor_blade_depth = 45.5;     // hloubka rotorového listu
+rotor_blade_length = 500 - 15;   // délka rotorového listu
+rotor_blade_depth = 45.5+2;     // hloubka rotorového listu
+rotor_balde_tip_cutoff = 15.5;
 
 
 blade_mount_length = 30;
@@ -42,13 +43,16 @@ rotor_height = 180;         // výška otočného kloubu rotoru nad hlavní trub
 rotor_blades_count = 2;
 rotor_delta_angle = 12;
 rotor_blade_thickness = 5.1;
+//rotor_balde_tip_cutoff = 10;
 
 rotor_blade_naca = 2412;
-rotor_blade_parts_count = 3;
+rotor_blade_parts_count = 4;
 
 blade_transition_length = 10; // length of blade transition
 
 blade_mount_screw_distance = (16.47+11.86)/2;
+
+rod_from_end = 10;
 
 /* blade_shell_thickness = 0.4;
 blade_shell_thickness_inner = 0.4;
@@ -75,8 +79,8 @@ blade_rod2_diameter = 2.58;
 blade_rod3_diameter = 2.13;
 
 blade_rod1_position = [3.4, 0.3, 0];
-blade_rod2_position = [rotor_blade_depth/4 - 4, 0.2, 0];
-blade_rod3_position = [rotor_blade_depth/4 + 3.5, 0, 0];
+blade_rod2_position = [rotor_blade_depth/4 - 6, 0.3, 0];
+blade_rod3_position = [rotor_blade_depth/4 + 3, 0.1, 0];
 
 
 rotor_head_width =  30;    //Rozměr 1 v nákresu
@@ -151,8 +155,8 @@ M2_nut_diameter = 4.8;
 M2_nut_pocket = 3.95;
 
 
-blade_mount_screw = M2_screw_diameter;
-blade_mount_nut = M2_nut_diameter;
+blade_mount_screw = M3_screw_diameter;
+blade_mount_nut = M3_nut_diameter;
 
 
 //šroub servo
@@ -211,17 +215,17 @@ tow_ring_hole_diameter = M3_screw_diameter;
 base_length = 290; //delka podlozky
 base_split_position = [0, 150, base_length];
 base_width = 70; //sirka podlozky - vnější šířka nosníku
-base_thickness = 4; //vyska podlozky
+base_thickness = 3; //vyska podlozky
 base_patern = 10;
-rantl_thickness = 4; //sirka steny podlozky
-rantl_height = 8;
+rantl_thickness = 3; //sirka steny podlozky
+rantl_height = 6.5;
 niy=4; //pocet der podelne
 
 
 // Drazak motoru
 
 motor_holder_height = base_patern * 5;
-motor_holder_thickness = 4;
+motor_holder_thickness = 3;
 motor_holder_motor_height = 25;
 motor_holder_side_mount_height = base_patern*2.5;
 pylon_holder_side_mount_height = base_patern*4.5;
@@ -231,9 +235,9 @@ pylon_holder_side_mount_height = base_patern*4.5;
 
 
 // pylon_height = 250 - pylon_holder_side_mount_height;
-pylon_height = 180 - pylon_holder_side_mount_height;
-pilot_height_separation = 120 - pylon_holder_side_mount_height;
-pylon_thickness = 3;
+pylon_height = 180 + 50 - pylon_holder_side_mount_height;
+pilot_height_separation = 120 + 30 - pylon_holder_side_mount_height;
+pylon_thickness = 3.5;
 pylon_beam_width = 10;
 pylon_base_length = 60;
 pylon_ring_length = 40;
