@@ -17,6 +17,7 @@ N = 80;
 module tail_center(){
     difference(){
 
+        union(){
         hull(){
             translate([0, 0, -below_height])
                 sweep(gen_dat_2(M=below_height, dz=1,N=N), showslices = false);
@@ -32,6 +33,11 @@ module tail_center(){
             translate([0, 0, -5-2])
                 rotate([0, 90, 0])
                     cylinder(d = 10.4+2, h = 40);
+        }
+
+        // kostky na pripevneni smerovky
+            translate([-(15-0.5)/2 + 30, -(5-0.5)/2, 0]) cube([15-0.5, 5-0.5, 10-0.7]);
+            translate([-(15-0.5)/2 + 30 + 80, -(5-0.5)/2, 0]) cube([15-0.5, 5-0.5, 10-0.7]);
         }
 
         // Otvor na podelnou tyc
@@ -79,6 +85,11 @@ module tail_center(){
             translate([+28/2, 0, -20+10]) cylinder(d=2, h=100, center = true, $fn = 20);
 
         }
+
+        // kostky na pripevneni smerovky
+        translate([30, 0, 5]) rotate([90, 0, 0]) cylinder(d = M3_screw_diameter, h = 20, center = true, $fn = 30);
+        translate([30 + 80, 0, 5]) rotate([90, 0, 0]) cylinder(d = M3_screw_diameter, h = 20, center = true, $fn = 30);
+
     }
 
     // specific generator function
