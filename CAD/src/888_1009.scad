@@ -32,15 +32,20 @@ module 888_1009(){
             }
 
         difference(){
-            cube([pylon_ring_length-15, pylon_ring_width-15, 30], center = true);
-                cube([5, pylon_ring_width-15, 30], center = true);
+            cube([pylon_ring_length-10, pylon_ring_width-10, 30], center = true);
+                cube([5, pylon_ring_width, 30], center = true);
                 for(x = [-1, 1])
-                    translate([0, 25/2*x, 0])
+                    translate([0, 20/2*x, 0])
                         cylinder(d = 10, h=30, center = true);
         }
-                for(x = [-1, 1])
-                    translate([0, 25/2*x, 0])
-                        cylinder(d = M3_screw_diameter, h=30, center = true, $fn = 30);
+
+        // otvory na pripevneni prislusenstvi
+        for(x = [-1, 1])
+            translate([0, 20/2*x, 0])
+                cylinder(d = M3_screw_diameter, h=30, center = true, $fn = 30);
+        for(x = [-1, 1])
+            translate([0, 20/2*x, -pylon_ring_height-pylon_ring_thickness-1.5])
+                cylinder(d = M3_nut_diameter, h=30, $fn = 6);
 
 // Otvory pro sesroubovani s pylonem
         for(x = [-pylon_ring_length/2+5:10:pylon_ring_length/2-5])

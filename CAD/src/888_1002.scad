@@ -8,7 +8,8 @@ lenght = 33; //delka sten z vykresu, nepouzity
 thickness = motor_holder_thickness; //sirka sten - dost random
 drzak_height = 70; //vyska drzaku
 
-
+//motor_mount = "ray_normal";
+motor_mount = "ray_reverse";
 
 module 888_1002(){
 translate([0, -motor_holder_thickness/2, 0])
@@ -46,7 +47,13 @@ difference(){
 							cylinder(d = 10, h = motor_holder_thickness, $fn=80);
 				}
 
+	translate([15, -thickness/2+0.2, 1])
+		rotate([90, 0, 0])
+			linear_extrude(0.2+0.6)
+				text(str(week), size=6);
+
 	}
+
 
 	translate([0, 0, -rantl_height + base_thickness + 0.2])
 			translate([0, - 10 + motor_holder_thickness/2, 0])
@@ -66,9 +73,11 @@ difference(){
 	union(){
 //+2 kvadriky
         for (i=[base_width-rantl_thickness,0,0])
-            translate([i-base_width/2-0.15,-20/2, -base_thickness])
-                cube([rantl_thickness+0.3, 20, rantl_height+0.2]);
+            translate([i-base_width/2-0.15,-20/2, -base_thickness-0.5])
+                cube([rantl_thickness+0.3, 20, rantl_height+0.2+0.5]);
+    }
 
+	if(motor_mount == "ray_normal") union(){
 //dira uprostred
         translate([0, thickness/2 + 0.5, motor_holder_motor_height])
             rotate([90,0,0])
@@ -91,6 +100,41 @@ difference(){
                     rotate([0,0,i]) //triketra itself
                         translate([0,25/2,-0.5]) //ramena triketry
                             cylinder(d=M3_screw_diameter,h=thickness+1,$fn=50);
+
+
+    }
+
+	if(motor_mount == "ray_reverse") union(){
+//dira uprostred
+        translate([0, thickness/2 + 0.5, motor_holder_motor_height])
+            rotate([90,0,0])
+		        cylinder(d=10,h=thickness+1,$fn=100);
+
+// Otvor pro vzduch do motoru
+        translate([0, thickness/2 + 0.5, motor_holder_motor_height])
+            rotate([90,0,0])
+			difference(){
+		        cylinder(d=36,h=thickness+1,$fn=100);
+		        cylinder(d=17,h=thickness+1,$fn=100);
+				cube([10, 50, 50], center = true);
+				cube([50, 10, 50], center = true);
+			}
+
+			//diry na sroubky uvnitr
+			        for (i=[90,270])
+			            translate([0,thickness/2,motor_holder_motor_height]) //posunuti teziste triketry
+			                rotate([90,0,0]) //otoceni valecku, aby to byla dirka
+			                    rotate([0,0,i]) //triketra itself
+			                        translate([0,25/2,-0.5]) //ramena triketry
+			                            cylinder(d=M3_screw_diameter,h=thickness+1,$fn=50);
+
+			        for (i=[0,180])
+			            translate([0,thickness/2,motor_holder_motor_height]) //posunuti teziste triketry
+			                rotate([90,0,0]) //otoceni valecku, aby to byla dirka
+			                    rotate([0,0,i]) //triketra itself
+			                        translate([0,18.5/2,-0.5]) //ramena triketry
+			                            cylinder(d=M3_screw_diameter,h=thickness+1,$fn=50);
+
 
     }
 }

@@ -42,11 +42,11 @@ module 888_1008(){
             }
                 difference(){
                     union(){
-                        translate([0, pilot_height_separation/2 - 8/2 + 0.4, 0])
-                            cube([pylon_base_length/2, 8, pylon_thickness+1], center = true);
+                        translate([0, pilot_height_separation/2 - 8/2 + 0.2, 0])
+                            cube([pylon_base_length/2, 6, pylon_thickness+1], center = true);
 
-                        translate([0, pilot_height_separation/2 - 8*1.5 - 23 - 0.4, 0])
-                            cube([pylon_base_length/2, 8, pylon_thickness+1], center = true);
+                        translate([0, pilot_height_separation/2 - 8*1.5 - 23 - 0.2, 0])
+                            cube([pylon_base_length/2, 6, pylon_thickness+1], center = true);
                     }
                     translate([0, pilot_height_separation/2 - 8 + 3, 0])
                         cylinder(d = M2_screw_diameter, h = 10, $fn = 50, center = true);

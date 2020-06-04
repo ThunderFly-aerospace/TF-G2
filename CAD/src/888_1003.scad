@@ -11,9 +11,11 @@ height = 20;
 front_overlap = 7;
 back_overlap = 20;
 length = base_length + front_overlap + back_overlap; //delka sten z vykresu, nepouzity
-thickness = 3; //sirka sten
+thickness = 1; //tloustka sten
 drzak_height = 70; //spatny rozmer so far
 sides_split_positions = [0, length/3, length/3*2, length];
+
+side_base_thickness = 0.2*6;
 
 
 module 888_1003_outline(){
@@ -23,30 +25,30 @@ module 888_1003_outline(){
 				hull(){
 		//kvadrik ("spolecny s podlozkou")
 	        translate([10, -base_thickness -rantl_height/2, 0])
-	         cube([base_length, base_thickness + rantl_height, thickness]);
+	         cube([base_length, base_thickness + rantl_height, 1]);
 
 			    translate([front_overlap, 9-bellow, 0])
-						cylinder(d = 8, h = thickness);
+						cylinder(d = 8, h = 1);
 
 					translate([front_overlap+18, 3-bellow+28, 0])
-						cylinder(d = 6, h = thickness);
+						cylinder(d = 6, h = 1);
 
 					translate([45, 45-bellow, 0])
-						cylinder(d = 12, h = thickness);
+						cylinder(d = 12, h = 1);
 
 					translate([43-front_overlap + 20, -bellow + height + 15, 0])
-						cylinder(d = 30, h = thickness);
+						cylinder(d = 30, h = 1);
 
 					translate([50-front_overlap + 13 + 200, -bellow + height + 22, 0])
-						cylinder(d = 20, h = thickness);
+						cylinder(d = 20, h = 1);
 
 					translate([-32 + back_overlap + base_length, 23, 0])
-						cylinder(d = 10, h = thickness);
+						cylinder(d = 10, h = 1);
 
 				}
 
 				hull(){
-					for(x = [10*13,10*21])
+					for(x = [6*13,10*25])
 		        translate([x, pylon_holder_side_mount_height, -0.1])
 		            cylinder(d = 5.5+5, h = 10);
 
@@ -98,7 +100,7 @@ module 888_1003(){
 
 
 		union(){
-			linear_extrude(0.2*5)
+			linear_extrude(side_base_thickness)
 				888_1003_outline();
 
 			difference(){
@@ -122,12 +124,16 @@ module 888_1003(){
 	            //cylinder(d = 5.5, h = 10, center = true, $fn = 50);
 
 		// Horni rada sroubu pro pylon
-		for(x = [10*13:10:10*21])
+		for(x = [6*13:10:10*25])
 	        translate([x, pylon_holder_side_mount_height, -0.1])
 	            cylinder(d = M3_screw_diameter, h = 10, center = true, $fn = 50);
 	            //cylinder(d = 5.5, h = 10, center = true, $fn = 50);
 
 	}
+
+	translate([8, -3, side_base_thickness-0.4])
+	linear_extrude(1)
+		text(str(week), size = 5);
 }
 
 888_1003();

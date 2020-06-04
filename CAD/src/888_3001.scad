@@ -30,7 +30,7 @@ module tail_center(){
                 cube([500, 20, 100], center=true);
             }
 
-            translate([0, 0, -5-2])
+            translate([0, 0, -5-12])
                 rotate([0, 90, 0])
                     cylinder(d = 10.4+2, h = 40);
         }
@@ -41,10 +41,16 @@ module tail_center(){
         }
 
         // Otvor na podelnou tyc
-        translate([-20, 0, -5-2])
+        translate([-20, 0, -5-12])
             rotate([0, 90, 0])
-                cylinder(d = 10.4, h = 80, $fn=50);
+                cylinder(d = 10.4, h = 62.6, $fn=50);
 
+        translate([42 - 20, 0, -5-12])
+            rotate([90, 0, 0]){
+                cylinder(d = M3_screw_diameter, h = 62.6, $fn=50, center = true);
+                translate([0, 0, 10/2+1]) cylinder(d = M3_nut_diameter, h = 10, $fn=6);
+                translate([0, 0, -10-10/2-1]) cylinder(d = M3_nut_diameter, h = 10, $fn=12);
+            }
         // Otvory na tycky pro privpevneni vyskovky
         translate([0, 0, -25])
             rotate([90, -elevator_pitch, 0])
@@ -55,7 +61,7 @@ module tail_center(){
                         cylinder(d = 2.5, h = 100, center = true, $fn = 20);
                 }
 
-        difference(){
+        #difference(){
             translate([depth_max - rudder_depth - 5, -10, -below_height])
                 cube([depth_max, 20, below_height]);
             hull(){
@@ -73,13 +79,13 @@ module tail_center(){
         translate([depth_max - rudder_depth, 0, -below_height+2])
             cylinder(d = 2.5, h=60, $fn = 20);
 
-        translate([70, 0, 0]) union(){
-            translate([-25/2, -13/2, -35]) cube([25, 13, 35]);
-            translate([-35/2, -13/2, -20]) cube([35, 13, 35]);
-            translate([-35/2, -13/2, -20+10]) cube([35, 13+5, 35]);
+        translate([60, 1, 0]) union(){
+            translate([-25/2, -11/2, -35]) cube([25, 11, 35]);
+            translate([-35/2, -11/2, -20]) cube([35, 11, 35]);
+            translate([-35/2, -11/2, -20+10]) cube([35, 11+5, 35]);
             hull(){
-                translate([-25/2, -13/2, -20-2]) cube([25, 13, 1]);
-                translate([-35/2, -13/2, -35]) cube([35, 13, 1]);
+                translate([-25/2, -11/2, -20-2]) cube([25, 11, 1]);
+                translate([-35/2, -11/2, -35]) cube([35, 11, 1]);
             }
             translate([-28/2, 0, -20+10]) cylinder(d=2, h=100, center = true, $fn = 20);
             translate([+28/2, 0, -20+10]) cylinder(d=2, h=100, center = true, $fn = 20);
@@ -100,7 +106,11 @@ module tail_center(){
       T_(edge_shift_2(i), 0, (i)*2, af)];  // translate airfoil
 
     function edge_shift_2(i) = 0;
-    function thickness_2(i) = 0.03;   //0.5*sin(i*i)+.1;
+    //function thickness_2(i) = 0.03;   //0.5*sin(i*i)+.1;
+
+    //function edge_shift(i) = (i/60)^(22)+i*0.75;
+    function thickness_2(i) = 0.0001;   //0.5*sin(i*i)+.1;
+
     function extra_length_2(i) = depth_max;
 
 }
