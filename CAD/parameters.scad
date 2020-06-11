@@ -17,7 +17,7 @@ rotor_blade_AOA = 1.5;      // nastavení úhlu náběhu rotorového listu
 rotor_blade_rod = true;  // generovat diru pro uhlikove tycky
 rotor_blade_length = 500;   // délka rotorového listu
 // rotor_blade_length = 450 - 15;   // délka rotorového listu -- nastaveni prvniho vytisku
-rotor_blade_length = 460;   // délka rotorového listu
+//rotor_blade_length = 460;   // délka rotorového listu
 rotor_blade_depth = 45.5+2;     // hloubka rotorového listu
 rotor_balde_tip_cutoff = 15.5;
 
