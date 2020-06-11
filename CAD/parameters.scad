@@ -1,4 +1,4 @@
-
+week = "77";
 global_clearance = 0.5;
 
 layer_thickness = 0.3;
@@ -15,7 +15,9 @@ rotor_blade_AOA = 1.5;      // nastavení úhlu náběhu rotorového listu
 
 // Rotor Auto-G2
 rotor_blade_rod = true;  // generovat diru pro uhlikove tycky
-rotor_blade_length = 500 - 15;   // délka rotorového listu
+rotor_blade_length = 500;   // délka rotorového listu
+// rotor_blade_length = 450 - 15;   // délka rotorového listu -- nastaveni prvniho vytisku
+rotor_blade_length = 460;   // délka rotorového listu
 rotor_blade_depth = 45.5+2;     // hloubka rotorového listu
 rotor_balde_tip_cutoff = 15.5;
 
@@ -47,6 +49,7 @@ rotor_blade_thickness = 5.1;
 
 rotor_blade_naca = 2412;
 rotor_blade_parts_count = 4;
+//rotor_blade_parts_count = 3;
 
 blade_transition_length = 10; // length of blade transition
 
@@ -77,10 +80,12 @@ blade_infill_overlap = 0;
 blade_rod1_diameter = 2.58;
 blade_rod2_diameter = 2.58;
 blade_rod3_diameter = 2.13;
+blade_rod2_diameter = 2.6;
+blade_rod3_diameter = 2.6;
 
 blade_rod1_position = [3.4, 0.3, 0];
-blade_rod2_position = [rotor_blade_depth/4 - 6, 0.3, 0];
-blade_rod3_position = [rotor_blade_depth/4 + 3, 0.1, 0];
+blade_rod2_position = [rotor_blade_depth/4 - 6, 0.5, 0];
+blade_rod3_position = [rotor_blade_depth/4 + 3, 0.5, 0];
 
 
 rotor_head_width =  30;    //Rozměr 1 v nákresu
@@ -225,7 +230,7 @@ niy=4; //pocet der podelne
 // Drazak motoru
 
 motor_holder_height = base_patern * 5;
-motor_holder_thickness = 3;
+motor_holder_thickness = 3.5;
 motor_holder_motor_height = 25;
 motor_holder_side_mount_height = base_patern*2.5;
 pylon_holder_side_mount_height = base_patern*4.5;
@@ -237,7 +242,7 @@ pylon_holder_side_mount_height = base_patern*4.5;
 // pylon_height = 250 - pylon_holder_side_mount_height;
 pylon_height = 180 + 50 - pylon_holder_side_mount_height;
 pilot_height_separation = 120 + 30 - pylon_holder_side_mount_height;
-pylon_thickness = 3.5;
+pylon_thickness = 3;
 pylon_beam_width = 10;
 pylon_base_length = 60;
 pylon_ring_length = 40;
