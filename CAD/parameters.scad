@@ -3,6 +3,8 @@ global_clearance = 0.5;
 
 layer_thickness = 0.3;
 
+base_patern = 10;
+
 //Main tube diameter - hole [mm]
 main_tube_outer_diameter = 25.4;
 main_tube_inner_diameter = 23.05;
@@ -86,6 +88,11 @@ blade_rod3_diameter = 2.6;
 blade_rod1_position = [3.4, 0.3, 0];
 blade_rod2_position = [rotor_blade_depth/4 - 6, 0.5, 0];
 blade_rod3_position = [rotor_blade_depth/4 + 3, 0.5, 0];
+
+
+// vzdalenosti der pro kryty
+cover_holes = [base_patern*5, base_patern*13, base_patern*17, base_patern*26];
+
 
 
 rotor_head_width =  30;    //Rozměr 1 v nákresu
@@ -193,7 +200,6 @@ tail_airfoil_n = 80;
 //center_of_gravity_position = [main_pylon_position - tan(gliding_aggle)*rotor_height, 0, 0];
 
 
-base_patern = 10.16;
 ////podzvozek
 
 radius_undercarriage = 25;
@@ -221,7 +227,6 @@ base_length = 290; //delka podlozky
 base_split_position = [0, 150, base_length];
 base_width = 70; //sirka podlozky - vnější šířka nosníku
 base_thickness = 3; //vyska podlozky
-base_patern = 10;
 rantl_thickness = 3; //sirka steny podlozky
 rantl_height = 6.5;
 niy=4; //pocet der podelne
