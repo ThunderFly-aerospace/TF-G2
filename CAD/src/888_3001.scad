@@ -51,6 +51,12 @@ module tail_center(){
                 translate([0, 0, 10/2+1]) cylinder(d = M3_nut_diameter, h = 10, $fn=6);
                 translate([0, 0, -10-10/2-1]) cylinder(d = M3_nut_diameter, h = 10, $fn=12);
             }
+
+        // Otvor na podelnou tyc
+        translate([30, 0, -5-12])
+            rotate([0, 180-40, 0])
+                cylinder(d = 9, h = 30, $fn=50);
+
         // Otvory na tycky pro privpevneni vyskovky
         translate([0, 0, -25])
             rotate([90, -elevator_pitch, 0])
@@ -61,7 +67,7 @@ module tail_center(){
                         cylinder(d = 2.5, h = 100, center = true, $fn = 20);
                 }
 
-        #difference(){
+        difference(){
             translate([depth_max - rudder_depth - 5, -10, -below_height])
                 cube([depth_max, 20, below_height]);
             hull(){

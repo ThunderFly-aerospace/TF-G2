@@ -35,6 +35,7 @@ translate([-rotor_blade_depth/2, 20, rotor_blade_length/4]) rotate([0, 0, 180])
 
 
 
+
 module 888_4001_modif_cd(){
   translate([-rotor_blade_depth/2, 28, 0])
     888_4001_print_modificator(4);

@@ -1,11 +1,11 @@
 
 //@set_slicing_config(../slicing/default.ini)
-include <../../parameters.scad>
+include <../../../parameters.scad>
 
-use <../888_1010.scad>
-use <../888_1011.scad>
-use <../888_1012.scad>
-use <../888_1014.scad>
+use <../../888_1010.scad>
+use <../../888_1011.scad>
+use <../../888_1012.scad>
+use <../../888_1014.scad>
 
 
 
@@ -22,10 +22,13 @@ rotate([0, -90, 180])
     Part3();
 }
 
+translate([183, 0, 250])
 difference(){
   translate([0, 0, 30])
     rotate([180, 0, 0])
       888_1014();
-  cube(50);
+  //  cube(50);
 }
-rotor_head();
+
+translate([183, 0, 250])
+  rotor_head();

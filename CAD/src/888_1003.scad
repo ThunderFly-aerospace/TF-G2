@@ -18,6 +18,7 @@ sides_split_positions = [0, length/3, length/3*2, length];
 side_base_thickness = 0.2*6;
 
 
+
 module 888_1003_outline(){
 
 		projection() difference(){
@@ -111,6 +112,12 @@ module 888_1003(){
 					offset(delta=-0.4*3)
 						888_1003_outline();
 			}
+
+			for(x=cover_holes)
+				translate([x, 0, 0]){
+					cylinder(d = 8, h = 5, $fn=30);
+				}
+
 		}
         for(x = [20:10:base_length])
 	        translate([x, 0, -0.1])
@@ -128,6 +135,13 @@ module 888_1003(){
 	        translate([x, pylon_holder_side_mount_height, -0.1])
 	            cylinder(d = M3_screw_diameter, h = 10, center = true, $fn = 50);
 	            //cylinder(d = 5.5, h = 10, center = true, $fn = 50);
+
+
+		// Otvory pro kryt
+			for(x=cover_holes)
+				translate([x, 0, -0.1]){
+					cylinder(d = M3_screw_diameter, h = 10, $fn=30);
+				}
 
 	}
 
