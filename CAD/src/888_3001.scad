@@ -21,7 +21,7 @@ module tail_center(){
         hull(){
             translate([0, 0, -below_height])
                 sweep(gen_dat_2(M=below_height, dz=1,N=N), showslices = false);
-            intersection(){
+            #intersection(){
                 union(){
                     elevator(position = 1);
                     mirror([0, 1, 0])
@@ -45,17 +45,17 @@ module tail_center(){
             rotate([0, 90, 0])
                 cylinder(d = 10.4, h = 62.6, $fn=50);
 
-        translate([42 - 20, 0, -5-12])
+         translate([42 - 35, 0, -5-12])
             rotate([90, 0, 0]){
                 cylinder(d = M3_screw_diameter, h = 62.6, $fn=50, center = true);
                 translate([0, 0, 10/2+1]) cylinder(d = M3_nut_diameter, h = 10, $fn=6);
                 translate([0, 0, -10-10/2-1]) cylinder(d = M3_nut_diameter, h = 10, $fn=12);
             }
 
-        // Otvor na podelnou tyc
-        translate([30, 0, -5-12])
-            rotate([0, 180-40, 0])
-                cylinder(d = 9, h = 30, $fn=50);
+        // Otvor na vyvod kabelu
+        translate([42, 0, -5-12])
+            rotate([0, 180, 0])
+                cylinder(d = 10, h = 30, $fn=50);
 
         // Otvory na tycky pro privpevneni vyskovky
         translate([0, 0, -25])
@@ -67,25 +67,35 @@ module tail_center(){
                         cylinder(d = 2.5, h = 100, center = true, $fn = 20);
                 }
 
+        // vyrez na otocnou cast ostruhy
         difference(){
-            translate([depth_max - rudder_depth - 5, -10, -below_height])
+            translate([depth_max - rudder_depth -2, -10, -below_height])
                 cube([depth_max, 20, below_height]);
             hull(){
             translate([5, -10, -below_height])
                 cube([depth_max - rudder_depth - 10, 20, 10]);
             translate([depth_max - rudder_depth, 0, -below_height+10-50])
-                cylinder(d = 12, h=50, $fn=50);
+                cylinder(d = 6, h=50, $fn=50);
             }
 
         }
+
+        // prostor pro otaceni smerovky
         translate([depth_max - rudder_depth, 0, -below_height+10])
-            cylinder(d = 12, h=80);
+            cylinder(d = 7, h=80);
 
         // Otvor pro svislou osu
         translate([depth_max - rudder_depth, 0, -below_height+2])
             cylinder(d = 2.5, h=60, $fn = 20);
 
+        // krabice pro servo
         translate([60, 1, 0]) union(){
+            //translate([-25/2, -11/2, -35]) cube([25, 11, 35]);
+            translate([-35/2, -11/2, -40]) cube([35, 13.5, 35]);
+            translate([-35/2, -11/2, -20+3]) cube([35, 11+5, 35]);
+            translate([-35/2, -11/2, -20+3-42]) cube([35, 11+5, 35]);
+
+            /*
             translate([-25/2, -11/2, -35]) cube([25, 11, 35]);
             translate([-35/2, -11/2, -20]) cube([35, 11, 35]);
             translate([-35/2, -11/2, -20+10]) cube([35, 11+5, 35]);
@@ -95,12 +105,21 @@ module tail_center(){
             }
             translate([-28/2, 0, -20+10]) cylinder(d=2, h=100, center = true, $fn = 20);
             translate([+28/2, 0, -20+10]) cylinder(d=2, h=100, center = true, $fn = 20);
-
+            */
         }
 
-        // kostky na pripevneni smerovky
-        translate([30, 0, 5]) rotate([90, 0, 0]) cylinder(d = M3_screw_diameter, h = 20, center = true, $fn = 30);
-        translate([30 + 80, 0, 5]) rotate([90, 0, 0]) cylinder(d = M3_screw_diameter, h = 20, center = true, $fn = 30);
+        // kostky na pripevneni smerovky, otvory v nich na sroub a vystuzeni
+        translate([30, 0, 5]){
+           rotate([90, 0, 0]) cylinder(d = M3_screw_diameter, h = 20, center = true, $fn = 30);
+           translate([13/3, 0, -5]) cylinder(d=2, h=8, center=true);
+           translate([-13/3, 0, -5]) cylinder(d=2, h=8, center=true);
+        }
+
+        translate([30 + 80, 0, 5]){
+            rotate([90, 0, 0]) cylinder(d = M3_screw_diameter, h = 20, center = true, $fn = 30);
+            translate([13/3, 0, -5]) cylinder(d=2, h=8, center=true);
+            translate([-13/3, 0, -5]) cylinder(d=2, h=8, center=true);
+        }
 
     }
 
@@ -108,14 +127,14 @@ module tail_center(){
     function gen_dat_2(M=10,dz=0.1,N=10) = [for (i=[0:dz:M/2])
       let( L = extra_length_2(i))
       let( af = vec3D(
-          airfoil_data([0,0,0.05+thickness_2(i)], L=extra_length_2(i), N = N)))
+          airfoil_data([0,0,0.0501+thickness_2(i)], L=extra_length_2(i), N = N)))
       T_(edge_shift_2(i), 0, (i)*2, af)];  // translate airfoil
 
     function edge_shift_2(i) = 0;
     //function thickness_2(i) = 0.03;   //0.5*sin(i*i)+.1;
 
     //function edge_shift(i) = (i/60)^(22)+i*0.75;
-    function thickness_2(i) = 0.0001;   //0.5*sin(i*i)+.1;
+    function thickness_2(i) = (1-i/100)*0.01;   //0.5*sin(i*i)+.1;
 
     function extra_length_2(i) = depth_max;
 

@@ -39,7 +39,7 @@ module tail_rudder() translate([0, 0, -rudder_below]){
                 translate([depth_max - rudder_depth+10, -10, 0])
                     cube([rudder_depth - 10-3, 20, height_bottom_part+rudder_below-.5]);
                 translate([depth_max - rudder_depth, 0, 0])
-                    cylinder(d = 12-2, h = height_bottom_part+rudder_below-0.5, $fn=60);
+                    cylinder(d = 5, h = height_bottom_part+rudder_below-0.5, $fn=60);
             }
         }
         translate([depth_max - rudder_depth, 0, -0.5])
@@ -51,7 +51,7 @@ module tail_rudder() translate([0, 0, -rudder_below]){
             translate([10, 0, 1]) cube([10, 2, 2], center = true);
             translate([0, 20, 0]) cylinder(d = 7, h=2, $fn=40);
         }
-        translate([0, 20, 0]) cylinder(d = 2.6, h=2, $fn=40);
+        translate([0, 20, 0]) cylinder(d = 2, h=2, $fn=40);
     }
     /* difference(){
         union(){

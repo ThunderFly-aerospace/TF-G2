@@ -16,6 +16,13 @@ module 888_1007(){
                     cube([pylon_ring_length, 10, pylon_thickness], center = true);
             }
 
+            hull()
+            for(x = [-pylon_base_length/2+5:10:pylon_base_length/2-5])
+            translate([x, 0, 0])
+                rotate([-90+pylon_angle, 0, 0]){
+                    cylinder(d = M3_nut_diameter+2, h = 3, $fn = $preview?10:30);
+                }
+
 // Vytvoreni sikmych ploch
             /* hull(){
                 cube([pylon_base_length, 10, pylon_thickness], center = true);
@@ -64,12 +71,14 @@ module 888_1007(){
 //  Otvory pro prisroubovani
     for(x = [-pylon_base_length/2+5:10:pylon_base_length/2-5])
     translate([x, 0, 0])
-        rotate([90-pylon_angle, 0, 0])
+        rotate([-90+pylon_angle, 0, 0]){
             cylinder(d = M3_screw_diameter, h = 20, center = true, $fn = $preview?10:30);
+            translate([0, 0, pylon_thickness-2]) cylinder(d = M3_nut_diameter, h = 5, $fn = 6);
+        }
 
     for(x = [-pylon_ring_length/2+5:10:pylon_ring_length/2-5])
     translate([x, pilot_height_separation, 0])
-        rotate([90-pylon_angle, 0, 0])
+        rotate([-90+pylon_angle, 0, 0])
             cylinder(d = M3_screw_diameter, h = 20, center = true, $fn = $preview?10:30);
 
 

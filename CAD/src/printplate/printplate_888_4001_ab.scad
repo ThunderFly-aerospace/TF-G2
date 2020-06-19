@@ -1,10 +1,9 @@
-//@set_slicing_config(../../slicing/blade_center.ini)
+//@set_slicing_config(../../slicing/blade_center_parts.ini)
 
 
 //@set_modificator(888_4001_modif_ab)
 //@set_slicing_config(../../slicing/blade_infill_modif.ini, 888_4001_modif_ab)
 
-//drzak zadniho kolecka
 include <../../parameters.scad>
 use <../888_4001.scad>
 

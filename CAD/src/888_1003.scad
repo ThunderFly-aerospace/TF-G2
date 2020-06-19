@@ -119,10 +119,18 @@ module 888_1003(){
 				}
 
 		}
-        for(x = [20:10:base_length])
+
+		// nedelat otvory pro srouby v mistech otvoru pro pripevneni bocnic
+		difference(){
+				for(x = [20:10:base_length])
 	        translate([x, 0, -0.1])
-	            cylinder(d = M3_screw_diameter, h = 10, center = true, $fn = 50);
-	            //cylinder(d = 5.5, h = 10, center = true, $fn = 50);
+            cylinder(d = M3_screw_diameter, h = 10, center = true, $fn = 50);
+
+				// Otvory pro kryt
+				for(x=cover_holes)
+					translate([x, 0, 0])
+						cylinder(d = 8, h = 5, $fn=30);
+			}
 
         //for(x = [10+base_patern, 10+base_patern*2])
 		for(x = [10*3:10:10*27])
@@ -140,7 +148,8 @@ module 888_1003(){
 		// Otvory pro kryt
 			for(x=cover_holes)
 				translate([x, 0, -0.1]){
-					cylinder(d = M3_screw_diameter, h = 10, $fn=30);
+					cylinder(d = M3_nut_diameter, h = M3_nut_height+0.1, $fn=6);
+					translate([0, 0, M3_nut_height+0.2+0.1]) cylinder(d = M3_screw_diameter, h = 10, $fn=30);
 				}
 
 	}
