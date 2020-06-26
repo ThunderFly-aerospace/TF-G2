@@ -48,14 +48,15 @@ module 888_1007(){
                 translate([0, pilot_height_separation - 10/2, 0])
                     cube([pylon_ring_length-20, 0.1, pylon_thickness+1], center = true);
             }
-                translate([0, pilot_height_separation/2 - 10/2, 0])
-                    cube([pylon_ring_length, 10, pylon_thickness+1], center = true);
+// Stredni pricka
+                //translate([0, pilot_height_separation/2 - 10/2, 0])
+                //    cube([pylon_ring_length, 10, pylon_thickness+1], center = true);
         }
 
         for(i=[0, 1]) mirror([i, 0, 0])
         difference(){
           hull(){
-            #translate([pylon_base_length/2 - 5, 6, -2])
+            translate([pylon_base_length/2 - 5, 6, -2])
               cylinder(d = 2, h = pylon_thickness+1);
 
             translate([pylon_ring_length/2 - 5, pilot_height_separation - 6, -2])
