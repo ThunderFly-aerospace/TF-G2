@@ -28,6 +28,7 @@ use <../888_1005.scad>
 
 use <888_2002.scad>
 
+include <position/position_888_1016_rear_difference.scad>
 
 /*
 for(x = [1, 0])

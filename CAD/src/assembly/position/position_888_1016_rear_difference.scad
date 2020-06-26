@@ -9,3 +9,4 @@ use <../../888_1016.scad>
 //translate([0, i*(base_width/2+5), 0])
 //rotate([90, 0, 0])
 888_1016_rear_crop();
+888_1016_rear_holes();
