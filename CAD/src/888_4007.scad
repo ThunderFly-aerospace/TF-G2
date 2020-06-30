@@ -5,6 +5,7 @@ diameter = 20;
 // Tooth diameter
 tooth_diameter = 3;
 
+module 888_4007(){
 difference(){
 	union(){
 		cylinder(r=diameter/2, h=3, center=true, $fn = 600); 
@@ -20,3 +21,6 @@ difference(){
 	translate([0,0,3 * M3_screw_diameter -1.5 + layer_thickness]) 
         cylinder(d = M3_screw_diameter, h=5, $fn=16);
 }	
+}
+
+888_4007();
