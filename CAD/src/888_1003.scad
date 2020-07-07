@@ -13,9 +13,15 @@ back_overlap = 20;
 length = base_length + front_overlap + back_overlap; //delka sten z vykresu, nepouzity
 thickness = 1; //tloustka sten
 drzak_height = 70; //spatny rozmer so far
-sides_split_positions = [0, length/3, length/3*2, length];
+sides_split_positions = [0, length/3-5, length/3*2, length];
 
 side_base_thickness = 0.2*6;
+
+platform_ears_position = base_patern * [6, 25];
+platform_ears_height = 25;
+platform_ears_thickness = 2;
+platform_ears_corner_radius = 3.5;
+platform_ears_hole_from_bottom = 5;
 
 
 
@@ -118,6 +124,14 @@ module 888_1003(){
 					cylinder(d = 8, h = 5, $fn=30);
 				}
 
+			// Usi pro pripevneni k platforme
+			for (x = platform_ears_position)
+				translate([x, 0, 0])
+					hull(){
+						#for(pos = [[-base_patern, 0], [base_patern, 0], [-base_patern/2, -platform_ears_height], [base_patern/2, -platform_ears_height] ])
+							translate([pos[0], pos[1], 0]) cylinder(r = platform_ears_corner_radius, h = platform_ears_thickness);
+					}
+
 		}
 
 		// nedelat otvory pro srouby v mistech otvoru pro pripevneni bocnic
@@ -151,6 +165,13 @@ module 888_1003(){
 					cylinder(d = M3_nut_diameter, h = M3_nut_height+0.1, $fn=6);
 					translate([0, 0, M3_nut_height+0.2+0.1]) cylinder(d = M3_screw_diameter, h = 10, $fn=30);
 				}
+
+			// Usi pro pripevneni k platforme
+			for (x = platform_ears_position)
+				translate([x, -platform_ears_corner_radius, 0])
+					hull(){
+						translate([0, -platform_ears_height + platform_ears_hole_from_bottom, 0]) cylinder(d = 3, h = platform_ears_thickness+3, center = true);
+					}
 
 	}
 
