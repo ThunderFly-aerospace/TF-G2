@@ -1434,6 +1434,11 @@
      <z>125</z>
     </coordinates></vertex>
     <vertex><coordinates>
+     <x>1.80946</x>
+     <y>0.650399</y>
+     <z>89.8436</z>
+    </coordinates></vertex>
+    <vertex><coordinates>
      <x>1.8</x>
      <y>0.5</y>
      <z>89.8548</z>
@@ -1441,11 +1446,6 @@
     <vertex><coordinates>
      <x>1.80946</x>
      <y>0.3496</y>
-     <z>89.8436</z>
-    </coordinates></vertex>
-    <vertex><coordinates>
-     <x>1.80946</x>
-     <y>0.650399</y>
      <z>89.8436</z>
     </coordinates></vertex>
     <vertex><coordinates>
@@ -5156,34 +5156,34 @@
      <v3>57</v3>
     </triangle>
     <triangle>
-     <v1>286</v1>
-     <v2>287</v2>
-     <v3>62</v3>
-    </triangle>
-    <triangle>
-     <v1>64</v1>
-     <v2>286</v2>
-     <v3>62</v3>
-    </triangle>
-    <triangle>
      <v1>107</v1>
-     <v2>288</v2>
-     <v3>286</v3>
+     <v2>286</v2>
+     <v3>287</v3>
     </triangle>
     <triangle>
      <v1>64</v1>
      <v2>107</v2>
-     <v3>286</v3>
+     <v3>287</v3>
+    </triangle>
+    <triangle>
+     <v1>287</v1>
+     <v2>288</v2>
+     <v3>62</v3>
+    </triangle>
+    <triangle>
+     <v1>64</v1>
+     <v2>287</v2>
+     <v3>62</v3>
     </triangle>
     <triangle>
      <v1>136</v1>
      <v2>289</v2>
-     <v3>288</v3>
+     <v3>286</v3>
     </triangle>
     <triangle>
      <v1>107</v1>
      <v2>136</v2>
-     <v3>288</v3>
+     <v3>286</v3>
     </triangle>
     <triangle>
      <v1>131</v1>
@@ -5646,13 +5646,13 @@
      <v3>109</v3>
     </triangle>
     <triangle>
-     <v1>287</v1>
+     <v1>288</v1>
      <v2>335</v2>
      <v3>113</v3>
     </triangle>
     <triangle>
      <v1>62</v1>
-     <v2>287</v2>
+     <v2>288</v2>
      <v3>113</v3>
     </triangle>
     <triangle>
@@ -5723,7 +5723,7 @@
     <triangle>
      <v1>345</v1>
      <v2>336</v2>
-     <v3>286</v3>
+     <v3>287</v3>
     </triangle>
     <triangle>
      <v1>300</v1>
@@ -5732,8 +5732,8 @@
     </triangle>
     <triangle>
      <v1>345</v1>
-     <v2>286</v2>
-     <v3>288</v3>
+     <v2>287</v2>
+     <v3>286</v3>
     </triangle>
     <triangle>
      <v1>324</v1>
@@ -5742,7 +5742,7 @@
     </triangle>
     <triangle>
      <v1>345</v1>
-     <v2>288</v2>
+     <v2>286</v2>
      <v3>289</v3>
     </triangle>
     <triangle>
@@ -5946,14 +5946,14 @@
      <v3>334</v3>
     </triangle>
     <triangle>
-     <v1>287</v1>
+     <v1>288</v1>
      <v2>336</v2>
      <v3>335</v3>
     </triangle>
     <triangle>
-     <v1>286</v1>
+     <v1>287</v1>
      <v2>336</v2>
-     <v3>287</v3>
+     <v3>288</v3>
     </triangle>
     <triangle>
      <v1>295</v1>
@@ -6916,16 +6916,6 @@
      <v3>164</v3>
     </triangle>
     <triangle>
-     <v1>361</v1>
-     <v2>336</v2>
-     <v3>362</v3>
-    </triangle>
-    <triangle>
-     <v1>362</v1>
-     <v2>336</v2>
-     <v3>346</v3>
-    </triangle>
-    <triangle>
      <v1>359</v1>
      <v2>337</v2>
      <v3>361</v3>
@@ -6934,6 +6924,16 @@
      <v1>361</v1>
      <v2>337</v2>
      <v3>336</v3>
+    </triangle>
+    <triangle>
+     <v1>361</v1>
+     <v2>336</v2>
+     <v3>362</v3>
+    </triangle>
+    <triangle>
+     <v1>362</v1>
+     <v2>336</v2>
+     <v3>346</v3>
     </triangle>
     <triangle>
      <v1>351</v1>
@@ -8375,7 +8375,7 @@
 <metadata type="slic3r.dont_support_bridges">1</metadata>
 <metadata type="slic3r.duplicate_distance">6</metadata>
 <metadata type="slic3r.end_filament_gcode">"; Filament-specific end gcode \n;END gcode for filament\n"</metadata>
-<metadata type="slic3r.end_gcode">M104 S0\nM140 S0\n;Retract the filament\nG92 E1\nG1 E-1 F300\n G1 Z5 F300\n;End of Gcode</metadata>
+<metadata type="slic3r.end_gcode">M104 S0\nM140 S0\n;Retract the filament\nG92 E1\nG1 E-1 F300\n G91 \n G1 Z5 F300\n;End of Gcode</metadata>
 <metadata type="slic3r.external_perimeter_extrusion_width">0</metadata>
 <metadata type="slic3r.external_perimeter_speed">75%</metadata>
 <metadata type="slic3r.external_perimeters_first">0</metadata>
