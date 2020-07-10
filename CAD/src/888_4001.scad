@@ -38,7 +38,7 @@ module blade_infill(){
                     for (i=[blade_infill_distance : blade_infill_distance*2 : rotor_blade_length + rotor_blade_depth]) {
                         translate([rotor_blade_depth/4, -10, i])
                             rotate([0, 50, 0])
-                                cube([rotor_blade_depth*0.40, 20, blade_shell_thickness_inner]);
+                              #  cube([rotor_blade_depth*0.40, 20, blade_shell_thickness_inner]);
 
                     //translate([rotor_blade_depth/4, -10, i])
                     //  rotate([0, 90+30, 0])
