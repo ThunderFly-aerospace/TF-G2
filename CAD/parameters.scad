@@ -67,9 +67,9 @@ blade_infill_overlap = 0; */
 
 /// Nastaveni pro Slic3r
 blade_shell_thickness = 0.45;
-blade_shell_thickness_inner = 0.43;
+blade_shell_thickness_inner = 0.2;
 blade_shell_thickness_wire = 0.45;
-blade_infill_distance = 20;
+blade_infill_distance = 23;
 blade_infill_overlap = 0;
 
 
@@ -79,16 +79,24 @@ blade_infill_overlap = 0;
 //blade_rod_position = [15, 0, 0];
 //blade_rod_position2 = [4, 0.3, 0];
 
-blade_rod1_diameter = 2.58;
-blade_rod2_diameter = 2.58;
-blade_rod3_diameter = 2.13;
-blade_rod2_diameter = 2.6;
-blade_rod3_diameter = 2.6;
+//blade_rod1_diameter = 2.58;
+//blade_rod2_diameter = 2.58;
+//blade_rod3_diameter = 2.13;
+blade_rod1_diameter = 2.4;
+blade_rod2_diameter = 2.4;
+blade_rod3_diameter = 2.4;
 
-blade_rod1_position = [3.4, 0.3, 0];
-blade_rod2_position = [rotor_blade_depth/4 - 6, 0.5, 0];
-blade_rod3_position = [rotor_blade_depth/4 + 3, 0.5, 0];
+// blade_rod1_position = [3.4, 0.3, 0];
+blade_rod1_position = [rotor_blade_depth/4 - 8.7, 0.2, 0];
+blade_rod2_position = [rotor_blade_depth/4 - 5.8, 0.5, 0];
+blade_rod3_position = [rotor_blade_depth/4 + 3.5, 0.5, 0];
 
+
+blade_glue_holes = 0;
+
+rotor_blade_endtip_diameter = 20;
+
+rotor_blade_part_list = [0, 50, 200, 350, 500];
 
 // vzdalenosti der pro kryty
 cover_holes = [base_patern*5, base_patern*13, base_patern*17, base_patern*26];

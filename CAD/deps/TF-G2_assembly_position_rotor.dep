@@ -1,5 +1,4 @@
-/home/roman/repos/tf/TF-G2/CAD/stl/position_rotor.stl: \
-	/home/roman/repos/tf/TF-G2/CAD/src/lib/stdlib/naca4.scad \
-	/home/roman/repos/tf/TF-G2/CAD/src/888_4001.scad \
-	/home/roman/repos/tf/TF-G2/CAD/parameters.scad \
-	/home/roman/repos/tf/TF-G2/CAD/src/assembly/position/position_rotor.scad
+position_rotor.scad: \
+	../../../parameters.scad \
+	../../888_4001.scad \
+	../../lib/stdlib/naca4.scad \
