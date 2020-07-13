@@ -30,6 +30,11 @@ join_height = 10;
 
 module 888_2002()
 {
+	/*
+	translate([suspension_depth,0,suspension_depth/6])
+	rotate([90,-90,0])
+ %cylinder(suspension_depth*10,suspension_depth/4,suspension_depth/4,$fn=3);
+*/
 
 //cylinder(h = cylinder_h, r1 = suspension_bow_diameter/2, r2 = cylinder_r2);
 
@@ -50,7 +55,166 @@ module 888_2002()
 							rotate([180,0,0])
 								cylinder(h = cylinder_h, r1=suspension_bow_diameter/2 - suspension_thickness, r2=1);
 					}
+
+
 				}
+				//zpevnění
+					union(){
+							translate([suspension_depth/1.5,suspension_bow_diameter,suspension_depth/5.5])
+								rotate([90,-90,0])
+									cylinder(suspension_depth*20, suspension_depth/3.5, suspension_depth/3.5,$fn=3);
+							
+							translate([suspension_depth/1.5 + suspension_depth/3,suspension_bow_diameter,suspension_depth/3.07])
+								rotate([90,90,0])
+									cylinder(suspension_depth*20, suspension_depth/3.5, suspension_depth/3.5,$fn=3);
+								rotate([180,0,0])
+									union(){
+										translate([suspension_depth/1.5,suspension_bow_diameter,suspension_depth/5.5])
+											rotate([90,-90,0])
+												cylinder(suspension_depth*20, suspension_depth/3.5, suspension_depth/3.5,$fn=3);
+										
+										translate([suspension_depth/1.5 + suspension_depth/3,suspension_bow_diameter,suspension_depth/3.07])
+											rotate([90,90,0])
+												cylinder(suspension_depth*20, suspension_depth/3.5, suspension_depth/3.5,$fn=3);
+									}
+						translate([suspension_depth - suspension_depth/3,0,0])
+							union(){
+									union(){
+										translate([suspension_depth/1.5,suspension_bow_diameter,suspension_depth/5.5])
+											rotate([90,-90,0])
+												cylinder(suspension_depth*20, suspension_depth/3.5, suspension_depth/3.5,$fn=3);
+										
+										translate([suspension_depth/1.5 + suspension_depth/3,suspension_bow_diameter,suspension_depth/3.07])
+											rotate([90,90,0])
+												cylinder(suspension_depth*20, suspension_depth/3.5, suspension_depth/3.5,$fn=3);
+									}
+								rotate([180,0,0])
+									union(){
+										translate([suspension_depth/1.5,suspension_bow_diameter,suspension_depth/5.5])
+											rotate([90,-90,0])
+												cylinder(suspension_depth*20, suspension_depth/3.5, suspension_depth/3.5,$fn=3);
+										
+										translate([suspension_depth/1.5 + suspension_depth/3,suspension_bow_diameter,suspension_depth/3.07])
+											rotate([90,90,0])
+												cylinder(suspension_depth*20, suspension_depth/3.5, suspension_depth/3.5,$fn=3);
+									}
+							}
+						translate([suspension_depth*2 - 2*suspension_depth/3,0,0])
+							union(){
+									union(){
+										translate([suspension_depth/1.5,suspension_bow_diameter,suspension_depth/5.5])
+											rotate([90,-90,0])
+												cylinder(suspension_depth*20, suspension_depth/3.5, suspension_depth/3.5,$fn=3);
+										
+										translate([suspension_depth/1.5 + suspension_depth/3,suspension_bow_diameter,suspension_depth/3.07])
+											rotate([90,90,0])
+												cylinder(suspension_depth*20, suspension_depth/3.5, suspension_depth/3.5,$fn=3);
+									}
+								rotate([180,0,0])
+									union(){
+										translate([suspension_depth/1.5,suspension_bow_diameter,suspension_depth/5.5])
+											rotate([90,-90,0])
+												cylinder(suspension_depth*20, suspension_depth/3.5, suspension_depth/3.5,$fn=3);
+										
+										translate([suspension_depth/1.5 + suspension_depth/3,suspension_bow_diameter,suspension_depth/3.07])
+											rotate([90,90,0])
+												cylinder(suspension_depth*20, suspension_depth/3.5, suspension_depth/3.5,$fn=3);
+									}
+							}
+
+						translate([suspension_depth*3 - 3*suspension_depth/3,0,0])
+							union(){
+									union(){
+										translate([suspension_depth/1.5,suspension_bow_diameter,suspension_depth/5.5])
+											rotate([90,-90,0])
+												cylinder(suspension_depth*20, suspension_depth/3.5, suspension_depth/3.5,$fn=3);
+										
+										translate([suspension_depth/1.5 + suspension_depth/3,suspension_bow_diameter,suspension_depth/3.07])
+											rotate([90,90,0])
+												cylinder(suspension_depth*20, suspension_depth/3.5, suspension_depth/3.5,$fn=3);
+									}
+								rotate([180,0,0])
+									union(){
+										translate([suspension_depth/1.5,suspension_bow_diameter,suspension_depth/5.5])
+											rotate([90,-90,0])
+												cylinder(suspension_depth*20, suspension_depth/3.5, suspension_depth/3.5,$fn=3);
+										
+										translate([suspension_depth/1.5 + suspension_depth/3,suspension_bow_diameter,suspension_depth/3.07])
+											rotate([90,90,0])
+												cylinder(suspension_depth*20, suspension_depth/3.5, suspension_depth/3.5,$fn=3);
+									}
+							}
+						translate([suspension_depth*4 - 4*suspension_depth/3,0,0])
+							union(){
+									union(){
+										translate([suspension_depth/1.5,suspension_bow_diameter,suspension_depth/5.5])
+											rotate([90,-90,0])
+												cylinder(suspension_depth*20, suspension_depth/3.5, suspension_depth/3.5,$fn=3);
+										
+										translate([suspension_depth/1.5 + suspension_depth/3,suspension_bow_diameter,suspension_depth/3.07])
+											rotate([90,90,0])
+												cylinder(suspension_depth*20, suspension_depth/3.5, suspension_depth/3.5,$fn=3);
+									}
+								rotate([180,0,0])
+									union(){
+										translate([suspension_depth/1.5,suspension_bow_diameter,suspension_depth/5.5])
+											rotate([90,-90,0])
+												cylinder(suspension_depth*20, suspension_depth/3.5, suspension_depth/3.5,$fn=3);
+										
+										translate([suspension_depth/1.5 + suspension_depth/3,suspension_bow_diameter,suspension_depth/3.07])
+											rotate([90,90,0])
+												cylinder(suspension_depth*20, suspension_depth/3.5, suspension_depth/3.5,$fn=3);
+									}
+							}
+						translate([suspension_depth*5 - 5*suspension_depth/3,0,0])
+							union(){
+									union(){
+										translate([suspension_depth/1.5,suspension_bow_diameter,suspension_depth/5.5])
+											rotate([90,-90,0])
+												cylinder(suspension_depth*20, suspension_depth/3.5, suspension_depth/3.5,$fn=3);
+										
+										translate([suspension_depth/1.5 + suspension_depth/3,suspension_bow_diameter,suspension_depth/3.07])
+											rotate([90,90,0])
+												cylinder(suspension_depth*20, suspension_depth/3.5, suspension_depth/3.5,$fn=3);
+									}
+								rotate([180,0,0])
+									union(){
+										translate([suspension_depth/1.5,suspension_bow_diameter,suspension_depth/5.5])
+											rotate([90,-90,0])
+												cylinder(suspension_depth*20, suspension_depth/3.5, suspension_depth/3.5,$fn=3);
+										
+										translate([suspension_depth/1.5 + suspension_depth/3,suspension_bow_diameter,suspension_depth/3.07])
+											rotate([90,90,0])
+												cylinder(suspension_depth*20, suspension_depth/3.5, suspension_depth/3.5,$fn=3);
+									}
+							}
+						translate([suspension_depth*6 - 6*suspension_depth/3,0,0])
+							union(){
+									union(){
+										translate([suspension_depth/1.5,suspension_bow_diameter,suspension_depth/5.5])
+											rotate([90,-90,0])
+												cylinder(suspension_depth*20, suspension_depth/3.5, suspension_depth/3.5,$fn=3);
+										
+										translate([suspension_depth/1.5 + suspension_depth/3,suspension_bow_diameter,suspension_depth/3.07])
+											rotate([90,90,0])
+												cylinder(suspension_depth*20, suspension_depth/3.5, suspension_depth/3.5,$fn=3);
+									}
+								rotate([180,0,0])
+									union(){
+										translate([suspension_depth/1.5,suspension_bow_diameter,suspension_depth/5.5])
+											rotate([90,-90,0])
+												cylinder(suspension_depth*20, suspension_depth/3.5, suspension_depth/3.5,$fn=3);
+										
+										translate([suspension_depth/1.5 + suspension_depth/3,suspension_bow_diameter,suspension_depth/3.07])
+											rotate([90,90,0])
+												cylinder(suspension_depth*20, suspension_depth/3.5, suspension_depth/3.5,$fn=3);
+									}
+							}
+					}
+
+
+
+				//odečtení zbylého kužele
 				translate([-suspension_bow_diameter,-suspension_bow_diameter,-cylinder_h*2])
 						cube([suspension_bow_diameter,suspension_bow_diameter*2,cylinder_h*4]);
 				translate([-suspension_bow_diameter,0,-suspension_depth])
