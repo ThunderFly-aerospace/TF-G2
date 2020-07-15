@@ -8,4 +8,6 @@ SRC_DIR=../src
 GIT_ROOT=../../
 OUTPUT_FOLDER=CAD
 NAME_PREFIX=TF-G2
+PROCESSOR3D_PARAM=--no_gcode --no_amf
+
 include ../../utils/Makefile
