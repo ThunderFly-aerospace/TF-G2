@@ -8,21 +8,29 @@ include <../parameters.scad>
 module 888_4002(hole_diameter=3)
 {
     angle_between_blades = 360 / rotor_blades_count;
-    rotor_center_plate_size = 30;
-    rotor_mounting_plate_size = 20;
     shaft_diameter = M3_screw_diameter;
-    thickness = 1.9;
+    thickness = 1.4;
     blade_screws_distance = (16.47+11.86)/2;
+    blade_holder_widh = blade_mount_width;
 
     translate([0, 0, thickness/2])
     difference () {
         union () {
+          hull(){
             cylinder(r = 3+9, h = thickness, center = true, $fn = 100);
+            for (i = [0:rotor_blades_count]){
+                rotate([0,0, i*angle_between_blades])
+                    translate([0, blade_screws_distance, 0])
+                        cube([blade_holder_widh, blade_screws_distance/2, thickness], center = true);
+            }
+          }
+
+
 
             for (i = [0:rotor_blades_count]){
                 rotate([0,0, i*angle_between_blades])
                     translate([0, 20, 0])
-                        cube([16, 30, thickness], center = true);
+                        cube([blade_holder_widh, 30, thickness], center = true);
             }
         }
 
@@ -36,6 +44,15 @@ module 888_4002(hole_diameter=3)
                         cylinder(d = blade_mount_screw, h = 2* thickness, center = true, $fn = 20);
                     translate([0, -blade_screws_distance/2, 0])
                         cylinder(d = blade_mount_screw, h = 2* thickness, center = true, $fn = 20);
+
+                    //diry pro lepsi moznost utrzeni listu
+                    translate ([blade_holder_widh/2 - hole_diameter/8, -blade_screws_distance/2, 0])
+                        cylinder (h=thickness*2, d=hole_diameter, center=true, $fn=100);
+
+                    translate ([-blade_holder_widh/2 + hole_diameter/8, -blade_screws_distance/2, 0])
+                        cylinder (h=thickness*2, d=hole_diameter, center=true, $fn=100);
+
+
                 }
         }
 
@@ -44,13 +61,6 @@ module 888_4002(hole_diameter=3)
             rotate([0,0, i*angle_between_blades + angle_between_blades/2])
                 translate([0, 3 + 4.5 + blade_mount_screw/2, 0])
                     cylinder(d = blade_mount_screw, h = 2* thickness, center = true, $fn = 20);
-        }
-
-        //diry pro lepsi moznost utrzeni listu
-        for (i=[1,2,4,5]) {
-            rotate ([0, 0, 60*i])
-                translate ([15, 0, 0])
-                    cylinder (h=thickness+2, d=hole_diameter, center=true, $fn=100);
         }
     }
 }
