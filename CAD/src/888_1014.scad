@@ -5,15 +5,13 @@ include <../parameters.scad>
 $fn = $preview? 30:80;
 
 
-release_plate_thickness = 2;
-
 release_cube_width = 20;
 release_cube_length = 10;
 
-top_inner_diameter = 15;
-bottom_inner_diameter = 24;
-thickness = 0.85;
-sensor_cap_height = 19;
+top_inner_diameter = 13;
+bottom_inner_diameter = 24+1;
+thickness = 1.3;
+sensor_cap_height = 16;
 
 module 888_1014(){
 
@@ -33,23 +31,20 @@ module 888_1014(){
 
   translate([0, 0, -0.1])
     cylinder(d = M3_screw_diameter, h=50);
-  translate([0, 0, 2.5])
-    cylinder(d = inner_diameter, h = 50);
 
-
-  for(r = [0, 90])
+  for(r = [0: 360/(16): 180])
     rotate([0, 0, r])
-      hull()
-        for(z = [0, 2.5])
-          translate([0, 0, z + sensor_cap_height - 4])
-            rotate([90, 0, 0])
-              cylinder(d = 3, h = 50, center = true, $fn = 5);
+      translate([0, 0, sensor_cap_height])
+        cube([50, 2, 10], center = true);
+
+    translate([0, 0, -0.1]) cylinder(d = M3_nut_diameter, h = M3_nut_height-1, $fn=6);
 
 }
 
   difference(){
-    cylinder(d = M3_screw_diameter+3, h = 3);
-    translate([0, 0, -0.5]) cylinder(d = M3_screw_diameter, h = 4);
+    cylinder(d = 7, h = M3_nut_height -2 + 2);
+    translate([0, 0, M3_nut_height - 2.2+0.15]) cylinder(d = M3_screw_diameter, h = 10);
+    translate([0, 0, -0.1]) cylinder(d = M3_nut_diameter, h = M3_nut_height-2, $fn=6);
   }
 
 
