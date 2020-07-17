@@ -3,6 +3,7 @@ include <../parameters.scad>
 module 888_4003(){
 
     angle_between_blades = 360 / rotor_blades_count;
+	blade_holder_widh = blade_mount_width;
     rotor_center_plate_size = 30;
     rotor_mounting_plate_size = 20;
     shaft_diameter = 6.1;
@@ -20,6 +21,19 @@ module 888_4003(){
                     cylinder(r = 3+9, h = thickness, center = true, $fn = 100);
                     translate([0,0,-thickness/2])
                         cylinder(d = spacer_disc_diameter, h = thickness + 0.5, $fn = 100);
+
+
+                    
+                    rotate([0, 0, -90-rotor_delta_angle])
+                    hull(){
+                        cylinder(r = 3+9, h = thickness, center = true, $fn = 100);
+
+                        for (i = [0:rotor_blades_count]){
+                            rotate([0,0, i*angle_between_blades])
+                                translate([0, blade_screws_distance, 0])
+                                    cube([blade_holder_widh, blade_screws_distance/2, thickness], center = true);
+                        }
+                    }
                 }
 
                 cylinder(d = M3_screw_diameter, h = 3* thickness, center = true, $fn = 20);
