@@ -2,8 +2,6 @@ include <../parameters.scad>
 
 module 888_4008(){
 
-    rotor_blades_count=2;
-
     angle_between_blades = 360 / rotor_blades_count;
 
     //shaft_diameter = 6.1;
@@ -20,13 +18,13 @@ module 888_4008(){
     starter_pipe_r=8;
     starter_neck_r=10;
     starter_neck_h=1; 
-    starter_bottom_h=5;
+    starter_bottom_h=4;
     
     sensor_cap_height=starter_top_h+starter_neck_h+starter_bottom_h;
   
     rpm_sensor_inner_r=12.5;
     rpm_sensor_thickness = 1.3;
-    rpm_sensor_h=5;
+    rpm_sensor_h=6;
     rpm_sensor_count=16;
     
     screws_head_d=7;
