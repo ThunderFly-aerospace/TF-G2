@@ -188,15 +188,15 @@ module 888_4001_modificator(){
 
 module 888_4001_end_modificator(){
 
-    translate([0, -5, 0])
-        cube([rotor_blade_depth, 10, rotor_balde_tip_cutoff]);
+    translate([0, -4, 0])
+        cube([rotor_blade_depth, 8, rotor_balde_tip_cutoff/2+2]);
 
-    translate([0, -5, rotor_blade_length-2])
-        cube([rotor_blade_depth/2, 10, 2]);
+    translate([0, -4, rotor_blade_length-2])
+        cube([rotor_blade_depth/2, 8, 2]);
 }
 
-//%888_4001_modificator();
-//%888_4001_end_modificator();
+%888_4001_modificator();
+%888_4001_end_modificator();
 
 
 module 888_4001_print(part = 1){
@@ -225,7 +225,7 @@ module 888_4001_print_modificator(part = 1){
 
 module 888_4001_end_print_modificator(part = 1){
     part_height = rotor_blade_part_list[part] - rotor_blade_part_list[part-1];
-    part_bottom = rotor_blade_part_list[part];
+    part_bottom = rotor_blade_part_list[part-1];
 
     translate([0, 0, -part_bottom])
             888_4001_end_modificator();
