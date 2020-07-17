@@ -12,7 +12,7 @@ draft = true;
 
 include <../parameters.scad>
 use <lib/stdlib/naca4.scad>
-rotor_blade_endtip_diameter = 10;
+// rotor_blade_endtip_diameter = 15;
 rotor_blade_depth_naca_resolution = draft ? 50 : 100;
 
 module base_airfoil(h = rotor_blade_length){
@@ -128,6 +128,12 @@ module 888_4001(){
                 cylinder(d = blade_rod3_diameter, h = rotor_blade_length + 1, $fn = 50);
         }
 
+        if (rotor_blade_rod) translate([0, 0, rod_from_end]){
+            translate(blade_rod1_position - [0, 0, 0.5])
+                %cylinder(d = blade_rod1_diameter*5, h = rotor_blade_length - rod_from_end, $fn = 50);
+            echo(str("Delka vyztuhy listu je ", (rotor_blade_length - rod_from_end), " mm"));
+        }
+
         if (rotor_blade_rod)
           if(blade_glue_holes)
             translate([0, 0, rod_from_end]){
@@ -182,15 +188,15 @@ module 888_4001_modificator(){
 
 module 888_4001_end_modificator(){
 
-    translate([0, -5, 0])
-        cube([rotor_blade_depth, 10, rotor_balde_tip_cutoff]);
+    translate([0, -4, 0])
+        cube([rotor_blade_depth, 8, rotor_balde_tip_cutoff/2+2]);
 
-    translate([0, -5, rotor_blade_length-2])
-        cube([rotor_blade_depth/2, 10, 2]);
+    translate([0, -4, rotor_blade_length-2])
+        cube([rotor_blade_depth/2, 8, 2]);
 }
 
-//%888_4001_modificator();
-//%888_4001_end_modificator();
+%888_4001_modificator();
+%888_4001_end_modificator();
 
 
 module 888_4001_print(part = 1){
@@ -219,7 +225,7 @@ module 888_4001_print_modificator(part = 1){
 
 module 888_4001_end_print_modificator(part = 1){
     part_height = rotor_blade_part_list[part] - rotor_blade_part_list[part-1];
-    part_bottom = rotor_blade_part_list[part];
+    part_bottom = rotor_blade_part_list[part-1];
 
     translate([0, 0, -part_bottom])
             888_4001_end_modificator();
