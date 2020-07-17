@@ -12,7 +12,7 @@ draft = true;
 
 include <../parameters.scad>
 use <lib/stdlib/naca4.scad>
-rotor_blade_endtip_diameter = 10;
+// rotor_blade_endtip_diameter = 15;
 rotor_blade_depth_naca_resolution = draft ? 50 : 100;
 
 module base_airfoil(h = rotor_blade_length){
@@ -126,6 +126,12 @@ module 888_4001(){
                 cylinder(d = blade_rod2_diameter, h = rotor_blade_length + 1, $fn = 50);
             translate(blade_rod3_position - [0, 0, 0.5])
                 cylinder(d = blade_rod3_diameter, h = rotor_blade_length + 1, $fn = 50);
+        }
+
+        if (rotor_blade_rod) translate([0, 0, rod_from_end]){
+            translate(blade_rod1_position - [0, 0, 0.5])
+                %cylinder(d = blade_rod1_diameter*5, h = rotor_blade_length - rod_from_end, $fn = 50);
+            echo(str("Delka vyztuhy listu je ", (rotor_blade_length - rod_from_end), " mm"));
         }
 
         if (rotor_blade_rod)
