@@ -8,9 +8,9 @@ module 888_4006(AOA = rotor_blade_AOA) {
     thickness = 10;
     offset_size = 36;
 
-    short_edge_bottom = 25.15;
-    short_edge_top = 24;
-    long_edge_bottom = 28.8;
+    short_edge_bottom = 26.65;
+    short_edge_top = 25;
+    long_edge_bottom = 30.3;
 
     points = [
     	[0, 0, 0],

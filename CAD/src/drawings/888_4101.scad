@@ -24,12 +24,12 @@ module 888_4101(){
 
     for(i = [0:360/rotor_blades_count:360]) {
         rotate([0, 0, i])
-            translate([blade_holder_widh/2, 35, -5])
+            translate([blade_holder_widh/2, 36.5, -5])
                 rotate([0, 180, 90])
                     888_4006();
 
         rotate([0, 0, i])
-            translate([-blade_holder_widh/2, 35, 5])
+            translate([-blade_holder_widh/2, 36.5, 5])
                 rotate([0, 0, -90])
                     888_4004();
 
