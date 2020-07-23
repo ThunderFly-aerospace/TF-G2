@@ -1,8 +1,6 @@
 # TF-G2 training autogyro
 ![TF-G2](/CAD/render_Img/TF-G2_004.png)
 
-![Build status](https://github.com/ThunderFly-aerospace/TF-G2/workflows/Build%20repository/badge.svg?branch=master)
-
 
 Autogyro model for UAV pilot training and learning purposes.
 
