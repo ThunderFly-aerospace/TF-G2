@@ -235,5 +235,9 @@ module 888_4001_end_print_modificator(part = 1){
 888_4001();
 
 
+echo(blade_rod1_position);
 echo(blade_rod2_position);
 echo(blade_rod3_position);
+
+
+echo(blade_rod2_position[0]-blade_rod3_position[0]);
