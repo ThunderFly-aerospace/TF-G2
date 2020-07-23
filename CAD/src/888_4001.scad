@@ -106,6 +106,7 @@ module blade_mount(){
             #translate([rotor_blade_depth/4 -blade_mount_width/2, -blade_mount_thickness/2, rotor_blade_length - blade_transition_length - blade_mount_length/4])
                 cube([blade_mount_width, blade_mount_thickness, blade_mount_length/4]);
         } */
+
 }
 
 
@@ -154,6 +155,28 @@ module 888_4001(){
 
             }
 
+        spine_radius = (blade_rod3_position[0] - blade_rod2_position[0]) / 2; // vypocet radiusu ohybu dratu
+        translate([(blade_rod3_position[0] + blade_rod2_position[0]) / 2, blade_rod3_position[1], rotor_blade_length -blade_mount_screw_offset])
+        rotate([90, 0, 0])
+        intersection(){
+            rotate_extrude(angle = 180, convexity = 2)
+                translate([spine_radius, 0, 0])  // posunutí o radius ohybu
+                  union(){
+                    circle(d = blade_rod2_diameter,  $fn = $preview? 7 : 50);
+                    translate([0, -blade_rod2_diameter/2, 0])
+                      square([10,blade_rod2_diameter]);
+                  }
+          union(){
+              translate([-spine_radius,0, -blade_rod2_diameter/2])
+                cube([spine_radius * 2,40, 30]);
+              translate([spine_radius,0, 0])
+                rotate([90, 0, 0])
+                  cylinder(d = blade_rod2_diameter, h = 40,$fn = 50, center = true);
+              translate([-spine_radius,0, 0])
+                rotate([90, 0, 0])
+                  cylinder(d = blade_rod2_diameter, h = 40,$fn = 50, center = true);
+          }
+      }
 
 
         difference(){
@@ -188,15 +211,15 @@ module 888_4001_modificator(){
 
 module 888_4001_end_modificator(){
 
-    translate([0, -5, 0])
-        cube([rotor_blade_depth, 10, rotor_balde_tip_cutoff]);
+    translate([0, -4, 0])
+        cube([rotor_blade_depth, 8, rotor_balde_tip_cutoff/2+2]);
 
-    translate([0, -5, rotor_blade_length-2])
-        cube([rotor_blade_depth/2, 10, 2]);
+    translate([0, -4, rotor_blade_length-2])
+        cube([rotor_blade_depth/2, 8, 2]);
 }
 
-//%888_4001_modificator();
-//%888_4001_end_modificator();
+%888_4001_modificator();
+%888_4001_end_modificator();
 
 
 module 888_4001_print(part = 1){
@@ -225,7 +248,7 @@ module 888_4001_print_modificator(part = 1){
 
 module 888_4001_end_print_modificator(part = 1){
     part_height = rotor_blade_part_list[part] - rotor_blade_part_list[part-1];
-    part_bottom = rotor_blade_part_list[part];
+    part_bottom = rotor_blade_part_list[part-1];
 
     translate([0, 0, -part_bottom])
             888_4001_end_modificator();
@@ -233,7 +256,7 @@ module 888_4001_end_print_modificator(part = 1){
 }
 
 888_4001();
-
+//blade_mount();
 
 echo(blade_rod1_position);
 echo(blade_rod2_position);
