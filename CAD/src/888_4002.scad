@@ -9,7 +9,7 @@ module 888_4002(hole_diameter=3)
 {
     angle_between_blades = 360 / rotor_blades_count;
     shaft_diameter = M3_screw_diameter;
-    thickness = 1.6;
+    thickness = 1.8;
     blade_screws_distance = (16.47+11.86)/2;
     blade_holder_widh = blade_mount_width;
 
