@@ -22,11 +22,12 @@ module 888_4008(){
     
     sensor_cap_height=starter_top_h+starter_neck_h+starter_bottom_h;
   
-    rpm_sensor_inner_r=12;
+    rpm_sensor_inner_r=12.5;
     rpm_sensor_thickness = 1.3;
     rpm_sensor_h=8;
     rpm_sensor_base_h= 2;
     rpm_sensor_count=16;
+    rpm_hole_h = 5;
     
     screws_head_d=7;
     screws_h=14;
@@ -58,14 +59,17 @@ module 888_4008(){
                             {
                                 translate([0,0,thickness/2+sensor_cap_height+1])                                
                                     cylinder(h=2*sensor_cap_height,r=starter_pipe_r,center=true, $fn=40);
+    
+                                translate([0,0,thickness/2+sensor_cap_height/2])                                
+                                    cylinder(h=sensor_cap_height,r1=starter_pipe_r, r2=starter_pipe_r+4, $fn=40);
                                 
                                 translate([0,0,thickness/2+starter_top_h+starter_bottom_h+starter_neck_h+rpm_sensor_h])                                
                                     cylinder(h=2*rpm_sensor_h,r=rpm_sensor_inner_r,center=true, $fn=40);
                                 
                                   for(r = [0: 360/(rpm_sensor_count): 180])
                                         rotate([0, 0, r])
-                                          translate([0, 0, thickness/2+sensor_cap_height+5+rpm_sensor_base_h])
-                                            cube([50, 2.5, 10], center = true);
+                                          translate([0, 0, thickness/2+sensor_cap_height+rpm_hole_h/2+rpm_sensor_base_h])
+                                            cube([50, 2.5, rpm_hole_h], center = true);
                             }
                             
                             
@@ -75,9 +79,9 @@ module 888_4008(){
                         cylinder(d = spacer_disc_diameter, h = thickness + spare_disc_height, $fn = 100);
                 }
 
-                cylinder(d = M3_screw_diameter, h = 3* thickness+starter_top_h, center = true, $fn = 20);
+                cylinder(d = M3_screw_diameter+0.1, h = 3* thickness+starter_top_h, center = true, $fn = 20);
                 translate([0,0,thickness - M3_nut_height/4])
-                    cylinder(d = M3_nut_diameter+0.15, h = M3_nut_height, center = true, $fn = 6);
+                    cylinder(d = M3_nut_diameter+0.1, h = M3_nut_height, center = true, $fn = 6);
 
                 for (i = [1:rotor_blades_count]){
                     rotate([0, 0, i*angle_between_blades + angle_between_blades/2 + 180])
