@@ -22,8 +22,8 @@ module 888_4008(){
     
     sensor_cap_height=starter_top_h+starter_neck_h+starter_bottom_h;
   
-    rpm_sensor_inner_r=13;
-    rpm_sensor_thickness = 1.4;
+    rpm_sensor_inner_r=12;
+    rpm_sensor_thickness = 1.3;
     rpm_sensor_h=8;
     rpm_sensor_base_h= 2;
     rpm_sensor_count=16;
