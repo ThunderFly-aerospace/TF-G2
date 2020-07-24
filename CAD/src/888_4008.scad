@@ -26,8 +26,9 @@ module 888_4008(){
     rpm_sensor_thickness = 1.3;
     rpm_sensor_h=8;
     rpm_sensor_base_h= 2;
-    rpm_sensor_count=16;
+    rpm_sensor_count=8;
     rpm_hole_h = 5;
+    rpm_hole_width = 5;
     
     screws_head_d=7;
     screws_h=14;
@@ -69,7 +70,7 @@ module 888_4008(){
                                   for(r = [0: 360/(rpm_sensor_count): 180])
                                         rotate([0, 0, r])
                                           translate([0, 0, thickness/2+sensor_cap_height+rpm_hole_h/2+rpm_sensor_base_h])
-                                            cube([50, 2.5, rpm_hole_h], center = true);
+                                            cube([50, rpm_hole_width, rpm_hole_h], center = true);
                             }
                             
                             
