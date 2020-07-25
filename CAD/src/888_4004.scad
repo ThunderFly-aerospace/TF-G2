@@ -10,8 +10,8 @@ module 888_4004() {
 	thickness = 1.97;
 	offset_size = 36;
 
-	long_edge = 30.2+1.5;
-	short_edge = 26.7+1.5;
+	long_edge = 30.2+0.75;
+	short_edge = 26.7+0.75;
 
 	points = [
 		[0, 0, 0],
