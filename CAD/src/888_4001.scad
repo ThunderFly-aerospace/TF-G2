@@ -98,15 +98,6 @@ module blade_mount(){
 
         }
 
-        /* hull(){
-            translate([0, 0, rotor_blade_length - blade_transition_length - blade_mount_length])
-                linear_extrude(height = 0.1)
-                    polygon(points = airfoil_data(naca=rotor_blade_naca, L = rotor_blade_depth, N = rotor_blade_depth_naca_resolution));
-
-            #translate([rotor_blade_depth/4 -blade_mount_width/2, -blade_mount_thickness/2, rotor_blade_length - blade_transition_length - blade_mount_length/4])
-                cube([blade_mount_width, blade_mount_thickness, blade_mount_length/4]);
-        } */
-
 }
 
 
@@ -129,12 +120,6 @@ module 888_4001(){
                 cylinder(d = blade_rod3_diameter, h = rotor_blade_length + 1, $fn = 50);
         }
 
-        if (rotor_blade_rod) translate([0, 0, rod_from_end]){
-            translate(blade_rod1_position - [0, 0, 0.5])
-                %cylinder(d = blade_rod1_diameter*5, h = rotor_blade_length - rod_from_end, $fn = 50);
-            echo(str("Delka vyztuhy listu je ", (rotor_blade_length - rod_from_end), " mm"));
-        }
-
         if (rotor_blade_rod)
           if(blade_glue_holes)
             translate([0, 0, rod_from_end]){
@@ -155,7 +140,10 @@ module 888_4001(){
 
             }
 
+        // kulaté zakončení výztuhy v kořenu listu
+
         spine_radius = (blade_rod3_position[0] - blade_rod2_position[0]) / 2; // vypocet radiusu ohybu dratu
+        echo(str("radius vyztuhy je:",  spine_radius, " mm"));
         translate([(blade_rod3_position[0] + blade_rod2_position[0]) / 2, blade_rod3_position[1], rotor_blade_length -blade_mount_screw_offset])
         rotate([90, 0, 0])
         intersection(){
@@ -218,8 +206,8 @@ module 888_4001_end_modificator(){
         cube([rotor_blade_depth/2, 8, 2]);
 }
 
-%888_4001_modificator();
-%888_4001_end_modificator();
+//%888_4001_modificator();
+//%888_4001_end_modificator();
 
 
 module 888_4001_print(part = 1){
@@ -258,9 +246,11 @@ module 888_4001_end_print_modificator(part = 1){
 888_4001();
 //blade_mount();
 
+echo(str("Delka vyztuhy listu je:", (rotor_blade_length - rod_from_end), " mm"));
+
 echo(blade_rod1_position);
 echo(blade_rod2_position);
 echo(blade_rod3_position);
 
 
-echo(blade_rod2_position[0]-blade_rod3_position[0]);
+echo(str("Roztec vyztuh je:",  blade_rod3_position[0]-blade_rod2_position[0], " mm"));
