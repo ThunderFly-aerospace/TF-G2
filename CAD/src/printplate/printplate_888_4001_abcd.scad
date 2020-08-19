@@ -25,6 +25,7 @@ translate([-rotor_blade_depth/2, 3.5, 0])
 translate([rotor_blade_depth/2, -3.5, 0]) rotate([0, 0, 180])
   888_4001_print(2);
 
+/*  chybi modifikatory pro plnou spicku na konci wingletu
 translate([rotor_blade_depth/2, -20, rotor_blade_part_list[1]])
   rotate([0, 180, 0])
     888_4001_print(1);
@@ -32,7 +33,7 @@ translate([rotor_blade_depth/2, -20, rotor_blade_part_list[1]])
 translate([-rotor_blade_depth/2, 20, rotor_blade_length/4]) rotate([0, 0, 180])
   rotate([0, 180, 0])
     888_4001_print(1);
-
+*/
 
 
 
