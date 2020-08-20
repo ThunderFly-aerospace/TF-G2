@@ -12,6 +12,7 @@ draft = true;
 
 include <../parameters.scad>
 use <lib/stdlib/naca4.scad>
+
 // rotor_blade_endtip_diameter = 15;
 rotor_blade_depth_naca_resolution = draft ? 50 : 100;
 
@@ -52,7 +53,7 @@ module blade_infill(){
             }
             base_airfoil();
         }
-        blade_shell(thickness = 0.8);
+        blade_shell(thickness = blade_shell_thickness);
 
 
         difference(){
@@ -215,14 +216,25 @@ module 888_4001_print(part = 1){
     part_height = rotor_blade_part_list[part] - rotor_blade_part_list[part-1];
     part_bottom = rotor_blade_part_list[part-1];
 
-    translate([0, 0, -part_bottom])
-    intersection(){
+    difference(){
+      translate([0, 0, -part_bottom])
+        intersection(){
 
-        888_4001();
+            888_4001();
 
-        translate([0, -25, part_bottom])
-            cube([rotor_blade_depth, 50, part_height]);
+            translate([0, -25, part_bottom])
+                cube([rotor_blade_depth, 50, part_height]);
         }
+
+      translate(blade_rod1_position)
+          cylinder(d1 = blade_rod1_diameter + global_clearance, d2 = blade_rod1_diameter, h = 3*layer_thickness, $fn = 50);
+
+      translate(blade_rod2_position)
+          cylinder(d1 = blade_rod2_diameter + global_clearance, d2 = blade_rod2_diameter, h = 3*layer_thickness, $fn = 50);
+
+      translate(blade_rod3_position)
+          cylinder(d1 = blade_rod3_diameter + global_clearance, d2 = blade_rod3_diameter, h = 3*layer_thickness, $fn = 50);
+    }
 }
 module 888_4001_print_modificator(part = 1){
     part_height = rotor_blade_part_list[part] - rotor_blade_part_list[part-1];

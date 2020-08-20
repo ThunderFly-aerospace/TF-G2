@@ -7,6 +7,8 @@
 include <../../parameters.scad>
 use <../888_4001.scad>
 
+draft = false;
+
 translate([-rotor_blade_depth/2, 28, 0])
   888_4001_print(4);
 
