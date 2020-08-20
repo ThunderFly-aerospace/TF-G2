@@ -7,20 +7,21 @@
 //@set_modificator(888_4001_modificator)
 //@set_slicing_config(../slicing/blade_infill_modif.ini, 888_4001_modificator)
 
-draft = true;
-
-
 include <../parameters.scad>
 use <lib/stdlib/naca4.scad>
 
 // rotor_blade_endtip_diameter = 15;
-rotor_blade_depth_naca_resolution = draft ? 50 : 100;
 
-module base_airfoil(h = rotor_blade_length){
+
+module base_airfoil(h = rotor_blade_length, draft = true){
+    rotor_blade_depth_naca_resolution = draft ? 50 : 200;
+
     airfoil(naca = rotor_blade_naca, L = rotor_blade_depth, N = rotor_blade_depth_naca_resolution, h = h - blade_transition_length - blade_mount_length, open = false);
 }
 
-module blade_shell(thickness = blade_shell_thickness){
+module blade_shell(thickness = blade_shell_thickness,draft = true){
+    rotor_blade_depth_naca_resolution = draft ? 50 : 200;
+
     hollow_airfoil(naca = rotor_blade_naca, L = rotor_blade_depth, N = rotor_blade_depth_naca_resolution, h = rotor_blade_length - blade_transition_length - blade_mount_length, open = false, wall_thickness = thickness);
 }
 
@@ -68,7 +69,10 @@ module blade_infill(){
 }
 
 
-module blade_mount(){
+module blade_mount(draft){
+
+    rotor_blade_depth_naca_resolution = draft ? 50 : 200;
+
     translate([rotor_blade_depth/4, 0, rotor_blade_length - blade_mount_length])
         difference(){
             union(){
@@ -102,11 +106,11 @@ module blade_mount(){
 }
 
 
-module 888_4001(){
+module 888_4001(draft){
     difference(){
         union(){
-            base_airfoil();
-            blade_mount();
+            base_airfoil(draft = draft);
+            blade_mount(draft);
         }
 
         blade_infill();
@@ -211,20 +215,41 @@ module 888_4001_end_modificator(){
 //%888_4001_end_modificator();
 
 
-module 888_4001_print(part = 1){
+module 888_4001_print(part = 1, draft){
 
     part_height = rotor_blade_part_list[part] - rotor_blade_part_list[part-1];
     part_bottom = rotor_blade_part_list[part-1];
 
-    difference(){
-      translate([0, 0, -part_bottom])
-        intersection(){
+      if (part == 1)
+        difference(){
+          translate([0, 0, -part_bottom])
+            intersection(){
 
-            888_4001();
+                888_4001(draft=draft);
 
-            translate([0, -25, part_bottom])
-                cube([rotor_blade_depth, 50, part_height]);
+                translate([0, -25, part_bottom])
+                    cube([rotor_blade_depth, 50, part_height]);
+            }
+
+        translate(blade_rod1_position + [0, 0, part_height - 3*layer_thickness])
+            cylinder(d2 = blade_rod1_diameter + global_clearance, d1 = blade_rod1_diameter, h = 3*layer_thickness, $fn = 50);
+
+        translate(blade_rod2_position + [0, 0, part_height - 3*layer_thickness])
+            cylinder(d2 = blade_rod2_diameter + global_clearance, d1 = blade_rod2_diameter, h = 3*layer_thickness, $fn = 50);
+
+        translate(blade_rod3_position + [0, 0, part_height - 3*layer_thickness])
+            cylinder(d2 = blade_rod3_diameter + global_clearance, d1 = blade_rod3_diameter, h = 3*layer_thickness, $fn = 50);
         }
+      else
+      difference(){
+        translate([0, 0, -part_bottom])
+          intersection(){
+
+              888_4001(draft=draft);
+
+              translate([0, -25, part_bottom])
+                  cube([rotor_blade_depth, 50, part_height]);
+          }
 
       translate(blade_rod1_position)
           cylinder(d1 = blade_rod1_diameter + global_clearance, d2 = blade_rod1_diameter, h = 3*layer_thickness, $fn = 50);

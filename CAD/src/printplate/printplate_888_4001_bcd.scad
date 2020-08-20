@@ -7,26 +7,23 @@
 include <../../parameters.scad>
 use <../888_4001.scad>
 
-draft = false;
-
-
 translate([-rotor_blade_depth/2, 19, 0])
-  888_4001_print(4);
+  888_4001_print(4, draft = false);
 
 translate([rotor_blade_depth/2, -19, 0]) rotate([0, 0, 180])
-  888_4001_print(4);
+  888_4001_print(4, draft = false);
 
 translate([-rotor_blade_depth/2, -12, 0])
-  888_4001_print(3);
+  888_4001_print(3, draft = false);
 
 translate([rotor_blade_depth/2, 12, 0]) rotate([0, 0, 180])
-  888_4001_print(3);
+  888_4001_print(3, draft = false);
 
 translate([-rotor_blade_depth/2, 3.5, 0])
-  888_4001_print(2);
+  888_4001_print(2, draft = false);
 
 translate([rotor_blade_depth/2, -3.5, 0]) rotate([0, 0, 180])
-  888_4001_print(2);
+  888_4001_print(2, draft = false);
 
 
 

@@ -15,11 +15,11 @@ use <../888_4001.scad>
 
 translate([rotor_blade_depth/2, -5, 0])
   rotate([0, 180, 0])
-    888_4001_print(1);
+    888_4001_print(1, draft = false);
 
 translate([-rotor_blade_depth/2, 5, 0]) rotate([0, 0, 180])
   rotate([0, 180, 0])
-    888_4001_print(1);
+    888_4001_print(1, draft = false);
 
 
 
