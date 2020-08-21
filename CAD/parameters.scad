@@ -1,4 +1,5 @@
 include <bolt_parameters.scad>
+use <./src/lib/stdlib/naca4.scad>
 
 week = "77";
 global_clearance = 0.5;
@@ -81,8 +82,13 @@ blade_rod1_diameter = 2.55;
 blade_rod2_diameter = 2.55;
 blade_rod3_diameter = 2.55;
 
+
 // blade_rod1_position = [3.4, 0.3, 0];
-blade_rod1_position = [rotor_blade_depth/4 - 8.7, 0.2, 0];
+
+blade_rod1_xposition = rotor_blade_depth/4 - 8.9;
+blade_rod1_yposition = rotor_blade_depth * camberY(naca = rotor_blade_naca, x = blade_rod1_xposition / rotor_blade_depth); // calculate airfoil chamber line y position
+
+blade_rod1_position = [blade_rod1_xposition, blade_rod1_yposition, 0];  // shift rod1 to chamber line location
 blade_rod2_position = [rotor_blade_depth/4 - 5.8, 0.5, 0];
 blade_rod3_position = [rotor_blade_depth/4 + 3.5, 0.5, 0];
 
