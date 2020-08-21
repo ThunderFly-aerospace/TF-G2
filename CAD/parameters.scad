@@ -62,9 +62,9 @@ blade_infill_distance = 25;
 blade_infill_overlap = 0; */
 
 /// Nastaveni pro Slic3r
-blade_shell_thickness = 0.45;
-blade_shell_thickness_inner = 0.05;
-blade_shell_thickness_wire = 0.45;
+blade_shell_thickness = 0.5;
+blade_shell_thickness_inner = 0.08;
+blade_shell_thickness_wire = 0.5;
 blade_infill_distance = 23;
 blade_infill_overlap = 0;
 
