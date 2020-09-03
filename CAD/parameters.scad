@@ -78,9 +78,9 @@ blade_infill_overlap = 0;
 //blade_rod1_diameter = 2.58;
 //blade_rod2_diameter = 2.58;
 //blade_rod3_diameter = 2.13;
-blade_rod1_diameter = 2.55;
-blade_rod2_diameter = 2.55;
-blade_rod3_diameter = 2.55;
+blade_rod1_diameter = 2.45;
+blade_rod2_diameter = 2.45;
+blade_rod3_diameter = 2.45;
 
 
 // blade_rod1_position = [3.4, 0.3, 0];
