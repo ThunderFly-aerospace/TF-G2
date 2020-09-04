@@ -53,7 +53,7 @@ module 888_2002()
 
 
 				}
-				
+
 				//prořezy
 				//horní
 				translate([0,0,suspension_depth/4 - suspension_depth/16])
@@ -200,7 +200,7 @@ module 888_2002()
 				translate([0,0,- suspension_depth/4 - suspension_depth/16])
 					rotate([90,-90,104])
 						cylinder(suspension_depth*10, suspension_depth/4, suspension_depth/4, $fn=3);
-					
+
 
 
 				//odečtení zbylého kužele
@@ -252,7 +252,7 @@ translate([0,-suspension_bow_diameter/2 - join_height,0])
 
 	                translate([0, 0, suspension_depth/2])
 	                    rotate([0, 90, 0])
-	                        cylinder(d = 6.5, h = 30, center = true);
+	                        cylinder(d = M3_screw_diameter, h = 30, center = true);
 	            }
 }
 
