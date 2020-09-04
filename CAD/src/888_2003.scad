@@ -3,7 +3,7 @@ include <../parameters.scad>
 
 
 
-module 888_1011(){
+module 888_2003(){
     /*
      * Highly Configurable Wheel (One Wheel To Rule Them All)
      *
@@ -1079,4 +1079,4 @@ module 888_1011(){
     }
 }
 
-888_1011();
+888_2003();
