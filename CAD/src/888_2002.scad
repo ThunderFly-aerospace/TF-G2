@@ -10,7 +10,7 @@ suspension_thickness = 0.41*6;
 suspension_holder_flange_height = 25;
 suspension_holder_thickness = 0.41*15;
 
-suspension_camber = 10;
+suspension_camber = 2; // úhel zakončení, délka konstrukce
 
 suspension_join_length = 22;
 suspension_join_screw_distance = 12;
@@ -128,6 +128,14 @@ module 888_2002()
 					rotate([90,-270,104])
 						cylinder(suspension_depth*10, suspension_depth/4, suspension_depth/4, $fn=3);
 
+				translate([0,0,suspension_depth/4 - suspension_depth/16])
+					rotate([90,-90,100])
+						cylinder(suspension_depth*10, suspension_depth/4, suspension_depth/4, $fn=3);
+
+				translate([0,0,suspension_depth/4 + suspension_depth/16])
+					rotate([90,-270,96])
+						cylinder(suspension_depth*10, suspension_depth/4, suspension_depth/4, $fn=3);
+
 				//dolní
 				translate([0,0, - suspension_depth/4 + suspension_depth/16])
 					rotate([90,-270,172])
@@ -200,6 +208,14 @@ module 888_2002()
 				translate([0,0,- suspension_depth/4 - suspension_depth/16])
 					rotate([90,-90,104])
 						cylinder(suspension_depth*10, suspension_depth/4, suspension_depth/4, $fn=3);
+				
+				translate([0,0, - suspension_depth/4 + suspension_depth/16])
+					rotate([90,-270,100])
+						cylinder(suspension_depth*10, suspension_depth/4, suspension_depth/4, $fn=3);
+
+				translate([0,0,- suspension_depth/4 - suspension_depth/16])
+					rotate([90,-90,96])
+						cylinder(suspension_depth*10, suspension_depth/4, suspension_depth/4, $fn=3);
 
 
 
@@ -213,9 +229,13 @@ module 888_2002()
 						cube([suspension_bow_diameter,suspension_bow_diameter*2,cylinder_h*2]);
 				translate([-suspension_bow_diameter,-suspension_bow_diameter,- cylinder_h*2- suspension_depth/2])
 						cube([suspension_bow_diameter*2,suspension_bow_diameter*2,cylinder_h*2]);
+				
+				//zrkácení délky
+					
 					rotate([0, 0, -90 + suspension_camber])
 						translate([1,0,-10])
 					   		cube(200);
+				
 				}
 	}
 //koncovky - hranatá
