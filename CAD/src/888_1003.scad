@@ -19,6 +19,7 @@ side_base_thickness = 0.2*6;
 
 platform_ears_position = base_patern * [6, 25];
 platform_ears_height = 25;
+platform_ears_height = 11 + battery_case_height;
 platform_ears_thickness = 2;
 platform_ears_corner_radius = 3.5;
 platform_ears_hole_from_bottom = 5;
@@ -51,6 +52,21 @@ module 888_1003_outline(){
 
 					translate([-32 + back_overlap + base_length, 23, 0])
 						cylinder(d = 10, h = 1);
+
+				}
+
+
+				translate([battery_case_start_x,0,0]) hull(){
+		//Spodni cast pro akumulator
+	        translate([0, -base_thickness -rantl_height/2, 0])
+	         cube([battery_length+20, base_thickness + rantl_height, 1]);
+
+			    translate([10, -bellow - 10, 0])
+						cylinder(d = 8, h = 1);
+
+					translate([battery_length+10, -bellow - 10, 0])
+						cylinder(d = 8, h = 1);
+
 
 				}
 
@@ -126,10 +142,16 @@ module 888_1003(){
 
 			// Usi pro pripevneni k platforme
 			for (x = platform_ears_position)
-				translate([x, 0, 0])
-					hull(){
-						#for(pos = [[-base_patern, 0], [base_patern, 0], [-base_patern/2, -platform_ears_height], [base_patern/2, -platform_ears_height] ])
-							translate([pos[0], pos[1], 0]) cylinder(r = platform_ears_corner_radius, h = platform_ears_thickness);
+				translate([x, 0, 0]){
+					hull()
+						for(pos = [[-base_patern, 0], [base_patern, 0], [-base_patern/2, -platform_ears_height], [base_patern/2, -platform_ears_height] ])
+							translate([pos[0], pos[1], 0])
+								cylinder(r = platform_ears_corner_radius, h = platform_ears_thickness);
+						for(pos = [[-base_patern/2, -platform_ears_height], [base_patern/2, -platform_ears_height] ])
+							hull(){
+								translate([pos[0]-1, pos[1]+8, 0]) cube([2, 32, 4]);
+
+					}
 					}
 
 		}
@@ -158,6 +180,12 @@ module 888_1003(){
 	            cylinder(d = M3_screw_diameter, h = 10, center = true, $fn = 50);
 	            //cylinder(d = 5.5, h = 10, center = true, $fn = 50);
 
+		// Rada sroubu pro akumulator
+		for(x = [20:10:10*18])
+	        translate([x, -bellow - 5, -0.1])
+	            cylinder(d = M3_screw_diameter, h = 10, center = true, $fn = 50);
+	            //cylinder(d = 5.5, h = 10, center = true, $fn = 50);
+
 
 		// Otvory pro kryt
 			for(x=cover_holes)
@@ -170,7 +198,8 @@ module 888_1003(){
 			for (x = platform_ears_position)
 				translate([x, -platform_ears_corner_radius, 0])
 					hull(){
-						translate([0, -platform_ears_height + platform_ears_hole_from_bottom, 0]) cylinder(d = 3, h = platform_ears_thickness+3, center = true);
+						translate([0, -platform_ears_height + platform_ears_hole_from_bottom, 0])
+							cylinder(d = 3.5, h = platform_ears_thickness+3, center = true, $fn = 20);
 					}
 
 	}

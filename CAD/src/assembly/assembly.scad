@@ -11,6 +11,7 @@ include <position/position_888_1007.scad>
 include <position/position_888_1008.scad>
 include <position/position_888_1009.scad>
 include <position/position_888_1013.scad>
+include <position/position_888_1018.scad>
 include <position/position_rotor.scad>
 //include <../888_1016.scad>
 include <position/position_888_3000.scad>
@@ -28,7 +29,7 @@ use <../888_1005.scad>
 
 use <888_2002.scad>
 
-include <position/position_888_1016_rear_difference.scad>
+// include <position/position_888_1016_rear_difference.scad>
 
 /*
 for(x = [1, 0])

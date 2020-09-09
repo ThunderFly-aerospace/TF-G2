@@ -221,3 +221,19 @@ pylon_bottom_angle = atan2(pilot_height_separation,(base_width-pylon_ring_width)
 echo(pylon_bottom_angle);
 pylon_top_angle = atan2(pylon_height - pilot_height_separation,(pylon_ring_width - rotor_head_width)/2 - pylon_thickness - pylon_ring_thickness);
 echo(pylon_top_angle);
+
+
+
+// Parametry k akumulatoru
+
+
+
+//  GensACE 3300 mAh
+
+battery_case_height = 25;
+battery_case_start_x = 15;
+battery_case_wall = 3;
+
+battery_width = 50;
+battery_height = 20;
+battery_length = 150;
