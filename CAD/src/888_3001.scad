@@ -109,16 +109,10 @@ module tail_center(){
         }
 
         // kostky na pripevneni smerovky, otvory v nich na sroub a vystuzeni
-        translate([30, 0, 5]){
-           rotate([90, 0, 0]) cylinder(d = M3_screw_diameter, h = 20, center = true, $fn = 30);
-           translate([13/3, 0, -5]) cylinder(d=2, h=8, center=true);
-           translate([-13/3, 0, -5]) cylinder(d=2, h=8, center=true);
-        }
-
-        translate([30 + 80, 0, 5]){
+        for(x = [80+30, 30]) translate([x, 0, 5]){
             rotate([90, 0, 0]) cylinder(d = M3_screw_diameter, h = 20, center = true, $fn = 30);
-            translate([13/3, 0, -5]) cylinder(d=2, h=8, center=true);
-            translate([-13/3, 0, -5]) cylinder(d=2, h=8, center=true);
+            translate([13/3, 0, 0]) cylinder(d=1.5, h=20, center=true);
+            translate([-13/3, 0, 0]) cylinder(d=1.5, h=20, center=true);
         }
 
     }
