@@ -62,6 +62,14 @@ module 888_4002(hole_diameter=3)
                 translate([0, 3 + 4.5 + blade_mount_screw/2, 0])
                     cylinder(d = blade_mount_screw, h = 2* thickness, center = true, $fn = 20);
         }
+
+        translate([-3.5, 3, 0.4])
+          linear_extrude(1)
+            text(str(week), size = 5);
+
+        translate([-4.5, -8, 0.4])
+          linear_extrude(1)
+            text(str(thickness), size = 5);
     }
 }
 

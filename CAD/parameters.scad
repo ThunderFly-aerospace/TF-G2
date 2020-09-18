@@ -1,7 +1,7 @@
 include <bolt_parameters.scad>
 use <./src/lib/stdlib/naca4.scad>
 
-week = "77";
+week = "77";  // dummy value for visual rendering not used for printing.
 global_clearance = 0.5;
 
 layer_thickness = 0.3;
