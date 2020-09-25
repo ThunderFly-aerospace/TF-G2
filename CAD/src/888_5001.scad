@@ -47,7 +47,7 @@ curvedPipe([ [10, distance/2, h],
 module 888_5001(){
 
 type = "naca"; // "naca" or "cylinder"
-//type = "cylinder";
+type = "cylinder";
 width = 30;
 
 pipe_d = 2;
