@@ -34,11 +34,15 @@ module 888_2002()
 {
 
 	union(){
+//	translate([0,-suspension_bow_diameter/2 - join_height/2,suspension_depth/2])
 	translate([0,-suspension_bow_diameter/2 - join_height/2,suspension_depth/2])
+
 		color([0,0.5,0])
 			difference(){
+				
 				difference(){
 					union(){
+
 							cylinder(h= cylinder_h, r1=suspension_bow_diameter/2, r2= cylinder_r2);
 						rotate([180,0,0])
 							cylinder(h= cylinder_h, r1=suspension_bow_diameter/2, r2= cylinder_r2);
@@ -50,68 +54,73 @@ module 888_2002()
 							rotate([180,0,0])
 								cylinder(h = cylinder_h, r1=suspension_bow_diameter/2 - suspension_thickness, r2=1);
 					}
-
-
-				}
-
+					}
+					//zešikmení
+					 translate([3,0,-cylinder_h*2])  
+				               cylinder(cylinder_h*4,suspension_bow_diameter/2-5,suspension_bow_diameter/2-10);				
+				
+				
 				//prořezy
 				//horní
+
+				union(){
 				translate([0,0,suspension_depth/4 - suspension_depth/16])
 					rotate([90,-90,172])
-						cylinder(suspension_depth*10, suspension_depth/4, suspension_depth/4, $fn=3);
+						cylinder(suspension_depth*10, suspension_depth/5, suspension_depth/5, $fn=3);
 
-				translate([0,0,suspension_depth/4 + suspension_depth/16])
+				translate([0,0,suspension_depth/4.5 + suspension_depth/16])
 					rotate([90,-270,168])
-						cylinder(suspension_depth*10, suspension_depth/4, suspension_depth/4, $fn=3);
+						cylinder(suspension_depth*10, suspension_depth/5, suspension_depth/5, $fn=3);
 
 				translate([0,0,suspension_depth/4 - suspension_depth/16])
 					rotate([90,-90,164])
-						cylinder(suspension_depth*10, suspension_depth/4, suspension_depth/4, $fn=3);
+						cylinder(suspension_depth*10, suspension_depth/5, suspension_depth/5, $fn=3);
 
-				translate([0,0,suspension_depth/4 + suspension_depth/16])
+				translate([0,0,suspension_depth/4.5 + suspension_depth/16])
 					rotate([90,-270,160])
-						cylinder(suspension_depth*10, suspension_depth/4, suspension_depth/4, $fn=3);
+						cylinder(suspension_depth*10, suspension_depth/5, suspension_depth/5, $fn=3);
 
 				translate([0,0,suspension_depth/4 - suspension_depth/16])
 					rotate([90,-90,156])
-						cylinder(suspension_depth*10, suspension_depth/4, suspension_depth/4, $fn=3);
+						cylinder(suspension_depth*10, suspension_depth/5, suspension_depth/5, $fn=3);
 
-				translate([0,0,suspension_depth/4 + suspension_depth/16])
+				translate([0,0,suspension_depth/4.5 + suspension_depth/16])
 					rotate([90,-270,152])
-						cylinder(suspension_depth*10, suspension_depth/4, suspension_depth/4, $fn=3);
+						cylinder(suspension_depth*10, suspension_depth/5, suspension_depth/5, $fn=3);
 
 				translate([0,0,suspension_depth/4 - suspension_depth/16])
 					rotate([90,-90,148])
-						cylinder(suspension_depth*10, suspension_depth/4, suspension_depth/4, $fn=3);
+						cylinder(suspension_depth*10, suspension_depth/5, suspension_depth/5, $fn=3);
 
-				translate([0,0,suspension_depth/4 + suspension_depth/16])
+				translate([0,0,suspension_depth/5 + suspension_depth/16])
 					rotate([90,-270,144])
-						cylinder(suspension_depth*10, suspension_depth/4, suspension_depth/4, $fn=3);
+						cylinder(suspension_depth*10, suspension_depth/5, suspension_depth/5, $fn=3);
 
 				translate([0,0,suspension_depth/4 - suspension_depth/16])
 					rotate([90,-90,140])
-						cylinder(suspension_depth*10, suspension_depth/4, suspension_depth/4, $fn=3);
+						cylinder(suspension_depth*10, suspension_depth/5, suspension_depth/5, $fn=3);
 
-				translate([0,0,suspension_depth/4 + suspension_depth/16])
+				translate([0,0,suspension_depth/5 + suspension_depth/16])
 					rotate([90,-270,136])
-						cylinder(suspension_depth*10, suspension_depth/4, suspension_depth/4, $fn=3);
+						cylinder(suspension_depth*10, suspension_depth/5, suspension_depth/5, $fn=3);
 
-				translate([0,0,suspension_depth/4 - suspension_depth/16])
+				translate([0,0,suspension_depth/4.5 - suspension_depth/16])
 					rotate([90,-90,132])
-						cylinder(suspension_depth*10, suspension_depth/4, suspension_depth/4, $fn=3);
+						cylinder(suspension_depth*10, suspension_depth/5, suspension_depth/5, $fn=3);
 
-				translate([0,0,suspension_depth/4 + suspension_depth/16])
+				translate([0,0,suspension_depth/5 + suspension_depth/16])
 					rotate([90,-270,128])
-						cylinder(suspension_depth*10, suspension_depth/4, suspension_depth/4, $fn=3);
+						cylinder(suspension_depth*10, suspension_depth/5, suspension_depth/5, $fn=3);
 
-				translate([0,0,suspension_depth/4 - suspension_depth/16])
+				translate([0,0,suspension_depth/4.5 - suspension_depth/16])
 					rotate([90,-90,124])
-						cylinder(suspension_depth*10, suspension_depth/4, suspension_depth/4, $fn=3);
+						cylinder(suspension_depth*10, suspension_depth/5, suspension_depth/5, $fn=3);
 
-				translate([0,0,suspension_depth/4 + suspension_depth/16])
+				translate([0,0,suspension_depth/6 + suspension_depth/16])
 					rotate([90,-270,120])
-						cylinder(suspension_depth*10, suspension_depth/4, suspension_depth/4, $fn=3);
+						cylinder(suspension_depth*10, suspension_depth/5, suspension_depth/5, $fn=3);
 
+				/*
 				translate([0,0,suspension_depth/4 - suspension_depth/16])
 					rotate([90,-90,116])
 						cylinder(suspension_depth*10, suspension_depth/4, suspension_depth/4, $fn=3);
@@ -139,64 +148,67 @@ module 888_2002()
 				translate([0,0,suspension_depth/4 - suspension_depth/16])
 					rotate([90,-90,92])
 						cylinder(suspension_depth*10, suspension_depth/4, suspension_depth/4, $fn=3);
-
+				*/
+				}
+	
+				
 				//dolní
-				translate([0,0, - suspension_depth/4 + suspension_depth/16])
+				translate([0,0, - suspension_depth/3.5 + suspension_depth/16])
 					rotate([90,-270,172])
-						cylinder(suspension_depth*10, suspension_depth/4, suspension_depth/4, $fn=3);
+						cylinder(suspension_depth*10, suspension_depth/5, suspension_depth/5, $fn=3);
 
 				translate([0,0,- suspension_depth/4 - suspension_depth/16])
 					rotate([90,-90,168])
-						cylinder(suspension_depth*10, suspension_depth/4, suspension_depth/4, $fn=3);
+						cylinder(suspension_depth*10, suspension_depth/5, suspension_depth/5, $fn=3);
 
-				translate([0,0, - suspension_depth/4 + suspension_depth/16])
+				translate([0,0, - suspension_depth/3.5 + suspension_depth/16])
 					rotate([90,-270,164])
-						cylinder(suspension_depth*10, suspension_depth/4, suspension_depth/4, $fn=3);
+						cylinder(suspension_depth*10, suspension_depth/5, suspension_depth/5, $fn=3);
 
 				translate([0,0,- suspension_depth/4 - suspension_depth/16])
 					rotate([90,-90,160])
-						cylinder(suspension_depth*10, suspension_depth/4, suspension_depth/4, $fn=3);
+						cylinder(suspension_depth*10, suspension_depth/5, suspension_depth/5, $fn=3);
 
-				translate([0,0, - suspension_depth/4 + suspension_depth/16])
+				translate([0,0, - suspension_depth/3.5 + suspension_depth/16])
 					rotate([90,-270,156])
-						cylinder(suspension_depth*10, suspension_depth/4, suspension_depth/4, $fn=3);
+						cylinder(suspension_depth*10, suspension_depth/5, suspension_depth/5, $fn=3);
 
 				translate([0,0,- suspension_depth/4 - suspension_depth/16])
 					rotate([90,-90,152])
-						cylinder(suspension_depth*10, suspension_depth/4, suspension_depth/4, $fn=3);
+						cylinder(suspension_depth*10, suspension_depth/5, suspension_depth/5, $fn=3);
 
 				translate([0,0, - suspension_depth/4 + suspension_depth/16])
 					rotate([90,-270,148])
-						cylinder(suspension_depth*10, suspension_depth/4, suspension_depth/4, $fn=3);
+						cylinder(suspension_depth*10, suspension_depth/5, suspension_depth/5, $fn=3);
 
-				translate([0,0,- suspension_depth/4 - suspension_depth/16])
+				translate([0,0,- suspension_depth/4.5 - suspension_depth/16])
 					rotate([90,-90,144])
-						cylinder(suspension_depth*10, suspension_depth/4, suspension_depth/4, $fn=3);
+						cylinder(suspension_depth*10, suspension_depth/5, suspension_depth/5, $fn=3);
 
 				translate([0,0, - suspension_depth/4 + suspension_depth/16])
 					rotate([90,-270,140])
-						cylinder(suspension_depth*10, suspension_depth/4, suspension_depth/4, $fn=3);
+						cylinder(suspension_depth*10, suspension_depth/5, suspension_depth/5, $fn=3);
 
-				translate([0,0,- suspension_depth/4 - suspension_depth/16])
+				translate([0,0,- suspension_depth/4.5 - suspension_depth/16])
 					rotate([90,-90,136])
-						cylinder(suspension_depth*10, suspension_depth/4, suspension_depth/4, $fn=3);
+						cylinder(suspension_depth*10, suspension_depth/5, suspension_depth/5, $fn=3);
 
-				translate([0,0, - suspension_depth/4 + suspension_depth/16])
+				translate([0,0, - suspension_depth/4.5 + suspension_depth/16])
 					rotate([90,-270,132])
-						cylinder(suspension_depth*10, suspension_depth/4, suspension_depth/4, $fn=3);
+						cylinder(suspension_depth*10, suspension_depth/5, suspension_depth/5, $fn=3);
 
-				translate([0,0,- suspension_depth/4 - suspension_depth/16])
+				translate([0,0,- suspension_depth/5 - suspension_depth/16])
 					rotate([90,-90,128])
-						cylinder(suspension_depth*10, suspension_depth/4, suspension_depth/4, $fn=3);
+						cylinder(suspension_depth*10, suspension_depth/5, suspension_depth/5, $fn=3);
 
-				translate([0,0, - suspension_depth/4 + suspension_depth/16])
+				translate([0,0, - suspension_depth/4.5 + suspension_depth/16])
 					rotate([90,-270,124])
-						cylinder(suspension_depth*10, suspension_depth/4, suspension_depth/4, $fn=3);
+						cylinder(suspension_depth*10, suspension_depth/5, suspension_depth/5, $fn=3);
 
-				translate([0,0,- suspension_depth/4 - suspension_depth/16])
+				translate([0,0,- suspension_depth/5.5 - suspension_depth/16])
 					rotate([90,-90,120])
-						cylinder(suspension_depth*10, suspension_depth/4, suspension_depth/4, $fn=3);
-
+						cylinder(suspension_depth*10, suspension_depth/5, suspension_depth/5, $fn=3);
+				/*
 				translate([0,0, - suspension_depth/4 + suspension_depth/16])
 					rotate([90,-270,116])
 						cylinder(suspension_depth*10, suspension_depth/4, suspension_depth/4, $fn=3);
@@ -224,7 +236,7 @@ module 888_2002()
 				translate([0,0, - suspension_depth/4 + suspension_depth/16])
 					rotate([90,-270,92])
 						cylinder(suspension_depth*10, suspension_depth/4, suspension_depth/4, $fn=3);
-
+				*/
 
 				//odečtení zbylého kužele
 				translate([-suspension_bow_diameter,-suspension_bow_diameter,-cylinder_h*2])
@@ -232,17 +244,12 @@ module 888_2002()
 				translate([-suspension_bow_diameter,suspension_camber*2,-suspension_depth])
 					rotate([0,0,-90])
 						cube([suspension_bow_diameter,suspension_bow_diameter*2,cylinder_h*2]);
-				translate([-1,-1 + suspension_camber*2,suspension_depth/2])
-						cube([suspension_bow_diameter,suspension_bow_diameter*2,cylinder_h*2]);
-				translate([-suspension_bow_diameter,-suspension_bow_diameter,- cylinder_h*2- suspension_depth/2])
+				translate([-suspension_bow_diameter,-suspension_bow_diameter,suspension_depth/2])
 						cube([suspension_bow_diameter*2,suspension_bow_diameter*2,cylinder_h*2]);
-				
-				//zrkácení délky
-					
-					rotate([0, 0, -90 + suspension_camber])
-						translate([1,0,-10])
-					   		cube(200);
-				
+				translate([-suspension_bow_diameter,-suspension_bow_diameter, -cylinder_h*2 - suspension_depth/2])
+						cube([suspension_bow_diameter*2,suspension_bow_diameter*2,cylinder_h*2]);
+
+		
 				}
 	}
 //koncovky - hranatá
@@ -261,6 +268,7 @@ translate([0,-suspension_bow_diameter/2 - join_height,0])
 	            rotate([0, 90, 0])
 	               cylinder(d= M3_screw_diameter, h = 30);
 	    }
+
 // koncovky - oblá
 	translate([0, -suspension_bow_diameter/2 - join_height/2, 0])
 
@@ -281,28 +289,59 @@ translate([0,-suspension_bow_diameter/2 - join_height,0])
 	                    rotate([0, 90, 0])
 	                        cylinder(d = M3_screw_diameter, h = 30, center = true);
 	            }
+
+
 //druhá strana
+
 	union(){
-	translate([-6,-suspension_bow_diameter/2 - join_height,suspension_depth/2])
+	translate([0,-suspension_bow_diameter/2 - join_height,suspension_depth/2])
+
 			color([0,0,1])
 				difference(){
-					difference(){
+
+
+					intersection(){
+						difference(){
+							union(){
+								translate([0,0,-suspension_depth/2])
+										cylinder(h= cylinder_h, r1=suspension_bow_diameter/2, r2= cylinder_r2);
+								translate([0,0, suspension_depth/2])
+									rotate([180,0,0])
+										cylinder(h= cylinder_h, r1=suspension_bow_diameter/2, r2= cylinder_r2);
+							}
+						
 						union(){
-							translate([0,0,-suspension_depth/2])
-								cylinder(h= cylinder_h, r1=suspension_bow_diameter/2, r2= cylinder_r2);
-							translate([0,0, suspension_depth/2])
-							rotate([180,0,0])
-							cylinder(h= cylinder_h, r1=suspension_bow_diameter/2, r2= cylinder_r2);
+								translate([0,0,-0.01 - suspension_depth/2])
+										cylinder(h= cylinder_h, r1=suspension_bow_diameter/2 - suspension_thickness, r2=1);
+								translate([0,0,0.01 + suspension_depth/2])
+									rotate([180,0,0])
+										cylinder(h = cylinder_h, r1=suspension_bow_diameter/2 - suspension_thickness, r2=1);
+							}
 						}
-						union(){
-							translate([0,0,-0.01 - suspension_depth/2])
-									cylinder(h= cylinder_h, r1=suspension_bow_diameter/2 - suspension_thickness, r2=1);
-							translate([0,0,0.01 + suspension_depth/2])
-								rotate([180,0,0])
-									cylinder(h = cylinder_h, r1=suspension_bow_diameter/2 - suspension_thickness, r2=1);
-						}
-					}
-									//prořezy
+
+					//zešikmení
+					 translate([3,0,-cylinder_h*2])  
+				          #cylinder(cylinder_h*4,suspension_bow_diameter/2-5,suspension_bow_diameter/2-10);				
+
+
+}
+
+
+						/*
+					//zešikmení
+					 translate([0,0,-cylinder_h*2])  
+				              #cylinder(cylinder_h*4,suspension_bow_diameter/2 + 5,suspension_bow_diameter/2 + 10);				
+				     }*/
+
+
+
+/////////////////////
+
+
+
+					//}
+/*
+					//prořezy
 					//horní
 
 					translate([0,0,suspension_depth/4 + suspension_depth/16])
@@ -458,20 +497,19 @@ translate([0,-suspension_bow_diameter/2 - join_height,0])
 					translate([0,0,- suspension_depth/4 - suspension_depth/16])
 						rotate([90,-90,96])
 							cylinder(suspension_depth*10, suspension_depth/4, suspension_depth/4, $fn=3);
-		
+		*/
 					
 
 					//odečtení zbylého kužele
-					translate([-suspension_bow_diameter,-suspension_bow_diameter,-cylinder_h*2])
-							cube([suspension_bow_diameter,suspension_bow_diameter*2,cylinder_h*4]);
-					translate([-suspension_bow_diameter,suspension_camber*2,-suspension_depth])
-						rotate([0,0,-90])
-							cube([suspension_bow_diameter,suspension_bow_diameter*2,cylinder_h*2]);
-					translate([-1,-1 + suspension_camber*2,suspension_depth/2])
-							cube([suspension_bow_diameter,suspension_bow_diameter*2,cylinder_h*2]);
-					translate([-suspension_bow_diameter,-suspension_bow_diameter,- cylinder_h*2- suspension_depth/2])
-							cube([suspension_bow_diameter*2,suspension_bow_diameter*2,cylinder_h*2]);
-					
+				translate([-suspension_bow_diameter,-suspension_bow_diameter,-cylinder_h*2])
+						cube([suspension_bow_diameter,suspension_bow_diameter*2,cylinder_h*4]);
+				translate([-suspension_bow_diameter,suspension_camber*2,-suspension_depth])
+					rotate([0,0,-90])
+						cube([suspension_bow_diameter,suspension_bow_diameter*2,cylinder_h*2]);
+				translate([-suspension_bow_diameter,-suspension_bow_diameter,suspension_depth/2-0.5])
+						cube([suspension_bow_diameter*2,suspension_bow_diameter*2,cylinder_h*2]);
+				translate([-suspension_bow_diameter,-suspension_bow_diameter, -cylinder_h*2 - suspension_depth/2])
+						cube([suspension_bow_diameter*2,suspension_bow_diameter*2,cylinder_h*2]);					
 					//zrkácení délky
 						
 						rotate([0, 0, -90 + suspension_camber])
