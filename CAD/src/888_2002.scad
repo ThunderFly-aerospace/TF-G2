@@ -294,18 +294,17 @@ translate([0,-suspension_bow_diameter/2 - join_height,0])
 //druhá strana
 
 	union(){
-	translate([0,-suspension_bow_diameter/2 - join_height/2,suspension_depth/2])
+	translate([0,-suspension_bow_diameter/2 - join_height+5,+ suspension_depth/2])
 
 			color([0,0,1])
 				difference(){
 
-
 					intersection(){
 						difference(){
 							union(){
-								translate([0,-join_height/2,-suspension_depth/2])
+								translate([0,join_height/2,-suspension_depth/2])
 										cylinder(h= cylinder_h, r1=suspension_bow_diameter/2, r2= cylinder_r2);
-								translate([0,-join_height/2, suspension_depth/2])
+								translate([0,join_height/2, suspension_depth/2])
 									rotate([180,0,0])
 										cylinder(h= cylinder_h, r1=suspension_bow_diameter/2, r2= cylinder_r2);
 							}
@@ -317,21 +316,15 @@ translate([0,-suspension_bow_diameter/2 - join_height,0])
 									rotate([180,0,0])
 										cylinder(h = cylinder_h, r1=suspension_bow_diameter/2 - suspension_thickness, r2=1);
 							}
+						
 						}
-
 					//zešikmení
-					 translate([3,0,-cylinder_h*2])  
+					 translate([3,0,-cylinder_h*2]) 
 				          cylinder(cylinder_h*4,suspension_bow_diameter/2-5,suspension_bow_diameter/2-10);				
 
+					}
 
-}
 
-
-						/*
-					//zešikmení
-					 translate([0,0,-cylinder_h*2])  
-				              #cylinder(cylinder_h*4,suspension_bow_diameter/2 + 5,suspension_bow_diameter/2 + 10);				
-				     }*/
 
 
 
@@ -501,27 +494,28 @@ translate([0,-suspension_bow_diameter/2 - join_height,0])
 					
 
 					//odečtení zbylého kužele
-				translate([-suspension_bow_diameter,-suspension_bow_diameter,-cylinder_h*2])
-						cube([suspension_bow_diameter,suspension_bow_diameter*2,cylinder_h*4]);
+					
 				translate([-suspension_bow_diameter,suspension_camber*2,-suspension_depth])
 					rotate([0,0,-90])
 						cube([suspension_bow_diameter,suspension_bow_diameter*2,cylinder_h*2]);
-				translate([-suspension_bow_diameter,-suspension_bow_diameter,suspension_depth/2-0.5])
+				translate([-suspension_bow_diameter,-suspension_bow_diameter - join_height/2,suspension_depth/2-0.5])
 						cube([suspension_bow_diameter*2,suspension_bow_diameter*2,cylinder_h*2]);
 				translate([-suspension_bow_diameter,-suspension_bow_diameter, -cylinder_h*2 - suspension_depth/2])
 						cube([suspension_bow_diameter*2,suspension_bow_diameter*2,cylinder_h*2]);					
+					
+
 					//zrkácení délky
 						
 						rotate([0, 0, -90 + suspension_camber])
 							translate([1,0,-10])
 						   		cube(200);
 
-							translate([-200 + 6,0,-10])
+							translate([-200 ,0,-10])
 						   		cube(200);
 				
 					// koncovky - oblá - odečtení otvoru pro šroub
 			        rotate([0, 0, suspension_camber])
-			        	translate([suspension_bow_diameter/2,0, 0])
+			        	translate([suspension_bow_diameter/2,-join_height/2, 0])
 			                    rotate([0, 90, 0])
 			                       cylinder(d = M3_screw_diameter, h = 30, center = true);
 				}
