@@ -294,7 +294,7 @@ translate([0,-suspension_bow_diameter/2 - join_height,0])
 //druhá strana
 
 	union(){
-	translate([0,-suspension_bow_diameter/2 - join_height,suspension_depth/2])
+	translate([0,-suspension_bow_diameter/2 - join_height/2,suspension_depth/2])
 
 			color([0,0,1])
 				difference(){
@@ -303,17 +303,17 @@ translate([0,-suspension_bow_diameter/2 - join_height,0])
 					intersection(){
 						difference(){
 							union(){
-								translate([0,0,-suspension_depth/2])
+								translate([0,-join_height/2,-suspension_depth/2])
 										cylinder(h= cylinder_h, r1=suspension_bow_diameter/2, r2= cylinder_r2);
-								translate([0,0, suspension_depth/2])
+								translate([0,-join_height/2, suspension_depth/2])
 									rotate([180,0,0])
 										cylinder(h= cylinder_h, r1=suspension_bow_diameter/2, r2= cylinder_r2);
 							}
 						
 						union(){
-								translate([0,0,-0.01 - suspension_depth/2])
+								translate([0,-join_height/2,-0.01 - suspension_depth/2])
 										cylinder(h= cylinder_h, r1=suspension_bow_diameter/2 - suspension_thickness, r2=1);
-								translate([0,0,0.01 + suspension_depth/2])
+								translate([0,-join_height/2,0.01 + suspension_depth/2])
 									rotate([180,0,0])
 										cylinder(h = cylinder_h, r1=suspension_bow_diameter/2 - suspension_thickness, r2=1);
 							}
@@ -321,7 +321,7 @@ translate([0,-suspension_bow_diameter/2 - join_height,0])
 
 					//zešikmení
 					 translate([3,0,-cylinder_h*2])  
-				          #cylinder(cylinder_h*4,suspension_bow_diameter/2-5,suspension_bow_diameter/2-10);				
+				          cylinder(cylinder_h*4,suspension_bow_diameter/2-5,suspension_bow_diameter/2-10);				
 
 
 }
