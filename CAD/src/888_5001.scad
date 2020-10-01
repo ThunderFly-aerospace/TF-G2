@@ -55,26 +55,28 @@ pipe_d = 2;
 
 // for NACA type
 naca = 0040;
-distance = 30;
-length = 60;
+distance = 25;
+length = 45;
 profile_thickness = surface_distance(x = 0.25, naca = naca)*length;
 
-sensor_rantl = 4;
+sensor_rantl = 6;
 sensor_pos = [10, distance/2 + sensor_rantl, width/2];
 sensor_nose_distance = 4.3;
-sensor_nose_hole_depth = 3;
-sensor_nose_hole_diameter = 3;
+sensor_nose_hole_depth = 2.5;
+sensor_nose_hole_diameter = 3.5;
+sensor_sealing_nose_diameter = 1.5;
+sensor_sealing_nose_length = 2;
 
 
 // for cylinder type
 
 stage1_len = 5;
-stage1_dia = 20;
+stage1_dia = 19;
 stage2_pos = 25;
-stage2_dia = 10;
+stage2_dia = 8;
 stage2_len = 5;
 stage3_len = 1;
-stage3_dia = 20;
+stage3_dia = 19;
 
 
 pipe1_pos = [type=="naca"? 3: stage1_len/2, 0, width/2];
@@ -99,7 +101,8 @@ pipe2_pos = [type=="naca"?length*0.3333 : stage2_pos+stage2_len/2, 0, width/2];
             }}
             else{
                 difference(){
-                    translate([0, -distance/2, -2]) cube([length, distance, width+4]);
+                    translate([0, -distance/2, -2])
+                        cube([length, distance, width+4]);
                     linear_extrude(width) polygon([
                         //[0, -1],
                         [0, stage1_dia/2],
@@ -119,44 +122,51 @@ pipe2_pos = [type=="naca"?length*0.3333 : stage2_pos+stage2_len/2, 0, width/2];
                 }
             }
             hull(){
-                translate([-15/2 + sensor_pos[0], distance/2, 0]) cube([20, sensor_rantl, width]);
-                translate([-15/2 + sensor_pos[0], distance/2, 0]) cube([35, 0.1, width]);
+                translate([-15/2 + sensor_pos[0], distance/2, 0]) cube([15, sensor_rantl, width]);
+                translate([-15/2 + sensor_pos[0], distance/2, 0]) cube([20, 0.1, width]);
             }
         }
 
         h = width/2;
 
-        if(!$preview)
-        curvedPipe([
-                sensor_pos + [sensor_nose_distance/2, 0, 0],
-                sensor_pos + [sensor_nose_distance/2, -5, 0],
-    			pipe2_pos  + [0, distance/2-5, 0],
-    			pipe2_pos + [0, 0, 0]
-            ],
-            3,
-			[4, 4, 3, 3],
-		    pipe_d, 0
-        );
+        if($preview) translate([0, -50, width/2]) cube(100);
 
-        if(!$preview)
-        curvedPipe([
-                sensor_pos + [-sensor_nose_distance/2, 0, 0],
-                sensor_pos + [-sensor_nose_distance/2, -5, 0],
-    			pipe1_pos + [0, distance/2-5, 0],
-    			pipe1_pos + [0, 0, 0],
+        union(){
 
-            ],
-            3,
-			[4,4,3,3],
-		    pipe_d, 0
-        );
+            //if(!$preview)
+            #curvedPipe([
+                    sensor_pos + [sensor_nose_distance/2, -sensor_nose_hole_depth-sensor_sealing_nose_length+0.1, 0],
+                    sensor_pos + [sensor_nose_distance/2, -7, 0],
+        			pipe2_pos  + [0, distance/2-4, 0],
+        			pipe2_pos + [0, 0, 0]
+                ],
+                3,
+    			[3, 3, 2, 2],
+    		    pipe_d, 0
+            );
+
+            //if(!$preview)
+            #curvedPipe([
+                    sensor_pos + [-sensor_nose_distance/2, -sensor_nose_hole_depth-sensor_sealing_nose_length+0.1, 0],
+                    sensor_pos + [-sensor_nose_distance/2, -7, 0],
+        			pipe1_pos + [0, distance/2-1, 0],
+        			pipe1_pos + [0, 0, 0],
+
+                ],
+                3,
+    			[3, 2, 2, 2],
+    		    pipe_d, 0
+            );
 
 
-        for(x = [0.5, -0.5])
-        translate(sensor_pos + [sensor_nose_distance*x, 0, 0])
-            rotate([90, 0, 0])
-                cylinder(d = sensor_nose_hole_diameter, h= sensor_nose_hole_depth*2, center=true, $fn = 15);
+            for(x = [0.5, -0.5])
+            translate(sensor_pos + [sensor_nose_distance*x, 0, 0])
+                rotate([90, 0, 0]){
+                    cylinder(d = sensor_nose_hole_diameter, h= sensor_nose_hole_depth*2, center=true, $fn = 15);
+                    translate([0, 0, sensor_nose_hole_depth]) #cylinder(d2 = pipe_d, d1 = sensor_sealing_nose_diameter ,h= sensor_sealing_nose_length, $fn = 15);
+                }
 
+            }
         }
 }
 
