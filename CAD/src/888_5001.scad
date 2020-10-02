@@ -16,9 +16,9 @@ pipe_d = 2;
 
 
 // for NACA type
-naca = 0040;
-distance = 25;
-length = 45;
+naca = 0035;
+distance = 20;
+length = 40;
 profile_thickness = surface_distance(x = 0.25, naca = naca)*length;
 
 sensor_rantl = 3;
@@ -230,7 +230,7 @@ translate([0, -width/2, 0]) rotate([-90, 0, 0]) difference(){
         }
 
 
-    //if($preview) translate([-50, -50, width/2]) cube(100);
+    if($preview) translate([-50, -50, width/2]) cube(100);
     }
 }
 
