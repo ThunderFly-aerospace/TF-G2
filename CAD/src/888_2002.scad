@@ -309,7 +309,7 @@ translate([0,-suspension_bow_diameter/2 - join_height,0])
 							}
 						
 						union(){
-								translate([0,0,-2])
+								translate([1,0,-2])
 									cylinder(cylinder_h, suspension_bow_diameter/2 - suspension_thickness, cylinder_r2);
 								translate([1,0,+2 - cylinder_h + suspension_depth])
 									cylinder(cylinder_h, cylinder_r2, suspension_bow_diameter/2 - suspension_thickness);
