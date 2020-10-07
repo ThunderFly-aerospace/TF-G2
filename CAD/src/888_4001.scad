@@ -119,12 +119,21 @@ module blade_mount(draft){
 module 888_4001_doc(part = 1)
 {
 
-  translate(blade_rod1_position - [0, 0, 0.5])
+  spine_radius = (blade_rod3_position[0] - blade_rod2_position[0]) / 2; // vypocet radiusu ohybu dratu
+  echo(str("radius vyztuhy je:",  spine_radius, " mm"));
+  translate([(blade_rod3_position[0] + blade_rod2_position[0]) / 2, blade_rod3_position[1], rotor_blade_length - blade_mount_screw_offset])
+  rotate([90, 0, 0])
+  rotate_extrude(angle = 180, convexity = 2)
+      translate([spine_radius, 0, 0])  // posunutí o radius ohybu
+          circle(d = blade_rod2_diameter,  $fn = $preview? 50 : 100);
+
+
+  translate(blade_rod1_position - [0, 0, -rod_from_end])
       cylinder(d = blade_rod1_diameter, h = rotor_blade_length - rod_from_end, $fn = 50);
-  translate(blade_rod2_position - [0, 0, 0.5])
-      cylinder(d = blade_rod2_diameter, h = rotor_blade_length - rod_from_end, $fn = 50);
-  translate(blade_rod3_position - [0, 0, 0.5])
-      cylinder(d = blade_rod3_diameter, h = rotor_blade_length - rod_from_end, $fn = 50);
+  translate(blade_rod2_position - [0, 0, -rod_from_end])
+      cylinder(d = blade_rod2_diameter, h = rotor_blade_length - rod_from_end - blade_mount_screw_offset, $fn = 50);
+  translate(blade_rod3_position - [0, 0, -rod_from_end])
+      cylinder(d = blade_rod3_diameter, h = rotor_blade_length - rod_from_end - blade_mount_screw_offset, $fn = 50);
 
 }
 
@@ -181,16 +190,16 @@ module 888_4001(draft){
                     translate([0, -blade_rod2_diameter/2, 0])
                       square([10,blade_rod2_diameter]);
                   }
-          union(){
-              translate([-spine_radius,0, -blade_rod2_diameter/2])
-                cube([spine_radius * 2,40, 30]);
-              translate([spine_radius,0, 0])
-                rotate([90, 0, 0])
-                  cylinder(d = blade_rod2_diameter, h = 40,$fn = 50, center = true);
-              translate([-spine_radius,0, 0])
-                rotate([90, 0, 0])
-                  cylinder(d = blade_rod2_diameter, h = 40,$fn = 50, center = true);
-          }
+            union(){
+                translate([-spine_radius,0, -blade_rod2_diameter/2])
+                  cube([spine_radius * 2,40, 30]);
+                translate([spine_radius,0, 0])
+                  rotate([90, 0, 0])
+                    cylinder(d = blade_rod2_diameter, h = 40,$fn = 50, center = true);
+                translate([-spine_radius,0, 0])
+                  rotate([90, 0, 0])
+                    cylinder(d = blade_rod2_diameter, h = 40,$fn = 50, center = true);
+            }
       }
 
 
