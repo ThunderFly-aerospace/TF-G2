@@ -7,6 +7,16 @@
 //@set_modificator(888_4001_modificator)
 //@set_slicing_config(../slicing/blade_infill_modif.ini, 888_4001_modificator)
 
+DOC_SCALING_FACTOR = 100;
+DOC_HEIGHT = 50;
+
+include <lib/stdlib/dimlines.scad>
+
+DIM_LINE_WIDTH = .025 * DOC_SCALING_FACTOR;
+DIM_SPACE = .1 * DOC_SCALING_FACTOR;
+
+
+
 include <../parameters.scad>
 use <lib/stdlib/naca4.scad>
 
@@ -105,6 +115,18 @@ module blade_mount(draft){
 
 }
 
+
+module 888_4001_doc(part = 1)
+{
+
+  translate(blade_rod1_position - [0, 0, 0.5])
+      cylinder(d = blade_rod1_diameter, h = rotor_blade_length - rod_from_end, $fn = 50);
+  translate(blade_rod2_position - [0, 0, 0.5])
+      cylinder(d = blade_rod2_diameter, h = rotor_blade_length - rod_from_end, $fn = 50);
+  translate(blade_rod3_position - [0, 0, 0.5])
+      cylinder(d = blade_rod3_diameter, h = rotor_blade_length - rod_from_end, $fn = 50);
+
+}
 
 module 888_4001(draft){
     difference(){
@@ -282,6 +304,10 @@ module 888_4001_end_print_modificator(part = 1){
 
 888_4001();
 //blade_mount();
+
+translate([0, 20, 0])
+  888_4001_doc();
+
 
 echo(str("Delka vyztuhy listu je:", (rotor_blade_length - rod_from_end), " mm"));
 
