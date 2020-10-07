@@ -32,6 +32,105 @@ presah = 3; //prodloužení kvůli přesahu ze zmenšení úhlu
 
 module 888_2002()
 {
+////DRUHÝ POKUS
+
+
+
+//rotate([0,0,180])
+
+difference()
+{    
+    union(){
+       
+       		cylinder (cylinder_h, suspension_bow_diameter/2,0);
+        translate([0,0,-cylinder_h])
+        	cylinder(cylinder_h,0, suspension_bow_diameter/2);
+    }
+    
+    translate([join_height/2,0, -join_height])
+    	cylinder(cylinder_h, suspension_bow_diameter/2,0);
+     
+    translate([join_height/2,0,+ join_height - cylinder_h])
+    	cylinder(cylinder_h,0,suspension_bow_diameter/2);
+
+//odstranění zbylého kužele
+  	translate([0,-100,-200])
+    	cube([200,200,400]);
+    
+    translate([-100,0,-200])
+      	cube([200,200,400]);
+   
+  	translate([-100,-100,join_height - 0.1])
+   		cube([200,200,400]);  
+   
+  	translate([-100,-100,-400 - join_height + 0.1])
+   		cube([200,200,400]); 
+
+
+	//prořezy
+
+	for (i = [1:14])
+		translate([0,0, + suspension_depth/9*i/14 + 2])
+			rotate([90,-90,-6*i])
+				cylinder(suspension_depth*10, suspension_depth/7, suspension_depth/7, $fn=3);
+	
+	for (a = [1:15])
+		translate([0,0, + (suspension_depth/9)*(a/15) + 3])
+			rotate([90,-270,-6*a + 3])
+				cylinder(suspension_depth*10, suspension_depth/7, suspension_depth/7, $fn=3);
+
+
+	for (b = [1:15])
+		translate([0,0, - (suspension_depth/6)*(b/14) - 3 ])
+			rotate([90,-90,-6*b + 3])
+				cylinder(suspension_depth*10, suspension_depth/7, suspension_depth/7, $fn=3);
+
+	for (c = [1:14])
+		translate([0,0, - (suspension_depth/6)*(c/15) -  2])
+			rotate([90,-270,-6*c])
+				cylinder(suspension_depth*10, suspension_depth/7, suspension_depth/7, $fn=3);
+
+}
+//koncovky - hranatá
+translate([4,0,-join_height +1])
+	rotate ([0,0,90])
+	    difference(){
+	        union(){
+	            translate([0, suspension_bow_diameter/2-suspension_thickness/2 - presah*2.6, 0])
+	                cube([suspension_holder_thickness, join_height + suspension_thickness/2 + presah*2.6, suspension_depth]);
+	        }
+
+	        translate([-0.1, suspension_bow_diameter/2 + join_height/2, suspension_depth/2 - 5])
+	            rotate([0, 90, 0])
+	                cylinder(d= M3_screw_diameter, h = 30);
+
+	        translate([-0.1, suspension_bow_diameter/2 + join_height/2, suspension_depth/2 + 5])
+	            rotate([0, 90, 0])
+	               cylinder(d= M3_screw_diameter, h = 30);
+	    }
+
+// koncovky - oblá
+	    rotate([180, 0, -90])
+	       translate([suspension_bow_diameter/2,-5, -suspension_depth/2])
+	            difference(){
+	                hull(){
+	                    translate([-suspension_thickness, 5, 0])
+	                       cube([suspension_thickness, 1, suspension_depth]);
+	                    translate([-wheel_mount_thickness - presah*2.5, -3, 0])
+	                       cube([wheel_mount_thickness + presah*2.5, 6, suspension_depth]);
+	                    translate([0, 0, suspension_depth/2])
+	                        rotate([0, -90, 0])
+	                            cylinder(d = M3_screw_diameter+8, h = wheel_mount_thickness);
+	                }
+
+	                translate([0, 0, suspension_depth/2])
+	                    rotate([0, 90, 0])
+	                        cylinder(d = M3_screw_diameter, h = 30, center = true);
+	            }
+
+
+////PRVNÍ POKUS
+/*
 
 	union(){
 //	translate([0,-suspension_bow_diameter/2 - join_height/2,suspension_depth/2])
@@ -120,7 +219,7 @@ module 888_2002()
 					rotate([90,-270,120])
 						cylinder(suspension_depth*10, suspension_depth/5, suspension_depth/5, $fn=3);
 
-				/*
+				
 				translate([0,0,suspension_depth/4 - suspension_depth/16])
 					rotate([90,-90,116])
 						cylinder(suspension_depth*10, suspension_depth/4, suspension_depth/4, $fn=3);
@@ -148,7 +247,7 @@ module 888_2002()
 				translate([0,0,suspension_depth/4 - suspension_depth/16])
 					rotate([90,-90,92])
 						cylinder(suspension_depth*10, suspension_depth/4, suspension_depth/4, $fn=3);
-				*/
+				
 				}
 	
 				
@@ -208,7 +307,7 @@ module 888_2002()
 				translate([0,0,- suspension_depth/5.5 - suspension_depth/16])
 					rotate([90,-90,120])
 						cylinder(suspension_depth*10, suspension_depth/5, suspension_depth/5, $fn=3);
-				/*
+				
 				translate([0,0, - suspension_depth/4 + suspension_depth/16])
 					rotate([90,-270,116])
 						cylinder(suspension_depth*10, suspension_depth/4, suspension_depth/4, $fn=3);
@@ -236,7 +335,7 @@ module 888_2002()
 				translate([0,0, - suspension_depth/4 + suspension_depth/16])
 					rotate([90,-270,92])
 						cylinder(suspension_depth*10, suspension_depth/4, suspension_depth/4, $fn=3);
-				*/
+				
 
 				//odečtení zbylého kužele
 				translate([-suspension_bow_diameter,-suspension_bow_diameter,-cylinder_h*2])
@@ -332,7 +431,7 @@ translate([0,-suspension_bow_diameter/2 - join_height,0])
 
 
 					//}
-/*
+
 					//prořezy
 					//horní
 
@@ -489,7 +588,7 @@ translate([0,-suspension_bow_diameter/2 - join_height,0])
 					translate([0,0,- suspension_depth/4 - suspension_depth/16])
 						rotate([90,-90,96])
 							cylinder(suspension_depth*10, suspension_depth/4, suspension_depth/4, $fn=3);
-		*/
+		
 					
 
 					//odečtení zbylého kužele
@@ -520,30 +619,9 @@ translate([0,-suspension_bow_diameter/2 - join_height,0])
 				}
 
 	}
+*/
 
 
-	$fn = 90;
-
-difference()
-{    
-    union(){
-        cylinder(20,10,0);
-        translate([0,0,-20])
-            cylinder(20,0,10);
-    }
-    
-    translate([0,-10,-20])
-        cube([20,20,40]);
-    
-    translate([-10,0,-20])
-        cube([20,20,40]);
-    
-    #translate([1,0,-2])
-        cylinder(20,10,0);
-    
-    #translate([1,0,+2-20])
-        cylinder(20,0,10); 
-}
 
 
 
