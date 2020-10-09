@@ -8,12 +8,12 @@ lenght = 33; //delka sten z vykresu, nepouzity
 thickness = motor_holder_thickness; //sirka sten - dost random
 drzak_height = 70; //vyska drzaku
 
-motor_angle = -5;
+//motor_angle = -5; //angle of proppler axis
 
 //motor_mount = "ray_normal";
 motor_mount = "ray_reverse";
 
-module 888_1002(){
+module 888_1002(motor_angle = -5){
 translate([0, -motor_holder_thickness/2, 0])
 difference(){
 	translate([0, 0, -rantl_height + base_thickness + 0.2])
