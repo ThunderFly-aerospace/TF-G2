@@ -4,6 +4,8 @@ include <../parameters.scad>
 
 $fn = 90;
 
+zmenseni = 1.5;
+
 cylinder_r2 = 0;
 suspension_depth = 18;
 suspension_thickness = 0.41*6;
@@ -16,6 +18,8 @@ suspension_join_length = 22;
 suspension_join_screw_distance = 12;
 
 suspension_bow_diameter = 200;		//cylinder_r1
+suspension_bow_diameter_1 = 200 - 2*zmenseni;
+
 
 
 
@@ -25,7 +29,13 @@ angle = 55;
 sin_angle = sin(angle);
 cylinder_h = sqrt(((sin_angle^2)*(suspension_bow_diameter^2))/(4*((1-(sin_angle^2)))));
 
+
+cylinder_h_1 = sqrt(((sin_angle^2)*(suspension_bow_diameter^2))/(4*((1-(sin_angle^2))))) - zmenseni;
+
 join_height = 10;
+join_height_1 = 10 - zmenseni;
+
+
 //join_height = suspension_depth/(tan(uhel)) + suspension_thickness;
 
 presah = 3; //prodloužení kvůli přesahu ze zmenšení úhlu
@@ -38,8 +48,12 @@ module 888_2002()
 
 //rotate([0,0,180])
 
+
+//obal
 difference()
 {    
+    
+
     union(){
        
        		cylinder (cylinder_h, suspension_bow_diameter/2,0);
@@ -53,6 +67,8 @@ difference()
     translate([join_height/2,0,+ join_height - cylinder_h])
     	cylinder(cylinder_h,0,suspension_bow_diameter/2);
 
+
+
 //odstranění zbylého kužele
   	translate([0,-100,-200])
     	cube([200,200,400]);
@@ -65,6 +81,43 @@ difference()
    
   	translate([-100,-100,-400 - join_height + 0.1])
    		cube([200,200,400]); 
+
+
+//dutý
+union(){
+	difference()
+	{    
+	    
+
+	    union(){
+	       		cylinder (cylinder_h_1, suspension_bow_diameter_1/2,0);
+	        translate([0,0,-cylinder_h_1])
+	        	cylinder(cylinder_h_1,0, suspension_bow_diameter_1/2);
+	    }
+	    
+	    translate([join_height_1/2 - zmenseni,-zmenseni, -join_height_1])
+	    	cylinder(cylinder_h_1, suspension_bow_diameter_1/2,0);
+	     
+	    translate([join_height_1/2 - zmenseni,-zmenseni,+ join_height_1 - cylinder_h_1])
+	    	cylinder(cylinder_h_1,0,suspension_bow_diameter_1/2);
+
+
+
+	//odstranění zbylého kužele
+	  	translate([zmenseni,-100,-200])
+	    	cube([200,200,400]);
+	    
+	    translate([-100,zmenseni,-200])
+	      	cube([200,200,400]);
+	   
+	  	translate([-100,-100,join_height_1 - 0.1])
+	   		cube([200,200,400]);  
+	   
+	  	translate([-100,-100,-400 - join_height_1 + 0.1])
+	   		cube([200,200,400]); 
+
+	}
+}
 
 
 	//prořezy
@@ -91,6 +144,8 @@ difference()
 				cylinder(suspension_depth*10, suspension_depth/7, suspension_depth/7, $fn=3);
 
 }
+
+
 //koncovky - hranatá
 translate([4,0,-join_height +1])
 	rotate ([0,0,90])
@@ -126,6 +181,7 @@ translate([4,0,-join_height +1])
 	                translate([0, 0, suspension_depth/2])
 	                    rotate([0, 90, 0])
 	                        cylinder(d = M3_screw_diameter, h = 30, center = true);
+	            
 	            }
 
 
