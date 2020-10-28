@@ -16,19 +16,30 @@ pipe_d = 2;
 
 
 // for NACA type
-naca = 0035;
+naca = 0040;
 distance = 20;
 length = 40;
 profile_thickness = surface_distance(x = 0.25, naca = naca)*length;
 
 sensor_rantl = 3;
-sensor_pos = [10, distance/2 + sensor_rantl, width/2];
+sensor_pos = [9, distance/2 + sensor_rantl, width/2];
 sensor_nose_distance = 4.3;
 sensor_nose_hole_depth = 2.5;
 sensor_nose_hole_diameter = 3.5;
 sensor_sealing_nose_diameter = 1.5;
 sensor_sealing_nose_length = 2;
 
+
+
+// Krabicka na PCB
+
+pcb_width = 15;
+pcb_offset = 0.65;
+pcb_length = 36;
+pcb_sensor_from_top = 5;
+pcb_thickness = 3;
+pcb_thickness_sensor = 3.4;
+pcb_thickness_conn = 6;
 
 // for cylinder type
 
@@ -88,27 +99,35 @@ module 888_5001(){
 
 translate([0, -width/2, 0]) rotate([-90, 0, 0]) difference(){
 
+    
+    // Horni profil
     union(){
     if(type == "naca"){
         intersection(){
             translate([0, -distance/2, 0]) airfoil(naca = naca, L = length, N = 50, h= width, open = false);
-            //translate([0, -distance/2, 0]) cube([length, distance, width]);
+            translate([0, -distance/2, 0]) cube([length, distance, width]);
+        }
+        intersection(){
+            translate([0, -distance/2, 0]) airfoil(naca = 0015, L = length, N = 50, h= width, open = false);
+            translate([0,-distance*1.5, 0]) cube([length, distance, width]);
         }
             translate([0, -distance/2, 0]) cube([length, distance, 2]);
             translate([0, -distance/2, width-2]) cube([length, distance, 2]);
     }
 
-    translate([length-15, -distance/2, 0]) difference() {
-        hull(){
-            translate([0, -15, 0]) cylinder(d = 10, h = width);
-            translate([5, 0, 0]) cylinder(d = 5, h = width);
-            translate([-5, 0, 0]) cylinder(d = 5, h = width);
-        }
+    // Usi pro TF-G2
+    // translate([length-15, -distance/2, 0]) difference() {
+    //     hull(){
+    //         translate([0, -15, 0]) cylinder(d = 10, h = width);
+    //         translate([5, 0, 0]) cylinder(d = 5, h = width);
+    //         translate([-5, 0, 0]) cylinder(d = 5, h = width);
+    //     }
 
-        translate([0, -15, width/2]) cube( rotor_head_width-2*rotorhead_wall_thickness, center = true);
+    //     translate([0, -15, width/2]) cube( rotor_head_width-2*rotorhead_wall_thickness, center = true);
 
-        }
+    //     }
 
+    // Spodni profil
     difference(){
         union(){
             if(type == "naca"){
@@ -141,9 +160,24 @@ translate([0, -width/2, 0]) rotate([-90, 0, 0]) difference(){
                         ]);
                 }
             }
+
+            // schod pro PCB
             hull(){
                 translate([-15/2 + sensor_pos[0], distance/2, 0]) cube([15, sensor_rantl, width]);
                 translate([-15/2 + sensor_pos[0], distance/2, 0]) cube([20, 0.1, width]);
+            }
+
+
+
+            // Krabicka na PCB
+
+            union(){
+                translate([sensor_pos[0] - pcb_sensor_from_top, distance/2, 0])
+                    cube([pcb_length, sensor_rantl + pcb_thickness, width/2-pcb_width/2-pcb_offset]);
+                translate([sensor_pos[0] - pcb_sensor_from_top, distance/2, width - (width/2-pcb_width/2+pcb_offset)])
+                    cube([pcb_length, sensor_rantl + pcb_thickness, width/2-pcb_width/2+pcb_offset]);
+                translate([sensor_pos[0] - pcb_sensor_from_top - 2, distance/2, 0])
+                    cube([2, sensor_rantl + pcb_thickness, width]);   
             }
         }
 
@@ -156,8 +190,8 @@ translate([0, -width/2, 0]) rotate([-90, 0, 0]) difference(){
         h = width/2;
 
 
+        // trubicky pro tlak
         union(){
-
             if(!$preview)
             curvedPipe([
                     sensor_pos + [sensor_nose_distance/2, -sensor_nose_hole_depth-sensor_sealing_nose_length+0.1, 0],
@@ -200,37 +234,47 @@ translate([0, -width/2, 0]) rotate([-90, 0, 0]) difference(){
 
 
     /// otvory pro pripevneni rotorove hlavy
-    translate([length-15, -distance/2, 0]){
-        translate([0, -15, 0])
-            cylinder(d = M3_screw_diameter, h = width, $fn = 20);
+    // translate([length-15, -distance/2, 0]){
+    //     translate([0, -15, 0])
+    //         cylinder(d = M3_screw_diameter, h = width, $fn = 20);
 
-        for(y = [5, -5])
-            translate([y, 0, 0]){
-                cylinder(d = M3_screw_diameter, h = width, $fn = 20);
-                for(x = [4, width-4-M3_nut_height])
-                    translate([0, 0, x])
-                        hull(){
-                            cylinder(d = M3_nut_diameter, h = M3_nut_height, $fn = 6);
-                            translate([0, -10, 0]) cylinder(d = M3_nut_diameter, h = M3_nut_height, $fn = 6);
-                        }
-
-            }
-        }
+    //     for(y = [5, -5])
+    //         translate([y, 0, 0]){
+    //             cylinder(d = M3_screw_diameter, h = width, $fn = 20);
+    //             for(x = [4, width-4-M3_nut_height])
+    //                 translate([0, 0, x])
+    //                     hull(){
+    //                         cylinder(d = M3_nut_diameter, h = M3_nut_height, $fn = 6);
+    //                         translate([0, -10, 0]) cylinder(d = M3_nut_diameter, h = M3_nut_height, $fn = 6);
+    //                     }
+    //         }
+    //     }
 
     //  otvory pro pripevneni vicka
 
     translate([0, 0, 0])
         for(y = [[4, 1], [width-4, -1]])
-            translate([sensor_pos[0], +distance/2+sensor_rantl, y[0]]){
-            rotate([90, 0, 0]) cylinder(d = M3_screw_diameter, h=8, $fn = 15);
-            hull(){
-                translate([0, -3, 0]) rotate([90, 0, 0]) cylinder(d = M3_nut_diameter, h=M3_nut_height, $fn = 6);
-                translate([0, -3, -10*y[1]]) rotate([90, 0, 0]) cylinder(d = M3_nut_diameter, h=M3_nut_height, $fn = 6);
-            }
+            translate([sensor_pos[0]+8, +distance/2+sensor_rantl, y[0]]){
+                rotate([90, 0, 0])
+                    translate([0, 0, -5]) cylinder(d = M3_screw_diameter, h=15, $fn = 15);
+                hull(){
+                    translate([0, -3, 0]) rotate([90, 0, 0]) cylinder(d = M3_nut_diameter, h=M3_nut_height, $fn = 6);
+                    translate([0, -3, -10*y[1]]) rotate([90, 0, 0]) cylinder(d = M3_nut_diameter, h=M3_nut_height, $fn = 6);
+                }
         }
 
 
-    if($preview) translate([-50, -50, width/2]) cube(100);
+    union(){
+        translate([0, distance/2 + sensor_rantl, 2.5])
+            cube([length, sensor_rantl + pcb_thickness + 1, 3]);
+        translate([0, distance/2 + sensor_rantl, width - 2.5-3])
+            cube([length, sensor_rantl + pcb_thickness + 1, 3]);
+        translate([0, distance/2 + sensor_rantl, 0])
+            cube([2, sensor_rantl + pcb_thickness, width]);   
+    }
+
+
+    //if($preview) translate([-50, -50, width/2]) cube(100);
     }
 }
 
@@ -258,4 +302,4 @@ module support_888_5001(){
     }
 }
 }
-% support_888_5001();
+// % support_888_5001();
