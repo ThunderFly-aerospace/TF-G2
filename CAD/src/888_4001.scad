@@ -7,10 +7,23 @@
 //@set_modificator(888_4001_modificator)
 //@set_slicing_config(../slicing/blade_infill_modif.ini, 888_4001_modificator)
 
+DOC_SCALING_FACTOR = 100;
+DOC_HEIGHT = 50;
+
+include <lib/stdlib/dimlines.scad>
+
+DIM_LINE_WIDTH = .025 * DOC_SCALING_FACTOR;
+DIM_SPACE = .1 * DOC_SCALING_FACTOR;
+
+
+
 include <../parameters.scad>
 use <lib/stdlib/naca4.scad>
 
 // rotor_blade_endtip_diameter = 15;
+
+spine_radius = (blade_rod3_position[0] - blade_rod2_position[0]) / 2; // vypocet radiusu ohybu dratu
+spine_length = rotor_blade_length - rod_from_end - blade_mount_screw_offset + spine_radius + blade_rod2_diameter/2;
 
 
 module base_airfoil(h = rotor_blade_length, draft = true){
@@ -106,6 +119,53 @@ module blade_mount(draft){
 }
 
 
+module 888_4001_doc(part = 1)
+{
+
+  translate([(blade_rod3_position[0] + blade_rod2_position[0]) / 2, blade_rod3_position[1], rotor_blade_length - blade_mount_screw_offset])
+  rotate([90, 0, 0])
+  rotate_extrude(angle = 180, convexity = 2)
+      translate([spine_radius, 0, 0])  // posunutí o radius ohybu
+          circle(d = blade_rod2_diameter,  $fn = $preview? 50 : 100);
+
+
+  translate(blade_rod1_position - [0, 0, -rod_from_end])
+      cylinder(d = blade_rod1_diameter, h = rotor_blade_length - rod_from_end - blade_mount_screw_offset + spine_radius + blade_rod2_diameter/2, $fn = 50);
+  translate(blade_rod2_position - [0, 0, -rod_from_end])
+      cylinder(d = blade_rod2_diameter, h = rotor_blade_length - rod_from_end - blade_mount_screw_offset, $fn = 50);
+  translate(blade_rod3_position - [0, 0, -rod_from_end])
+      cylinder(d = blade_rod3_diameter, h = rotor_blade_length - rod_from_end - blade_mount_screw_offset, $fn = 50);
+
+// The following two lines are vertical lines that bracket the dimensions
+// left arrow
+translate([-2*DIM_SPACE, 0, rod_from_end + spine_length ])
+  rotate([0, 0, 0])
+    line(length=4*DIM_SPACE, width=DIM_LINE_WIDTH, height=DIM_HEIGHT,
+        left_arrow=false, right_arrow=false);
+
+
+// bottom
+translate([-2*DIM_SPACE, 0, rod_from_end])
+  rotate([0, 0, 0])
+    line(length=4*DIM_SPACE, width=DIM_LINE_WIDTH, height=DIM_HEIGHT,
+        left_arrow=false, right_arrow=false);
+
+// length dimension
+translate([-DIM_SPACE, 0, rod_from_end])
+  rotate([90, -90, 0])
+      dimensions(length=spine_length, line_width=DIM_LINE_WIDTH, loc=0);
+
+// bend radius
+translate([(blade_rod3_position[0] + blade_rod2_position[0])/2, 0, rod_from_end + spine_length ])
+  rotate([90, -90, 0])
+leader_line(angle=0, radius=0,
+                angle_length=DIM_SPACE,
+                horz_line_length=DIM_SPACE, direction=DIM_RIGHT,
+                line_width=DIM_LINE_WIDTH,
+                text=str("R ", spine_radius + blade_rod2_diameter/2));
+
+}
+
 module 888_4001(draft){
     difference(){
         union(){
@@ -148,7 +208,7 @@ module 888_4001(draft){
         // kulaté zakončení výztuhy v kořenu listu
 
         spine_radius = (blade_rod3_position[0] - blade_rod2_position[0]) / 2; // vypocet radiusu ohybu dratu
-        echo(str("radius vyztuhy je:",  spine_radius, " mm"));
+        echo(str("Stredni radius vyztuhy je:",  spine_radius, " mm"));
         translate([(blade_rod3_position[0] + blade_rod2_position[0]) / 2, blade_rod3_position[1], rotor_blade_length -blade_mount_screw_offset])
         rotate([90, 0, 0])
         intersection(){
@@ -159,16 +219,16 @@ module 888_4001(draft){
                     translate([0, -blade_rod2_diameter/2, 0])
                       square([10,blade_rod2_diameter]);
                   }
-          union(){
-              translate([-spine_radius,0, -blade_rod2_diameter/2])
-                cube([spine_radius * 2,40, 30]);
-              translate([spine_radius,0, 0])
-                rotate([90, 0, 0])
-                  cylinder(d = blade_rod2_diameter, h = 40,$fn = 50, center = true);
-              translate([-spine_radius,0, 0])
-                rotate([90, 0, 0])
-                  cylinder(d = blade_rod2_diameter, h = 40,$fn = 50, center = true);
-          }
+            union(){
+                translate([-spine_radius,0, -blade_rod2_diameter/2])
+                  cube([spine_radius * 2,40, 30]);
+                translate([spine_radius,0, 0])
+                  rotate([90, 0, 0])
+                    cylinder(d = blade_rod2_diameter, h = 40,$fn = 50, center = true);
+                translate([-spine_radius,0, 0])
+                  rotate([90, 0, 0])
+                    cylinder(d = blade_rod2_diameter, h = 40,$fn = 50, center = true);
+            }
       }
 
 
@@ -283,7 +343,13 @@ module 888_4001_end_print_modificator(part = 1){
 888_4001();
 //blade_mount();
 
-echo(str("Delka vyztuhy listu je:", (rotor_blade_length - rod_from_end), " mm"));
+
+
+
+
+echo(str("Delka vyztuhy uvnitr listu je:", (rotor_blade_length - rod_from_end), " mm"));
+echo(str("Celkova delka vyztuhy je:", (spine_length), " mm"));
+
 
 echo(blade_rod1_position);
 echo(blade_rod2_position);
