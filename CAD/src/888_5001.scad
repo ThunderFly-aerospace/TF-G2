@@ -16,8 +16,8 @@ pipe_d = 2;
 
 
 // for NACA type
-naca = 0040;
-distance = 20;
+naca = 0045;
+distance = 22;
 length = 40;
 profile_thickness = surface_distance(x = 0.25, naca = naca)*length;
 
@@ -303,3 +303,32 @@ module support_888_5001(){
 }
 }
 // % support_888_5001();
+
+
+
+module 888_5001_cap() translate([0, -width/2, 0]) rotate([-90, 0, 0]) {
+
+    difference(){ union(){
+
+        translate([0.5, distance/2 + sensor_rantl + pcb_thickness_sensor + 2, 0])
+            cube([length-0.5, 2, width]);
+
+        translate([0.5, distance/2 + sensor_rantl + pcb_thickness_sensor, 3])
+            cube([length-0.5, 4, 2]);
+        translate([0.5, distance/2 + sensor_rantl + pcb_thickness_sensor, width - 2-3])
+            cube([length-0.5, 4, 2]);
+        translate([0.5, distance/2 + sensor_rantl + pcb_thickness_sensor, 0])
+            cube([1.5, 4, width]);   
+    }
+
+
+    for(y = [[4, 1], [width-4, -1]])
+        translate([sensor_pos[0]+8, +distance/2+sensor_rantl + pcb_thickness_sensor, y[0]]){
+            rotate([90, 0, 0])
+                translate([0, 0, -5]) cylinder(d = M3_screw_diameter, h=15, $fn = 15);
+    }
+    }
+}
+
+
+888_5001_cap();
