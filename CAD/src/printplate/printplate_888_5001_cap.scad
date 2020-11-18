@@ -6,8 +6,8 @@ include <../../parameters.scad>
 
 use <../888_5001.scad>
 
-rotate([0, 90, 0])
+//rotate([0, 90, 0])
 {
-    888_5001();
+    888_5001_cap();
     //support_888_5001();
 }
