@@ -8,6 +8,7 @@ gpsself_thickness = 2;
 gpsself_rantl_thickness = 3;
 gpsself_height = 5;
 gpsself_length = 50;
+TFGPS01_screw_distance = 40;
 
 
 module 888_1015(){
