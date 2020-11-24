@@ -3,7 +3,7 @@
 
 include <../parameters.scad>
 include <lib/Round-Anything/polyround.scad>
-include <lib/Round-Anything/roundAnythingExamples.scad>
+use <lib/Round-Anything/roundAnythingExamples.scad>
 
 
 module 888_1008(){
@@ -19,19 +19,19 @@ module 888_1008(){
             }
 
             // kostky pro pripevneni serva
-            translate([-13.75, 35, pylon_thickness/2])
+            translate([-12.75, 35, pylon_thickness/2])
                 rotate([0, 0, -7.2])
                     difference(){
                         intersection(){
                             extrudeWithRadius(10, -5, 0, 70)
-                                square([5, 33], center = true);
-                            cube([5, 50, 22], center=true);
+                                square([7, 35], center = true);
+                            cube([7, 55, 22], center=true);
                         }
-                        cube([6, 24, 22], center = true);
+                        cube([20, 24, 22], center = true);
                         for(y=[-28/2, 28/2])
                             translate([0, y, 5])
                                 rotate([0, 90, 0])
-                                    cylinder(h=30, d=1.7, center=true, $fn=20);
+                                    cylinder(h=30, d=1.9, center=true, $fn=20);
                     }
 
             // Material pro matky, k rámečku pylonu
@@ -140,7 +140,7 @@ module 888_5002(){
 // 888_5002();
 
 
-translate([-10, 80, pylon_thickness + 10])
-    rotate([-90, 0, 0])
-        888_5002();
+// translate([-10, 80, pylon_thickness + 10])
+//    rotate([-90, 0, 0])
+        //888_5002();
 

@@ -4,8 +4,12 @@
 include <../../parameters.scad>
 use <../888_1008.scad>
 
+
 translate([17, -47, 0])
     888_1008();
+
+
 translate([-17, 47, 0])
-        rotate([0, 0, 180])
-    888_1008();
+rotate([0, 0, 180])
+    mirror([1, 0, 0])
+        888_1008();
