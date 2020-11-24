@@ -25,6 +25,9 @@ rod_x_dist = 30;
 rod_y_distance = rod_x_dist*2 - 3*2; // 3 je delka kuloveho cepu
 rod_x_distance = rod_x_dist - rod_size/2 - BaseThickness - M3_screw_diameter/2 - space;
 
+TFPROBE01_PCB_thickness = 1.8;
+TFPROBE01_PCB_width = 10.2;
+TFPROBE01_sensor_height = 1.1;
 
 module Part3(){
 
@@ -56,11 +59,7 @@ module Part3(){
 
             translate([0, rod_y_distance/2 - rod_size/4 , rod_x_distance + rod_size/2])
                 cube([rod_size, rod_size/2, rod_size],center = true);
-        }
 
-        hull(){
-            translate([0, 0, -BaseThickness+4])
-                cube([rod_size, rod_size, 6],center = true);
             translate([0 , -rod_y_distance/2 + rod_size/4, rod_x_distance + rod_size/2])
                 cube([rod_size, rod_size/2, rod_size],center = true);
         }
@@ -84,12 +83,16 @@ module Part3(){
     translate([0, 0, -10])
         cylinder(d = M3_screw_diameter, h = 100);
 
-    //translate([0, 0, bearing_outer_diameter + Bwall*2])
-    //    cylinder(d = M3_nut_diameter, h = 100);
-
     // podlozka pod hlavu sroubu
     translate([0, 0, bearing_outer_diameter + Bwall*2+1])
-        cylinder(d = 9, h = 5);
+        cylinder(d = 9, h = rod_y_distance);
+
+    translate([-9/2, -9/2, bearing_outer_diameter + Bwall*4])
+        cube([9,9,rod_y_distance]);
+
+    // TFPROBE01 RPM sensor
+    translate([-TFPROBE01_PCB_thickness + rod_size/2 - TFPROBE01_sensor_height , -TFPROBE01_PCB_width/2, bearing_outer_diameter + Bwall*4])
+        cube([TFPROBE01_PCB_thickness, TFPROBE01_PCB_width, rod_y_distance]);
 
 
     // diry v sloupku pro pridelai kuloveho drzaku pro tahlo
@@ -100,13 +103,7 @@ module Part3(){
 
     translate([0, 0, rod_x_distance + rod_size/2])
         rotate([90, 0, 0])
-            translate([0, 0, rod_y_distance/2 - 10 - Bwall])
-                cylinder(d = M2_nut_diameter, h=10, $fn=6);
-
-    translate([0, 0, rod_x_distance + rod_size/2])
-        rotate([90, 0, 0])
-            translate([0, 0, -rod_y_distance/2 + Bwall])
-                cylinder(d = M2_nut_diameter, h=10, $fn=6);
+          cylinder(d = M2_nut_diameter, h = rod_y_distance - 2* Bwall, center = true, $fn=6);
 
     }
 }
