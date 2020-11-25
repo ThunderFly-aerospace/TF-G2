@@ -74,10 +74,14 @@ module 888_4008(){
                 }
 
               //hex_screw(15,4,55,30,1.5,2,24,8,0,0);
+              // Zavit pro namotani provazku
               translate([0, 0, starter_top_h+3]) difference(){
                 cylinder(d = starter_rope_d+10, h = 18-0.1);
                 screw_thread(starter_rope_d, 3, 50, 18, 1, 0);
               }
+
+              // Otvor na zastrceni provazku
+              translate([0, 0, starter_top_h+top_thickness]) rotate([90, 0, 0]) cylinder(d = 2.5, h = 50, center = true, $fn = 10);
 
               // Otvory pro senzor
               for(r = [0:rpm_sensor_count])
