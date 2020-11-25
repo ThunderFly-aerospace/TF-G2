@@ -46,17 +46,17 @@ module 888_4002(hole_diameter=3)
                         cylinder(d = blade_mount_screw, h = 2* thickness, center = true, $fn = 20);
 
                     //diry pro lepsi moznost utrzeni listu
-                    translate ([blade_holder_widh/2 - hole_diameter/8, -blade_screws_distance/2, 0])
-                        cylinder (h=thickness*2, d=hole_diameter, center=true, $fn=100);
+                    translate ([blade_holder_widh/2 + hole_diameter/3, -blade_screws_distance/2, 0])
+                        cylinder (h=thickness*2, d=2.2 * hole_diameter, center=true, $fn=4);
 
-                    translate ([-blade_holder_widh/2 + hole_diameter/8, -blade_screws_distance/2, 0])
-                        cylinder (h=thickness*2, d=hole_diameter, center=true, $fn=100);
+                    translate ([-blade_holder_widh/2 - hole_diameter/3, -blade_screws_distance/2, 0])
+                        cylinder (h=thickness*2, d=2.2 * hole_diameter, center=true, $fn=4);
 
 
                 }
         }
 
-        rotate([0,0, rotor_delta_angle])
+        rotate([0,0, -rotor_delta_angle])
         for (i = [1:rotor_blades_count]){
             rotate([0,0, i*angle_between_blades + angle_between_blades/2])
                 translate([0, 3 + 4.5 + blade_mount_screw/2, 0])
