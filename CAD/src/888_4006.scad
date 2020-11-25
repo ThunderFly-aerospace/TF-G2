@@ -3,7 +3,7 @@ include <../parameters.scad>;
 module 888_4006(AOA = rotor_blade_AOA) {
     blade_screws_distance = (16.47+11.86)/2;
     move_index = 4+blade_mount_screw/2;
-	blade_holder_widh = blade_mount_width;
+	  blade_holder_widh = blade_mount_width;
     angle_between_blades = 360 / rotor_blades_count;
     thickness = 10;
     offset_size = 36;
@@ -60,10 +60,12 @@ module 888_4006(AOA = rotor_blade_AOA) {
 
 
     	translate([move_index, blade_holder_widh/2,  -global_clearance])
+          rotate([-AOA, 0, 0])
             cylinder(d=blade_mount_screw, h=4, $fn=20);
     	translate([move_index+blade_screws_distance, blade_holder_widh/2,  -global_clearance])
+          rotate([-AOA, 0, 0])
             cylinder(d=blade_mount_screw, h=4, $fn=20);
-        
+
         // Vytvoreni sikme plochy
         translate([0, blade_holder_widh/2, 0])
             rotate([-AOA, 0, 0]){
