@@ -13,7 +13,7 @@ module 888_4008(){
     top_thickness = 3;
     //blade_screws_distance = (16.47+11.86)/2;
 
-    height_from_rotor_nut = 27.5;
+    height_from_rotor_nut = 29.5;
 
     // %cylinder(d = 5, h = height_from_rotor_nut);
 
@@ -25,11 +25,12 @@ module 888_4008(){
     starter_top_r=14;
     starter_top_h=M3_screw_head_height+3;
     starter_pipe_r=10;
+    starter_pipe_d_bottom = 32;
     starter_neck_r=10;
     starter_neck_h=1;
     starter_bottom_h=5;
 
-    starter_rope_d = 30;
+    starter_rope_d = 38;
 
     sensor_cap_height=starter_top_h+starter_neck_h+starter_bottom_h;
 
@@ -65,7 +66,7 @@ module 888_4008(){
                             union()
                             {
                                 translate([0,0,top_thickness+M3_nut_height])
-                                    cylinder(h=5*sensor_cap_height,r=starter_pipe_r, $fn=40);
+                                    cylinder(h=5*sensor_cap_height,r1=starter_pipe_r, d2=starter_pipe_d_bottom, $fn=40);
                             }
 
 
@@ -76,21 +77,21 @@ module 888_4008(){
               //hex_screw(15,4,55,30,1.5,2,24,8,0,0);
               // Zavit pro namotani provazku
               translate([0, 0, starter_top_h+3]) difference(){
-                cylinder(d = starter_rope_d+10, h = 18-0.1);
-                screw_thread(starter_rope_d, 3, 50, 18, 1, 0);
+                cylinder(d = starter_rope_d+10, h = 19-0.1);
+                screw_thread(starter_rope_d, 3, 50, 19, 2, 0);
               }
 
               // Otvor na zastrceni provazku
-              translate([0, 0, starter_top_h+top_thickness]) rotate([90, 0, 0]) cylinder(d = 2.5, h = 50, center = true, $fn = 10);
+              //translate([0, 0, starter_top_h+top_thickness]) rotate([-90, 0, 0]) cylinder(d = 2.5, h = 50, center = false, $fn = 10);
 
               // Otvory pro senzor
               for(r = [0:rpm_sensor_count])
                 rotate([0, 0, r*360/rpm_sensor_count])
-                translate([0, 12, height_from_rotor_nut+3])
+                translate([0, 15, height_from_rotor_nut+3])
                   hull()
                   {
-                    translate([-0.5/2, -1.5, -8]) cube([0.5, 3, 0.1]);
-                    translate([-2.5/2, -1.5, 0]) cube([2.5, 3, 0.1]);
+                    translate([-4/2, -1.5, -8]) cube([4, 3, 0.1]);
+                    translate([-4/2, -1.5, 0]) cube([4, 4, 0.1]);
                   }
 
 
@@ -107,7 +108,7 @@ module 888_4008(){
                         {
                             cube([30, 15, 10], center = true);
                             translate([0,-7.5,5])
-                                rotate([atan2(starter_top_h,(starter_top_r-edge_distance_from_center)),0,0])
+                                rotate([atan2(starter_top_h,(16-edge_distance_from_center)),0,0])
                                     translate([-15,0,-10])
                                         cube([30,15,10]);
                         }
