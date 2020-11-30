@@ -4,4 +4,4 @@
 include <../../parameters.scad>
 use <../888_1002.scad>
 
-888_1002(motor_angle = 0);
+888_1002(motor_angle = -5);
