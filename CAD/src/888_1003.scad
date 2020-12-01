@@ -13,7 +13,7 @@ back_overlap = 20;
 length = base_length + front_overlap + back_overlap; //delka sten z vykresu, nepouzity
 thickness = 1; //tloustka sten
 drzak_height = 70; //spatny rozmer so far
-sides_split_positions = [-5, length/3-5, length/3*2, length];
+sides_split_positions = [0, length/3-5, length/3*2, length];
 
 side_base_thickness = 0.2*6;
 
