@@ -23,8 +23,8 @@ module tail_rudder() translate([0, 0, 0]){
         // space for rudder
             difference(){
                 hull(){
-                    translate([depth_max - rudder_depth+10, -10, 0])
-                        cube([rudder_depth - 10-3, 20, height]);
+                    #translate([depth_max - rudder_depth+10, -10, 0])
+                        cube([rudder_depth - 10-8, 20, height]);
                     translate([depth_max - rudder_depth, 0, 0])
                         cylinder(d = 5, h = height_bottom_part+rudder_below-0.5, $fn=60);
                 }
