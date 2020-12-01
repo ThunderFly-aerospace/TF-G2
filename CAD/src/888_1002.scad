@@ -142,6 +142,21 @@ difference(){
           }
       }
 	}
+
+
+
+
+// popisky
+  translate([21, base_width/2+rantl_thickness, 8])
+    rotate([90, 0, 180])
+      linear_extrude(0.5)
+        text(str(week), size = 6);
+
+  translate([12, -base_width/2-rantl_thickness, 8])
+    rotate([90, 0, 0])
+      linear_extrude(0.5)
+        text(str(motor_angle), size = 6);
+
 }
 
 

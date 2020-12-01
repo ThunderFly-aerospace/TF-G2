@@ -207,9 +207,9 @@ module 888_1003(){
 
 	}
 
-	translate([8, -3, side_base_thickness-0.4])
-	linear_extrude(1)
-		text(str(week), size = 5);
+	translate([28, 4, side_base_thickness-0.4])
+		linear_extrude(1.2)
+			text(str(week), size = 6);
 }
 
 
