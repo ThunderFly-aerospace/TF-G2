@@ -9,14 +9,16 @@ thickness = motor_holder_thickness; //sirka sten - dost random
 drzak_height = 70; //vyska drzaku
 
 motor_diameter = 35.2;
-
+side_thickness = 3;
 
 x_offset = 50;
 
 motor_angle = -5; //angle of proppler axis
 
-if(0)
-translate([x_offset, 0, motor_holder_motor_height -(-rantl_height + base_thickness + 0.2)])
+
+// nahled motoru
+if(1)
+%translate([x_offset, 0, motor_holder_motor_height -(-rantl_height + base_thickness + 0.2)])
   rotate([0, -90 - motor_angle, 0]) translate([0, 0, thickness]) {
     cylinder(d = motor_diameter, h = 50);
     translate([0, 0, -20]) cylinder(d = 5, h = 50);
@@ -26,13 +28,14 @@ translate([x_offset, 0, motor_holder_motor_height -(-rantl_height + base_thickne
 module 888_1002(motor_angle = motor_angle) translate([-5, 0, 0]) {
 //translate([0, -motor_holder_thickness/2, 0])
 difference(){
-	//translate([0, 0, -rantl_height + base_thickness + 0.2])
 	union(){
-
-// zakladni tvar
+  // zakladni tvar
 		hull(){
-			translate([0, -base_width/2, 0])
-				cube([10, base_width, motor_holder_motor_height*1.5]);
+			translate([0, -base_width/2 - side_thickness, 0])
+        cube([15, base_width + 2*side_thickness, motor_holder_side_mount_height + rantl_height/2 + M3_screw_diameter]);
+
+      translate([0, -base_width/2 - side_thickness, 0])
+        cube([25, base_width + 2*side_thickness, 10]);
 
 				translate([x_offset-15, 0, 0]) cylinder(d = 20, h=2);
 
@@ -44,20 +47,10 @@ difference(){
 		}
 
 
-/*
-	translate([15, -thickness/2+0.2, 1])
-		rotate([90, 0, 0])
-			linear_extrude(0.2+0.6+2.5)
-				text(str(week), size=6);
-
-	translate([-25, -thickness/2+0.2, 1])
-		rotate([90, 0, 0])
-			linear_extrude(0.2+0.6+2.5)
-				text(str(motor_angle), size=6); */
-
 	}
 
 
+    // Otvory pro pripevneni a vetrani motoru
     translate([x_offset, 0, motor_holder_motor_height -(-rantl_height + base_thickness + 0.2)])
       rotate([0, 90 - motor_angle, 0]){
 
@@ -78,7 +71,7 @@ difference(){
 
     // spodni vyrez - odlehceni
     hull(){
-  			cube([thickness*6, base_width-thickness*4, 20], center = true);
+  			cube([thickness*16, base_width-thickness*4, 20], center = true);
 				translate([x_offset-15, 0, 0]) cylinder(d = 20-thickness, h=10);
 
 
@@ -87,10 +80,10 @@ difference(){
     difference(){
   		hull(){
   			translate([-0.1, -base_width/2+thickness*1.5, thickness])
-  				cube([thickness*3, base_width-thickness*3, motor_holder_motor_height*1.5]);
+  				cube([thickness*8, base_width-thickness*3, motor_holder_motor_height*1.5]);
 
-  			translate([-0.1, -base_width/2+thickness, motor_holder_height/3])
-  				cube([thickness*3, base_width-thickness*2, motor_holder_motor_height*1.5]);
+  			// translate([-0.1, -base_width/2+thickness, motor_holder_height/3])
+  			// 	cube([thickness*8, base_width-thickness*2, motor_holder_motor_height*1.5]);
 
   				translate([x_offset-15, 0, thickness]) cylinder(d = 20, h=2);
 
@@ -129,17 +122,25 @@ difference(){
 				}
 
 
-//+2 kvadriky
+
+// Vyrez na zapusteni bocnic
+    for(m = [0,1])
+      mirror([0, m, 0])
+        translate([0, base_width/2, -0.1])
+          cube([10+0.5, 20, 50]);
+
+
 
     for(m = [0,1])
-    mirror([0, m, 0])
-    translate([-1, -base_width/2 -0.1, -0.1])
-      hull(){
-        cube([30, rantl_thickness+0.3, rantl_height+0.5]);
-        translate()cube([30, 0.1, rantl_height+7]);
+      mirror([0, m, 0])
+        translate([-0.1, -base_width/2 -0.1, -0.1]){
+            cube([25.1, rantl_thickness+0.3, rantl_height+1]);
+
+          hull(){
+            cube([10+0.5, rantl_thickness+0.3, rantl_height+1]);
+            translate()cube([10+0.5, 0.1, rantl_height+4]);
+          }
       }
-
-
 	}
 }
 

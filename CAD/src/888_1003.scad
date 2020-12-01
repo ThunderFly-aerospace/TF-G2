@@ -28,54 +28,56 @@ platform_ears_hole_from_bottom = 5;
 
 module 888_1003_outline(){
 
-		projection() difference(){
-			union(){
-				hull(){
-		//kvadrik ("spolecny s podlozkou")
-	        translate([10, -base_thickness -rantl_height/2, 0])
-	         cube([base_length+6, base_thickness + rantl_height, 1]);
+		projection()
+			difference(){
+				union(){
+					hull(){
+			//kvadrik ("spolecny s podlozkou")
+				        translate([10+15, -base_thickness -rantl_height/2, 0])
+				        	cube([base_length+6-15, base_thickness + rantl_height, 1]);
 
-			    translate([front_overlap, 11-bellow, 0])
-						cylinder(d = 16, h = 1);
+				       	// vepredu ve vysce prostrednich der na policky
+					    translate([10*3, motor_holder_side_mount_height, 0])
+					    	cube([M3_screw_diameter+7, M3_screw_diameter+15, 1], center = true);
+							//cylinder(d = M3_screw_diameter+7, h = 1);
 
-					translate([45, 45-bellow, 0])
-						cylinder(d = 12, h = 1);
+						translate([45, 45-bellow, 0])
+							cylinder(d = 12, h = 1);
 
-					translate([50-front_overlap + 13 + 200, -bellow + height + 22, 0])
-						cylinder(d = 20, h = 1);
+						translate([50-front_overlap + 13 + 200, -bellow + height + 22, 0])
+							cylinder(d = 20, h = 1);
 
-                    for(x = [42:10:10*26+2])
-		            translate([x, pylon_holder_side_mount_height, -0.1])
-		                cylinder(d = 5.5+5, h = 10);
+	                    for(x = [42:10:10*26+2])
+				            translate([x, pylon_holder_side_mount_height, -0.1])
+				                cylinder(d = 5.5+5, h = 10);
 
-						}
+					}
 				}
 
 
-				translate([battery_case_start_x,0,0]) hull(){
-		//Spodni cast pro akumulator
-	        translate([0, -base_thickness -rantl_height/2, 0])
-	         cube([battery_length+20, base_thickness + rantl_height, 1]);
+				translate([battery_case_start_x,0,0])
+					hull(){
+					//Spodni cast pro akumulator
+	        			translate([0, -base_thickness -rantl_height/2, 0])
+	        				cube([battery_length+20, base_thickness + rantl_height, 1]);
 
-			    translate([10, -bellow - 10, 0])
-						cylinder(d = 8, h = 1);
+			    		translate([10, -bellow - 10, 0])
+							cylinder(d = 8, h = 1);
 
-					translate([battery_length+10, -bellow - 10, 0])
-						cylinder(d = 8, h = 1);
-
-
-				}
+						translate([battery_length+10, -bellow - 10, 0])
+							cylinder(d = 8, h = 1);
+					}
 
 			// otvory ve stene
 			for (i=[0:6])
 				translate([i*42, 0, 0]+[25, 5.5, -1])
 				{
-					hull(){
+					if(i!=0)hull(){
 						translate([12, 0, 0]) cylinder(d=3, h = 20);
 						translate([-12, 0, 0]) cylinder(d=3, h = 20);
 						translate([0, 14, 0]) cylinder(d=3, h = 20);
 					}
-					if(i<6)hull(){
+					if(i!=6)hull(){
 						translate([21+12, 14, 0]) cylinder(d=3, h = 20);
 						translate([21-12, 14, 0]) cylinder(d=3, h = 20);
 						translate([21, 0, 0]) cylinder(d=3, h = 20);
@@ -175,10 +177,10 @@ module 888_1003(){
         
 		// Rada sroubu predni sklonena hrana
         translate([42, pylon_holder_side_mount_height, 0])
-        rotate([0,0,-135])
-		for(x = [0:10:10*5])
-	        translate([x, 0, -0.1])
-	            cylinder(d = M3_screw_diameter, h = 10, center = true, $fn = 50);
+	        rotate([0,0,-135])
+				for(x = [0:10:10*1])
+			        translate([x, 0, -0.1])
+			            cylinder(d = M3_screw_diameter, h = 10, center = true, $fn = 50);
         
 		// Rada sroubu zadni sklonena hrana
         translate([10*26+2, pylon_holder_side_mount_height, 0])
