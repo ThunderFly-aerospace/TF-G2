@@ -33,6 +33,8 @@ M3_nut_height = 2.7;
 M3_nut_diameter = 6.6;
 M3_screw_head_height = 3;
 M3_nut_pocket = 5.6;
+M3_head_diameter = 6.6;
+M3_head_height = 3.0;
 
 
 //Screw diameter and nut for M2,5 [mm]
@@ -46,3 +48,5 @@ M2_screw_diameter = 2.0;
 M2_nut_height = 1.8;
 M2_nut_diameter = 4.8;
 M2_nut_pocket = 3.95;
+M2_head_diameter = 4.5;
+M2_head_height = 2.0;

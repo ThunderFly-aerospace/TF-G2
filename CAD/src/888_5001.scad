@@ -1,9 +1,9 @@
 include <../parameters.scad>
 
 use <lib/stdlib/curvedPipe/curvedPipe.scad>
-//use <lib/copyFunctions.scad>
+use <lib/stdlib/bolts.scad>
 
-
+$fn = 200;
 
 
 type = "naca"; // "naca" or "cylinder"
@@ -55,6 +55,11 @@ stage3_dia = 19;
 pipe1_pos = [type=="naca"? 3: stage1_len/2, 0, width/2];
 pipe2_pos = [type=="naca"?length*0.3 : stage2_pos+stage2_len/2, 0, width/2];
 
+// PCB cap
+cap_head_overlay = 3;
+rail_x = 4.5;
+rail_h = sqrt(2*(rail_x*rail_x))/2;
+bolt_z = 15 - M3_head_height; // top of cap - head_height
 
 
 module pipes()
@@ -99,7 +104,7 @@ module 888_5001(){
 
 translate([0, -width/2, 0]) rotate([-90, 0, 0]) difference(){
 
-    
+
     // Horni profil
     union(){
     if(type == "naca"){
@@ -132,11 +137,10 @@ translate([0, -width/2, 0]) rotate([-90, 0, 0]) difference(){
         union(){
             if(type == "naca"){
             intersection(){
-                translate([0, distance/2, 0]) airfoil(naca = naca, L = length, N = 50, h= width, open = false);
-                union(){
-                    translate([0, -distance/2, 0]) cube([length, distance, width]);
-                    cube([10, distance/2 + sensor_rantl, width]);
-                }
+                translate([0, distance/2, 0])
+                    airfoil(naca = naca, L = length, N = 50, h= width, open = false);
+                translate([0, -distance/2, 0])
+                    cube([length, distance, width]);
             }}
             else{
                 difference(){
@@ -173,18 +177,34 @@ translate([0, -width/2, 0]) rotate([-90, 0, 0]) difference(){
 
             union(){
                 translate([sensor_pos[0] - pcb_sensor_from_top, distance/2, 0])
-                    cube([pcb_length, sensor_rantl + pcb_thickness, width/2-pcb_width/2-pcb_offset]);
-                translate([sensor_pos[0] - pcb_sensor_from_top, distance/2, width - (width/2-pcb_width/2+pcb_offset)])
-                    cube([pcb_length, sensor_rantl + pcb_thickness, width/2-pcb_width/2+pcb_offset]);
+                    cube([pcb_length, sensor_rantl + pcb_thickness,
+                          //width/2 - pcb_width/2 - pcb_offset - 1.1]);
+                          width/2 - pcb_width/2 - pcb_offset]);
+                translate([sensor_pos[0] - pcb_sensor_from_top, distance/2,
+                           //width/2 + pcb_width/2 - pcb_offset - 1.1])
+                           width/2 + pcb_width/2 - pcb_offset])
+                    difference(){
+                        cube([pcb_length, sensor_rantl + pcb_thickness,
+                              //width/2 - pcb_width/2 + pcb_offset + 1.1]);
+                              width/2 - pcb_width/2 + pcb_offset + 2]);
+                        translate([-0.01, 0, 0])
+                        rotate([-60, 0, 0])
+                            cube([pcb_length + 0.02, sensor_rantl + pcb_thickness,
+                                  width/2 - pcb_width/2 + pcb_offset]);
+                    }
                 translate([sensor_pos[0] - pcb_sensor_from_top - 2, distance/2, 0])
-                    cube([2, sensor_rantl + pcb_thickness, width]);   
+                    cube([2, sensor_rantl + pcb_thickness, width]);
+
+            // PCB
+            //if(!$preview)
+            
             }
         }
 
 
-
-        translate([0, 0, width/2 + 25 + rotor_head_width/2]) rotate([90-pylon_top_angle, 0, 0]) cube(50, center = true);
-        translate([0, 0, width/2 -25 - rotor_head_width/2]) rotate([pylon_top_angle, 0, 0]) cube(50, center = true);
+        // jan.kott: What was this good for?
+        //translate([0, 0, width/2 + 25 + rotor_head_width/2]) rotate([90-pylon_top_angle, 0, 0]) cube(50, center = true);
+        //translate([0, 0, width/2 -25 - rotor_head_width/2]) rotate([pylon_top_angle, 0, 0]) cube(50, center = true);
 
 
         h = width/2;
@@ -229,48 +249,20 @@ translate([0, -width/2, 0]) rotate([-90, 0, 0]) difference(){
         }
     }
 
-
-    // difference od celeho tvaru
-
-
-    /// otvory pro pripevneni rotorove hlavy
-    // translate([length-15, -distance/2, 0]){
-    //     translate([0, -15, 0])
-    //         cylinder(d = M3_screw_diameter, h = width, $fn = 20);
-
-    //     for(y = [5, -5])
-    //         translate([y, 0, 0]){
-    //             cylinder(d = M3_screw_diameter, h = width, $fn = 20);
-    //             for(x = [4, width-4-M3_nut_height])
-    //                 translate([0, 0, x])
-    //                     hull(){
-    //                         cylinder(d = M3_nut_diameter, h = M3_nut_height, $fn = 6);
-    //                         translate([0, -10, 0]) cylinder(d = M3_nut_diameter, h = M3_nut_height, $fn = 6);
-    //                     }
-    //         }
-    //     }
-
     //  otvory pro pripevneni vicka
-
-    translate([0, 0, 0])
-        for(y = [[4, 1], [width-4, -1]])
-            translate([sensor_pos[0]+8, +distance/2+sensor_rantl, y[0]]){
-                rotate([90, 0, 0])
-                    translate([0, 0, -5]) cylinder(d = M3_screw_diameter, h=15, $fn = 15);
-                hull(){
-                    translate([0, -3, 0]) rotate([90, 0, 0]) cylinder(d = M3_nut_diameter, h=M3_nut_height, $fn = 6);
-                    translate([0, -3, -10*y[1]]) rotate([90, 0, 0]) cylinder(d = M3_nut_diameter, h=M3_nut_height, $fn = 6);
-                }
-        }
-
+    cap_bolts();
 
     union(){
-        translate([0, distance/2 + sensor_rantl, 2.5])
-            cube([length, sensor_rantl + pcb_thickness + 1, 3]);
-        translate([0, distance/2 + sensor_rantl, width - 2.5-3])
-            cube([length, sensor_rantl + pcb_thickness + 1, 3]);
-        translate([0, distance/2 + sensor_rantl, 0])
-            cube([2, sensor_rantl + pcb_thickness, width]);   
+        // Rails
+        for(y = [rail_h, width - rail_h + 2])
+            translate([length/2 + 0.01, distance/2 + sensor_rantl + pcb_thickness , y])
+                difference(){
+                    rotate([45, 0, 0])
+                        cube([length + 0.01, rail_x, rail_x], center=true);
+                }
+        // Lid front cut-out
+        translate([0, distance/2 + sensor_rantl - 3, -0.01])
+            cube([cap_head_overlay + 0.01, sensor_rantl + pcb_thickness + 0.01, width + 0.02]);
     }
 
 
@@ -304,31 +296,47 @@ module support_888_5001(){
 }
 // % support_888_5001();
 
-
-
-module 888_5001_cap() translate([0, -width/2, 0]) rotate([-90, 0, 0]) {
-
-    difference(){ union(){
-
-        translate([0.5, distance/2 + sensor_rantl + pcb_thickness_sensor + 2, 0])
-            cube([length-0.5, 2, width]);
-
-        translate([0.5, distance/2 + sensor_rantl + pcb_thickness_sensor, 3])
-            cube([length-0.5, 4, 2]);
-        translate([0.5, distance/2 + sensor_rantl + pcb_thickness_sensor, width - 2-3])
-            cube([length-0.5, 4, 2]);
-        translate([0.5, distance/2 + sensor_rantl + pcb_thickness_sensor, 0])
-            cube([1.5, 4, width]);   
+module 888_5001_cap() translate([0, -width/2, -30]) rotate([-90, 0, 0]) {
+    difference(){
+        translate([0, distance/2 + 1, 0])
+            union(){
+                difference(){
+                    airfoil(naca = naca, L = 1.3*length, N = 50, h= width + 2, open = false);
+                    // Bottom cut-out
+                    translate([cap_head_overlay - global_clearance, -length + 5, -width/2])
+                        cube([length, length, 2*width]);
+                    translate([-length/2, -length - 1, -width/2])
+                        cube([2*length, length, 2*width]);
+                }
+                // Rails
+                for(y = [rail_h, width - rail_h + 2])
+                    translate([length/2 + 1, 5 + global_clearance/2, y])
+                        difference(){
+                            rotate([45, 0, 0])
+                                cube([length - 1.5, rail_x, rail_x], center=true);
+                            translate([0, rail_h, 0])
+                                cube([length, 2*rail_h, 2*rail_h], center=true);
+                        }
+            }
+        // Tail cut-out
+        translate([length, 0, -width/2])
+            cube([length, length, 2*width]);
+        // Vertical bolts cut-out
+        cap_bolts();
+        // Horizontal  bolts cut-out
     }
+}
 
-
-    for(y = [[4, 1], [width-4, -1]])
-        translate([sensor_pos[0]+8, +distance/2+sensor_rantl + pcb_thickness_sensor, y[0]]){
-            rotate([90, 0, 0])
-                translate([0, 0, -5]) cylinder(d = M3_screw_diameter, h=15, $fn = 15);
-    }
-    }
+module cap_bolts() {
+    // Vertical bolts cut-out
+    translate([sensor_pos[0] + 5, bolt_z + distance/2 , M3_head_diameter/2])
+        rotate([90, -90, 0])
+            bolt(3, 10);
+    translate([sensor_pos[0] + 5, bolt_z + distance/2 , width - M3_head_diameter/2 + 2])
+        rotate([90, 90, 0])
+            bolt(3, 10);
 }
 
 
 888_5001_cap();
+echo(width + 2);
