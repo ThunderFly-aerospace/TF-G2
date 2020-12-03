@@ -160,4 +160,7 @@ difference(){
 }
 
 
+difference(){
 888_1002();
+//translate([0, 0, 30]) cube(100);
+}
