@@ -17,6 +17,7 @@ sides_split_positions = [-5, length/3-5, length/3*2, length];
 
 side_base_thickness = 0.2*6;
 
+platform_ears_en = 0;
 platform_ears_position = base_patern * [6, 25];
 platform_ears_height = 25;
 platform_ears_height = 11 + battery_case_height;
@@ -52,7 +53,7 @@ module 888_1003_outline(){
 				                cylinder(d = 5.5+5, h = 10);
 
 					}
-				}
+				
 
 
 				translate([battery_case_start_x,0,0])
@@ -67,7 +68,7 @@ module 888_1003_outline(){
 						translate([battery_length+10, -bellow - 10, 0])
 							cylinder(d = 8, h = 1);
 					}
-
+				}
 			// otvory ve stene
 			for (i=[0:6])
 				translate([i*42, 0, 0]+[25, 5.5, -1])
@@ -130,6 +131,8 @@ module 888_1003(){
 				}
 
 			// Usi pro pripevneni k platforme
+			
+			if(platform_ears_en)
 			for (x = platform_ears_position)
 				translate([x, 0, 0]){
 					hull()
@@ -147,15 +150,15 @@ module 888_1003(){
 
 		// nedelat otvory pro srouby v mistech otvoru pro pripevneni bocnic
 		difference(){
-				for(x = [20:10:base_length])
-	        translate([x, 0, -0.1])
-            cylinder(d = M3_screw_diameter, h = 10, center = true, $fn = 50);
+			for(x = [20:10:base_length])
+		        translate([x, 0, -0.1])
+	            	cylinder(d = M3_screw_diameter, h = 10, center = true, $fn = 50);
 
-				// Otvory pro kryt
-				for(x=cover_holes)
-					translate([x, 0, 0])
-						cylinder(d = 8, h = 5, $fn=30);
-			}
+			// Otvory pro kryt
+			for(x=cover_holes)
+				translate([x, 0, 0])
+					cylinder(d = 8, h = 5, $fn=30);
+		}
 
         //for(x = [10+base_patern, 10+base_patern*2])
 		for(x = [10*3:10:10*27])
@@ -170,7 +173,7 @@ module 888_1003(){
 	            //cylinder(d = 5.5, h = 10, center = true, $fn = 50);
 
 		// Rada sroubu pro akumulator
-		for(x = [20:10:10*18])
+		for(x = [40:10:10*18])
 	        translate([x, -bellow - 5, -0.1])
 	            cylinder(d = M3_screw_diameter, h = 10, center = true, $fn = 50);
 	            //cylinder(d = 5.5, h = 10, center = true, $fn = 50);
