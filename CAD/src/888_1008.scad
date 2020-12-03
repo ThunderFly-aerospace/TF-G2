@@ -7,7 +7,6 @@ use <lib/Round-Anything/roundAnythingExamples.scad>
 
 use<888_1007.scad>
 
-pylon_suspension_height = 100;
 
 module 888_1008(){
 
@@ -48,16 +47,16 @@ module 888_1008(){
                 }
 
         translate([0, 0, -pylon_suspension_height])
-            pylon_pipes(6, 0, -2.5);
+            pylon_pipes(pylon_pipe_d, 0, -2.5);
     }
 
 
 }
 
 
-%translate([0, 0, -100]){
+%translate([0, 0, -pylon_suspension_height]){
     888_1007();
-    pylon_pipes(6, 0, 0);
+    pylon_pipes(pylon_pipe_d, 0, -2);
     pylon_silentblocks();
 }
 888_1008();
