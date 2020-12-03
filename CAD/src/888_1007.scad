@@ -4,86 +4,79 @@
 include <../parameters.scad>
 
 
-
-module 888_1007(){
-    translate([0, 0, pylon_thickness/2])
-    difference(){
-        union(){
-            // Zakladni tvar
-            hull(){
-                cube([pylon_base_length, 10, pylon_thickness], center = true);
-                translate([0, pilot_height_separation, 0])
-                    cube([pylon_ring_length, 10, pylon_thickness], center = true);
-            }
-
-            hull()
-            for(x = [-pylon_base_length/2+5:10:pylon_base_length/2-5])
-            translate([x, 0, 0])
-                rotate([-90+pylon_angle, 0, 0]){
-                    cylinder(d = M3_nut_diameter+2, h = 3, $fn = $preview?10:30);
-                }
-
-// Vytvoreni sikmych ploch
-            /* hull(){
-                cube([pylon_base_length, 10, pylon_thickness], center = true);
-                translate([0, 0, pylon_thickness/2])
-                    rotate([90-pylon_angle, 0, 0])
-                        cube([pylon_base_length, 10, 0.1], center = true);
-            }
-
-            translate([0, pilot_height_separation, 0])
-                hull(){
-                    cube([pylon_ring_length, 10, pylon_thickness], center = true);
-                    translate([0, 0, pylon_thickness/2])
-                        rotate([90-pylon_angle, 0, 0])
-                            cube([pylon_ring_length, 10, 0.1], center = true);
-                } */
-        }
-
-// Odecet stredniho odlehceni
-        difference(){
-            hull(){
-                translate([0, 10/2, 0])
-                    cube([pylon_base_length-20, 0.1, pylon_thickness+1], center = true);
-                translate([0, pilot_height_separation - 10/2, 0])
-                    cube([pylon_ring_length-20, 0.1, pylon_thickness+1], center = true);
-            }
-// Stredni pricka
-                //translate([0, pilot_height_separation/2 - 10/2, 0])
-                //    cube([pylon_ring_length, 10, pylon_thickness+1], center = true);
-        }
-
-        for(i=[0, 1]) mirror([i, 0, 0])
-        difference(){
-          hull(){
-            translate([pylon_base_length/2 - 5, 6, -2])
-              cylinder(d = 2, h = pylon_thickness+1);
-
-            translate([pylon_ring_length/2 - 5, pilot_height_separation - 6, -2])
-              cylinder(d = 2, h = pylon_thickness+1);
-          }
-
-          for(y = [0:10])
-            translate([0, y*15, 0])
-              cube([100, 3, pylon_thickness*2+2], center = true);
-        }
+pylon_bottom_wall = 6;
+pylon_suspension_height = 100;
 
 
-//  Otvory pro prisroubovani
-    for(x = [-pylon_base_length/2+5:10:pylon_base_length/2-5])
-    translate([x, 0, 0])
-        rotate([-90+pylon_angle, 0, 0]){
-            cylinder(d = M3_screw_diameter, h = 20, center = true, $fn = $preview?10:30);
-            translate([0, 0, pylon_thickness-2]) cylinder(d = M3_nut_diameter, h = 5, $fn = 6);
-        }
+x_pos_top = 30/2;
+y_pos_top = 30/2;
 
-    for(x = [-pylon_ring_length/2+5:10:pylon_ring_length/2-5])
-    translate([x, pilot_height_separation, 0])
-        rotate([-90+pylon_angle, 0, 0])
-            cylinder(d = M3_screw_diameter, h = 20, center = true, $fn = $preview?10:30);
+module pylon_pipes(d = 7, below = 10, above = 10){
+    x_pos_bottom = base_width/2 - 5;
+    y_pos_bottom = base_width/2 - 5;
 
 
+    length = sqrt( sqrt((x_pos_bottom-x_pos_top)^2 + (y_pos_bottom-y_pos_top)^2 )^2 + pylon_suspension_height^2);
+    echo("delka tycek:", length);
+
+
+    translate([x_pos_bottom, y_pos_bottom, 0])
+        rotate([atan2((x_pos_bottom-x_pos_top), pylon_suspension_height), -atan2((y_pos_bottom-y_pos_top), pylon_suspension_height), 0])
+            translate([0, 0, -below]) cylinder(d = d, h = length+below+above);
+    translate([-x_pos_bottom, y_pos_bottom, 0])
+        rotate([atan2((x_pos_bottom-x_pos_top), pylon_suspension_height), atan2((y_pos_bottom-y_pos_top), pylon_suspension_height), 0])
+            translate([0, 0, -below]) cylinder(d = d, h = length+below+above);
+
+    translate([x_pos_bottom, -y_pos_bottom, 0])
+        rotate([-atan2((x_pos_bottom-x_pos_top), pylon_suspension_height), -atan2((y_pos_bottom-y_pos_top), pylon_suspension_height), 0])
+            translate([0, 0, -below]) cylinder(d = d, h = length+below+above);
+    translate([-x_pos_bottom, -y_pos_bottom, 0])
+        rotate([-atan2((x_pos_bottom-x_pos_top), pylon_suspension_height), atan2((y_pos_bottom-y_pos_top), pylon_suspension_height), 0])
+            translate([0, 0, -below]) cylinder(d = d, h = length+below+above);
+}
+
+module silentblock(){
+    union(){
+        translate([0, 0, -6]) cylinder(d = M3_screw_diameter, h = 8+12);
+        cylinder(d = 8, h = 8);
     }
 }
 
+module pylon_silentblocks(){
+    for(x=[0.5, -0.5]){
+        translate([45*x, 0, pylon_suspension_height-4]) silentblock();
+        translate([0, 45*x, pylon_suspension_height-4]) silentblock();
+    }
+}
+
+module 888_1007(){
+
+    difference(){
+
+        cube([base_width, base_width, 10], center = true);
+
+        minkowski(){
+            difference(){
+                cube([base_width - pylon_bottom_wall*2 - 6,
+                    base_width - pylon_bottom_wall*2 - 6, 11], center = true);
+                for(x = [-0.5, 0.5], y=[-0.5, 0.5])
+                    translate([(base_width-pylon_bottom_wall*2)*x, (base_width-pylon_bottom_wall*2)*y, 0])
+                        cylinder(d = 20, h = 20, center=true);
+            }
+        cylinder(d=6, h=1, $fn=20);
+        }
+
+        pylon_pipes(7);
+
+        for(x = [-15, -5, 5, 15])
+            translate([x, 0, 0])
+                rotate([90, 0, 0]){
+                    cylinder(d = M3_screw_diameter, h = base_width+1, center=true, $fn = 12);
+                    cylinder(d = M3_nut_diameter, h = base_width-4*2, center=true, $fn = 6);
+                }
+    }
+}
+
+
+%pylon_pipes();
 888_1007();
