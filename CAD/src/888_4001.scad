@@ -102,8 +102,8 @@ module blade_mount(draft){
                 }
             }
 
-            translate([-2, -blade_mount_thickness/2 + 0.6, blade_mount_length -blade_mount_screw_offset - blade_mount_screw_distance/2 + 2])
-              rotate([90, 0, 0])
+            translate([-2, blade_mount_thickness/2 + 0.1, blade_mount_length -blade_mount_screw_offset - blade_mount_screw_distance/2])
+              rotate([90, 0, 180])
                 linear_extrude(10)
                   text(str(rotor_blade_naca), size=6, font="Liberation Sans", halign="center", valign="center");
 
@@ -348,7 +348,8 @@ module 888_4001_end_print_modificator(part = 1){
 
 
 echo(str("Delka vyztuhy uvnitr listu je:", (rotor_blade_length - rod_from_end), " mm"));
-echo(str("Celkova delka vyztuhy je:", (spine_length), " mm"));
+echo(str("Celkova delka rovne vyztuhy je:", (spine_length), " mm"));
+echo(str("Celkova delka ohnute vyztuhy je:", (spine_length), " mm"));
 
 
 echo(blade_rod1_position);
