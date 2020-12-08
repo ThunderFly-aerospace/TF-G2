@@ -349,7 +349,7 @@ module 888_4001_end_print_modificator(part = 1){
 
 echo(str("Delka vyztuhy uvnitr listu je:", (rotor_blade_length - rod_from_end), " mm"));
 echo(str("Celkova delka rovne vyztuhy je:", (spine_length), " mm"));
-echo(str("Celkova delka ohnute vyztuhy je:", (spine_length), " mm"));
+echo(str("Celkova delka ohnute vyztuhy je:", ((spine_length-blade_mount_screw_offset)*2 + (spine_radius - blade_rod2_diameter/2) * PI ), " mm"));
 
 
 echo(blade_rod1_position);
