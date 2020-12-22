@@ -24,8 +24,9 @@ module 888_4008(){
 
     starter_top_r=14;
     starter_top_h=M3_screw_head_height+3;
-    starter_pipe_r=10;
-    starter_pipe_d_bottom = 32;
+    starter_pipe_d_top = 20;
+    starter_pipe_d_middle = 35;
+    starter_pipe_d_bottom = 25;
     starter_neck_r=10;
     starter_neck_h=1;
     starter_bottom_h=5;
@@ -60,17 +61,14 @@ module 888_4008(){
 
                                 translate([0,0, top_thickness + starter_top_h])
                                     cylinder(h=rpm_sensor_h, d=starter_rope_d, $fn=100);
-
                             }
 
-                            union()
-                            {
-                                translate([0,0,top_thickness+M3_nut_height])
-                                    cylinder(h=5*sensor_cap_height,r1=starter_pipe_r, d2=starter_pipe_d_bottom, $fn=40);
-                            }
-
-
-
+                          translate([0,0,top_thickness + M3_nut_height])
+                                cylinder(h=sensor_cap_height, d1=starter_pipe_d_top, d2 = starter_pipe_d_middle, $fn=40);
+                          translate([0,0,top_thickness + M3_nut_height + sensor_cap_height])
+                                cylinder(h=0.5*sensor_cap_height, d1=starter_pipe_d_middle, d2 = starter_pipe_d_middle, $fn=40);
+                          translate([0,0,top_thickness + M3_nut_height + 1.5*sensor_cap_height])
+                                cylinder(h=sensor_cap_height, d1=starter_pipe_d_middle, d2 = starter_pipe_d_bottom, $fn=40);
                     }
                 }
 
@@ -78,11 +76,13 @@ module 888_4008(){
               // Zavit pro namotani provazku
               translate([0, 0, starter_top_h+3]) difference(){
                 cylinder(d = starter_rope_d+10, h = 19-0.1);
-                screw_thread(starter_rope_d, 3, 50, 19, 2, 0);
+                screw_thread(starter_rope_d, 3, 50, 22, 2, 0);
               }
 
               // Otvor na zastrceni provazku
-              //translate([0, 0, starter_top_h+top_thickness]) rotate([-90, 0, 0]) cylinder(d = 2.5, h = 50, center = false, $fn = 10);
+              translate([0, 0, starter_top_h+top_thickness + 19 ])
+                  rotate([-90, 0, -11.5])
+                    cylinder(d = 2, h = 50, center = false, $fn = 10);
 
               // Otvory pro senzor
               for(r = [0:rpm_sensor_count])
@@ -98,8 +98,8 @@ module 888_4008(){
                 cylinder(d = M3_screw_diameter+0.1, h = 3* thickness+starter_top_h, center = true, $fn = 20);
 
                 // Zapusteni na matku rotoru
-                translate([0,0,top_thickness])
-                    cylinder(d = M3_nut_diameter+0.1, h = M3_nut_height+5, $fn = 6);
+                translate([0,0,top_thickness - 0.5 * M3_nut_height])
+                    cylinder(d = M3_nut_diameter + global_clearance, h = M3_nut_height+5, $fn = 6);
 
                 translate([0, 0, thickness/2])
                 for (i = [1:rotor_blades_count]){
