@@ -2,27 +2,107 @@
 // Trhaci predel rotorove hlavy
 
 include <../parameters.scad>
-use <888_1008.scad>
+use <888_1007.scad>
 
-module 888_1009() {
+pylon_silentblocks_base_distance = 58;
 
-    difference(){
-            minkowski(){
-                linear_extrude(2)
-                    union(){
-                        square([45, 1], center=true);
-                        square([1, 45], center=true);
-                    }
-                cylinder(d=9, h = 0.1, $fn=20);
-            }
-    
 
-    for(r = [1, 2, 3, 4])
-        rotate([0, 0, r*90])
-            translate([45/2, -0.1])
-                cylinder(d=M3_screw_diameter, h = 10, $fn=30);
+module clamp(){
+  difference(){
+    union(){
+      cylinder(d = 5+4, h = 10);
+      translate([0, -2.5, 0]) cube([9, 5, 10]);
+
     }
+    translate([0, -0.5, 0]) cube([10, 1, 11]);
+    cylinder(d = 5, h = 11);
+
+    translate([6, 0, 6]) rotate([90, 0, 0]){
+        cylinder(d=M3_screw_diameter, h = 10, center=true, $fn=10);
+        translate([0, 0, 1.5]) rotate(30) cylinder(d=M3_nut_diameter, h = 10, $fn=6);
+    }
+
+  }
 }
 
+
+module 888_1009() {
+  difference(){
+union(){
+  for(x = [-0.5, 0.5], y=[-0.5, 0.5])
+    translate([(pylon_silentblocks_base_distance)*x, (pylon_silentblocks_base_distance)*y, 0])
+      cylinder(d=10, h = 2, $fn=30);
+
+  for(y = [-0.5, 0.5])
+    hull()
+      for(x = [-0.5, 0.5])
+        translate([(pylon_silentblocks_base_distance)*x, (pylon_silentblocks_base_distance)*y, 0])
+          cylinder(d=8, h = 2);
+  for(x = [-0.5, 0.5])
+    hull()
+      for(y = [-0.5, 0.5])
+        translate([(pylon_silentblocks_base_distance)*x, (pylon_silentblocks_base_distance)*y, 0])
+        cylinder(d=8, h = 2);
+}
+
+  for(x = [-0.5, 0.5], y=[-0.5, 0.5])
+    translate([(pylon_silentblocks_base_distance)*x, (pylon_silentblocks_base_distance)*y, -0.5])
+      cylinder(d=M3_screw_diameter, h = 3, $fn=15);
+}
+
+    //predni svorky
+    for(y=[-1, 0])
+      mirror([0, y, 0])
+        translate([pylon_silentblocks_base_distance*0.5, 0.5*(pylon_silentblocks_base_distance-15), 0])
+          rotate([0, 0, 180])
+            clamp();
+
+    //zadni svorky
+    for(y=[-1, 0])
+      mirror([0, y, 0])
+        translate([-pylon_silentblocks_base_distance*0.5+15/2, 0.5*(pylon_silentblocks_base_distance), 0])
+          clamp();
+
+}
+
+
+
+module pylon_pipes(d = pylon_pipe_d, below = 10, above = 10){
+    x_front_bottom = pylon_silentblocks_base_distance/2;
+    x_rear_bottom = pylon_silentblocks_base_distance/2-15/2;
+    y_rear_bottom = pylon_silentblocks_base_distance/2;
+    y_front_bottom = pylon_silentblocks_base_distance/2-15/2;
+
+    x_pos_bottom = base_width/2 - 5;
+    y_pos_bottom = base_width/2 - 5;
+
+    x_pos_top = pylon_pipe_top_dist/2;
+    y_pos_top = pylon_pipe_top_dist/2;
+
+
+    length = sqrt( sqrt((x_pos_bottom-x_pos_top)^2 + (y_pos_bottom-y_pos_top)^2 )^2 + pylon_suspension_height^2);
+    echo("delka tycek:", length);
+
+
+    // predni prava
+    translate([x_front_bottom, y_front_bottom, 0])
+        rotate([atan2((x_pos_bottom-x_pos_top), pylon_suspension_height), 0, 0])
+            translate([0, 0, -below]) cylinder(d = d, h = length+below+above, $fn=20);
+
+    translate([-x_rear_bottom, y_rear_bottom, 0])
+        rotate([atan2((x_pos_bottom-x_pos_top), pylon_suspension_height), atan2((y_pos_bottom-y_pos_top), pylon_suspension_height), 0])
+            translate([0, 0, -below]) cylinder(d = d, h = length+below+above, $fn=20);
+
+    // predni leva
+    translate([x_front_bottom, -y_front_bottom, 0])
+        rotate([-atan2((x_pos_bottom-x_pos_top), pylon_suspension_height), 0, 0])
+            translate([0, 0, -below]) cylinder(d = d, h = length+below+above, $fn=20);
+    translate([-x_rear_bottom, -y_rear_bottom, 0])
+        rotate([-atan2((x_pos_bottom-x_pos_top), pylon_suspension_height), atan2((y_pos_bottom-y_pos_top), pylon_suspension_height), 0])
+            translate([0, 0, -below]) cylinder(d = d, h = length+below+above, $fn=20);
+}
+pylon_pipes(below=0);
+
 888_1009();
-%translate([0, 0, -4]) 888_1008();
+%translate([0, 0, -8]) 888_1007();
+%translate([0, 0, -8]) pylon_silentblocks();
