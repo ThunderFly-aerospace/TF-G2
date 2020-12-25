@@ -34,6 +34,7 @@ module 888_4008(draft = true){
     starter_neck_r=10;
     starter_neck_h=1;
     starter_bottom_h=5;
+    starter_rope_diameter=2;
 
     starter_rope_d = 38;
 
@@ -68,9 +69,9 @@ module 888_4008(draft = true){
                             }
 
                           translate([0,0,top_thickness + M3_nut_height])
-                                cylinder(h=sensor_cap_height, d1=starter_pipe_d_top, d2 = starter_pipe_d_middle, $fn=draft?rpm_sensor_count:120);
-                          translate([0,0,top_thickness + M3_nut_height + sensor_cap_height])
-                                cylinder(h=0.5*sensor_cap_height, d1=starter_pipe_d_middle, d2 = starter_pipe_d_middle, $fn=draft?rpm_sensor_count:120);
+                                cylinder(h=sensor_cap_height/2, d1=starter_pipe_d_top, d2 = starter_pipe_d_middle, $fn=draft?rpm_sensor_count:120);
+                          translate([0,0,top_thickness + M3_nut_height + sensor_cap_height/2])
+                                cylinder(h=sensor_cap_height, d1=starter_pipe_d_middle, d2 = starter_pipe_d_middle, $fn=draft?rpm_sensor_count:120);
                           translate([0,0,top_thickness + M3_nut_height + 1.5*sensor_cap_height])
                                 cylinder(h=sensor_cap_height, d1=starter_pipe_d_middle, d2 = starter_pipe_d_bottom, $fn=draft?rpm_sensor_count:120);
                     }
@@ -85,8 +86,15 @@ module 888_4008(draft = true){
 
               // Otvor na zastrceni provazku
               translate([0, 0, starter_top_h+top_thickness + 19 ])
-                  rotate([-90, 0, -11.5])
-                    cylinder(d = 2, h = 50, center = false, $fn = 10);
+                  rotate([-90, 0, -rotor_delta_angle])
+                    cylinder(d = starter_rope_diameter, h = 50, center = false, $fn = 10);
+
+              // Cut for rope fix before start
+              rotate([0, 0, 180])
+                 translate([-starter_pipe_d_middle/2, starter_pipe_d_top/2 + (starter_pipe_d_middle/2 - starter_pipe_d_top/2)/2, starter_top_h - starter_top_h/3])
+                    rotate([30, 3, 0])
+                      cube([starter_pipe_d_middle, starter_pipe_d_middle, starter_rope_diameter]);
+
 
               // Otvory pro senzor
               translate([0,0,top_thickness + M3_nut_height + sensor_cap_height])
@@ -99,9 +107,10 @@ module 888_4008(draft = true){
                     }
                 }
 
+              // rotor axis
               cylinder(d = M3_screw_diameter+0.1, h = 3* thickness+starter_top_h, center = true, $fn = 20);
 
-              // Zapusteni na matku rotoru
+              // Rotor nut
               translate([0,0,top_thickness - 0.5 * M3_nut_height])
                   cylinder(d = M3_nut_diameter + global_clearance, h = M3_nut_height+5, $fn = 6);
 
@@ -133,8 +142,12 @@ module 888_4008(draft = true){
                   }
 
               }
+              // cross section for model construction
+              //cube(100);
+
             }
         }
 }
+
 
 888_4008();
