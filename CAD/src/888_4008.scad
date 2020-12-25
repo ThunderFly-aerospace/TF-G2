@@ -1,6 +1,10 @@
 include <../parameters.scad>
 include <lib/stdlib/polyScrewThread_r1.scad>
-module 888_4008(){
+
+
+
+
+module 888_4008(draft = true){
 
 
 
@@ -26,7 +30,7 @@ module 888_4008(){
     starter_top_h=M3_screw_head_height+3;
     starter_pipe_d_top = 20;
     starter_pipe_d_middle = 35;
-    starter_pipe_d_bottom = 25;
+    starter_pipe_d_bottom = 20;
     starter_neck_r=10;
     starter_neck_h=1;
     starter_bottom_h=5;
@@ -41,7 +45,7 @@ module 888_4008(){
     rpm_sensor_base_h= 2;
     rpm_sensor_count=16;
     rpm_hole_h = 50;
-    rpm_hole_width = 5;
+    //rpm_hole_width = 7;
 
     screws_head_d=7;
     screws_h=14;
@@ -57,18 +61,18 @@ module 888_4008(){
                             union()
                             {
                               translate([0,0,0])
-                                  cylinder(r1 = rotor_center_r, d2=starter_rope_d, h = top_thickness+starter_top_h, $fn = 100);
+                                  cylinder(r1 = rotor_center_r, d2=starter_rope_d, h = top_thickness+starter_top_h, $fn = draft?rpm_sensor_count:120);
 
                                 translate([0,0, top_thickness + starter_top_h])
-                                    cylinder(h=rpm_sensor_h, d=starter_rope_d, $fn=100);
+                                    cylinder(h=rpm_sensor_h, d=starter_rope_d, $fn=draft?rpm_sensor_count:120);
                             }
 
                           translate([0,0,top_thickness + M3_nut_height])
-                                cylinder(h=sensor_cap_height, d1=starter_pipe_d_top, d2 = starter_pipe_d_middle, $fn=40);
+                                cylinder(h=sensor_cap_height, d1=starter_pipe_d_top, d2 = starter_pipe_d_middle, $fn=draft?rpm_sensor_count:120);
                           translate([0,0,top_thickness + M3_nut_height + sensor_cap_height])
-                                cylinder(h=0.5*sensor_cap_height, d1=starter_pipe_d_middle, d2 = starter_pipe_d_middle, $fn=40);
+                                cylinder(h=0.5*sensor_cap_height, d1=starter_pipe_d_middle, d2 = starter_pipe_d_middle, $fn=draft?rpm_sensor_count:120);
                           translate([0,0,top_thickness + M3_nut_height + 1.5*sensor_cap_height])
-                                cylinder(h=sensor_cap_height, d1=starter_pipe_d_middle, d2 = starter_pipe_d_bottom, $fn=40);
+                                cylinder(h=sensor_cap_height, d1=starter_pipe_d_middle, d2 = starter_pipe_d_bottom, $fn=draft?rpm_sensor_count:120);
                     }
                 }
 
@@ -85,53 +89,51 @@ module 888_4008(){
                     cylinder(d = 2, h = 50, center = false, $fn = 10);
 
               // Otvory pro senzor
-              for(r = [0:rpm_sensor_count])
-                rotate([0, 0, r*360/rpm_sensor_count])
-                translate([0, 15, height_from_rotor_nut+3])
-                  hull()
+              translate([0,0,top_thickness + M3_nut_height + sensor_cap_height])
+                intersection() {
+                    cylinder(d = starter_pipe_d_middle, h = rpm_hole_h, $fn = draft?rpm_sensor_count:120);
+
+                    for (i=[0:rpm_sensor_count]) rotate([0, 0, (360/rpm_sensor_count)*i]){
+                        linear_extrude(height = rpm_hole_h)
+                        polygon(points=[[0,0],[starter_rope_d/2, ((starter_rope_d/2) * sin(360/rpm_sensor_count/2))/2], [starter_rope_d/2, -((starter_rope_d/2) * sin(360/rpm_sensor_count/2))/2]]);
+                    }
+                }
+
+              cylinder(d = M3_screw_diameter+0.1, h = 3* thickness+starter_top_h, center = true, $fn = 20);
+
+              // Zapusteni na matku rotoru
+              translate([0,0,top_thickness - 0.5 * M3_nut_height])
+                  cylinder(d = M3_nut_diameter + global_clearance, h = M3_nut_height+5, $fn = 6);
+
+              translate([0, 0, thickness/2])
+              for (i = [1:rotor_blades_count]){
+                  rotate([0, 0, i*angle_between_blades + angle_between_blades/2 + 180])
+                      translate([0, edge_distance_from_center+15/2, -10/2+thickness/2])
+                      {
+                          cube([30, 15, 10], center = true);
+                          translate([0,-7.5,5])
+                              rotate([atan2(starter_top_h,(16-edge_distance_from_center)),0,0])
+                                  translate([-15,0,-10])
+                                      cube([30,15,10]);
+                      }
+                  angle=(rotor_blades_count/2 == round(rotor_blades_count/2))? (i*angle_between_blades):i*angle_between_blades - angle_between_blades/2;
+                  rotate([0,0, angle])
                   {
-                    translate([-4/2, -1.5, -8]) cube([4, 3, 0.1]);
-                    translate([-4/2, -1.5, 0]) cube([4, 4, 0.1]);
+                          translate([0, 3 + 4.5 + blade_mount_screw/2, 0])
+                              cylinder(d = blade_mount_screw, h = 2* (thickness+sensor_cap_height), center = true, $fn = 20);
                   }
 
-
-                cylinder(d = M3_screw_diameter+0.1, h = 3* thickness+starter_top_h, center = true, $fn = 20);
-
-                // Zapusteni na matku rotoru
-                translate([0,0,top_thickness - 0.5 * M3_nut_height])
-                    cylinder(d = M3_nut_diameter + global_clearance, h = M3_nut_height+5, $fn = 6);
-
-                translate([0, 0, thickness/2])
-                for (i = [1:rotor_blades_count]){
-                    rotate([0, 0, i*angle_between_blades + angle_between_blades/2 + 180])
-                        translate([0, edge_distance_from_center+15/2, -10/2+thickness/2])
-                        {
-                            cube([30, 15, 10], center = true);
-                            translate([0,-7.5,5])
-                                rotate([atan2(starter_top_h,(16-edge_distance_from_center)),0,0])
-                                    translate([-15,0,-10])
-                                        cube([30,15,10]);
-                        }
-                    angle=(rotor_blades_count/2 == round(rotor_blades_count/2))? (i*angle_between_blades):i*angle_between_blades - angle_between_blades/2;
-                    rotate([0,0, angle])
+                  hull(){rotate([0,0, angle])
                     {
-                            translate([0, 3 + 4.5 + blade_mount_screw/2, 0])
-                                cylinder(d = blade_mount_screw, h = 2* (thickness+sensor_cap_height), center = true, $fn = 20);
+                          translate([0, 3 + 4.5 + blade_mount_screw/2, screws_h/2+thickness/2])
+                              cylinder(d = screws_head_d, h = screws_h, center = true, $fn = 20);
                     }
+                          translate([0, 0, screws_h/2+thickness/2])
+                    cylinder(d = 5, h = screws_h*2.5);
+                  }
 
-                    hull(){rotate([0,0, angle])
-                      {
-                            translate([0, 3 + 4.5 + blade_mount_screw/2, screws_h/2+thickness/2])
-                                cylinder(d = screws_head_d, h = screws_h, center = true, $fn = 20);
-                      }
-                            translate([0, 0, screws_h/2+thickness/2])
-                      cylinder(d = 5, h = screws_h*2.5);
-                    }
-
-                }
+              }
             }
-
-
         }
 }
 

@@ -4,4 +4,4 @@
 include <../../parameters.scad>
 
 use <../888_4008.scad>
-888_4008();
+888_4008(draft=false);
