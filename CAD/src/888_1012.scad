@@ -66,6 +66,15 @@ module Part3(){
     }
 
 
+    // servo nuts
+   translate([0, rod_y_distance/4, rod_x_distance + rod_size])
+       rotate([0, 90, 0])
+           cylinder(d = rod_x_distance/2, h = 100, center = true);
+
+   translate([0, - rod_y_distance/4, rod_x_distance + rod_size])
+       rotate([0, 90, 0])
+           cylinder(d = rod_x_distance/2, h = 100, center = true);
+
   // Zapusteni pro loziska
    translate([bearing_shaft_shift + bearing_shaft_length - bearing_shaft_length + bearing_thickness - 100, 0, bearing_outer_diameter/2 + Bwall])
         rotate([0, 90, 0])
