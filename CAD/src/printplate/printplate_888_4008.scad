@@ -1,4 +1,4 @@
-//@set_slicing_config(../../slicing/blade_center_parts.ini)
+//@set_slicing_config(../../slicing/head.ini)
 
 //drzak zadniho kolecka
 include <../../parameters.scad>
