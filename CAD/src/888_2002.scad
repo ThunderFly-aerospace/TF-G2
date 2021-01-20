@@ -7,7 +7,6 @@ $fn = 90;
 zmenseni = 1.5;
 
 cylinder_r2 = 0;
-suspension_depth = 18; // zvetšit treba na 34
 suspension_thickness = 0.41*6; // k cemu to je?
 suspension_holder_flange_height = 25;
 suspension_holder_thickness = 0.41*15;
@@ -28,9 +27,6 @@ cylinder_h_1 = sqrt(((sin_angle^2)*(suspension_bow_diameter^2))/(4*((1-(sin_angl
 
 join_height = 17;
 join_height_1 = 17 - zmenseni;
-
-
-//join_height = suspension_depth/(tan(uhel)) + suspension_thickness;
 
 presah = 5; //prodloužení kvůli přesahu ze zmenšení úhlu
 
@@ -90,12 +86,12 @@ module 888_2002(){
                 if (i % 2 == 0) {
                     translate([0, 0, (join_height/2 - m)/2 + 1])
                         rotate([90,30,0])
-                            cylinder(h = suspension_bow_diameter, r = join_height/2 - m, $fn=3);
+                            cylinder(h = suspension_bow_diameter, r = join_height/2 - m - 1, $fn=3);
                 }
                 else {
-                    translate([0, 0, (join_height/2 - m)/2 + (join_height/2 * sqrt(3))/4 + 1])
+                    translate([0, 0, (join_height/2 - m - 1)/2 + (join_height/2 * sqrt(3))/4 + 1])
                         rotate([90,90,0])
-                            cylinder(h = suspension_bow_diameter, r = join_height/2 - m, $fn=3);
+                            cylinder(h = suspension_bow_diameter, r = join_height/2 - m - 1, $fn=3);
                 }
             }
         }
@@ -115,28 +111,26 @@ module 888_2002(){
                 rotate([0, 90, 0])
                     cylinder(d= M3_screw_diameter, h = 30);
         }
-
     // koncovky - oblá
     rotate([180, 0, -90])
-       translate([suspension_bow_diameter/2,-5, -suspension_depth/2])
+            translate([suspension_bow_diameter/2,-5, 0])
             difference(){
                 hull(){
-                    translate([-suspension_thickness, 5, 0])
-                       cube([suspension_thickness, 1, suspension_depth]);
-                    translate([-wheel_mount_thickness - presah*2.5, -3, 0])
-                       cube([wheel_mount_thickness + presah*2.5, 6, suspension_depth]);
-                    translate([0, 0, suspension_depth/2])
-                        rotate([0, -90, 0])
-                            cylinder(d = M3_screw_diameter+8, h = wheel_mount_thickness);
+                    translate([-suspension_thickness/2, 5.5, 0])
+                        cube([suspension_thickness, 1, join_height + 1], center=true);
+                    translate([(-wheel_mount_thickness - presah*2.5)/2, 0, 0])
+                        cube([wheel_mount_thickness + presah*2.5, 6, join_height + 1], center=true);
+                    rotate([0, -90, 0])
+                        cylinder(d = M3_screw_diameter+8, h = wheel_mount_thickness);
                 }
-                translate([0, 0, suspension_depth/2])
-                    rotate([0, 90, 0])
-                        cylinder(d = M3_screw_diameter, h = 30, center = true);
+                rotate([0, 90, 0])
+                    cylinder(d = M3_screw_diameter, h = suspension_bow_diameter, center = true);
             }
     }
-    translate([0, 0, -join_height + 0.5])
-        rotate([-1.9, -1.9, 0])
-            cube([2*suspension_bow_diameter, 2*suspension_bow_diameter, 10], center = true);
+    mirror_copy([0, 0, 1])
+        translate([0, 0, -join_height + 0.5])
+            rotate([-1.8, -1.8, 0])
+                cube([2*suspension_bow_diameter, 2*suspension_bow_diameter, 10], center = true);
     }
 }
 
