@@ -16,7 +16,7 @@ suspension_join_screw_distance = 10; // zvetsit na 20
 suspension_bow_diameter = 200;      //cylinder_r1
 suspension_bow_diameter_1 = 200 - 2*zmenseni;
 
-wheel_mount_thickness = 7;
+wheel_mount_thickness = 13;
 
 angle = 55;
 sin_angle = sin(angle);
@@ -26,7 +26,7 @@ cylinder_h = sqrt(((sin_angle^2)*(suspension_bow_diameter^2))/(4*((1-(sin_angle^
 cylinder_h_1 = sqrt(((sin_angle^2)*(suspension_bow_diameter^2))/(4*((1-(sin_angle^2))))) - zmenseni;
 
 join_height = 17;
-join_height_1 = 17 - zmenseni;
+join_height_1 = join_height - zmenseni;
 
 presah = 5; //prodloužení kvůli přesahu ze zmenšení úhlu
 
@@ -38,6 +38,7 @@ module mirror_copy(v=[1,0,0])
 
 module 888_2002(){
     //spodní ořez
+    rotate([1.8, 1.8, 0])
     difference(){
     union(){
     //obal
@@ -118,8 +119,8 @@ module 888_2002(){
                 hull(){
                     translate([-suspension_thickness/2, 5.5, 0])
                         cube([suspension_thickness, 1, join_height + 1], center=true);
-                    translate([(-wheel_mount_thickness - presah*2.5)/2, 0, 0])
-                        cube([wheel_mount_thickness + presah*2.5, 6, join_height + 1], center=true);
+                    translate([(-wheel_mount_thickness)/2, 0, 0])
+                        cube([wheel_mount_thickness, 6, join_height + 1], center=true);
                     rotate([0, -90, 0])
                         cylinder(d = M3_screw_diameter+8, h = wheel_mount_thickness);
                 }
@@ -133,5 +134,6 @@ module 888_2002(){
                 cube([2*suspension_bow_diameter, 2*suspension_bow_diameter, 10], center = true);
     }
 }
+
 
 888_2002();
