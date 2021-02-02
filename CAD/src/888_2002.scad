@@ -12,7 +12,7 @@ suspension_holder_flange_height = 25;
 suspension_holder_thickness = 0.41*15;
 suspension_camber = -2; // úhel zakončení, délka konstrukce
 suspension_join_length = 22;
-suspension_join_screw_distance = 10; // zvetsit na 20
+suspension_join_screw_distance = 20;
 suspension_bow_diameter = 200;      //cylinder_r1
 suspension_bow_diameter_1 = 200 - 2*zmenseni;
 
@@ -107,7 +107,7 @@ module 888_2002(){
                       join_height + 2*presah, 2*join_height], center=true);
 
             mirror_copy([0, 0, 1])
-            translate([-0.1, suspension_bow_diameter/2 + presah/2 - M3_screw_diameter/2 - 1,
+            translate([-0.1, suspension_bow_diameter/2 + presah/2 - 1.5*M3_screw_diameter,
                        suspension_join_screw_distance/2])
                 rotate([0, 90, 0])
                     cylinder(d= M3_screw_diameter, h = 30);
