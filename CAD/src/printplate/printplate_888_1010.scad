@@ -4,4 +4,4 @@
 include <../../parameters.scad>
 use <../888_1010.scad>
 
-    888_1010();
+   rotate([0, -90, 0]) 888_1010();
