@@ -203,7 +203,7 @@ niy=4; //pocet der podelne
 
 pylon_pipe_d = 5.2;
 pylon_suspension_height = 150;
-pylon_pipe_top_dist = 30;
+pylon_pipe_top_dist = 0;
 
 
 pylon_height = 180 + 50 - pylon_holder_side_mount_height;

@@ -3,6 +3,7 @@
 
 include <../parameters.scad>
 use <888_1007.scad>
+use <888_1010.scad>
 
 pylon_silentblocks_base_distance = 58;
 
@@ -26,7 +27,7 @@ module clamp(){
 }
 
 
-module 888_1009() {
+module 888_1009_bottom() {
   difference(){
 union(){
   for(x = [-0.5, 0.5], y=[-0.5, 0.5])
@@ -67,6 +68,31 @@ union(){
 
 
 
+pylon_adapter_top_width = 35-4;
+
+
+top_break_roof = 1;
+top_break_side = 2;
+
+module 888_1009_top(){
+
+  difference(){
+    cube([30, pylon_adapter_top_width, 10], center = true);
+    translate([0, 0, top_break_roof])
+      cube([31, pylon_adapter_top_width-top_break_side*3, 10], center = true);
+
+    for(x = [-15/2, 15/2], y = [-pylon_adapter_top_width/2+2, pylon_adapter_top_width/2-2]) 
+      translate([x, y, 0])
+        rotate([-90, 0, 0])
+        {
+          cylinder(d = M3_screw_diameter, h = 10, center = true, $fn = 20);
+          cylinder(d = M3_nut_diameter, h = 2, center = true, $fn = 6);
+        }
+  }
+}
+
+
+
 module pylon_pipes(d = pylon_pipe_d, below = 10, above = 10){
     x_front_bottom = pylon_silentblocks_base_distance/2;
     x_rear_bottom = pylon_silentblocks_base_distance/2-15/2;
@@ -79,10 +105,8 @@ module pylon_pipes(d = pylon_pipe_d, below = 10, above = 10){
     x_pos_top = pylon_pipe_top_dist/2;
     y_pos_top = pylon_pipe_top_dist/2;
 
-
     length = sqrt( sqrt((x_pos_bottom-x_pos_top)^2 + (y_pos_bottom-y_pos_top)^2 )^2 + pylon_suspension_height^2);
     echo("delka tycek:", length);
-
 
     // predni prava
     translate([x_front_bottom, y_front_bottom, 0])
@@ -103,6 +127,8 @@ module pylon_pipes(d = pylon_pipe_d, below = 10, above = 10){
 }
 pylon_pipes(below=0);
 
-888_1009();
+888_1009_bottom();
+translate([0, 0, 150]) 888_1009_top();
 %translate([0, 0, -8]) 888_1007();
+%rotate([0, 0, 180]) translate([7.5, 0, -13.5+180]) 888_1010();
 %translate([0, 0, -8]) pylon_silentblocks();
