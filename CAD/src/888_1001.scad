@@ -28,6 +28,11 @@ module 888_1001(){
                 for (i=[-base_width/2, base_width/2 - rantl_thickness])
                     translate([0, i , 0])
                         cube([base_length, rantl_thickness, rantl_height + base_thickness]);
+
+                for (i=[-base_width/2 + rantl_thickness, base_width/2 - rantl_thickness])
+                    translate([base_length/2 + 26/2, i , base_thickness])
+                      rotate([45, 0, 0])
+                        cube([base_length-26, 3, 3], center = true);
             }
 
             //XT60 konektor
