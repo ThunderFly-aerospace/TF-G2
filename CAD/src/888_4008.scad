@@ -80,13 +80,13 @@ module 888_4008(draft = true){
               //hex_screw(15,4,55,30,1.5,2,24,8,0,0);
               // Zavit pro namotani provazku
               translate([0, 0, starter_top_h+3]) difference(){
-                cylinder(d = starter_rope_d+10, h = 19-0.1);
-                screw_thread(starter_rope_d, 3, 50, 22, 2, 0);
+                  cylinder(d = starter_rope_d+10, h = 25);
+                  screw_thread(starter_rope_d, 3, 50, 30, 2, -2);
               }
 
               // Otvor na zastrceni provazku
-              translate([0, 0, starter_top_h+top_thickness + 19 ])
-                  rotate([-90, 0, -rotor_delta_angle])
+              translate([0, 0, starter_top_h+top_thickness + 22 ])
+                  rotate([-90, 0, -rotor_delta_angle + 46])
                     cylinder(d = starter_rope_diameter, h = 50, center = false, $fn = 10);
 
               // Cut for rope fix before start
