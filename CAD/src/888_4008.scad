@@ -17,7 +17,7 @@ module 888_4008(draft = true){
     top_thickness = 3;
     //blade_screws_distance = (16.47+11.86)/2;
 
-    height_from_rotor_nut = 29.5;
+    height_from_rotor_nut = 28.5;
 
     // %cylinder(d = 5, h = height_from_rotor_nut);
 
@@ -89,8 +89,8 @@ module 888_4008(draft = true){
               }
 
               // Otvor na zastrceni provazku
-              translate([0, 0, starter_top_h+top_thickness + 22 ])
-                  rotate([-90, 0, -rotor_delta_angle + 46])
+              translate([0, 0, starter_top_h+top_thickness + 21 ])
+                  rotate([-90, 0, -rotor_delta_angle -67])
                     cylinder(d = starter_rope_diameter, h = 50, center = false, $fn = 10);
 
               // Cut for rope fix before start
