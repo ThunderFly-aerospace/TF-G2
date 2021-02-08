@@ -68,8 +68,12 @@ module 888_4008(draft = true){
                                     cylinder(h=rpm_sensor_h, d=starter_rope_d, $fn=draft?rpm_sensor_count:120);
                             }
 
-                          translate([0,0,top_thickness + M3_nut_height])
-                                cylinder(h=sensor_cap_height/2, d1=starter_pipe_d_top, d2 = starter_pipe_d_middle, $fn=draft?rpm_sensor_count:120);
+                          difference(){
+                            translate([0,0,top_thickness])
+                                  cylinder(h=sensor_cap_height/2 + M3_nut_height, d1=starter_pipe_d_top - top_thickness, d2 = starter_pipe_d_middle, $fn=draft?rpm_sensor_count:120);
+                            translate([0,0,top_thickness])
+                                  cylinder(h=M3_nut_height, d1=M3_nut_diameter*2, d2 = M3_nut_diameter * 1.2, $fn=draft?rpm_sensor_count:120);
+                          }
                           translate([0,0,top_thickness + M3_nut_height + sensor_cap_height/2])
                                 cylinder(h=sensor_cap_height, d1=starter_pipe_d_middle, d2 = starter_pipe_d_middle, $fn=draft?rpm_sensor_count:120);
                           translate([0,0,top_thickness + M3_nut_height + 1.5*sensor_cap_height])
@@ -132,7 +136,8 @@ module 888_4008(draft = true){
                               cylinder(d = blade_mount_screw, h = 2* (thickness+sensor_cap_height), center = true, $fn = 20);
                   }
 
-                  hull(){rotate([0,0, angle])
+                  hull(){
+                    rotate([0,0, angle])
                     {
                           translate([0, 3 + 4.5 + blade_mount_screw/2, screws_h/2+thickness/2])
                               cylinder(d = screws_head_d, h = screws_h, center = true, $fn = 20);
@@ -143,7 +148,7 @@ module 888_4008(draft = true){
 
               }
               // cross section for model construction
-              //cube(100);
+              //translate([0,-50,0])cube(100);
 
             }
         }
