@@ -18,7 +18,7 @@ suspension_bow_diameter_1 = 200 - 2*zmenseni;
 
 wheel_mount_thickness = 13;
 
-angle = 55;
+angle = 63;
 sin_angle = sin(angle);
 cylinder_h = sqrt(((sin_angle^2)*(suspension_bow_diameter^2))/(4*((1-(sin_angle^2)))));
 
