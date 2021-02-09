@@ -38,7 +38,6 @@ module mirror_copy(v=[1,0,0])
 
 module 888_2002(){
     //spodní ořez
-    rotate([1.8, 1.8, 0])
     difference(){
     union(){
     //obal
