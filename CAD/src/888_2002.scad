@@ -100,14 +100,16 @@ module 888_2002(){
     //koncovky - hranatá
     rotate ([0,0,90])
         difference(){
-            translate([suspension_holder_thickness/2,
-                       suspension_bow_diameter/2 - join_height/2 - presah/2, 0])
-                cube([suspension_holder_thickness,
-                      join_height + 2*presah, 2*join_height], center=true);
+            translate([suspension_holder_thickness/2, suspension_bow_diameter/2 - join_height/2, 0])
+                cube([suspension_holder_thickness, join_height + 2*presah, 2*join_height], center=true);
 
             mirror_copy([0, 0, 1])
-            translate([-0.1, suspension_bow_diameter/2 + presah/2 - M3_screw_diameter/2 - 1,
-                       suspension_join_screw_distance/2])
+            translate([-0.1, suspension_bow_diameter/2 + presah/2 - M3_screw_diameter/2, suspension_join_screw_distance/2])
+                rotate([0, 90, 0])
+                    cylinder(d= M3_screw_diameter, h = 30);
+
+            mirror_copy([0, 0, 1])
+            translate([-0.1, suspension_bow_diameter/2 - join_height - M3_screw_diameter/2, suspension_join_screw_distance/2])
                 rotate([0, 90, 0])
                     cylinder(d= M3_screw_diameter, h = 30);
         }
