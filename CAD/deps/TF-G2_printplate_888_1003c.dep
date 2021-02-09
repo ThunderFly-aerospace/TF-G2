@@ -1,4 +1,5 @@
-/home/roman/repos/tf/TF-G2/CAD/stl/printplate_888_1003c.stl: \
-	/home/roman/repos/tf/TF-G2/CAD/src/888_1003.scad \
-	/home/roman/repos/tf/TF-G2/CAD/parameters.scad \
-	/home/roman/repos/tf/TF-G2/CAD/src/printplate/printplate_888_1003c.scad
+printplate_888_1003c.scad: \
+	../../bolt_parameters.scad \
+	../../parameters.scad \
+	../888_1003.scad \
+	../lib/stdlib/naca4.scad \
