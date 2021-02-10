@@ -85,7 +85,7 @@ module 888_4008(draft = true){
               // Zavit pro namotani provazku
               translate([0, 0, starter_top_h+3]) difference(){
                   cylinder(d = starter_rope_d+10, h = 25);
-                  screw_thread(starter_rope_d, 3, 50, 30, 2, -2);
+                  screw_thread(starter_rope_d, 2, 45, 30, 2, -2);
               }
 
               // Otvor na zastrceni provazku
