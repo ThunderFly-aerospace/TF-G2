@@ -36,7 +36,7 @@ module 888_4008(draft = true){
     starter_bottom_h=5;
     starter_rope_diameter=2;
 
-    starter_rope_d = 38;
+    starter_rope_d = 39.2;
 
     sensor_cap_height=starter_top_h+starter_neck_h+starter_bottom_h;
 
@@ -61,11 +61,10 @@ module 888_4008(draft = true){
                     {
                             union()
                             {
-                              translate([0,0,0])
                                   cylinder(r1 = rotor_center_r, d2=starter_rope_d, h = top_thickness+starter_top_h, $fn = draft?rpm_sensor_count:120);
 
                                 translate([0,0, top_thickness + starter_top_h])
-                                    cylinder(h=rpm_sensor_h, d=starter_rope_d, $fn=draft?rpm_sensor_count:120);
+                                    cylinder(h=rpm_sensor_h, d=starter_rope_d + starter_rope_diameter, $fn=draft?rpm_sensor_count:120);
                             }
 
                           difference(){
@@ -74,7 +73,7 @@ module 888_4008(draft = true){
                             translate([0,0,top_thickness])
                                   cylinder(h=M3_nut_height, d1=M3_nut_diameter*2, d2 = M3_nut_diameter * 1.2, $fn=draft?rpm_sensor_count:120);
                           }
-                          #translate([0,0,top_thickness + M3_nut_height + sensor_cap_height/2])
+                          translate([0,0,top_thickness + M3_nut_height + sensor_cap_height/2])
                                 cylinder(h=sensor_cap_height*0.7, d1=starter_pipe_d_middle, d2 = starter_pipe_d_middle, $fn=draft?rpm_sensor_count:120);
                           translate([0,0,top_thickness + M3_nut_height + 1.2*sensor_cap_height])
                                 cylinder(h=sensor_cap_height, d1=starter_pipe_d_middle, d2 = starter_pipe_d_bottom, $fn=draft?rpm_sensor_count:120);
@@ -83,13 +82,36 @@ module 888_4008(draft = true){
 
               //hex_screw(15,4,55,30,1.5,2,24,8,0,0);
               // Zavit pro namotani provazku
-              translate([0, 0, starter_top_h+3]) difference(){
-                  cylinder(d = starter_rope_d+10, h = 25);
-                  screw_thread(starter_rope_d, 2, 45, 30, 2, -2);
+              translate([0, 0, top_thickness]) difference(){
+                  cylinder(d = starter_rope_d+10, h = rpm_sensor_h + starter_top_h);
+                  screw_thread(starter_rope_d, starter_rope_diameter, 45, rpm_sensor_h + starter_top_h, 2, -2);
+
+                  // light blocking rim
+                  translate([0, 0, rpm_sensor_h + starter_top_h - 1.5*starter_rope_diameter])
+                      cylinder(d1 = starter_pipe_d_middle, d2 = starter_rope_d+starter_rope_diameter/2, h = starter_rope_diameter);
+                  translate([0, 0, rpm_sensor_h + starter_top_h - starter_rope_diameter/2])
+                      cylinder(d = starter_rope_d+starter_rope_diameter/2, h = starter_rope_diameter);
               }
+              /*
+               * Just a 100mm long threaded rod.
+               *
+               * screw_thread(15,   // Outer diameter of the thread
+               *               4,   // Step, traveling length per turn, also, tooth height, whatever...
+               *              55,   // Degrees for the shape of the tooth
+               *                       (XY plane = 0, Z = 90, btw, 0 and 90 will/should not work...)
+               *             100,   // Length (Z) of the tread
+               *            PI/2,   // Resolution, one face each "PI/2" mm of the perimeter,
+               *               0);  // Countersink style:
+               *                         -2 - Not even flat ends
+               *                         -1 - Bottom (countersink'd and top flat)
+               *                          0 - None (top and bottom flat)
+               *                          1 - Top (bottom flat)
+               *                          2 - Both (countersink'd)
+               */
+              // screw_thread(15,4,55,100,PI/2,2);
 
               // Otvor na zastrceni provazku
-              translate([0, 0, starter_top_h+top_thickness + 20 -1.65 ])
+              translate([0, 0, starter_top_h+top_thickness + rpm_sensor_h -1.65 ])
                   rotate([-90, 0, -rotor_delta_angle - 45])
                     cylinder(d = starter_rope_diameter, h = 50, center = false, $fn = 10);
 
