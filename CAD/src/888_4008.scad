@@ -72,6 +72,18 @@ module 888_4008(draft = true){
                                   cylinder(h=sensor_cap_height/2 + M3_nut_height, d1=starter_pipe_d_top - top_thickness, d2 = starter_pipe_d_middle, $fn=draft?rpm_sensor_count:120);
                             translate([0,0,top_thickness])
                                   cylinder(h=M3_nut_height, d1=M3_nut_diameter*2, d2 = M3_nut_diameter * 1.2, $fn=draft?rpm_sensor_count:120);
+
+                            for (i = [1:rotor_blades_count]){
+                                rotate([0, 0, i*angle_between_blades + angle_between_blades/2 + 180])
+                                    translate([0, edge_distance_from_center+15/2, -10/2+thickness/2])
+                                    {
+                                        translate([0,-9,6.6])
+                                            rotate([atan2(starter_top_h,(16-edge_distance_from_center)),0,0])
+                                                translate([-14,0,-10])
+                                                    cube([30,15,10]);
+                                    }
+                            }
+
                           }
                           translate([0,0,top_thickness + M3_nut_height + sensor_cap_height/2])
                                 cylinder(h=sensor_cap_height*0.7, d1=starter_pipe_d_middle, d2 = starter_pipe_d_middle, $fn=draft?rpm_sensor_count:120);
@@ -169,7 +181,7 @@ module 888_4008(draft = true){
 
               }
               // cross section for model construction
-              //translate([0,-50,0])cube(100);
+              //translate([-50,0,0])cube(100);
 
             }
         }
