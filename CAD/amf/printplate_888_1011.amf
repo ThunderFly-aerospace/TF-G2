@@ -1,5 +1,5 @@
 <amf unit="millimeter">
- <metadata type="producer">OpenSCAD 2020.06.17</metadata>
+ <metadata type="producer">OpenSCAD 2021.03.04</metadata>
  <object id="0">
   <mesh>
    <vertices>
@@ -6559,7 +6559,7 @@
 <metadata type="slic3r.dont_support_bridges">1</metadata>
 <metadata type="slic3r.duplicate_distance">6</metadata>
 <metadata type="slic3r.end_filament_gcode">"; Filament-specific end gcode \n;END gcode for filament\n"</metadata>
-<metadata type="slic3r.end_gcode">M104 S0\nM140 S0\n;Retract the filament\nG92 E1\nG1 E-1 F300\n;End of Gcode</metadata>
+<metadata type="slic3r.end_gcode">M104 S0\nM140 S0\n;Retract the filament\nG92 E1\nG1 E-1 F300\n G91 \n G1 Z5 F300\n;End of Gcode</metadata>
 <metadata type="slic3r.external_perimeter_extrusion_width">0</metadata>
 <metadata type="slic3r.external_perimeter_speed">90%</metadata>
 <metadata type="slic3r.external_perimeters_first">0</metadata>
