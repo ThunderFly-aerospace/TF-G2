@@ -61,8 +61,7 @@ module 888_4008(draft = true){
                     {
                             union()
                             {
-                                  cylinder(r1 = rotor_center_r, d2=starter_rope_d, h = top_thickness+starter_top_h, $fn = draft?rpm_sensor_count:120);
-
+                                cylinder(r1 = rotor_center_r, d2=starter_rope_d, h = top_thickness+starter_top_h, $fn = draft?rpm_sensor_count:120);
                                 translate([0,0, top_thickness + starter_top_h])
                                     cylinder(h=rpm_sensor_h, d=starter_rope_d + starter_rope_diameter, $fn=draft?rpm_sensor_count:120);
                             }
@@ -137,7 +136,11 @@ module 888_4008(draft = true){
               // Otvory pro senzor
               translate([0,0,top_thickness + M3_nut_height + sensor_cap_height])
                 intersection() {
-                    cylinder(d = starter_pipe_d_middle, h = rpm_hole_h, $fn = draft?rpm_sensor_count:120);
+                    union(){  // sensor teeth outer rim
+                      cylinder(d = starter_pipe_d_middle, h = rpm_hole_h/4, $fn = draft?rpm_sensor_count:120);
+                      translate([0, 0, - M3_nut_height - sensor_cap_height + rpm_sensor_h + starter_top_h - starter_rope_diameter])
+                        cylinder(d1 = starter_pipe_d_middle, d2 = starter_rope_d - starter_rope_diameter/2, h = starter_rope_diameter, $fn = draft?rpm_sensor_count:120);
+                    }
 
                     for (i=[0:rpm_sensor_count]) rotate([0, 0, (360/rpm_sensor_count)*i]){
                         linear_extrude(height = rpm_hole_h)
