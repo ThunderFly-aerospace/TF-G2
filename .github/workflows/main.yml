@@ -2,7 +2,9 @@ name: Build repository
 
 on:
   push:
-    branches: [ master ]
+    branches:
+     - master
+     - 4s
   pull_request:
     branches: [ master ]
 
