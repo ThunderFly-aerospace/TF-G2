@@ -95,13 +95,13 @@ module 888_4008(draft = true){
               // Zavit pro namotani provazku
               translate([0, 0, top_thickness]) difference(){
                   cylinder(d = starter_rope_d+10, h = rpm_sensor_h + starter_top_h);
-                  screw_thread(starter_rope_d, starter_rope_diameter, 45, rpm_sensor_h + starter_top_h, 2, -2);
+                  screw_thread(starter_rope_d, starter_rope_diameter, 45, rpm_sensor_h + starter_top_h, draft?3:PI/3, -2);
 
                   // light blocking rim
                   translate([0, 0, rpm_sensor_h + starter_top_h - 1.5*starter_rope_diameter])
-                      cylinder(d1 = starter_pipe_d_middle, d2 = starter_rope_d+starter_rope_diameter/2, h = starter_rope_diameter);
+                      cylinder(d1 = starter_pipe_d_middle, d2 = starter_rope_d+starter_rope_diameter/2, h = starter_rope_diameter, $fn = draft?rpm_sensor_count:120);
                   translate([0, 0, rpm_sensor_h + starter_top_h - starter_rope_diameter/2])
-                      cylinder(d = starter_rope_d+starter_rope_diameter/2, h = starter_rope_diameter);
+                      cylinder(d = starter_rope_d+starter_rope_diameter/2, h = starter_rope_diameter, $fn = draft?rpm_sensor_count:120);
               }
               /*
                * Just a 100mm long threaded rod.
