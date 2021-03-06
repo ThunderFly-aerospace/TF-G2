@@ -27,7 +27,7 @@ rod_x_distance = rod_x_dist - rod_size/2 - BaseThickness - M3_screw_diameter/2 -
 
 TFPROBE01_PCB_thickness = 1.8;
 TFPROBE01_PCB_width = 10.2;
-TFPROBE01_sensor_height = 1.1;
+TFPROBE01_sensor_height = 0.9;
 
 module Part3(){
 
@@ -100,7 +100,7 @@ module Part3(){
         cube([9,9,rod_y_distance]);
 
     // TFPROBE01 RPM sensor
-    translate([-TFPROBE01_PCB_thickness + rod_size/2 - TFPROBE01_sensor_height , -TFPROBE01_PCB_width/2, bearing_outer_diameter + Bwall*4])
+    #translate([-TFPROBE01_PCB_thickness + rod_size/2 - TFPROBE01_sensor_height, -TFPROBE01_PCB_width/2, bearing_outer_diameter + Bwall*4])
         cube([TFPROBE01_PCB_thickness, TFPROBE01_PCB_width, rod_y_distance]);
 
 
