@@ -2,6 +2,8 @@ name: Build repository
 
 on:
   push:
+    tags:        
+      - '*'           # Push events to every tag
     branches:
      - master
      - 4s
