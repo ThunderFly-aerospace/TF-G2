@@ -1,0 +1,42 @@
+name: Render previews
+
+on:
+  push:
+    branches:
+     - master
+     - 4s
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+
+    env:
+      OPENSCAD_BIN: openscad-nightly
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Install requirements
+      run: |
+        uname -p
+        sudo apt update
+        sudo snap install openscad-nightly
+        openscad-nightly --version
+
+    - name: Make
+      run: |
+        cd CAD/src; make
+
+    #- name: Push
+    #  uses: mikeal/publish-to-github-action@master
+    #    env:
+    #      GITHUB_TOKEN: ${{ secrets.GitHubToken }}
+
+    - name: publish to git
+      run: |
+        git config --local user.email "work.flow@gmail.com"
+        git config --local user.name "Workflow"
+        git commit -m "Automatic commit from workflow" -a
+        git push
