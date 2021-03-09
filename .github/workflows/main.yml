@@ -1,9 +1,7 @@
-name: Build repository
+name: Build printable files
 
 on:
-  push:
-    tags:        
-      - '*'           # Push events to every tag
+  release:
     branches:
      - master
      - 4s
@@ -29,6 +27,7 @@ jobs:
         chmod +x ~/Slic3r.AppImage
         sudo apt-get install libc-bin python3-setuptools
         sudo python3 -m pip install --upgrade pip
+        sudo python3 -m pip install stlsort
         sudo python3 -m pip install lxml
         sudo python3 -m pip install git+https://github.com/ThunderFly-aerospace/yagv
         sudo python3 -m pip install git+https://${{ secrets.AUTH_USER }}:${{ secrets.GITHUBPAT }}@github.com/ThunderFly-aerospace/processor3D.git
