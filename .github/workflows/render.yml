@@ -35,14 +35,9 @@ jobs:
       run: |
         cd CAD/src; make
 
-    #- name: Push
-    #  uses: mikeal/publish-to-github-action@master
-    #    env:
-    #      GITHUB_TOKEN: ${{ secrets.GitHubToken }}
-
     - name: publish to git
       run: |
         git config --local user.email "work.flow@gmail.com"
         git config --local user.name "Workflow"
-        git commit -m "Automatic commit from workflow" -a
+        git add -A && git commit -m "Automatic commit from workflow"
         git push

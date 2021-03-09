@@ -42,14 +42,18 @@ jobs:
       run: |
         cd CAD/src/printplate; make
 
-    #- name: Push
-    #  uses: mikeal/publish-to-github-action@master
-    #    env:
-    #      GITHUB_TOKEN: ${{ secrets.GitHubToken }}
+    - name: Upload
+      uses: plocket/push-generated-file@master
+      with:
+        source_file_path: 'CAD/gcode'
+        destination_folder: 'gcode'
+        destination_repo: 'ThunderFly-aerospace/gcodes'
+        target_branch:  gcodes/TF-G2
+        token: ${{ secrets.GITHUBPAT }}
 
-    - name: publish to git
-      run: |
-        git config --local user.email "work.flow@gmail.com"
-        git config --local user.name "Workflow"
-        git commit -m "Automatic commit from workflow" -a
-        git push
+#    - name: publish to git
+#      run: |
+#        git config --local user.email "work.flow@gmail.com"
+#        git config --local user.name "Workflow"
+#        git commit -m "Automatic commit from workflow" -a
+#        git push
