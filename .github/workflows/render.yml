@@ -39,5 +39,5 @@ jobs:
       run: |
         git config --local user.email "work.flow@gmail.com"
         git config --local user.name "Workflow"
-        git add -A && git commit -m "Automatic commit from workflow"
+        git add -A && git commit --allow-empty -m "Automatic commit from workflow"
         git push
