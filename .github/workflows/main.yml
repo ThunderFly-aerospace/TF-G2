@@ -38,14 +38,24 @@ jobs:
       run: |
         cd CAD/src/printplate; make
 
-    - name: Upload
-      uses: plocket/push-generated-file@master
+    - name: Upload gcodes
+      uses:  MLAB-project/push-generated-file@master
       with:
         source_file_path: 'CAD/gcode'
         destination_folder: 'gcode'
         destination_repo: 'ThunderFly-aerospace/gcodes'
-        target_branch:  gcodes/TF-G2
+        target_branch:  TF-G2/edee
         token: ${{ secrets.GITHUBPAT }}
+
+    - name: Upload images
+      uses:  MLAB-project/push-generated-file@master
+      with:
+        source_file_path: 'CAD/png/printplate*'
+        destination_folder: 'png'
+        destination_repo: 'ThunderFly-aerospace/gcodes'
+        target_branch:  TF-G2/edee
+        token: ${{ secrets.GITHUBPAT }}
+
 
 #    - name: publish to git
 #      run: |
