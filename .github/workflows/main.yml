@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-20.04
 
     env:
-      OPENSCAD_BIN: openscad-nightly
+      OPENSCAD_BIN: openscad
       SLIC3R_BIN: ~/Slic3r.AppImage
 
     steps:
@@ -31,8 +31,8 @@ jobs:
         sudo python3 -m pip install lxml
         sudo python3 -m pip install git+https://github.com/ThunderFly-aerospace/yagv
         sudo python3 -m pip install git+https://${{ secrets.AUTH_USER }}:${{ secrets.GITHUBPAT }}@github.com/ThunderFly-aerospace/processor3D.git
-        sudo snap install openscad-nightly
-        openscad-nightly --version
+        sudo snap install openscad
+        openscad --version
 
     - name: Make
       run: |
@@ -50,7 +50,7 @@ jobs:
     - name: Upload images
       uses:  MLAB-project/push-generated-file@master
       with:
-        source_file_path: 'CAD/png/printplate*'
+        source_file_path: 'CAD/png'
         destination_folder: 'png'
         destination_repo: 'ThunderFly-aerospace/gcodes'
         target_branch:  TF-G2/edee
