@@ -27,7 +27,7 @@ jobs:
         chmod +x ~/Slic3r.AppImage
         wget https://files.openscad.org/OpenSCAD-2021.01-x86_64.AppImage -O ~/OpenSCAD.AppImage
         chmod +x ~/OpenSCAD.AppImage
-        sudo apt-get install libc-bin python3-setuptools 
+        sudo apt-get install libc-bin python3-setuptools xvfb
         sudo python3 -m pip install --upgrade pip
         sudo python3 -m pip install stlsort
         sudo python3 -m pip install lxml
