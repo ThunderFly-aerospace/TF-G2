@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-20.04
 
     env:
-      OPENSCAD_BIN: openscad-nightly
+      OPENSCAD_BIN: xvfb-run --auto-servernum openscad-nightly
 
     steps:
     - uses: actions/checkout@v2
@@ -22,14 +22,16 @@ jobs:
       run: |
         uname -p
         sudo apt update
-        sudo apt-get install libc-bin python3-setuptools
+        sudo apt-get install libc-bin python3-setuptools xvfb
         sudo python3 -m pip install --upgrade pip
         sudo python3 -m pip install stlsort
         sudo python3 -m pip install lxml
         sudo python3 -m pip install git+https://github.com/ThunderFly-aerospace/yagv
         sudo python3 -m pip install git+https://${{ secrets.AUTH_USER }}:${{ secrets.GITHUBPAT }}@github.com/ThunderFly-aerospace/processor3D.git
-        sudo snap install openscad-nightly
-        openscad-nightly --version
+        # sudo snap install openscad-nightly
+        chmod +x ~/Slic3r.AppImage
+        wget https://files.openscad.org/OpenSCAD-2021.01-x86_64.AppImage -O ~/OpenSCAD.AppImage
+        ~/OpenSCAD.AppImage --version
 
     - name: Make
       run: |
