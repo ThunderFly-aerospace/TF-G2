@@ -42,7 +42,7 @@ jobs:
       uses: actions/upload-artifact@v2.2.2
       with:
         name: 'render'
-        path: '.'
+        path: './**/*.png'
 
     - name: publish to git
       run: |
