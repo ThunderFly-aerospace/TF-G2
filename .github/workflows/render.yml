@@ -36,6 +36,12 @@ jobs:
       run: |
         cd CAD/src
         make
+        
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v2.2.2
+      with:
+        name: 'render'
+        path: '.'
 
     - name: publish to git
       run: |
