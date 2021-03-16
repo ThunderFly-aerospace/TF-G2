@@ -38,11 +38,17 @@ jobs:
         cd CAD/src
         make
         
-    - name: Upload a Build Artifact
+    - name: Upload a PND Artifact
       uses: actions/upload-artifact@v2.2.2
       with:
         name: 'render'
         path: './**/*.png'
+  
+    - name: Upload a STL Artifact
+      uses: actions/upload-artifact@v2.2.2
+      with:
+        name: 'render'
+        path: './**/*.stl'
 
     - name: publish to git
       run: |
