@@ -35,8 +35,8 @@ jobs:
         sudo python3 -m pip install git+https://${{ secrets.AUTH_USER }}:${{ secrets.GITHUBPAT }}@github.com/ThunderFly-aerospace/processor3D.git
         # sudo snap install openscad
         # sudo apt-get install openscad
-        alias openscad=~/OpenSCAD.AppImage
-        openscad --version
+        # alias openscad=~/OpenSCAD.AppImage
+        ~/OpenSCAD.AppImage --version
 
     - name: Make
       run: |
