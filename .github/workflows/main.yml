@@ -17,8 +17,12 @@ jobs:
       SLIC3R_BIN: ~/Slic3r.AppImage
 
     steps:
-    - uses: actions/checkout@v2
+    - name: Checkout repository
+      uses: actions/checkout@v2
 
+    - name: Checkout submodules
+      uses: textbook/git-checkout-submodule-action@2.1.1
+      
     - name: Install requirements
       run: |
         uname -p

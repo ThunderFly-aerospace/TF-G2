@@ -17,7 +17,11 @@ jobs:
       OPENSCAD_BIN: xvfb-run --auto-servernum ~/OpenSCAD.AppImage
 
     steps:
-    - uses: actions/checkout@v2
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Checkout submodules
+      uses: textbook/git-checkout-submodule-action@2.1.1
 
     - name: Install requirements
       run: |
@@ -37,13 +41,13 @@ jobs:
       run: |
         cd CAD/src
         make
-        
+
     - name: Upload a PNG Artifact
       uses: actions/upload-artifact@v2.2.2
       with:
         name: 'render_png'
         path: './**/*.png'
-  
+
     - name: Upload a STL Artifact
       uses: actions/upload-artifact@v2.2.2
       with:
