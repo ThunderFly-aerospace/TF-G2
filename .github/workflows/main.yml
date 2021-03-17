@@ -19,10 +19,9 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
+      with:
+        submodules: recursive
 
-    - name: Checkout submodules
-      uses: textbook/git-checkout-submodule-action@2.1.1
-      
     - name: Install requirements
       run: |
         uname -p
