@@ -20,8 +20,6 @@ jobs:
       with:
         submodules: recursive
 
-    - uses: nelonoel/branch-name@v1.0.1
-
     - name: Install requirements
       run: |
         uname -p
@@ -54,7 +52,7 @@ jobs:
         source_file_path: 'CAD/gcode'
         destination_folder: 'gcode'
         destination_repo: 'ThunderFly-aerospace/gcodes'
-        target_branch:  TF-G2/${BRANCH_NAME}/edee
+        target_branch:  TF-G2/${{ GITHUB_REF }}/edee
         token: ${{ secrets.GITHUBPAT }}
 
     - name: Upload images
@@ -63,7 +61,7 @@ jobs:
         source_file_path: 'CAD/img'
         destination_folder: 'png'
         destination_repo: 'ThunderFly-aerospace/gcodes'
-        target_branch:  TF-G2/${BRANCH_NAME}/edee
+        target_branch:  TF-G2/${{ GITHUB_REF }}/edee
         token: ${{ secrets.GITHUBPAT }}
 
 
