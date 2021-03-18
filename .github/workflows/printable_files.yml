@@ -3,12 +3,7 @@ name: Build printable files
 on:
   push:
     branches:
-     - '**'
-
-  pull_request:
-    branches:
-     - master
-     - 4s
+     - '*'
   workflow_dispatch:
 
 jobs:
