@@ -1,6 +1,7 @@
 name: Build printable files
 
 on:
+  workflow_dispatch:
   push:
     branches:
      - master
