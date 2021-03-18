@@ -2,6 +2,10 @@ name: Render previews
 
 on:
   push:
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+  repository_dispatch:
+    types: [backend_automation]
   workflow_dispatch:
 
 jobs:
