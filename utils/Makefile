@@ -27,7 +27,7 @@ $(AMF_DIR)/%.amf: $(SRC_DIR)/%.scad
 	-processor3D \
 		--output_folder $(GIT_ROOT)/$(OUTPUT_FOLDER) \
 		--name_prefix $(NAME_PREFIX) \
-		--pnd_folder $(IMG_DIR) \
+		--png_folder $(IMG_DIR) \
 		$(PROCESSOR3D_PARAM) $<
 
 
