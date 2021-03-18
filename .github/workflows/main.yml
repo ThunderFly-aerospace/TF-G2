@@ -1,14 +1,16 @@
 name: Build printable files
 
 on:
-  workflow_dispatch:
   push:
     branches:
      - master
      - 4s
   pull_request:
-    branches: [ master ]
-
+    branches:
+     - master
+     - 4s
+  workflow_dispatch:
+  
 jobs:
   build:
     runs-on: ubuntu-20.04
