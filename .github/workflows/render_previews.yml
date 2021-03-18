@@ -1,0 +1,66 @@
+name: Render previews
+
+# Controls when the action will run. Workflow runs when manually triggered using the UI
+# or API.
+on:
+  workflow_dispatch:
+    # Inputs the workflow accepts.
+    inputs:
+      name:
+        # Friendly description to be shown in the UI instead of 'name'
+        description: 'Person to greet'
+        # Default value if no value is explicitly provided
+        default: 'World'
+        # Input has to be provided for the workflow to run
+        required: true
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+
+    env:
+      OPENSCAD_BIN: xvfb-run --auto-servernum ~/OpenSCAD.AppImage
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+      with:
+        submodules: recursive
+
+    - name: Install requirements
+      run: |
+        uname -p
+        sudo apt update
+        sudo apt-get install libc-bin python3-setuptools xvfb
+        sudo python3 -m pip install --upgrade pip
+        sudo python3 -m pip install stlsort
+        sudo python3 -m pip install lxml
+        sudo python3 -m pip install git+https://github.com/ThunderFly-aerospace/yagv
+        sudo python3 -m pip install git+https://${{ secrets.AUTH_USER }}:${{ secrets.GITHUBPAT }}@github.com/ThunderFly-aerospace/processor3D.git
+        wget https://files.openscad.org/OpenSCAD-2021.01-x86_64.AppImage -O ~/OpenSCAD.AppImage
+        chmod +x ~/OpenSCAD.AppImage
+        ~/OpenSCAD.AppImage --version
+
+    - name: Make
+      run: |
+        cd CAD/src
+        make
+
+    - name: Upload a PNG Artifact
+      uses: actions/upload-artifact@v2.2.2
+      with:
+        name: 'render_png'
+        path: './**/*.png'
+
+    - name: Upload a STL Artifact
+      uses: actions/upload-artifact@v2.2.2
+      with:
+        name: 'render_stl'
+        path: './**/*.stl'
+
+    - name: publish to git
+      run: |
+        git config --local user.email "work.flow@gmail.com"
+        git config --local user.name "Workflow"
+        git add -A && git commit --allow-empty -m "Automatic commit from workflow"
+        git push
