@@ -1,13 +1,15 @@
 name: Render previews
 
 on:
-  workflow_dispatch:
   push:
     branches:
      - master
      - 4s
   pull_request:
-    branches: [ master ]
+    branches:
+      - master
+      - 4s
+  workflow_dispatch:
 
 jobs:
   build:
