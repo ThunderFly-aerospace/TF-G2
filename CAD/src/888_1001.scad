@@ -1,6 +1,5 @@
 //@set_slicing_config(slicing/default.ini)
 //nosna podlozka
-
  
 include <../parameters.scad>
 
