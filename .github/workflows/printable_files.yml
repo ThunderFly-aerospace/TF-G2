@@ -3,8 +3,8 @@ name: Build printable files
 on:
   push:
     branches:
-     - master
-     - 4s
+     - '**'
+
   pull_request:
     branches:
      - master
