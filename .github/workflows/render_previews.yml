@@ -3,12 +3,7 @@ name: Render previews
 on:
   push:
     branches:
-     - master
-     - 4s
-  pull_request:
-    branches:
-     - master
-     - 4s
+     - '*'
   workflow_dispatch:
 
 
