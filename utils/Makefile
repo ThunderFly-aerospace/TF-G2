@@ -10,6 +10,7 @@ SLICER?=~/Slic3r.AppImage
 NAME_PREFIX?=''
 SLIC3R_PROFILE?=''
 PROCESSOR3D_PARAM?=
+IMG_DIR?=''
 
 RED=" \e[91m "
 GRN=" \e[32m "
@@ -26,6 +27,7 @@ $(AMF_DIR)/%.amf: $(SRC_DIR)/%.scad
 	-processor3D \
 		--output_folder $(GIT_ROOT)/$(OUTPUT_FOLDER) \
 		--name_prefix $(NAME_PREFIX) \
+		--png_folder $(IMG_DIR) \
 		$(PROCESSOR3D_PARAM) $<
 
 

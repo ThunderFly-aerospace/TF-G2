@@ -35,5 +35,6 @@ translate([0, 0, 1.5]) difference(){
         rotate(30) translate([0, 0, 2]) cylinder(d=M3_nut_diameter, h = 20, $fn=6);
         rotate(30) translate([0, 0, -2-20]) cylinder(d=M3_nut_diameter, h = 20, $fn=6);
     }
-
 }
+
+888_3006();

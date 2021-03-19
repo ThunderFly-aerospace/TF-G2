@@ -27,7 +27,7 @@ rod_x_distance = rod_x_dist - rod_size/2 - BaseThickness - M3_screw_diameter/2 -
 
 TFPROBE01_PCB_thickness = 1.8;
 TFPROBE01_PCB_width = 10.2;
-TFPROBE01_sensor_height = 1.1;
+TFPROBE01_sensor_height = 0.9;
 
 module Part3(){
 
@@ -66,6 +66,15 @@ module Part3(){
     }
 
 
+    // servo nuts
+   translate([0, rod_y_distance/4, rod_x_distance + rod_size])
+       rotate([0, 90, 0])
+           cylinder(d = rod_x_distance/2, h = 100, center = true);
+
+   translate([0, - rod_y_distance/4, rod_x_distance + rod_size])
+       rotate([0, 90, 0])
+           cylinder(d = rod_x_distance/2, h = 100, center = true);
+
   // Zapusteni pro loziska
    translate([bearing_shaft_shift + bearing_shaft_length - bearing_shaft_length + bearing_thickness - 100, 0, bearing_outer_diameter/2 + Bwall])
         rotate([0, 90, 0])
@@ -91,7 +100,7 @@ module Part3(){
         cube([9,9,rod_y_distance]);
 
     // TFPROBE01 RPM sensor
-    translate([-TFPROBE01_PCB_thickness + rod_size/2 - TFPROBE01_sensor_height , -TFPROBE01_PCB_width/2, bearing_outer_diameter + Bwall*4])
+    #translate([-TFPROBE01_PCB_thickness + rod_size/2 - TFPROBE01_sensor_height, -TFPROBE01_PCB_width/2, bearing_outer_diameter + Bwall*4])
         cube([TFPROBE01_PCB_thickness, TFPROBE01_PCB_width, rod_y_distance]);
 
 

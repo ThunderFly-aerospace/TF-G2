@@ -199,6 +199,13 @@ niy=4; //pocet der podelne
 
 
 // pylon_height = 250 - pylon_holder_side_mount_height;
+
+
+pylon_pipe_d = 5.2;
+pylon_suspension_height = 150;
+pylon_pipe_top_dist = 0;
+
+
 pylon_height = 180 + 50 - pylon_holder_side_mount_height;
 pilot_height_separation = 120 + 30 - pylon_holder_side_mount_height;
 pylon_thickness = 3;
@@ -222,7 +229,9 @@ echo(pylon_bottom_angle);
 pylon_top_angle = atan2(pylon_height - pilot_height_separation,(pylon_ring_width - rotor_head_width)/2 - pylon_thickness - pylon_ring_thickness);
 echo(pylon_top_angle);
 
-
+airspeed_width = 35;
+airspeed_naca = 0004;
+airspeed_dist = 20;
 
 // Parametry k akumulatoru
 
@@ -231,7 +240,7 @@ echo(pylon_top_angle);
 //  GensACE 3300 mAh
 
 battery_case_height = 25;
-battery_case_start_x = 15;
+battery_case_start_x = 25;
 battery_case_wall = 3;
 
 battery_width = 50;
