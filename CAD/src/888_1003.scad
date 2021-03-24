@@ -19,7 +19,6 @@ side_base_thickness = 0.2*6;
 
 platform_ears_en = 0;
 platform_ears_position = base_patern * [6, 25];
-platform_ears_height = 25;
 platform_ears_height = 11 + battery_case_height;
 platform_ears_thickness = 2;
 platform_ears_corner_radius = 3.5;
@@ -53,7 +52,7 @@ module 888_1003_outline(){
 				                cylinder(d = 5.5+5, h = 10);
 
 					}
-				
+
 
 
 				translate([battery_case_start_x,0,0])
@@ -131,7 +130,7 @@ module 888_1003(){
 				}
 
 			// Usi pro pripevneni k platforme
-			
+
 			if(platform_ears_en)
 			for (x = platform_ears_position)
 				translate([x, 0, 0]){
@@ -177,14 +176,14 @@ module 888_1003(){
 	        translate([x, -bellow - 5, -0.1])
 	            cylinder(d = M3_screw_diameter, h = 10, center = true, $fn = 50);
 	            //cylinder(d = 5.5, h = 10, center = true, $fn = 50);
-        
+
 		// Rada sroubu predni sklonena hrana
         translate([42, pylon_holder_side_mount_height, 0])
 	        rotate([0,0,-135])
 				for(x = [0:10:10*1])
 			        translate([x, 0, -0.1])
 			            cylinder(d = M3_screw_diameter, h = 10, center = true, $fn = 50);
-        
+
 		// Rada sroubu zadni sklonena hrana
         translate([10*26+2, pylon_holder_side_mount_height, 0])
         rotate([0,0,-48])

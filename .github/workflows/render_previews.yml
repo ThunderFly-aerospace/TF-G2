@@ -38,6 +38,8 @@ jobs:
       run: |
         cd CAD/src
         make
+        cd assembly
+        make
 
     - name: Upload a PNG Artifact
       uses: actions/upload-artifact@v2.2.2
