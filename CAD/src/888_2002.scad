@@ -12,13 +12,13 @@ suspension_holder_flange_height = 25;
 suspension_holder_thickness = 0.41*15;
 suspension_camber = -2; // úhel zakončení, délka konstrukce
 suspension_join_length = 22;
-suspension_join_screw_distance = 20;
+suspension_join_screw_distance = 10; // zvetsit na 20 nebo více po vyřešění: https://github.com/ThunderFly-aerospace/TF-G2/issues/86
 suspension_bow_diameter = 200;      //cylinder_r1
 suspension_bow_diameter_1 = 200 - 2*zmenseni;
 
 wheel_mount_thickness = 13;
 
-angle = 55;
+angle = 63;
 sin_angle = sin(angle);
 cylinder_h = sqrt(((sin_angle^2)*(suspension_bow_diameter^2))/(4*((1-(sin_angle^2)))));
 
@@ -38,7 +38,6 @@ module mirror_copy(v=[1,0,0])
 
 module 888_2002(){
     //spodní ořez
-    rotate([1.8, 1.8, 0])
     difference(){
     union(){
     //obal
@@ -101,14 +100,16 @@ module 888_2002(){
     //koncovky - hranatá
     rotate ([0,0,90])
         difference(){
-            translate([suspension_holder_thickness/2,
-                       suspension_bow_diameter/2 - join_height/2 - presah/2, 0])
-                cube([suspension_holder_thickness,
-                      join_height + 2*presah, 2*join_height], center=true);
+            translate([suspension_holder_thickness/2, suspension_bow_diameter/2 - join_height/2, 0])
+                cube([suspension_holder_thickness, join_height + 2*presah, 2*join_height], center=true);
 
             mirror_copy([0, 0, 1])
-            translate([-0.1, suspension_bow_diameter/2 + presah/2 - 1.5*M3_screw_diameter,
-                       suspension_join_screw_distance/2])
+            translate([-0.1, suspension_bow_diameter/2 + presah/2 - M3_screw_diameter/2, suspension_join_screw_distance/2])
+                rotate([0, 90, 0])
+                    cylinder(d= M3_screw_diameter, h = 30);
+
+            mirror_copy([0, 0, 1])
+            translate([-0.1, suspension_bow_diameter/2 - join_height - M3_screw_diameter/2, suspension_join_screw_distance/2])
                 rotate([0, 90, 0])
                     cylinder(d= M3_screw_diameter, h = 30);
         }
