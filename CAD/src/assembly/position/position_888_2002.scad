@@ -7,14 +7,14 @@ use <../../888_2003.scad>
 
 
 translate([30, 0, 3])
-	translate([0, 75/2, 0])
-		rotate([90, 0, 90])
+	translate([0, -75/2, 0])
+		rotate([90, 90, 90])
 			translate([0, 0, -18/2])
                 888_2002();
 
 
 translate([30, 0, 3])
-	translate([0, -75/2, 0])
-		rotate([90, 0, -90])
+	translate([0, 75/2, 0])
+		rotate([90, 90, -90])
 			translate([0, 0, -18/2])
                 888_2002();
