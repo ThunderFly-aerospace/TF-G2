@@ -1,4 +1,5 @@
 //@set_slicing_config(../../slicing/default.ini)
+//@set_slicing_parameter(brim_width, 2)
 
 //dil pro pripevneni tazneho motoru
 include <../../parameters.scad>
