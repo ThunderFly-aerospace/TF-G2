@@ -1,6 +1,5 @@
-/home/roman/repos/tf/TF-G2/CAD/stl/888_3005.stl: \
-	/home/roman/repos/tf/TF-G2/CAD/src/888_3005.scad \
-	/home/roman/repos/tf/TF-G2/CAD/bolt_parameters.scad \
-	/home/roman/repos/tf/TF-G2/CAD/src/lib/stdlib/naca4.scad \
-	/home/roman/repos/tf/TF-G2/CAD/src/lib/stdlib/sweep.scad \
-	/home/roman/repos/tf/TF-G2/CAD/parameters.scad
+888_3005.scad: \
+	../bolt_parameters.scad \
+	../parameters.scad \
+	lib/stdlib/naca4.scad \
+	lib/stdlib/sweep.scad \
