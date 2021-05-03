@@ -17,7 +17,7 @@ module 888_4008(draft = true){
     top_thickness = 3;
     //blade_screws_distance = (16.47+11.86)/2;
 
-    height_from_rotor_nut = 27.5 - 1.65 ;
+    height_from_rotor_nut = 11.5 - 1.65 ;
 
     // %cylinder(d = 5, h = height_from_rotor_nut);
 
@@ -40,17 +40,57 @@ module 888_4008(draft = true){
 
     sensor_cap_height=starter_top_h+starter_neck_h+starter_bottom_h;
 
-    rpm_sensor_inner_r=12.5;
-    rpm_sensor_thickness = 1.3;
+  //  rpm_sensor_inner_r=12.5;
+  //  rpm_sensor_thickness = 1.3;
     rpm_sensor_h = height_from_rotor_nut - starter_top_h;
-    rpm_sensor_base_h= 2;
+  //  rpm_sensor_base_h= 2;
     rpm_sensor_count=16;
-    rpm_hole_h = 50;
+  //  rpm_hole_h = 50;
     //rpm_hole_width = 7;
 
     screws_head_d=7;
     screws_h=14;
+    
 
+    Ribbon_width = height_from_rotor_nut- (16.5 - 1.65) + 6; // Final ribbon width is the last addition (for example + 6)
+    
+                 /// Inner paws for nut holders
+                    Paw_diameter = 10;
+                    Paw_h = 20; // Total height of paw
+                    Paw_thick = 2; // Thickness of the paw between screw head and nut
+                    Paw_hole_diameter = M3_screw_diameter+0.1;
+                    
+ module Paw(){                   
+                 // Pomocná proměnná
+     H = top_thickness + M3_nut_height + sensor_cap_height/2+sensor_cap_height*0.7+Ribbon_width+0.25-2.5;
+     difference(){
+                        union(){
+                            
+                    translate([starter_pipe_d_middle/2+(starter_rope_d + starter_rope_diameter-starter_pipe_d_middle)/2-Paw_diameter/2,0, H-Paw_h])
+                    cylinder(h=Paw_h, d1=Paw_diameter, d2 = Paw_diameter, $fn=draft?rpm_sensor_count:120);
+                    translate([starter_pipe_d_middle/2+(starter_rope_d + starter_rope_diameter-starter_pipe_d_middle)/2-Paw_diameter/2,-Paw_diameter/2,H-Paw_h])
+                        cube([2.5, Paw_diameter, Paw_h]);
+//                    translate([starter_pipe_d_middle/2+2,-Paw_diameter/2, H-Paw_h-Ribbon_width-2])
+//                        cube([1, Paw_diameter, 2]);
+                    }
+                    
+                    translate([starter_pipe_d_middle/2+(starter_rope_d + starter_rope_diameter-starter_pipe_d_middle)/2-Paw_diameter-2.5+1.4,-Paw_diameter/2,H-Paw_h-1])
+                        cube([2.5, Paw_diameter, Paw_h+4]);
+                    
+                    
+                    // Hole for screw
+                        translate([starter_pipe_d_middle/2+(starter_rope_d + starter_rope_diameter-starter_pipe_d_middle)/2-Paw_diameter/2+0.2,0, H-15])
+                        cylinder(h=30, d1=Paw_hole_diameter, d2 = Paw_hole_diameter, $fn=draft?rpm_sensor_count:120);
+                   
+                   // Nut hole 
+                    translate([starter_pipe_d_middle/2+(starter_rope_d + starter_rope_diameter-starter_pipe_d_middle)/2-15,-6/2, H-14-Paw_thick])
+                    cube([10, 6, 14]);
+                    
+                    translate([starter_pipe_d_middle/2+(starter_rope_d + starter_rope_diameter-starter_pipe_d_middle)/2-Paw_diameter/2+0.2,0, H-3-Paw_thick+0.5])
+                     cylinder(d = M3_nut_diameter, h = 2.5, $fn = 6);
+                                  
+                    } 
+                }
 
 
     translate([0,0,-top_thickness])
@@ -59,13 +99,14 @@ module 888_4008(draft = true){
                 union(){
                     difference()
                     {
+                        /// Cup + big cylinder (originaly for starter rope)
                             union()
                             {
                                 cylinder(r1 = rotor_center_r, d2=starter_rope_d, h = top_thickness+starter_top_h, $fn = draft?rpm_sensor_count:120);
                                 translate([0,0, top_thickness + starter_top_h])
-                                    cylinder(h=rpm_sensor_h, d=starter_rope_d + starter_rope_diameter, $fn=draft?rpm_sensor_count:120);
+                                  cylinder(h=rpm_sensor_h, d=starter_rope_d + starter_rope_diameter, $fn=draft?rpm_sensor_count:120);
                             }
-
+                        /// Cup with holes for rotor blades holder
                           difference(){
                             translate([0,0,top_thickness])
                                   cylinder(h=sensor_cap_height/2 + M3_nut_height, d1=starter_pipe_d_top - top_thickness, d2 = starter_pipe_d_middle, $fn=draft?rpm_sensor_count:120);
@@ -84,14 +125,32 @@ module 888_4008(draft = true){
                             }
 
                           }
-                          translate([0,0,top_thickness + M3_nut_height + sensor_cap_height/2])
+                          /// Inner cut from the big cylinder (originaly for starter rope)
+                           translate([0,0,top_thickness + M3_nut_height + sensor_cap_height/2])
                                 cylinder(h=sensor_cap_height*0.7, d1=starter_pipe_d_middle, d2 = starter_pipe_d_middle, $fn=draft?rpm_sensor_count:120);
-                          translate([0,0,top_thickness + M3_nut_height + 1.2*sensor_cap_height])
-                                cylinder(h=sensor_cap_height, d1=starter_pipe_d_middle, d2 = starter_pipe_d_bottom, $fn=draft?rpm_sensor_count:120);
+                         translate([0,0,top_thickness + M3_nut_height + 1.2*sensor_cap_height])
+                                cylinder(h=sensor_cap_height, d1=starter_pipe_d_middle, d2 = starter_pipe_d_bottom, $fn=draft?rpm_sensor_count:120); /*  */
                     }
+                    
+translate([-4.2,0,0])
+Paw();
+mirror([1,0,0])
+translate([-4.2,0,0])                    
+Paw();   
+   
+   /// Inner cliff
+   difference(){
+       translate([0,0,top_thickness + M3_nut_height + sensor_cap_height/2-2.5])
+       cylinder(h=sensor_cap_height*0.7+Ribbon_width+0.25, d1=starter_pipe_d_middle, d2 = starter_pipe_d_middle);
+       
+       translate([0,0,top_thickness + M3_nut_height + sensor_cap_height/2-2.5])
+       cylinder(h=sensor_cap_height*0.7+Ribbon_width+0.25, d1=starter_pipe_d_middle-2, d2 = starter_pipe_d_middle-6);
+       
+       }                 
+                    
                 }
 
-              //hex_screw(15,4,55,30,1.5,2,24,8,0,0);
+ /*             //hex_screw(15,4,55,30,1.5,2,24,8,0,0);
               // Zavit pro namotani provazku
               translate([0, 0, top_thickness]) difference(){
                   cylinder(d = starter_rope_d+10, h = rpm_sensor_h + starter_top_h);
@@ -118,7 +177,7 @@ module 888_4008(draft = true){
                *                          0 - None (top and bottom flat)
                *                          1 - Top (bottom flat)
                *                          2 - Both (countersink'd)
-               */
+               *
               // screw_thread(15,4,55,100,PI/2,2);
 
               // Otvor na zastrceni provazku
@@ -131,9 +190,10 @@ module 888_4008(draft = true){
                  translate([-starter_pipe_d_middle/2, starter_pipe_d_top/2 + (starter_pipe_d_middle/2 - starter_pipe_d_top/2)/2, starter_top_h - starter_top_h/3])
                     rotate([30, 3, 0])
                       cube([starter_pipe_d_middle, starter_pipe_d_middle, starter_rope_diameter]);
+*/
 
 
-              // Otvory pro senzor
+       /*       // Otvory pro senzor
               translate([0,0,top_thickness + M3_nut_height + sensor_cap_height])
                 intersection() {
                     union(){  // sensor teeth outer rim
@@ -146,7 +206,7 @@ module 888_4008(draft = true){
                         linear_extrude(height = rpm_hole_h)
                         polygon(points=[[0,0],[starter_rope_d/2, ((starter_rope_d/2) * sin(360/rpm_sensor_count/2))/2], [starter_rope_d/2, -((starter_rope_d/2) * sin(360/rpm_sensor_count/2))/2]]);
                     }
-                }
+                } */
 
               // rotor axis
               cylinder(d = M3_screw_diameter+0.1, h = 3* thickness+starter_top_h, center = true, $fn = 20);
@@ -163,20 +223,27 @@ module 888_4008(draft = true){
                           translate([0,-7.5,5])
                               rotate([atan2(starter_top_h,(16-edge_distance_from_center)),0,0])
                                   translate([-15,0,-10])
-                                      cube([30,15,10]);
+                                      cube([30,17,10]);
                       }
                   angle=(rotor_blades_count/2 == round(rotor_blades_count/2))? (i*angle_between_blades):i*angle_between_blades - angle_between_blades/2;
                   rotate([0,0, angle])
                   {
                           translate([0, 3 + 4.5 + blade_mount_screw/2, 0])
                               cylinder(d = blade_mount_screw, h = 2* (thickness+sensor_cap_height), center = true, $fn = 20);
+                    
+                    translate([0, 3 + 4.5 + blade_mount_screw/2, screws_h/2+thickness/2-7])
+                      cylinder(d = M3_nut_diameter, h = 2.5, $fn = 6);
+                     translate([0, 3 + 4.5 + blade_mount_screw/2-1, screws_h/2+thickness/2-5])
+                      cube([M3_nut_diameter, 2  ,  2.5], center = true);
+                      
                   }
+
 
                   hull(){
                     rotate([0,0, angle])
                     {
                           translate([0, 3 + 4.5 + blade_mount_screw/2, screws_h/2+thickness/2])
-                              cylinder(d = screws_head_d, h = screws_h, center = true, $fn = 20);
+                              cylinder(d = screws_head_d-2.4, h = screws_h, center = true, $fn = 20);
                     }
                           translate([0, 0, screws_h/2+thickness/2])
                     cylinder(d = 5, h = screws_h*2.5);
