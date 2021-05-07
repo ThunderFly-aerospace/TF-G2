@@ -116,6 +116,9 @@ module 888_4008(draft = true){
                              difference(){
                              cube([M3_nut_diameter * 1.2,30,M3_nut_height], center = true); 
                                  cube([M3_nut_diameter * 1.2,M3_nut_diameter*1.2+4,M3_nut_height], center = true); 
+                                translate([0,0,2.15])
+                                 rotate([45,0,0])
+                                cube([M3_nut_diameter * 1.2,M3_nut_diameter*1.2+3,M3_nut_diameter*1.2+3], center = true); 
                               }
 
 
