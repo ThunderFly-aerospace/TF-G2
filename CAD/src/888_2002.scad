@@ -77,21 +77,26 @@ module 888_2002(){
                 cylinder(cylinder_h_1,0,suspension_bow_diameter_1/2);
         }
 
+        //výřezy
         cuts = 25;
-        rot = [for (a = 0, b = join_height/2;b > 0; a = a + b - b/3, b = b - join_height/4/(cuts*0.7)) a];
+        rot = [for (a = -0, b = join_height/2;b > 0; a = a + b - b/3,
+                    b = b - join_height/4/(cuts*0.7)) a];
+        echo(rot);
         mirror_copy([0, 0, 1])
         for (i = [0:cuts]) {
-            m = i*(join_height/4/(cuts*0.7));
+            m = i*(join_height/4/(cuts*2));
             rotate([0, 0, -90 + rot[i]]) {
                 if (i % 2 == 0) {
-                    translate([0, 0, (join_height/2 - m)/2 + 1])
+                    translate([0, 0, (join_height/2 - m)/2 + 0])
                         rotate([90,30,0])
-                            cylinder(h = suspension_bow_diameter, r = join_height/2 - m - 1, $fn=3);
+                            cylinder(h = suspension_bow_diameter,
+                                     r = join_height/3 - m - 1, $fn=3);
                 }
                 else {
-                    translate([0, 0, (join_height/2 - m - 1)/2 + (join_height/2 * sqrt(3))/4 + 1])
+                    translate([0, 0, (join_height/2 - m - 1)/2 + (join_height/2 * sqrt(3))/4 + 0])
                         rotate([90,90,0])
-                            cylinder(h = suspension_bow_diameter, r = join_height/2 - m - 1, $fn=3);
+                            cylinder(h = suspension_bow_diameter,
+                                     r = join_height/3 - m - 1, $fn=3);
                 }
             }
         }
