@@ -113,7 +113,7 @@ difference(){
 				cylinder(d = M3_nut_diameter, h = motor_holder_thickness+1, $fn = 6);
       }
 
-  for(z = [[motor_holder_side_mount_height+rantl_height/2, 0, 6], [rantl_height/2, 0, 10], [rantl_height/2, 10, 13]])
+  for(z = [[motor_holder_side_mount_height+rantl_height/2, 0, 6], [rantl_height/2, 0, 10], [rantl_height/2, 10, 10]])
 		translate([5+z[1], 0, z[0]])
 			rotate([90, 0, 0]){
 					cylinder(d = M3_screw_diameter, h = base_width+10, $fn = 30, center = true);
@@ -126,8 +126,8 @@ difference(){
 // Vyrez na zapusteni bocnic
     for(m = [0,1])
       mirror([0, m, 0])
-        translate([0, base_width/2, -0.1])
-          cube([10+0.5, 20, 50]);
+        translate([-0.5, base_width/2, -0.1])
+          cube([10+1, 20, 50]);
 
 
 
@@ -138,7 +138,9 @@ difference(){
 
           hull(){
             cube([10+0.5, rantl_thickness+0.3, rantl_height+1]);
-            translate()cube([10+0.5, 0.1, rantl_height+4]);
+// FIXME: empty translate()
+            cube([10+0.5, 0.1, rantl_height+4]);
+            
           }
       }
 	}
