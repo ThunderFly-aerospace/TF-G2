@@ -15,7 +15,7 @@ thickness = 1; //tloustka sten
 drzak_height = 70; //spatny rozmer so far
 sides_split_positions = [-5, length/3-5, length/3*2, length];
 
-side_base_thickness = 0.2*6;
+
 
 platform_ears_en = 0;
 platform_ears_position = base_patern * [6, 25];

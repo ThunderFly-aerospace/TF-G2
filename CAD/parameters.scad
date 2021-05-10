@@ -195,6 +195,8 @@ rantl_thickness = 3; //sirka steny podlozky
 rantl_height = 6.5;
 niy=4; //pocet der podelne
 
+side_base_thickness = 0.2*6; // minimalni tlouska  u bocnic napr. sten
+
 // Rotor pylon parameters
 
 
