@@ -29,7 +29,11 @@ TFPROBE01_PCB_thickness = 1.8;
 TFPROBE01_PCB_width = 10.2;
 TFPROBE01_sensor_height = 0.9;
 
-module Part3(){
+starter_rope_diameter=4;
+starter_rope_d = 39.2;
+
+
+module Part3(draft = true){
 
     // Vypocet uhlu
     rotor_plane_space = 7+3; // Vzdalenost od loziska k rovine rotoru (je to predevsim vzdalenost dvou maticek)
@@ -63,6 +67,16 @@ module Part3(){
             translate([0 , -rod_y_distance/2 + rod_size/4, rod_x_distance + rod_size/2])
                 cube([rod_size, rod_size/2, rod_size],center = true);
         }
+
+
+        // light blocking shield for TFPROBE sensor
+        difference(){
+          translate([ rod_size/2 , -TFPROBE01_PCB_width, bearing_outer_diameter + Bwall*4])
+              cube([2, TFPROBE01_PCB_width*2, 15]);
+          translate([-rod_size/2, 0, bearing_outer_diameter/2 + Bwall]) rotate([0, 90, 0])
+             cylinder(d = starter_rope_d+starter_rope_diameter/2, h = 50, $fn = draft?16:120);
+
+        }
     }
 
 
@@ -88,19 +102,20 @@ module Part3(){
         rotate([0, 90, 0])
             cylinder(d = bearing_outer_diameter, h = bearing_thickness + 0.1 + 100);
 
-   // Dira pro ROLL osu.
+  // Dira pro ROLL osu.
     translate([0, 0, -10])
         cylinder(d = M3_screw_diameter, h = 100);
 
     // podlozka pod hlavu sroubu
     translate([0, 0, bearing_outer_diameter + Bwall*2+1])
-        cylinder(d = 9, h = rod_y_distance);
-
-    translate([-9/2, -9/2, bearing_outer_diameter + Bwall*4])
-        cube([9,9,rod_y_distance]);
+        cylinder(d = 9, h = 5);
 
     // TFPROBE01 RPM sensor
-    #translate([-TFPROBE01_PCB_thickness + rod_size/2 - TFPROBE01_sensor_height, -TFPROBE01_PCB_width/2, bearing_outer_diameter + Bwall*4])
+    translate([-rod_size/2, -9/2, bearing_outer_diameter + Bwall*4])
+        cube([rod_size,9,rod_y_distance]);
+
+    // TFPROBE01 RPM sensor PCB
+    translate([-TFPROBE01_PCB_thickness + rod_size/2 - TFPROBE01_sensor_height, -TFPROBE01_PCB_width/2, bearing_outer_diameter + Bwall*4])
         cube([TFPROBE01_PCB_thickness, TFPROBE01_PCB_width, rod_y_distance]);
 
 
@@ -113,7 +128,6 @@ module Part3(){
     translate([0, 0, rod_x_distance + rod_size/2])
         rotate([90, 0, 0])
           cylinder(d = M2_nut_diameter, h = rod_y_distance - 2* Bwall, center = true, $fn=6);
-
     }
 }
 
@@ -121,8 +135,6 @@ difference(){
 Part3();
 //translate([-50, 0, 0]) cube(100);
 }
-
-
 
 module 888_1012(){
     Part3();
