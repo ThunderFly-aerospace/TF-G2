@@ -33,7 +33,7 @@ starter_rope_diameter=4;
 starter_rope_d = 39.2;
 
 
-module Part3(draft = true){
+module 888_1012(draft = true){
 
     // Vypocet uhlu
     rotor_plane_space = 7+3; // Vzdalenost od loziska k rovine rotoru (je to predevsim vzdalenost dvou maticek)
@@ -129,13 +129,4 @@ module Part3(draft = true){
         rotate([90, 0, 0])
           cylinder(d = M2_nut_diameter, h = rod_y_distance - 2* Bwall, center = true, $fn=6);
     }
-}
-
-difference(){
-Part3();
-//translate([-50, 0, 0]) cube(100);
-}
-
-module 888_1012(){
-    Part3();
 }
