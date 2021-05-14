@@ -11,7 +11,7 @@ add = 5; // prodlouzeni osy ve smeru roll osy
 
 $fn = 100;
 
-module Part2(){
+module 888_1011(){
   translate([0, 0, -wall-axis_diameter/2])
     difference(){
         hull(){
@@ -28,9 +28,4 @@ module Part2(){
     }
 }
 
-Part2();
-
-
-module 888_1011(){
-    Part2();
-}
+888_1011();

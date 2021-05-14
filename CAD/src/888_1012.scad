@@ -72,7 +72,7 @@ module 888_1012(draft = true){
         // light blocking shield for TFPROBE sensor
         difference(){
           translate([ rod_size/2 , -TFPROBE01_PCB_width, bearing_outer_diameter + Bwall*4])
-              cube([2, TFPROBE01_PCB_width*2, 15]);
+              cube([3, TFPROBE01_PCB_width*2, 15]);
           translate([-rod_size/2, 0, bearing_outer_diameter/2 + Bwall]) rotate([0, 90, 0])
              cylinder(d = starter_rope_d+starter_rope_diameter/2, h = 50, $fn = draft?16:120);
 
@@ -112,10 +112,10 @@ module 888_1012(draft = true){
 
     // TFPROBE01 RPM sensor
     translate([-rod_size/2, -9/2, bearing_outer_diameter + Bwall*4])
-        cube([rod_size,9,rod_y_distance]);
+        cube([rod_size + TFPROBE01_sensor_height/3,9,rod_y_distance]);
 
     // TFPROBE01 RPM sensor PCB
-    translate([-TFPROBE01_PCB_thickness + rod_size/2 - TFPROBE01_sensor_height, -TFPROBE01_PCB_width/2, bearing_outer_diameter + Bwall*4])
+    translate([-TFPROBE01_PCB_thickness + rod_size/2 - TFPROBE01_sensor_height*2/3, -TFPROBE01_PCB_width/2, bearing_outer_diameter + Bwall*4])
         cube([TFPROBE01_PCB_thickness, TFPROBE01_PCB_width, rod_y_distance]);
 
 
@@ -130,3 +130,5 @@ module 888_1012(draft = true){
           cylinder(d = M2_nut_diameter, h = rod_y_distance - 2* Bwall, center = true, $fn=6);
     }
 }
+
+888_1012(draft=true);
