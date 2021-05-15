@@ -29,6 +29,19 @@ TFPROBE01_PCB_thickness = 1.8;
 TFPROBE01_PCB_width = 10.2;
 TFPROBE01_sensor_height = 0.9;
 
+ // sloupky pro upevnění disku mlýnku
+       module Sloupek(){
+        PosunZ = 8;
+        PosunY = 10;
+        Vyska_sloupku = 4;
+      translate([rod_size/2, PosunY, bearing_outer_diameter/2 + Bwall+ PosunZ]) rotate([0, 90, 0])
+           difference(){
+                cylinder(d = 5, h = Vyska_sloupku);
+               cylinder(d = 1.5, h = Vyska_sloupku);
+               
+     }
+        }
+
 module Part3(){
 
     // Vypocet uhlu
@@ -63,8 +76,13 @@ module Part3(){
             translate([0 , -rod_y_distance/2 + rod_size/4, rod_x_distance + rod_size/2])
                 cube([rod_size, rod_size/2, rod_size],center = true);
         }
+    
+    Sloupek();
+    mirror([0, 90, 0])
+    Sloupek(); 
+        
     }
-
+    
 
     // servo nuts
    translate([0, rod_y_distance/4, rod_x_distance + rod_size])
@@ -113,7 +131,19 @@ module Part3(){
     translate([0, 0, rod_x_distance + rod_size/2])
         rotate([90, 0, 0])
           cylinder(d = M2_nut_diameter, h = rod_y_distance - 2* Bwall, center = true, $fn=6);
-
+          
+    // Groove on the main cylinder
+    Groove_height = 1;
+    
+    translate([rod_size/2 + bearing_outer_diameter - rod_size +1, 0, bearing_outer_diameter/2 + Bwall]) rotate([0, 90, 0])
+    difference(){
+        cylinder(d = bearing_outer_diameter + Bwall*2+1, h = Groove_height);
+        
+        Inner_diameter = 11.6;
+        cylinder(h = Groove_height, d1 = bearing_outer_diameter + Bwall*2, d2 = Inner_diameter);
+        cylinder(h = Groove_height, d1 = Inner_diameter, d2 = bearing_outer_diameter + Bwall*2);
+        
+    }
     }
 }
 
