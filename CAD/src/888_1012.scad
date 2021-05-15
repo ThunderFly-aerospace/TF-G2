@@ -128,6 +128,19 @@ module 888_1012(draft = true){
     translate([0, 0, rod_x_distance + rod_size/2])
         rotate([90, 0, 0])
           cylinder(d = M2_nut_diameter, h = rod_y_distance - 2* Bwall, center = true, $fn=6);
+
+    // Groove on the main cylinder
+    Groove_height = 1;
+
+    translate([rod_size/2 + bearing_outer_diameter - rod_size +1, 0, bearing_outer_diameter/2 + Bwall]) rotate([0, 90, 0])
+    difference(){
+        cylinder(d = bearing_outer_diameter + Bwall*2+1, h = Groove_height);
+
+        Inner_diameter = 11.6;
+        cylinder(h = Groove_height, d1 = bearing_outer_diameter + Bwall*2, d2 = Inner_diameter);
+        cylinder(h = Groove_height, d1 = Inner_diameter, d2 = bearing_outer_diameter + Bwall*2);
+
+    }
     }
 }
 
