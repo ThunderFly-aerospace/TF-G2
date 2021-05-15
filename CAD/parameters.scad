@@ -2,10 +2,11 @@ include <bolt_parameters.scad>
 use <./src/lib/stdlib/naca4.scad>
 
 week = "77";  // dummy value for visual rendering not used for printing.
-global_clearance = 0.5;
 
-layer_thickness = 0.3;
+global_clearance = 0.2;
+clearance = global_clearance;
 
+layer_thickness = 0.2;
 base_patern = 10;
 
 gliding_angle = 14;         // tenhle úhel by se zřejmě v budoucnu měl počítat z požadované klouzavosti.
@@ -13,7 +14,6 @@ gliding_angle = 14;         // tenhle úhel by se zřejmě v budoucnu měl poč�
 // Rotor parameters
 
 rotor_blade_AOA = 1.5;      // nastavení úhlu náběhu rotorového listu
-
 rotor_blade_rod = true;  // generovat diru pro uhlikove tycky
 rotor_blade_length = 500;   // délka rotorového listu
 // rotor_blade_length = 450 - 15;   // délka rotorového listu -- nastaveni prvniho vytisku
@@ -28,16 +28,14 @@ blade_mount_thickness = 4.6;
 blade_mount_screw_offset = 5; // distance of first screw from rotor end
 
 // Testovaci maly rotor
-
-        /*
-        rotor_blade_rod = false;
-        rotor_blade_length = 145;   // délka rotorového listu
-        rotor_blade_depth = 45.5 * (145/385);     // hloubka rotorového listu
-        blade_mount_length = 20;
-        blade_mount_width = 10;
-        blade_mount_thickness = 4;
-        */
-
+    /*
+    rotor_blade_rod = false;
+    rotor_blade_length = 145;   // délka rotorového listu
+    rotor_blade_depth = 45.5 * (145/385);     // hloubka rotorového listu
+    blade_mount_length = 20;
+    blade_mount_width = 10;
+    blade_mount_thickness = 4;
+    */
 // konec parametru pro testovaci maly rotor
 
 rotor_height = 180;         // výška otočného kloubu rotoru nad hlavní trubkou vírníku (odhad)
@@ -105,6 +103,11 @@ rotor_blade_part_list = [0, 50, 200, 350, 500];
 // vzdalenosti der pro kryty
 cover_holes = [base_patern*5, base_patern*13, base_patern*17, base_patern*26];
 
+
+
+/////
+// Tohle jsou parametry jeste z AUto-G2
+/////
 rotor_head_width =  30;    //Rozměr 1 v nákresu
 pylon_wall_thickness = 4.2;  // Rozměr 2 v nákresu
 horizontal_screw_distance = 14.5;   // Rozměr 4 v nákresu
@@ -118,6 +121,38 @@ bearing_outer_diameter = 10.2;    // Rozměr B1 v nákresu s přídavkem na tole
 bearing_thickness = 4;        // Rozměr B2 v nákresu
 //bearing_shaft_length = 19.5;    // Rozměr B3 v nákresu, Originalni hodnota 19.5
 bearing_shaft_length = 20;    // Rozměr B3 v nákresu
+
+/////
+// Parametry rotorové hlavy
+/////
+
+////
+//
+//	Navrh geometrie rotorove hlavy vychazi z nakresu od Dobiase
+//
+////
+
+rotor_head_plate_thickness = 5;
+
+rotor_ball_joint_neck = 3; // vyska krcku tahla od stredu koule. 
+
+
+// parametry pro dil, co se naklapi v roll a pitch, obsahuje tfprobe
+
+// delka dilu v podelne ose virniku - od osy pitch 
+rotor_head_rod_x = 35;
+// sirka dilu na stredy tahel 
+rotor_head_rod_y = rotor_head_rod.x*2 - rotor_ball_joint_neck*2;
+// vyska dilu az po rovinu rotoru
+rotor_head_rod_z = 0;
+
+rotor_head_shaft_angle = 10;
+
+
+
+rotor_head_pitch = 10;
+rotor_head_roll = 10;
+
 
 
 // Engine and engine holder parameters
@@ -136,7 +171,7 @@ engine_screws_radius = 15;
 engine_holes_radius = (24 + 44)/4;
 engine_shatf_hole_diameter = 13;
 
-//šroub servo
+//sroub servo
 Servo_screw = 1.5;
 Servo_nut_height = 1;
 Servo_nut_diameter = 2.7;
@@ -175,17 +210,6 @@ uhel_x = 90 - 79;
 maximum_printable_size = 150;
 
 
-////Pitotova trubice
-Pitot_tube_diameter = 4.02 + 1;
-Distance_hole_from_tube = 11.92;  //vzdálenost otvoru pro připevnění od samotné trubičky
-
-
-////Aerotow hitch
-tow_ring_diameter = 20;
-tow_ring_thickness = 5;
-tow_ring_groove = 2;
-tow_ring_hole_diameter = M3_screw_diameter;
-
 ////Simoniny parametry pro nosník rotoru
 base_length = 290; //delka podlozky
 base_split_position = [0, 290/2, base_length];
@@ -194,6 +218,8 @@ base_thickness = 3; //vyska podlozky
 rantl_thickness = 3; //sirka steny podlozky
 rantl_height = 6.5;
 niy=4; //pocet der podelne
+
+side_base_thickness = 0.2*6; // minimalni tlouska  u bocnic napr. sten
 
 // Rotor pylon parameters
 
