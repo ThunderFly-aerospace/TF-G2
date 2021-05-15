@@ -1,0 +1,52 @@
+
+{
+   "name": "Stavba podlozky a bocnic",
+   "save_blend": false,
+   "render": {
+   	"type": "png",
+   	"folder": "../../../doc/assembly_guide/src/",
+   	"frame": 0
+   },
+   "camera": {
+   	"translation": [-400, -500, 300],
+   	"rotation": [70, 0, -45]
+   },
+   "animation": 
+   {
+   
+   },
+   "parts":{
+   	"888_1001_podlozka": {
+   		"stl": "stl/buildmanual_0001_a.stl",
+   		"rotation": [0, 0, 0],
+   		"translation": [0, 0, 0],
+   		"material": "basic_light_gray"
+   	},
+   	"888_1002_motorova_pricka": {
+   		"stl": "stl/buildmanual_0001_b.stl",
+   		"rotation": [0, 0, 0],
+   		"translation": [0, 0, 0],
+   		"material": "basic_light_gray"
+   	},
+   	"888_1003_bocnice": {
+   		"stl": "stl/buildmanual_0001_c.stl",
+   		"rotation": [0, 0, 0],
+   		"translation": [0, 0, 0],
+   		"material": "basic_light_gray"
+   	},
+   	"srouby": {
+   		"stl": "stl/buildmanual_srouby_bocnice.stl",
+   		"rotation": [0, 0, 0],
+   		"translation": [0, 0, 0],
+   		"material": "screw"
+   	},
+   	"motor": {
+   		"stl": "stl/buildmanual_motor.stl",
+   		"rotation": [0, 0, 0],
+   		"translation": [0, 0, 0],
+   		"material": "basic_light_red"
+   	}
+   
+   }
+}
+
