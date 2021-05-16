@@ -1,4 +1,4 @@
-# TF-G2 autogyro printable g-gcodes
+# TF-G2 autogyro printable gcodes
 
 The printable data (gcodes) are generated automatically by our special software suite. It is required to ensure safety of printed parts. **Therefore for safety reasons we do not recommend to attempt to slice the parts yourself.**
 
