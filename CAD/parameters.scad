@@ -227,10 +227,15 @@ side_base_thickness = 0.2*6; // minimalni tlouska  u bocnic napr. sten
 // pylon_height = 250 - pylon_holder_side_mount_height;
 
 
-pylon_pipe_d = 5.2;
+pylon_pipe_d = 4.2;
 pylon_suspension_height = 150;
 pylon_pipe_top_dist = 0;
 
+pylon_silentblocks_base_distance = 58;
+pylon_pipe_top_y_dist = 25;
+pylon_pipe_top_x_dist = 30;
+pylon_screw_top_y_dist = 25;
+pylon_screw_top_x_dist = 15;
 
 pylon_height = 180 + 50 - pylon_holder_side_mount_height;
 

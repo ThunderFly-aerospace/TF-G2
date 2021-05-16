@@ -2,8 +2,8 @@
 
 //dil pro pripevneni tazneho motoru
 include <../../parameters.scad>
-use <../888_1008.scad>
+use <../888_1009.scad>
 
-
-888_1008();
-
+rotate([0, 0, 50])
+translate([0, 0, 10])
+888_1009_bottom();

@@ -5,9 +5,7 @@ include <../parameters.scad>
 use <888_1007.scad>
 use <888_1010.scad>
 
-pylon_silentblocks_base_distance = 58;
-pylon_pipe_top_y_dist = 20;
-pylon_pipe_top_x_dist = 30;
+
 
 
 // Vypocet uhlu tycek
@@ -45,12 +43,12 @@ pylon_pipe_top_x_dist = 30;
 module clamp(){
   difference(){
     union(){
-      translate([0, 0, -2]) cylinder(d = 5+4, h = 13+2, $fn=30);
+      translate([0, 0, -2]) cylinder(d = pylon_pipe_d+3, h = 13+2, $fn=30);
       translate([0, -2.5, 0]) cube([9, 5, 12]);
 
     }
     translate([2, -0.5, 0]) cube([10, 1, 15]);
-    translate([0, 0, 3]) cylinder(d = 5, h = 16, $fn=30);
+    translate([0, 0, 3]) cylinder(d = pylon_pipe_d, h = 16, $fn=30);
 
     translate([6, 0, 8.5]) rotate([90, 0, 0]){
         cylinder(d=M3_screw_diameter, h = 10, center=true, $fn=20);
@@ -117,50 +115,84 @@ pylon_adapter_top_width = 31;
 top_break_roof = 3;
 top_break_side = 2;
 
-echo("PYLON");
-echo(pylon_pipe_top_dist);
 
 module 888_1009_top(){
 
-  difference(){
-    
-    cube([38, pylon_adapter_top_width, 10], center = true);
-    translate([0, 0, top_break_roof])
-      cube([40, pylon_adapter_top_width-11, 10], center = true);
-    translate([0, 0, top_break_roof])
-      cube([7, pylon_adapter_top_width-3, 10], center = true);
 
-    // Otvory pro sesroubovani s pylonem
-    translate([pylon_pipe_top_x_dist/2, pylon_pipe_top_y_dist/2, -5])
-        rotate([0, rot_rr_x, 0]) rotate([rot_rr_y, 0, 0])
-            {
-                cylinder(d=5, h=25, center=true, $fn=24);
-                translate([0, 0, 5]) rotate([90, 0, 0]) cylinder(d=2, h = 15, center=true, $fn=30);
-            }
-    translate([-pylon_pipe_top_x_dist/2, pylon_pipe_top_y_dist/2, -5])
-        rotate([0, rot_fr_x, 0]) rotate([rot_fr_y, 0, 0])
-            cylinder(d=5, h=25, center=true, $fn=24);
-      
-    translate([pylon_pipe_top_x_dist/2, -pylon_pipe_top_y_dist/2, -5])
-        rotate([0, rot_rl_x, 0]) rotate([rot_rl_y, 0, 0])
-            cylinder(d=5, h=25, center=true, $fn=24);
-   
-    translate([-pylon_pipe_top_x_dist/2, -pylon_pipe_top_y_dist/2, -5])
-        rotate([0, rot_fl_x, 0]) rotate([rot_fl_y, 0, 0])
-            cylinder(d=5, h=25, center=true, $fn=24);
+pole = [
+[ 
+        [pylon_pipe_top_x_dist/2, pylon_pipe_top_y_dist/2, 0],
+        [pylon_screw_top_x_dist/2, pylon_screw_top_y_dist/2, 0],
+        [rot_rr_x, rot_rr_y]
+],
+[ 
+        [-pylon_pipe_top_x_dist/2, pylon_pipe_top_y_dist/2, 0],
+        [-pylon_screw_top_x_dist/2, pylon_screw_top_y_dist/2, 0],
+        [rot_fr_x, rot_fr_y]
+],
+[ 
+        [pylon_pipe_top_x_dist/2, -pylon_pipe_top_y_dist/2, 0],
+        [pylon_screw_top_x_dist/2, -pylon_screw_top_y_dist/2, 0],
+        [rot_rl_x, rot_rl_y]
+],
+[ 
+        [-pylon_pipe_top_x_dist/2, -pylon_pipe_top_y_dist/2, 0],
+        [-pylon_screw_top_x_dist/2, -pylon_screw_top_y_dist/2, 0],
+        [rot_fl_x, rot_fl_y]
+]
+  
+];
+       
+
+for( i = [0, 1, 2, 3] ){
+    param = pole[i];
     
-    // Otvory pro sesroubovani s rotorovou hlavou
-    for(x = [-15/2, 15/2], y = [-pylon_adapter_top_width/2+3, pylon_adapter_top_width/2-3]) 
-      translate([x, y, 0])
-        rotate([-90, 0, 0])
-        {
-            cylinder(d = M3_screw_diameter, h = 10, center = true, $fn = 20);
-            hull(){
-                cylinder(d = M3_nut_diameter, h = M3_nut_height, center = true, $fn = 6);
-                translate([0, -10, 0])
-                    cylinder(d = M3_nut_diameter, h = M3_nut_height, center = true, $fn = 6);
-            }
+    difference(){
+      union(){
+          
+        intersection(){
+            translate(param[0])
+                cube([10, 10, 10], center=true);
+            translate(param[0])
+                rotate([0, param[2][0], 0]) rotate([param[2][1], 0, 0])
+                   cylinder(d=pylon_pipe_d+2.5, h=25, center=true, $fn=48);
         }
+        
+        // spodni nozicka pro prisroubovani
+        hull(){
+            intersection(){
+                translate(param[0]+[0, 0, +5-1])
+                    cube([15, 15, 2], center=true);
+                translate(param[0])
+                    rotate([0, param[2][0], 0]) rotate([param[2][1], 0, 0])
+                        cylinder(d=8, h=25, center=true, $fn=48);
+            }
+            
+            translate(param[1]+[0, 0, +5-1])
+                #cylinder(d=M3_nut_diameter+2, h=2, center=true, $fn=48);
+           
+       }
+    
+    
+    }
+    
+    
+        intersection(){
+            translate(param[0]+[0, 0, -1])
+                cube([10, 10, 10], center=true);
+            translate(param[0]+[0, 0, 0])
+                rotate([0, param[2][0], 0]) rotate([param[2][1], 0, 0])
+                    cylinder(d=pylon_pipe_d, h=25, center=true, $fn=24);
+        }
+    
+    
+        translate(param[1])
+            rotate([0, param[2][0], 0]) rotate([param[2][1], 0, 0])
+                cylinder(d=5, h=25, center=true, $fn=24);
+    
+    
+    
+    }
   }
 }
 
@@ -194,7 +226,7 @@ module pylon_pipes(d = pylon_pipe_d, below = 10, above = 10){
             
 }
 
-pylon_pipes(below=-3, above=3);
+color("gray") pylon_pipes(below=-3, above=0);
 
 888_1009_bottom();
 translate([0, 0, 150]) 888_1009_top();
