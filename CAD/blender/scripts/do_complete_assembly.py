@@ -42,6 +42,10 @@ source_folder = args.source
 print("Slozka s scad soubory", source_folder)
 
 
+def deselect():
+    for ob in bpy.context.selected_objects:
+        bpy.data.objects[ob.name].select_set(False)
+        #ob.select_set(False)
 
 def import_and_rename(stl, name = None, merge = True):
     print("Importing file '{}' with name '{}'.".format(stl, name))
@@ -50,17 +54,27 @@ def import_and_rename(stl, name = None, merge = True):
     import_name = bpy.context.selected_objects[0].name
     #if not name: name = import_name
     if merge and name in bpy.data.objects:
-        print("Chci mergerovat a stary model je nalezen")
-        bpy.context.selected_objects.clear()
-        bpy.context.selected_objects.append(bpy.data.objects[name])
-        #bpy.context.selected_objects.append(bpy.data.objects[import_name])
-        bpy.ops.object.make_links_data()
-        #bpy.context.selected_objects.clear()
-        #bpy.context.selected_objects.append(bpy.data.objects[import_name])
-        #print("Mazu nove importovany", import_name)
-        #bpy.ops.object.delete()
-        #bpy.context.selected_objects.clear()
-        #bpy.context.selected_objects.append(bpy.data.objects[name])
+        print("Chci mergerovat a stary model je nalezen", name, import_name)
+        
+        
+        # Get properties from original object
+        material = bpy.data.objects[name].data.materials
+
+        # Replace original mesh from file
+        deselect()
+        bpy.data.objects[name].select_set(True)
+        bpy.data.objects[import_name].select_set(True)
+        bpy.ops.object.make_links_data(type='OBDATA')
+        deselect()
+
+        # Restore material from original object
+        for mat in material:
+            bpy.data.objects[name].data.materials.append(mat)
+
+        # Remove tmp object
+        objs = bpy.data.objects
+        objs.remove(objs[import_name], do_unlink=True)
+
     else:
         bpy.context.selected_objects[0].data.name = name
         bpy.context.selected_objects[0].name = name
