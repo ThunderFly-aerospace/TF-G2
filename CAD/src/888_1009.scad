@@ -169,7 +169,7 @@ for( i = [0, 1, 2, 3] ){
             }
             
             translate(param[1]+[0, 0, +5-1])
-                #cylinder(d=M3_nut_diameter+2, h=2, center=true, $fn=48);
+                cylinder(d=M3_nut_diameter+1, h=2, center=true, $fn=48);
            
        }
     
@@ -188,7 +188,7 @@ for( i = [0, 1, 2, 3] ){
     
         translate(param[1])
             rotate([0, param[2][0], 0]) rotate([param[2][1], 0, 0])
-                cylinder(d=5, h=25, center=true, $fn=24);
+                cylinder(d=M3_screw_diameter, h=25, center=true, $fn=24);
     
     
     
