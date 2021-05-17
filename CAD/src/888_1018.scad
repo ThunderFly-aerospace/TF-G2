@@ -6,6 +6,9 @@ include <../parameters.scad>
 module 888_1018(){
 
 
+translate([battery_length/2-10, 0, -battery_height]) rotate([0, 0, -90]) linear_extrude(battery_case_wall) text(str(week, " ^"), halign="center", valign="center", size=4);
+
+
 battery_case_holes = true;
 battery_case_wire_holes = true;
 

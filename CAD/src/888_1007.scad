@@ -20,6 +20,9 @@ pylon_silentblocks_base_distance = 58;
 
 module 888_1007(){
 
+ translate([-pylon_silentblocks_base_distance/2-3.5, 0, 0]) rotate([0, -90, 180]) linear_extrude(2+0.5) text(">", halign="center", valign="center");
+ translate([pylon_silentblocks_base_distance/2+4, 0, 0]) rotate([90, 0, 90]) linear_extrude(2+0.5) text(week, halign="center", valign="center", size=5);
+
     difference(){
 
         minkowski(){

@@ -31,6 +31,8 @@ pylon_mount_adapter_center_distance = airspeed_dist/2+4;
 
 module 888_1010(){
 
+ translate([0, airspeed_width/2, 0]) rotate([90, 0, 180]) linear_extrude(1, center=true) text(str("< ", week), halign="center", valign="center", size=4);
+
     difference(){
             union(){
                 translate([15, 0, 0]) rotate([180, 0, 180]) tfslot_888_1001(airspeed_width);

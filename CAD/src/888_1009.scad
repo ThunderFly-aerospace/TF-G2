@@ -61,6 +61,8 @@ module clamp(){
 
 
 module 888_1009_bottom() {
+ translate([-pylon_silentblocks_base_distance/2, 0, 0]) rotate([0, 0, 180]) linear_extrude(2+0.5) text(">", halign="center", valign="center");
+ translate([pylon_silentblocks_base_distance/2, 0, 0]) rotate([0, 0, 90]) linear_extrude(2+0.5) text(week, halign="center", valign="center", size=4);
   difference(){
 union(){
   for(x = [-0.5, 0.5], y=[-0.5, 0.5])
