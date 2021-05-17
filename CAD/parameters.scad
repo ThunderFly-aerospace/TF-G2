@@ -101,7 +101,9 @@ rotor_blade_part_list = [0, 50, 200, 350, 500];
 
 
 // vzdalenosti der pro kryty
-cover_holes = [base_patern*5, base_patern*13, base_patern*17, base_patern*26];
+//platform_mount_points = [base_patern*5, base_patern*13, base_patern*17, base_patern*26];
+// Otvory pro pripevneni na platformu
+platform_mount_points = [base_patern*8, base_patern*26];
 
 
 
