@@ -261,18 +261,9 @@ additional_thickness = 2;
 additional_presah = 6;
 additional_height = 10;
 
-// pozice soucastek
-*if(true){
-    translate([40+ additional_x, -105+ additional_y, 12.2+ additional_thickness])
-        rotate ([0,90,0])
-            puvodni_koncovka();
-    888_1003();
-}
 
-// otoceni a kopie pro tisk
-mirror_copy([1, 0, 0])
-rotate ([180,0,0])
 // FIXME: správné umístění
+module 888_2004(){
 difference(){
     translate([40 + additional_x, -105 + additional_y, 6])
     rotate ([0,90,0])
@@ -331,3 +322,13 @@ difference(){
             }
         }
     
+}
+
+// pozice soucastek - test
+if(true){
+    translate([40+ additional_x, -105+ additional_y, 12.2+ additional_thickness])
+        rotate ([0,90,0])
+            puvodni_koncovka();
+    888_1003();
+    888_2004();
+}
