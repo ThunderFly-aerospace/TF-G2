@@ -59,7 +59,7 @@ jobs:
         source_file_path: 'CAD/gcode'
         destination_folder: 'gcode'
         destination_repo: 'ThunderFly-aerospace/gcodes'
-        target_branch:  TF-G2/${{github.ref#refs/heads/}}/${{PRINTER}}
+        target_branch:  TF-G2/${{github.ref}}/${{PRINTER}}
         token: ${{ secrets.GITHUBPAT }}
 
     - name: Upload images
@@ -68,5 +68,5 @@ jobs:
         source_file_path: 'CAD/img'
         destination_folder: 'png'
         destination_repo: 'ThunderFly-aerospace/gcodes'
-        target_branch:  TF-G2/${{github.ref#refs/heads/}}/${{PRINTER}}
+        target_branch:  TF-G2/${{github.ref}}/${{PRINTER}}
         token: ${{ secrets.GITHUBPAT }}
