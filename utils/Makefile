@@ -24,7 +24,7 @@ prepare_config:
 	@echo "git root: $(GIT_ROOT)"
 	cd $(GIT_ROOT)/CAD/slicing/
 	rm ./*.ini 2> /dev/null || true # do not fail if it is not exists
-	cp -s 3Dprinter_configs/dist/$(PRINTER)/*.ini .
+	-cp -s 3Dprinter_configs/dist/$(PRINTER)/*.ini .
 	-ls .
 
 default: $(AMF_TARGETS)
