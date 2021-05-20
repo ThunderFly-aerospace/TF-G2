@@ -10,7 +10,7 @@ SLICER?=~/Slic3r.AppImage
 NAME_PREFIX?=''
 SLIC3R_PROFILE?=''
 PROCESSOR3D_PARAM?=
-PRINTER?='edee'
+PRINTER?=edee
 
 RED=" \e[91m "
 GRN=" \e[32m "
@@ -22,7 +22,7 @@ all: prepare_config default
 prepare_config:
 	@echo "Prepare config files for printer $(PRINTER)"
 	@echo "git root: $(GIT_ROOT)"
-	cd $(GIT_ROOT)/CAD/slicing/; rm ./*.ini 2> /dev/null || true; cp -s 3Dprinter_configs/dist/$(PRINTER)/*.ini .; -ls .
+	cd $(GIT_ROOT)/CAD/slicing/; rm ./*.ini 2> /dev/null || true; cp -s 3Dprinter_configs/dist/$(PRINTER)/*.ini .; ls .
 
 default: $(AMF_TARGETS)
 $(AMF_DIR)/%.amf: $(SRC_DIR)/%.scad
