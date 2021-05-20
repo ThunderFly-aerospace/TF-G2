@@ -24,7 +24,7 @@ platform_ears_thickness = 2;
 platform_ears_corner_radius = 3.5;
 platform_ears_hole_from_bottom = 5;
 
-
+additional_edge_thickness = 0.1;
 
 module 888_1003_outline(){
 
@@ -117,16 +117,16 @@ module 888_1003(){
 
 			difference(){
 				linear_extrude(3)
-					offset(delta=0)
+					offset(delta=0 + additional_edge_thickness)
 						888_1003_outline();
 				linear_extrude(3.1)
-					offset(delta=-0.4*3)
+					offset(delta=-0.4*3 - additional_edge_thickness)
 						888_1003_outline();
 			}
 
 			for(x=cover_holes)
 				translate([x, 0, 0]){
-					cylinder(d = 8, h = 5, $fn=30);
+					cylinder(d = 8 + additional_edge_thickness/2, h = 5, $fn=30);
 				}
 
 			// Usi pro pripevneni k platforme
@@ -225,7 +225,7 @@ suspension_holder_thickness = 0.41*15;
 suspension_bow_diameter = 200;      //cylinder_r1
 suspension_join_screw_distance = 10;
 join_height = 17;
-presah = 5; 
+presah = 5;
 
 module mirror_copy(v=[1,0,0])
 {
@@ -253,54 +253,70 @@ module puvodni_koncovka()
 }
 
 
-// vlastni porametry
+// vlastni parametry
+// FIXME: nastavit mezi prvni radu sroubu
+//        a druhou (na baterii), pekne doprostred
+start_x = 39.6;
+start_y = -105.5;
 
-additional_x=0;
-additional_y=0;
-additional_thickness = 2;
-additional_presah = 6;
-additional_height = 10;
+// volitelne parametry
+additional_x_move=0;
+additional_y_move=0;
+additional_thickness = 0; // e.g. height
+additional_height = 0;
+additional_height_y_move = 0;
+additional_width = 0;
+additional_width_x_move = 0 ;
 
+additional_height_nuts = 0; //
+// M3_nut_height+0.2 + additional_height_nuts < suspension_holder_thickness + additional_thickness
+// 2.7 + 2 < 6.15 + 2
+// best is same as additional_thickness
+
+// minimalni zdvih
+// additional_thickness = 1.5 ; // pro M3x12
+// additional_thickness = -0.5 ; // pro M3x10
 
 // FIXME: správné umístění
 module 888_2004(){
 difference(){
-    translate([40 + additional_x, -105 + additional_y, 6])
+    translate([start_x + additional_x_move, start_y + additional_y_move, 6])
     rotate ([0,90,0])
         difference(){
-            translate([suspension_holder_thickness/2 - additional_thickness/2, suspension_bow_diameter/2 - join_height/2, 0])
+            translate([suspension_holder_thickness/2 - additional_thickness/2 , suspension_bow_diameter/2 - join_height/2 + additional_height_y_move, additional_width_x_move])
                 cube([suspension_holder_thickness + additional_thickness,
-     join_height + 2*presah + additional_presah,
-     join_height + additional_height], center=true);
-
+     join_height + 2*presah + additional_height,
+     join_height + additional_width], center=true);
+            translate([0,additional_height_y_move,additional_width_x_move])
             mirror_copy([0, 0, 1])
             translate([-0.1, suspension_bow_diameter/2 + presah/2 - M3_screw_diameter/2, suspension_join_screw_distance/2])
                 rotate([0, 90, 0]){
                     translate([0,0,-additional_thickness])
                     cylinder(d= M3_screw_diameter, h = 30 + additional_thickness);
-                    translate([0,0,2.4]) 
-                cylinder(d = M3_nut_diameter, h = M3_nut_height+0.2, $fn = 6);
+                    translate([0,0,2.4 -  additional_height_nuts])
+                cylinder(d = M3_nut_diameter, h = M3_nut_height+0.2 + additional_height_nuts, $fn = 6);
             }
-
+            translate([0,additional_height_y_move,additional_width_x_move])
             mirror_copy([0, 0, 1])
             translate([-0.1, suspension_bow_diameter/2 - join_height - M3_screw_diameter/2, suspension_join_screw_distance/2])
                 rotate([0, 90, 0]){
                     translate([0,0,-additional_thickness])
                     cylinder(d= M3_screw_diameter, h = 30 + additional_thickness);
-                    translate([0,0,2.4]) 
-                cylinder(d = M3_nut_diameter, h = M3_nut_height+0.2, $fn = 6);
+                    translate([0,0,2.4 - additional_height_nuts])
+                cylinder(d = M3_nut_diameter, h = M3_nut_height+0.2 + additional_height_nuts, $fn = 6);
                 }
         };
     888_1003();
-        
+
     // clear bottom
     translate([0, -50, -0.5])
       cube([120,130,1.7]);
-        
+
     // Otvory pro kryt
+    //    - negativ difference (1003 has positive)
 	for(x=cover_holes)
 		translate([x, 0, 0])
-			cylinder(d = 8, h = 5+0.1, $fn=30);
+			cylinder(d = 8 + additional_edge_thickness/2, h = suspension_holder_thickness+0.1, $fn=30);
 
     // dolni rada
 	for(x = [20:10:base_length])
@@ -321,12 +337,12 @@ difference(){
                 cylinder(d = M3_head_diameter, h = M3_head_height + 0.2, $fn = 30, center = true);
             }
         }
-    
+
 }
 
 // pozice soucastek - test
 if(true){
-    translate([40+ additional_x, -105+ additional_y, 12.2+ additional_thickness])
+    translate([start_x + additional_x_move, start_y + additional_y_move, 12.2+ additional_thickness])
         rotate ([0,90,0])
             puvodni_koncovka();
     888_1003();
