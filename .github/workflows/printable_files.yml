@@ -5,11 +5,6 @@ on:
     branches:
      - '*'
   workflow_dispatch:
-    inputs:
-      printer:
-        description: 'Printer for slicing'     
-        required: true
-        default: 'edee'
 
 jobs:
   build:
