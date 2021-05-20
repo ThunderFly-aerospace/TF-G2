@@ -5,15 +5,22 @@ on:
     branches:
      - '*'
   workflow_dispatch:
+    inputs:
+      printer:
+        description: 'Printer for slicing'     
+        required: true
+        default: 'edee'
 
 jobs:
   build:
     runs-on: ubuntu-20.04
-
+    strategy:
+      matrix:
+        printer: [mini, edee]
     env:
       OPENSCAD_BIN: xvfb-run --auto-servernum ~/OpenSCAD.AppImage
       SLIC3R_BIN: ~/Slic3r.AppImage
-
+      PRINTER: ${{ matrix.printer }}
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
@@ -52,7 +59,7 @@ jobs:
         source_file_path: 'CAD/gcode'
         destination_folder: 'gcode'
         destination_repo: 'ThunderFly-aerospace/gcodes'
-        target_branch:  TF-G2/${{ github.ref }}/edee
+        target_branch:  TF-G2/${{github.ref}}/${PRINTER}
         token: ${{ secrets.GITHUBPAT }}
 
     - name: Upload images
@@ -61,13 +68,5 @@ jobs:
         source_file_path: 'CAD/img'
         destination_folder: 'png'
         destination_repo: 'ThunderFly-aerospace/gcodes'
-        target_branch:  TF-G2/${{ github.ref }}/edee
+        target_branch:  TF-G2/${{github.ref}}/${PRINTER}
         token: ${{ secrets.GITHUBPAT }}
-
-
-#    - name: publish to git
-#      run: |
-#        git config --local user.email "work.flow@gmail.com"
-#        git config --local user.name "Workflow"
-#        git commit -m "Automatic commit from workflow" -a
-#        git push
