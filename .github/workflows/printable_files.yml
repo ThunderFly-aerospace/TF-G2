@@ -22,9 +22,6 @@ jobs:
       SLIC3R_BIN: ~/Slic3r.AppImage
       PRINTER: ${{ matrix.printer }}
     steps:
-    - name: vypis nastaveni
-      run: |
-        echo "Slicovani pro tiskarnu: ${{ PRINTER }}""
     - name: Checkout repository
       uses: actions/checkout@v2
       with:
