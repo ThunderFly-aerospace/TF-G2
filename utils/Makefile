@@ -23,7 +23,8 @@ prepare_config:
 	@echo "Prepare config files for printer $(PRINTER)"
 	@echo "git root: $(GIT_ROOT)"
 	rm $(GIT_ROOT)/CAD/slicing/*.ini 2> /dev/null || true # do not fail if it is not exists
-	ln -fs $(GIT_ROOT)/CAD/slicing/3dprinter_config/dist/$(PRINTER)/*.ini .
+	ln -fs $(GIT_ROOT)/CAD/slicing/3dprinter_config/dist/$(PRINTER)/*.ini $(GIT_ROOT)/CAD/slicing/3dprinter_config/
+	ls $(GIT_ROOT)/CAD/slicing/3dprinter_config/
 
 default: $(AMF_TARGETS)
 $(AMF_DIR)/%.amf: $(SRC_DIR)/%.scad
