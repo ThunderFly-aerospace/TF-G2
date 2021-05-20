@@ -22,9 +22,7 @@ all: prepare_config default
 prepare_config:
 	@echo "Prepare config files for printer $(PRINTER)"
 	@echo "git root: $(GIT_ROOT)"
-	cd $(GIT_ROOT)/CAD/slicing/
-	rm ./*.ini 2> /dev/null || true # do not fail if it is not exists
-	-cp -s 3Dprinter_configs/dist/$(PRINTER)/*.ini .
+	cd $(GIT_ROOT)/CAD/slicing/; rm ./*.ini 2> /dev/null || true; cp -s 3Dprinter_configs/dist/$(PRINTER)/*.ini .
 	-ls .
 
 default: $(AMF_TARGETS)
