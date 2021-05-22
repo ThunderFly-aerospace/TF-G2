@@ -259,6 +259,9 @@ module puvodni_koncovka()
 start_x = 39.6;
 start_y = -105.5;
 
+// pomocne parametry
+// layer_thickness = 0;
+
 // volitelne parametry
 additional_x_move=0;
 additional_y_move=0;
@@ -322,7 +325,7 @@ difference(){
 	for(x = [20:10:base_length])
 		        translate([x, 0, -0.1 + additional_thickness]){
                     translate([0, 0, -additional_thickness/2])
-	            	cylinder(d = M3_screw_diameter, h = 10 +additional_thickness, center = true, $fn = 50);
+	            	cylinder(d = M3_screw_diameter, h = 10 - (M3_head_height + 1.2 + layer_thickness ) + additional_thickness, center = true, $fn = 50);
     translate([0,0,4.6])
                 cylinder(d = M3_head_diameter, h = M3_head_height + 0.2, $fn = 30, center = true);
             }
@@ -332,7 +335,7 @@ difference(){
 	for(x = [40:10:10*18])
 	        translate([x, -bellow - 5, -0.1 +additional_thickness]){
                 translate([0, 0, -additional_thickness/2])
-	            cylinder(d = M3_screw_diameter, h = 10 + additional_thickness, center = true, $fn = 50);
+	            cylinder(d = M3_screw_diameter, h = 10 - (M3_head_height + 1.2 + layer_thickness ) +  additional_thickness, center = true, $fn = 50);
                 translate([0,0,4.6])
                 cylinder(d = M3_head_diameter, h = M3_head_height + 0.2, $fn = 30, center = true);
             }
