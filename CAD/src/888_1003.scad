@@ -15,7 +15,7 @@ thickness = 1; //tloustka sten
 drzak_height = 70; //spatny rozmer so far
 sides_split_positions = [-5, length/3-5, length/3*2, length];
 
-side_base_thickness = 0.2*6;
+
 
 platform_ears_en = 0;
 platform_ears_position = base_patern * [6, 25];
@@ -124,7 +124,7 @@ module 888_1003(){
 						888_1003_outline();
 			}
 
-			for(x=cover_holes)
+			for(x=platform_mount_points)
 				translate([x, 0, 0]){
 					cylinder(d = 8, h = 5, $fn=30);
 				}
@@ -143,7 +143,12 @@ module 888_1003(){
 								translate([pos[0]-1, pos[1]+8, 0]) cube([2, 32, 4]);
 
 					}
-					}
+				}
+
+			if(1){
+				translate([35, 0, 0]) translate([-10, -15-4, 0]) cube([20, 23, 5]);
+				translate([35, 0, 0]) translate([-10, -15-4, 0]) cube([15, 23+5, 3]);
+			}
 
 		}
 
@@ -151,10 +156,10 @@ module 888_1003(){
 		difference(){
 			for(x = [20:10:base_length])
 		        translate([x, 0, -0.1])
-	            	cylinder(d = M3_screw_diameter, h = 10, center = true, $fn = 50);
+	            	cylinder(d = M3_screw_diameter, h = 15, center = true, $fn = 50);
 
 			// Otvory pro kryt
-			for(x=cover_holes)
+			for(x=platform_mount_points)
 				translate([x, 0, 0])
 					cylinder(d = 8, h = 5, $fn=30);
 		}
@@ -172,7 +177,7 @@ module 888_1003(){
 	            //cylinder(d = 5.5, h = 10, center = true, $fn = 50);
 
 		// Rada sroubu pro akumulator
-		for(x = [40:10:10*18])
+		for(x = [60:10:10*18])
 	        translate([x, -bellow - 5, -0.1])
 	            cylinder(d = M3_screw_diameter, h = 10, center = true, $fn = 50);
 	            //cylinder(d = 5.5, h = 10, center = true, $fn = 50);
@@ -193,23 +198,23 @@ module 888_1003(){
 
 
 		// Otvory pro kryt
-			for(x=cover_holes)
-				translate([x, 0, -0.1]){
-					cylinder(d = M3_nut_diameter, h = M3_nut_height+0.1, $fn=6);
-					translate([0, 0, M3_nut_height+0.2+0.1]) cylinder(d = M3_screw_diameter, h = 10, $fn=30);
-				}
+		for(x=platform_mount_points)
+			translate([x, 0, -0.1]){
+				cylinder(d = M3_nut_diameter, h = M3_nut_height+0.1, $fn=6);
+				translate([0, 0, M3_nut_height+0.2+0.1]) cylinder(d = M3_screw_diameter, h = 10, $fn=30);
+			}
 
-			// Usi pro pripevneni k platforme
-			for (x = platform_ears_position)
-				translate([x, -platform_ears_corner_radius, 0])
-					hull(){
-						translate([0, -platform_ears_height + platform_ears_hole_from_bottom, 0])
-							cylinder(d = 3.5, h = platform_ears_thickness+3, center = true, $fn = 20);
-					}
+		// // Usi pro pripevneni k platforme
+		// for (x = platform_ears_position)
+		// 	translate([x, -platform_ears_corner_radius, 0])
+		// 		hull(){
+		// 			translate([0, -platform_ears_height + platform_ears_hole_from_bottom, 0])
+		// 				cylinder(d = 3.5, h = platform_ears_thickness+3, center = true, $fn = 20);
+		// 	}
 
 	}
 
-	translate([28, 4, side_base_thickness-0.4])
+	translate([48, -13, side_base_thickness-0.4])
 		linear_extrude(1.2)
 			text(str(week), size = 6);
 }

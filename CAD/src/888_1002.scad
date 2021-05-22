@@ -118,7 +118,10 @@ difference(){
 			rotate([90, 0, 0]){
 					cylinder(d = M3_screw_diameter, h = base_width+10, $fn = 30, center = true);
 					translate([0, 0, (base_width-z[2])/2 - 3]) cylinder(d = M3_nut_diameter, h = 6, $fn = 6, center = true);
+                    translate([0, 0,(base_width)/2  +rantl_thickness+0.1 + side_base_thickness]) cylinder(d = M3_head_diameter, h = 6, $fn = 30, center = true);
 					translate([0, 0,-(base_width-z[2])/2 + 3]) cylinder(d = M3_nut_diameter, h = 6, $fn = 6, center = true);
+                    translate([0, 0,-(base_width)/2  -rantl_thickness-0.1 - side_base_thickness]) cylinder(d = M3_head_diameter, h = 6, $fn = 30, center = true);
+
 				}
 
 
