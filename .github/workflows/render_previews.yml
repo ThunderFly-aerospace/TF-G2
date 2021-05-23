@@ -17,10 +17,8 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
-      with:
-        token: ${{ secrets.GITHUBPAT }} # vložení tohoto řádku způsobí rekurzivní volání actions scriptů https://github.com/marketplace/actions/git-auto-commit
-        submodules: recursive
-
+      run: git -c submodule."CAD/slicing".update=none submodule update --init --recursive
+      
     - name: Install requirements
       run: |
         uname -p
