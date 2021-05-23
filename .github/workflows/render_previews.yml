@@ -18,7 +18,7 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
       with:
-  ##      token: ${{ secrets.GITHUBPAT }} # vložení tohoto řádku způsobí rekurzivní volání actions scriptů https://github.com/marketplace/actions/git-auto-commit
+        token: ${{ secrets.GITHUBPAT }} # vložení tohoto řádku způsobí rekurzivní volání actions scriptů https://github.com/marketplace/actions/git-auto-commit
         submodules: recursive
 
     - name: Install requirements
@@ -52,9 +52,7 @@ jobs:
         name: 'render_stl'
         path: './**/*.stl'
 
-    - name: publish to git
-      run: |
-        git config --local user.email "work.flow@gmail.com"
-        git config --local user.name "Workflow"
-        git add -A && git commit --allow-empty -m "Automatic commit from workflow"
-        git push
+    - name: publish to git        
+      uses: stefanzweifel/git-auto-commit-action@v4
+      with:
+        commit_message: Automatic commit from workflow
