@@ -18,6 +18,7 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
       with:
+        token: ${{ secrets.GITHUBPAT }}
         submodules: recursive
 
     - name: Install requirements
@@ -32,7 +33,7 @@ jobs:
         sudo python3 -m pip install --upgrade pip
         sudo python3 -m pip install stlsort
         sudo python3 -m pip install lxml
-        sudo python3 -m pip install git+https://github.com/ThunderFly-aerospace/yagv
+        sudo python3 -m pip install git+https://github.com/ThunderFly-aerospace/yagv@1829f02937c154ff52502698ef4ff61d2785a2f8
         sudo python3 -m pip install git+https://${{ secrets.AUTH_USER }}:${{ secrets.GITHUBPAT }}@github.com/ThunderFly-aerospace/processor3D.git
         ~/OpenSCAD.AppImage --version
 
