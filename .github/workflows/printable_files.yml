@@ -17,6 +17,9 @@ jobs:
       SLIC3R_BIN: ~/Slic3r.AppImage
       PRINTER: ${{ matrix.printer }}
     steps:
+    - uses: FranzDiebold/github-env-vars-action@v2
+    - name: 'test'
+      run: echo "CI_REF_NAME=$CI_REF_NAME"
     - name: Checkout repository
       uses: actions/checkout@v2
       with:
