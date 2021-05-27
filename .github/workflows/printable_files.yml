@@ -43,21 +43,22 @@ jobs:
       with:
         name: 'render_amf'
         path: './**/*.amf'
-
+    
+    - uses: FranzDiebold/github-env-vars-action@v2
     - name: Upload gcodes
       uses:  MLAB-project/push-generated-file@master
       with:
         source_file_path: 'CAD/gcode'
         destination_folder: 'gcode'
         destination_repo: 'ThunderFly-aerospace/gcodes'
-        target_branch:  TF-G2/${github.ref}/${{matrix.printer}}
+        target_branch:  TF-G2/$CI_REF_NAME/${{matrix.printer}}
         token: ${{ secrets.GITHUBPAT }}
 
-    - name: Upload images
-      uses:  MLAB-project/push-generated-file@master
-      with:
-        source_file_path: 'CAD/img'
-        destination_folder: 'png'
-        destination_repo: 'ThunderFly-aerospace/gcodes'
-        target_branch:  TF-G2/${{github.ref}}/${{matrix.printer}}
-        token: ${{ secrets.GITHUBPAT }}
+#     - name: Upload images
+#       uses:  MLAB-project/push-generated-file@master
+#       with:
+#         source_file_path: 'CAD/img'
+#         destination_folder: 'png'
+#         destination_repo: 'ThunderFly-aerospace/gcodes'
+#         target_branch:  TF-G2/${{github.ref}}/${{matrix.printer}}
+#         token: ${{ secrets.GITHUBPAT }}
