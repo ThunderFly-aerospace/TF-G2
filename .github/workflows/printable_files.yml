@@ -17,23 +17,10 @@ jobs:
       SLIC3R_BIN: ~/Slic3r.AppImage
       PRINTER: ${{ matrix.printer }}
     steps:
-    - uses: hmarr/debug-action@v2
     - uses: FranzDiebold/github-env-vars-action@v2
-    - name: 'test'
-      run: echo "CI_REF_NAME=$CI_REF_NAME"
-    - uses: hmarr/debug-action@v2
-    
-    - name: Upload gcodes
-      uses:  MLAB-project/push-generated-file@master
-      with:
-        source_file_path: 'CAD/gcode'
-        destination_folder: 'gcode'
-        destination_repo: 'ThunderFly-aerospace/gcodes'
-        target_branch:  ${{env.CI_REPOSITORY}}/${{env.CI_REF_NAME}}/${{matrix.printer}}
-        token: ${{ secrets.GITHUBPAT }}
-        
-        
-        
+
+    # - uses: hmarr/debug-action@v2
+
     - name: Checkout repository
       uses: actions/checkout@v2
       with:
@@ -51,17 +38,19 @@ jobs:
         sudo python3 -m pip install stlsort lxml
         sudo python3 -m pip install git+https://github.com/ThunderFly-aerospace/yagv@a541869d11d3c094f1d7a3ed4d3c0c30489398e9
         sudo python3 -m pip install git+https://${{ secrets.AUTH_USER }}:${{ secrets.GITHUBPAT }}@github.com/ThunderFly-aerospace/processor3D.git
+
     - name: Make
       run: |
         cd CAD/src/printplate; make
-        
+
     - name: Upload a AMF Artifact
       uses: actions/upload-artifact@v2.2.2
       with:
         name: 'render_amf'
         path: './**/*.amf'
-    
+
     - uses: FranzDiebold/github-env-vars-action@v2
+
     - name: Upload gcodes
       uses:  MLAB-project/push-generated-file@master
       with:
