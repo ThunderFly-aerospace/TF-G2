@@ -1,11 +1,7 @@
-//@set_slicing_config(slicing/default.ini)
-// Trhaci predel rotorove hlavy
 
 include <../parameters.scad>
 use <888_1007.scad>
 use <888_1010.scad>
-
-
 
 
 // Vypocet uhlu tycek
@@ -235,3 +231,10 @@ translate([0, 0, 150]) 888_1009_top();
 %translate([0, 0, -8]) 888_1007();
 %rotate([0, 0, 180]) translate([7.5, 0, -13.5+180]) 888_1010();
 %translate([0, 0, -8]) pylon_silentblocks();
+
+
+module pylon_assembly(){
+    888_1009_bottom();
+    translate([0, 0, 150]) 888_1009_top();
+}
+

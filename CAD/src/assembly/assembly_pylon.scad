@@ -9,8 +9,8 @@ include <../../parameters.scad>
 //include <position/position_888_1006.scad> // Policka na payload
 include <position/position_888_1007.scad> // spodni pricka pylonu
 include <position/position_888_1007_silentblocks.scad> // spodni pricka pylonu
-include <position/position_888_1008.scad> // horni pricka pylonu
 include <position/position_888_1009.scad>
+include <position/position_888_1010.scad>
 //include <position/position_888_1013.scad>
 //include <position/position_888_1018.scad>
 //include <position/position_rotor.scad>
