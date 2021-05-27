@@ -10,6 +10,7 @@ SLICER?=~/Slic3r.AppImage
 NAME_PREFIX?=''
 SLIC3R_PROFILE?=''
 PROCESSOR3D_PARAM?=
+IMG_DIR?=''
 PRINTER?=edee
 
 RED=" \e[91m "
