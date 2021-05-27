@@ -22,6 +22,18 @@ jobs:
     - name: 'test'
       run: echo "CI_REF_NAME=$CI_REF_NAME"
     - uses: hmarr/debug-action@v2
+    
+    - name: Upload gcodes
+      uses:  MLAB-project/push-generated-file@master
+      with:
+        source_file_path: 'CAD/gcode'
+        destination_folder: 'gcode'
+        destination_repo: 'ThunderFly-aerospace/gcodes'
+        target_branch:  TF-G2/${CI_REF_NAME}/${{matrix.printer}}
+        token: ${{ secrets.GITHUBPAT }}
+        
+        
+        
     - name: Checkout repository
       uses: actions/checkout@v2
       with:
