@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-20.04
     strategy:
       matrix:
-        printer: [mini, edee, mlab3D]
+        printer: [mini, edee, mlab3d]
     env:
       OPENSCAD_BIN: xvfb-run --auto-servernum ~/OpenSCAD.AppImage
       SLIC3R_BIN: ~/Slic3r.AppImage
