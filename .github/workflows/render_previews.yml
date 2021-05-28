@@ -10,7 +10,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-20.04
-    if: ${{ env.GITHUB_ACTOR != github.actor }}
+    if: ${{ github.actor != 'TFbot'}}
 
     env:
       OPENSCAD_BIN: xvfb-run --auto-servernum ~/OpenSCAD.AppImage
@@ -40,8 +40,9 @@ jobs:
 
     - name: Make
       run: |
-        cd CAD/src
-        make
+        #cd CAD/src
+        #make
+        echo "ahoj" > test.txt
 
     - name: Upload a PNG Artifact
       uses: actions/upload-artifact@v2.2.2
@@ -59,3 +60,4 @@ jobs:
       uses: stefanzweifel/git-auto-commit-action@v4
       with:
         commit_message: Automatic commit from workflow
+        commit_author: 'TFbot'
