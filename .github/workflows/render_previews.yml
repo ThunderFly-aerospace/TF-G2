@@ -17,8 +17,11 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
-    - name: Checkout submodules
-      run: git -c submodule."CAD/slicing".update=none submodule update --init --recursive
+      with:
+        token: ${{ secrets.GITHUBPAT }}
+        submodules: recursive
+#     - name: Checkout submodules
+#       run: git -c submodule."CAD/slicing".update=none submodule update --init --recursive
       
     - name: Install requirements
       run: |
