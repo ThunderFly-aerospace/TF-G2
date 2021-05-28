@@ -8,9 +8,9 @@ on:
 
 
 jobs:
-  if: ${{ env.GITHUB_ACTOR != github.actor }}
   build:
     runs-on: ubuntu-20.04
+    if: ${{ env.GITHUB_ACTOR != github.actor }}
 
     env:
       OPENSCAD_BIN: xvfb-run --auto-servernum ~/OpenSCAD.AppImage
