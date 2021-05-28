@@ -80,8 +80,8 @@ module 888_1010(){
                     rotate([0, 0, 180]) for(a=[-1, 1]) translate([8, a*(5+airspeed_width/2+0.5),  servo_z_offset]) rotate([90, 0, 90])     
                         union(){
                             translate([0, 0, 10]) cube([11, 24, 20], center = true);
-                            translate([0, 14, 13]) rotate([0, 90, 0]) cylinder(d = 2.5, h = 55, $fn=10);
-                            translate([0, -14, 13]) rotate([0, 90, 0]) cylinder(d = 2.5, h = 55, $fn=10);
+                            translate([0, 14, 13]) rotate([0, 90, 0]) cylinder(d = 1.8, h = 55, $fn=10);
+                            translate([0, -14, 13]) rotate([0, 90, 0]) cylinder(d = 1.8, h = 55, $fn=10);
                         }
 
 
@@ -142,8 +142,8 @@ module 888_1010(){
             rotate([0, 0, 180]) for(a=[-1, 1]) translate([8, a*(5+airspeed_width/2+0.5),  servo_z_offset]) rotate([90, 0, 90])     
                 union(){
                     translate([0, 0, 10]) cube([11, 24, 20], center = true);
-                    translate([0, 14, 13]) rotate([0, 90, 0]) cylinder(d = 2, h = 15, $fn=10);
-                    translate([0, -14, 13]) rotate([0, 90, 0]) cylinder(d = 2, h = 15, $fn=10);
+                    translate([0, 14, 13]) rotate([0, 90, 0]) cylinder(d = 1.8, h = 15, $fn=10);
+                    translate([0, -14, 13]) rotate([0, 90, 0]) cylinder(d = 1.8, h = 15, $fn=10);
                 }
     }
 
