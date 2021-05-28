@@ -16,14 +16,18 @@ jobs:
       OPENSCAD_BIN: xvfb-run --auto-servernum ~/OpenSCAD.AppImage
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
+#     - name: Checkout repository
+#       uses: actions/checkout@v2
+#       with:
+#         token: ${{ secrets.GITHUBPAT }}
+#         submodules: recursive
+# #     - name: Checkout submodules
+# #       run: git -c submodule."CAD/slicing".update=none submodule update --init --recursive
+    - name: Checkout submodule
+      uses: Mushus/checkout-submodule@v1.0.1
       with:
-        token: ${{ secrets.GITHUBPAT }}
-        submodules: recursive
-#     - name: Checkout submodules
-#       run: git -c submodule."CAD/slicing".update=none submodule update --init --recursive
-      
+        identifierFile: ${{ secrets.GITHUBPAT }}
+
     - name: Install requirements
       run: |
         uname -p
@@ -60,4 +64,3 @@ jobs:
       uses: stefanzweifel/git-auto-commit-action@v4
       with:
         commit_message: Automatic commit from workflow
-        commit_author: 'TFbot'
