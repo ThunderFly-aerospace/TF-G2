@@ -8,6 +8,7 @@ on:
 
 
 jobs:
+  if: ${{ env.GITHUB_ACTOR != github.actor }}
   build:
     runs-on: ubuntu-20.04
 
