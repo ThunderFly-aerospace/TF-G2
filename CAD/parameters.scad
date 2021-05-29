@@ -11,6 +11,21 @@ base_patern = 10;
 
 gliding_angle = 14;         // tenhle úhel by se zřejmě v budoucnu měl počítat z požadované klouzavosti.
 
+
+
+////Simoniny parametry pro nosník rotoru
+base_length = 290; //delka podlozky
+base_split_position = [0, 149, base_length];
+base_width = 70; //sirka podlozky - vnější šířka nosníku
+base_thickness = 3; //vyska podlozky
+rantl_thickness = 3; //sirka steny podlozky
+rantl_height = 6.5;
+niy=4; //pocet der podelne
+
+side_base_thickness = 0.2*6; // minimalni tlouska  u bocnic napr. sten
+
+
+
 // Rotor parameters
 
 rotor_blade_AOA = 1.5;      // nastavení úhlu náběhu rotorového listu
@@ -144,7 +159,7 @@ rotor_ball_joint_neck = 3; // vyska krcku tahla od stredu koule.
 // delka dilu v podelne ose virniku - od osy pitch 
 rotor_head_rod_x = 35;
 // sirka dilu na stredy tahel 
-rotor_head_rod_y = rotor_head_rod.x*2 - rotor_ball_joint_neck*2;
+rotor_head_rod_y = rotor_head_rod_x*2 - rotor_ball_joint_neck*2;
 // vyska dilu az po rovinu rotoru
 rotor_head_rod_z = 0;
 
@@ -165,10 +180,35 @@ motor_holder_motor_height = 25;
 motor_holder_side_mount_height = base_patern*2.5;
 pylon_holder_side_mount_height = base_patern*4.5;
 
-engine_angle = -8; // ongle of engine axis relative to fuselage main axis
+engine_angle = -5; // ongle of engine axis relative to fuselage main axis
 engine_diameter = 55;
-engine_offset = 55;
+engine_offset = 53;			// Posun motoru v ose X (dopredu)
 
+
+
+
+// Parametry pro hacek na kabely od motoru
+	motor_wire_holder_width = 5;
+	motor_wire_holder_height = 10;
+	motor_wire_holder_space = 3;
+	motor_wire_holder_thickness = 2.5;
+	motor_wire_holder_z_shift = 10;
+	motor_wire_holder_x_shift = 19;
+
+// Parametry pro ochranny ram nad motorem 
+	motor_protective_frame_x_shift = 20;
+	motor_protective_frame_z_base = 32;
+	motor_protective_frame_beam_width = 5;
+	motor_protective_frame_beam_thickness = 3;
+	motor_protective_frame_width = base_width-3;
+	motor_protective_frame_plug_thickness = 2;
+	motor_protective_frame_plug_length = 4;
+	motor_protective_frame_thickness = 5;
+	motor_protective_frame_z_scale = 0.75;
+
+
+
+// Overit, jestli tyto parametry jsou pouzite
 engine_screws_radius = 15;
 engine_holes_radius = (24 + 44)/4;
 engine_shatf_hole_diameter = 13;
@@ -212,16 +252,6 @@ uhel_x = 90 - 79;
 maximum_printable_size = 150;
 
 
-////Simoniny parametry pro nosník rotoru
-base_length = 290; //delka podlozky
-base_split_position = [0, 149, base_length];
-base_width = 70; //sirka podlozky - vnější šířka nosníku
-base_thickness = 3; //vyska podlozky
-rantl_thickness = 3; //sirka steny podlozky
-rantl_height = 6.5;
-niy=4; //pocet der podelne
-
-side_base_thickness = 0.2*6; // minimalni tlouska  u bocnic napr. sten
 
 // Rotor pylon parameters
 

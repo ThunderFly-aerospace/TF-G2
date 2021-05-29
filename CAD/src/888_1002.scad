@@ -1,24 +1,22 @@
-//@set_slicing_config(slicing/default.ini)
-
 //dil pro pripevneni tazneho motoru
 include <../parameters.scad>
+use <888_1004.scad>
 
-sides_height = 80; //vyska sten
-lenght = 33; //delka sten z vykresu, nepouzity
 thickness = motor_holder_thickness; //sirka sten - dost random
-drzak_height = 70; //vyska drzaku
 
 motor_diameter = 35.2;
 side_thickness = 3;
 
-x_offset = 50;
+motor_x_shift = engine_offset;
+motor_angle = engine_angle; //angle of proppler axis
 
-motor_angle = -5; //angle of proppler axis
+
+
 
 
 // nahled motoru
 if(1)
-%translate([x_offset, 0, motor_holder_motor_height -(-rantl_height + base_thickness + 0.2)])
+%translate([motor_x_shift, 0, motor_holder_motor_height -(-rantl_height + base_thickness + 0.2)])
   rotate([0, -90 - motor_angle, 0]) translate([0, 0, thickness]) {
     cylinder(d = motor_diameter, h = 50);
     translate([0, 0, -20]) cylinder(d = 5, h = 50);
@@ -37,12 +35,12 @@ difference(){
       translate([0, -base_width/2 - side_thickness, 0])
         cube([25, base_width + 2*side_thickness, 10]);
 
-				translate([x_offset-15, 0, 0]) cylinder(d = 20, h=2);
+				translate([motor_x_shift-15, 0, 0]) cylinder(d = 20, h=2);
 
-	        translate([x_offset, 0, motor_holder_motor_height -(-rantl_height + base_thickness + 0.2)])
+	        translate([motor_x_shift, 0, motor_holder_motor_height -(-rantl_height + base_thickness + 0.2)])
 	            rotate([0, 90 - motor_angle, 0]){
-	            	translate([0, 1, 0]) cylinder(d=motor_diameter+thickness*0, h=thickness, $fn=100);
-	            	translate([0, -1, 0]) cylinder(d=motor_diameter+thickness*0, h=thickness, $fn=100);
+	            	translate([0, 0, 0]) cylinder(d=motor_diameter+thickness*1, h=thickness, $fn=100);
+	            	//translate([0, -1, 0]) cylinder(d=motor_diameter+thickness*1, h=thickness, $fn=100);
               }
 		}
 
@@ -51,43 +49,43 @@ difference(){
 
 
     // Otvory pro pripevneni a vetrani motoru
-    translate([x_offset, 0, motor_holder_motor_height -(-rantl_height + base_thickness + 0.2)])
-      rotate([0, 90 - motor_angle, 0]){
+    translate([motor_x_shift, 0, motor_holder_motor_height -(-rantl_height + base_thickness + 0.2)])
+      rotate([0, 90 - motor_angle, 0]) rotate([0, 0, 45]){
 
         cylinder(d=13, h=20, $fn=100);
 
         for(x = [1,2,3,4])
           rotate([0, 0, 90*x+45])
             translate([0, 25/2, 0])
-              cylinder(d = M3_screw_diameter, h = 20);
+              cylinder(d = M3_screw_diameter, h = 20, $fn=20);
 
         for(x = [1,2,3,4])
           rotate([0, 0, 90*x])
             translate([0, 25/2, 0])hull(){
-              translate([2, 0, 0]) cylinder(d = M5_screw_diameter, h = 20);
-              translate([-2, 0, 0]) cylinder(d = M5_screw_diameter, h = 20);
+              translate([2, 0, 0]) cylinder(d = M5_screw_diameter, h = 20, $fn=20);
+              translate([-2, 0, 0]) cylinder(d = M5_screw_diameter, h = 20, $fn=20);
             }
     }
 
     // spodni vyrez - odlehceni
     hull(){
   			cube([thickness*16, base_width-thickness*4, 20], center = true);
-				translate([x_offset-15, 0, 0]) cylinder(d = 20-thickness, h=10);
+				translate([motor_x_shift-15, 0, 0]) cylinder(d = 20-thickness, h=10);
 
 
     }
 
     difference(){
   		hull(){
-  			translate([-0.1, -base_width/2+thickness*1.5, thickness])
+  			translate([-0.1, -base_width/2+thickness*1.5, thickness*2])
   				cube([thickness*8, base_width-thickness*3, motor_holder_motor_height*1.5]);
 
   			// translate([-0.1, -base_width/2+thickness, motor_holder_height/3])
   			// 	cube([thickness*8, base_width-thickness*2, motor_holder_motor_height*1.5]);
 
-  				translate([x_offset-15, 0, thickness]) cylinder(d = 20, h=2);
+  				translate([motor_x_shift-15, 0, thickness]) cylinder(d = 20, h=2);
 
-  	        translate([x_offset, 0, motor_holder_motor_height -(-rantl_height + base_thickness + 0.2)])
+  	        translate([motor_x_shift, 0, motor_holder_motor_height -(-rantl_height + base_thickness + 0.2)])
   	            rotate([0, 90 - motor_angle, 0])
                   hull(){
                     cylinder(d=motor_diameter, h=0.1, $fn=100);
@@ -96,23 +94,19 @@ difference(){
 
 
   		}
-          translate([-1, -base_width/2 + 0.3, 0.2])
-            cube([30, rantl_thickness*1.5, rantl_height+5]);
+      translate([-1, -base_width/2 + 0.3, 0.2])
+        cube([30, rantl_thickness*1.5, rantl_height+5]);
 
-          translate([-1, base_width/2 - rantl_thickness - 0.3, 0.2])
-            cube([30, rantl_thickness*1.5, rantl_height+5]);
+      translate([-1, base_width/2 - rantl_thickness - 0.3, 0.2])
+        cube([30, rantl_thickness*1.5, rantl_height+5]);
 
 
 
 
     }
 
-	translate([0, 0, 4])
-			translate([5, 0, 0]){
-				cylinder(d = M3_screw_diameter, h = motor_holder_thickness+10, $fn = 30, center=true);
-				cylinder(d = M3_nut_diameter, h = motor_holder_thickness+1, $fn = 6);
-      }
 
+  // Srouby do bocnic
   for(z = [[motor_holder_side_mount_height+rantl_height/2, 0, 6], [rantl_height/2, 0, 10], [rantl_height/2, 10, 10]])
 		translate([5+z[1], 0, z[0]])
 			rotate([90, 0, 0]){
@@ -123,6 +117,21 @@ difference(){
                     translate([0, 0,-(base_width)/2  -rantl_thickness-0.1 - side_base_thickness]) cylinder(d = M3_head_diameter, h = 6, $fn = 30, center = true);
 
 				}
+
+
+  // Vyrez pro ochranny ram nad motorem 
+  for(m = [0, 1])
+    mirror([0, m, 0])
+      translate([motor_protective_frame_x_shift, 0, motor_protective_frame_z_base]){
+        translate([0, 0, 10])
+          cube([motor_protective_frame_beam_width, motor_protective_frame_width, 20], center=true);
+        translate([0, motor_protective_frame_width/2-motor_protective_frame_plug_thickness/2, 0])
+          cube([motor_protective_frame_beam_width, motor_protective_frame_plug_thickness, motor_protective_frame_plug_length*2], center=true);
+      }
+
+  if(1)
+    %translate([motor_protective_frame_x_shift, 0, motor_protective_frame_z_base]) rotate([0, -90, 0])
+      888_1004();
 
 
 
@@ -161,6 +170,18 @@ difference(){
     rotate([90, 0, 0])
       linear_extrude(0.5)
         text(str(motor_angle), size = 6);
+
+
+
+
+  translate([motor_wire_holder_x_shift, -motor_wire_holder_thickness - motor_wire_holder_space + base_width/2 - rantl_thickness - thickness +1 , motor_wire_holder_z_shift]) cube([motor_wire_holder_width, motor_wire_holder_thickness, motor_wire_holder_height]);
+  translate([motor_wire_holder_x_shift, -motor_wire_holder_thickness - motor_wire_holder_space + base_width/2 - rantl_thickness - thickness +1 , motor_wire_holder_z_shift + motor_wire_holder_height -1]) cube([motor_wire_holder_width, motor_wire_holder_thickness+1, 1]);
+
+
+  hull(){
+  translate([motor_wire_holder_x_shift, -motor_wire_holder_thickness - motor_wire_holder_space + base_width/2 - rantl_thickness/2 , 0]) cube([motor_wire_holder_width, motor_wire_holder_thickness, 0.1]);
+  translate([motor_wire_holder_x_shift, -motor_wire_holder_thickness - motor_wire_holder_space + base_width/2 - rantl_thickness - thickness +1 , motor_wire_holder_z_shift]) cube([motor_wire_holder_width, motor_wire_holder_thickness, 0.1]);
+  }
 
 }
 
