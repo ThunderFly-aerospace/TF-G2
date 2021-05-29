@@ -10,6 +10,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-20.04
+    if: ${{ github.actor != 'TFbot'}}
 
     env:
       OPENSCAD_BIN: xvfb-run --auto-servernum ~/OpenSCAD.AppImage
@@ -17,11 +18,15 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
-      
-    - name: Checkout submodules
-      run: | 
-        git -c submodule."CAD/slicing".update=none submodule update --init --recursive
-      
+      with:
+        token: ${{ secrets.GITHUBPAT }}
+        submodules: recursive
+    
+    - name: Checkout repository and set original GitHub token
+      uses: actions/checkout@v2
+      with:
+        token: ${{ github.token }}
+        
     - name: Install requirements
       run: |
         uname -p
@@ -40,7 +45,7 @@ jobs:
       run: |
         cd CAD/src
         make
-
+        
     - name: Upload a PNG Artifact
       uses: actions/upload-artifact@v2.2.2
       with:
@@ -52,8 +57,9 @@ jobs:
       with:
         name: 'render_stl'
         path: './**/*.stl'
-
+        
     - name: publish to git        
       uses: stefanzweifel/git-auto-commit-action@v4
       with:
         commit_message: Automatic commit from workflow
+        
