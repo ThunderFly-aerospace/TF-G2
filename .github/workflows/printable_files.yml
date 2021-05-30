@@ -2,6 +2,9 @@ name: Build printable files
 
 on:
   push:
+    paths:
+      - '**.scad'
+      - '**.ini'
     branches:
      - '*'
   workflow_dispatch:
