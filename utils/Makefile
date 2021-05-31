@@ -18,7 +18,7 @@ GRN=" \e[32m "
 YEL=" \e[33m "
 DEF=" \e[39m "
 
-all: prepare_config default
+all: prepare_config default finish
 
 prepare_config:
 	@echo "Prepare config files for printer $(PRINTER)"
@@ -35,6 +35,8 @@ $(AMF_DIR)/%.amf: $(SRC_DIR)/%.scad
 		--name_prefix $(NAME_PREFIX) \
 		$(PROCESSOR3D_PARAM) $<
 
+finish:
+	cd $(GIT_ROOT)/CAD/slicing/; rm ./*.ini 2> /dev/null
 
 # gdefault: $(TARGETS)
 # $(GCD_DIR)/%.gcode: $(SRC_DIR)/%.scad
