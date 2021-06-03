@@ -30,4 +30,4 @@ Autogyro model for UAV pilot training and learning purposes.
 
 
 ### Contribution
-How to contribute to an open-source project is described on [own wiki page](https://github.com/ThunderFly-aerospace/TF-G2/wiki/Contribution). Your contribution is very welcomed. For the contribution, you can get optimized prining files (gcodes). 
+How to contribute to an open-source project is described on [own page](https://github.com/ThunderFly-aerospace/TF-G2/blob/4s/CONTRIBUTING.md). Your contribution is very welcomed. For the contribution, you can get optimized prining files (gcodes). 
