@@ -21,9 +21,7 @@ jobs:
       PRINTER: ${{ matrix.printer }}
     steps:
     - uses: FranzDiebold/github-env-vars-action@v2
-
-    # - uses: hmarr/debug-action@v2
-
+    
     - name: Checkout repository
       uses: actions/checkout@v2
       with:
@@ -53,7 +51,9 @@ jobs:
         name: 'render_amf'
         path: './**/*.amf'
 
-    - uses: FranzDiebold/github-env-vars-action@v2
+    - name: 'Anonymize gcode'
+      run: |
+        for f in gcode/*.gcode; do sed -e 's/; .*$//g' -e '/^$/d' -i $f; done
 
     - name: Upload gcodes
       uses:  MLAB-project/push-generated-file@master
@@ -63,12 +63,3 @@ jobs:
         destination_repo: 'ThunderFly-aerospace/gcodes'
         target_branch:  ${{env.CI_REPOSITORY}}/${{env.CI_REF_NAME}}/${{matrix.printer}}
         token: ${{ secrets.GITHUBPAT }}
-
-#     - name: Upload images
-#       uses:  MLAB-project/push-generated-file@master
-#       with:
-#         source_file_path: 'CAD/img'
-#         destination_folder: 'png'
-#         destination_repo: 'ThunderFly-aerospace/gcodes'
-#         target_branch:  TF-G2/${{github.ref}}/${{matrix.printer}}
-#         token: ${{ secrets.GITHUBPAT }}
