@@ -53,7 +53,7 @@ jobs:
 
     - name: 'Anonymize gcode'
       run: |
-        for f in gcode/*.gcode; do sed -e 's/; .*$//g' -e '/^$/d' -i $f; done
+        for f in CAD/gcode/*.gcode; do sed -e 's/; .*$//g' -e '/^$/d' -i $f; done
 
     - name: Upload gcodes
       uses:  MLAB-project/push-generated-file@master
