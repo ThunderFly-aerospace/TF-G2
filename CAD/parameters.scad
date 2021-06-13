@@ -223,6 +223,45 @@ pylon_top_angle = atan2(pylon_height - pilot_height_separation,(pylon_ring_width
 echo(pylon_top_angle);
 
 
+//free-flap-head
+free_flap_ax_length=25;
+free_flap_ax_diameter=3;
+
+free_flap_bearings_length=5;
+free_flap_bearings_outer_diameter=4.5;
+free_flap_negativ_flap_limit=5;
+free_flap_bearing_add=3;
+free_flap_desk_add=1;
+free_flap_desk_h=2;
+free_flap_central_part_screw_cylinder_h=free_flap_desk_h+2;
+
+free_flap_delta_angle=-rotor_delta_angle;
+free_flap_blade_screw_distance=blade_mount_screw_distance;
+free_flap_central_part_screw=3;
+free_flap_central_part_screw_distance=3 + 4.5 + blade_mount_screw/2;
+
+free_flap_circle_fn=40;
+
+free_flap_ax_offset=6+free_flap_bearing_add/2+free_flap_bearings_outer_diameter/2;
+
+free_flap_shaft_l=free_flap_ax_length-2*free_flap_bearings_length;
+free_flap_shaft_h=free_flap_ax_diameter+free_flap_bearing_add;
+free_flap_shaft_neck_l=7;
+
+free_flap_cut_d=12;
+free_flap_cut_h=1.8;
+free_flap_cut_w=12;
+
+free_flap_blade_d=18;
+free_flap_blade_holder_h=3;
+
+free_flap_blade_holder_l=blade_mount_length;
+free_flap_blade_h=blade_mount_thickness+0.5;
+free_flap_blade_w=18;
+free_flap_blade_first_screw=blade_mount_screw_offset+0.5;
+
+free_flap_blade_holder_radius=0.7*free_flap_blade_holder_h;
+free_flap_colective=5;
 
 // Parametry k akumulatoru
 

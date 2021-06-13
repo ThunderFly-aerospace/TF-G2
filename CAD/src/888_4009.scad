@@ -1,65 +1,157 @@
-d=20;
-delta=15;
-
-inner_l=20;
-
-axToTopofDesk=4;
-cylinder_r=6;
-cylinder_l=2*inner_l;
-
-ax_offset=10+cylinder_r;
-
-blade_screw_distance=(16.47+11.86)/2;
-blade_mount_screw=3;
-central_part_screw_distance=3 + 4.5 + blade_mount_screw/2;
-
-circle_fn=40;
-
-central_h=5;
+include <../parameters.scad>
 
 
-for(angle=[0,180])
+module 888_4009()
 {
-    rotate([0,0,angle])
-    {
-        
-        difference()
+
+ax_length=free_flap_ax_length;
+ax_diameter=free_flap_ax_diameter;
+
+bearings_length=free_flap_bearings_length;
+bearings_outer_diameter=free_flap_bearings_outer_diameter;
+negativ_flap_limit=free_flap_negativ_flap_limit;
+bearing_add=free_flap_bearing_add;
+desk_add=free_flap_desk_add;
+desk_h=free_flap_desk_h;
+central_part_screw_cylinder_h=free_flap_central_part_screw_cylinder_h;
+
+delta_angle=free_flap_delta_angle;
+blade_screw_distance=free_flap_delta_angle;
+central_part_screw=free_flap_central_part_screw;
+central_part_screw_distance=free_flap_central_part_screw_distance;
+
+circle_fn=free_flap_circle_fn;
+ax_offset=free_flap_ax_offset;
+    
+shaft_l=free_flap_shaft_l;
+shaft_h=free_flap_shaft_h;
+shaft_neck_l=free_flap_shaft_neck_l;
+    
+difference()
+{
+union()//dodani sloupků pro maticky
+{
+difference()
+{
+    
+    for(r=[0,180]) 
+        hull()
         {
-            union()
-            {
-                hull()
+            rotate([0,0,r])    
+                translate([ax_offset,0,(bearings_outer_diameter+bearing_add)/2])
+                    rotate([0,0,delta_angle])
+                        rotate([90,0,0])
+                        {                   
+         
+                            cylinder(d=bearings_outer_diameter+bearing_add,h=ax_length+1, center=true,$fn=circle_fn);
+                            translate([2,-desk_add,0])
+                                cylinder(d=bearings_outer_diameter+bearing_add,h=ax_length-2, center=true,$fn=circle_fn);
+                        }
+                        
+            rotate([0,0,delta_angle])
+                /*translate([0,0,desk_h/2-desk_add])
+                    cube([desk_l,desk_w,desk_h],center=true);*/
+                for(i=[-1,1])
                 {
-                    translate([0,ax_offset,axToTopofDesk])
-                        rotate([0,90,0])
-                            cylinder(h=inner_l,r1=cylinder_r,r2=cylinder_r,center=true,$fn=circle_fn);
-            
-                    translate([0,5,axToTopofDesk+central_h/2-cylinder_r])
-                        cube([inner_l,2,central_h],center=true);
+                    translate([0,i*central_part_screw_distance,desk_h/4-desk_add])
+                        cylinder(d=10,h=desk_h/2, center=true,$fn=circle_fn);
                 }
-                
-                hull()
-                {
-                    translate([central_part_screw_distance,0,axToTopofDesk+central_h/2-cylinder_r])
-                        cylinder(h=central_h,d=10,center=true);
-                    
-                    translate([0,0,axToTopofDesk+central_h/2-cylinder_r])
-                        cube([inner_l,2*(ax_offset-cylinder_r),central_h],center=true);
-                }
-            }
-            
-            translate([0,0,axToTopofDesk+central_h/2-cylinder_r])
-                cylinder(d=3,h=central_h+1,center=true,$fn=circle_fn);
-            
-            for(i=[-1,1])
-                translate([i*central_part_screw_distance,0,axToTopofDesk+central_h/2-cylinder_r])
-                    cylinder(d=3,h=central_h+1,center=true,$fn=circle_fn);
-            
-            
-            translate([0,ax_offset,axToTopofDesk])
-                        rotate([0,90,0])
-                            cylinder(h=inner_l+1,d=3,center=true,$fn=circle_fn);
-        
         }
+    
+    for(r=[0,180])
+        rotate([0,0,r])
+        {
+            //díra pro flap osu pro list
+            translate([ax_offset,0,(bearings_outer_diameter+bearing_add)/2])
+                rotate([0,0,delta_angle])
+                {
+                    rotate([90,0,0])
+                        cylinder(d=ax_diameter+0.1,h=2*ax_length, center=true,$fn=circle_fn);
+                    
+                    //díra pro list
+                    translate([(bearings_outer_diameter+bearing_add)/2,0,shaft_h/2])
+                        cube([2*(bearings_outer_diameter+bearing_add)+0.1,shaft_l+0.1,2*shaft_h],center=true);
+                    //díra pro list v záporném flappingu
+                    rotate([0,negativ_flap_limit,0])
+                        translate([(bearings_outer_diameter+bearing_add)/2,0,shaft_h/2])
+                            cube([2*(bearings_outer_diameter+bearing_add)+0.1,shaft_l+0.1,2*shaft_h],center=true);
+                        
+                }
+            
+            //díra pro ložiska
+            for(i=[-1,1])
+                translate([ax_offset,0,(bearings_outer_diameter+bearing_add)/2])
+                    rotate([0,0,delta_angle])
+                        translate([0,i*(shaft_l/2+bearings_length/2),0])
+                            rotate([90,0,0])
+                                cylinder(d=bearings_outer_diameter,h=bearings_length, center=true, $fn=circle_fn);
+                    
+        }
+        
+        //díra pro matičku rotoru
+        hull()
+        {
+            translate([0,0,5+desk_h])
+                        cylinder(d=11,h=10, center=true, $fn=circle_fn);
+            
+            //elegance                
+            for(rr=[0,180])
+                rotate([0,0,rr])
+                {   
+                    difference()
+                    {
+                        translate([ax_offset,0,(bearings_outer_diameter+bearing_add)/2])                    
+                            rotate([0,0,delta_angle])
+                                translate([-(bearings_outer_diameter+bearing_add)/4,0,shaft_h])
+                                    cube([(bearings_outer_diameter+bearing_add)/2,shaft_l+0.1,2*shaft_h],center=true);
+            
+                        hull()
+                        {
+                            translate([ax_offset,0,(bearings_outer_diameter+bearing_add)/2])                    
+                            rotate([0,0,delta_angle])
+                                rotate([90,0,0])             
+                                    cylinder(d=bearings_outer_diameter+bearing_add,h=ax_length+1, center=true,$fn=circle_fn);
+                                              
+                            rotate([0,0,delta_angle])
+                                for(i=[-1,1])
+                                {
+                                    translate([0,i*central_part_screw_distance,desk_h/2-desk_add])
+                                        cylinder(d=10,h=desk_h, center=true,$fn=circle_fn);
+                                }
+                        }
+                    }
+               }                
+        }    
+}
+
+for(i=[-1,1])
+{
+ rotate([0,0,delta_angle])
+    translate([0,i*central_part_screw_distance,central_part_screw_cylinder_h/2-desk_add])
+        cylinder(d=10,h=central_part_screw_cylinder_h, center=true,$fn=circle_fn);
+            
+}
+
+}
+    
+for(i=[-1,1])
+{
+ rotate([0,0,delta_angle])
+    translate([0,i*central_part_screw_distance,0])
+    {            
+        cylinder(d = M3_screw_diameter, h =  30, center=true, $fn = circle_fn);
+        translate([0,0,central_part_screw_cylinder_h-M3_nut_height+0.5])
+            cylinder(d = M3_nut_diameter, h =  30, $fn = 6);
     }
 }
 
+translate([0,0,5+desk_h])
+    cylinder(d=11,h=10, center=true, $fn=circle_fn);
+
+cylinder(d=M3_screw_diameter,h=10, center=true, $fn=circle_fn);
+
+}
+
+}
+
+888_4009();
