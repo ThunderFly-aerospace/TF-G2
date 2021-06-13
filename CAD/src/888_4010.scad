@@ -133,6 +133,10 @@ difference()
             
         translate([blade_screw_distance+blade_first_screw+blade_d,0,-(2*blade_holder_h+blade_h)/2-0.1])
             cylinder(d=M3_nut_diameter,h=M3_nut_height,center=true,$fn=6);  
+        
+          //popisky
+          translate([blade_first_screw+blade_d+blade_screw_distance/2, 0, (2*blade_holder_h+blade_h)/2-0.5])            
+                text(str(colective), size = 4, halign="center", valign="center");
     }
     
     //zabroušení usazení a díra pro osu
@@ -148,8 +152,6 @@ difference()
         rotate([90,0,0])
             cylinder(d=ax_diameter,h=shaft_l+1,center=true,$fn=circle_fn);
     }
-    
-    
     
 }
 }

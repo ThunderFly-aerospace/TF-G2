@@ -228,7 +228,8 @@ free_flap_ax_length=25;
 free_flap_ax_diameter=3;
 
 free_flap_bearings_length=5;
-free_flap_bearings_outer_diameter=4.5;
+//free_flap_bearings_outer_diameter=4.5;
+free_flap_bearings_outer_diameter=3;
 free_flap_negativ_flap_limit=5;
 free_flap_bearing_add=3;
 free_flap_desk_add=1;
@@ -261,7 +262,7 @@ free_flap_blade_w=18;
 free_flap_blade_first_screw=blade_mount_screw_offset+0.5;
 
 free_flap_blade_holder_radius=0.7*free_flap_blade_holder_h;
-free_flap_colective=5;
+free_flap_colective=-1.5;
 
 // Parametry k akumulatoru
 
