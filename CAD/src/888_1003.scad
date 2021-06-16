@@ -53,7 +53,7 @@ module 888_1003_outline(){
 				                cylinder(d = 5.5+5, h = 10);
 
 					}
-				
+
 
 
 				translate([battery_case_start_x,0,0])
@@ -131,7 +131,7 @@ module 888_1003(){
 				}
 
 			// Usi pro pripevneni k platforme
-			
+
 			if(platform_ears_en)
 			for (x = platform_ears_position)
 				translate([x, 0, 0]){
@@ -146,10 +146,10 @@ module 888_1003(){
 					}
 				}
 
-			if(1){
+			/*if(1){
 				translate([35, 0, 0]) translate([-10, -15-4, 0]) cube([20, 23, 5]);
 				translate([35, 0, 0]) translate([-10, -15-4, 0]) cube([15, 23+5, 3]);
-			}
+			}*/
 
 		}
 
@@ -178,18 +178,18 @@ module 888_1003(){
 	            //cylinder(d = 5.5, h = 10, center = true, $fn = 50);
 
 		// Rada sroubu pro akumulator
-		for(x = [60:10:10*18])
+		for(x = [40:10:10*18])
 	        translate([x, -bellow - 5, -0.1])
 	            cylinder(d = M3_screw_diameter, h = 10, center = true, $fn = 50);
 	            //cylinder(d = 5.5, h = 10, center = true, $fn = 50);
-        
+
 		// Rada sroubu predni sklonena hrana
         translate([42, pylon_holder_side_mount_height, 0])
 	        rotate([0,0,-135])
 				for(x = [0:10:10*1])
 			        translate([x, 0, -0.1])
 			            cylinder(d = M3_screw_diameter, h = 10, center = true, $fn = 50);
-        
+
 		// Rada sroubu zadni sklonena hrana
         translate([10*26+2, pylon_holder_side_mount_height, 0])
         rotate([0,0,-48])
@@ -215,7 +215,7 @@ module 888_1003(){
 
 	}
 
-	translate([48, -13, side_base_thickness-0.4])
+	translate([28, 5, side_base_thickness-0.4])
 		linear_extrude(1.2)
 			text(str(week), size = 6);
 }
