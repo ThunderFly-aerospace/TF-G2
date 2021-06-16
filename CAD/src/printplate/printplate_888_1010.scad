@@ -1,6 +1,6 @@
 //@set_slicing_config(../../slicing/head.ini)
 
-//dil pro pripevneni tazneho motoru
+//TFSLOT and rotor head holder 
 include <../../parameters.scad>
 use <../888_1010.scad>
 
