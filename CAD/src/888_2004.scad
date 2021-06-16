@@ -81,7 +81,7 @@ additional_height_nuts = 0; //
 // additional_thickness = -0.5 ; // pro M3x10
 
 // FIXME: správné umístění
-module 888_2004(){
+module 888_2004(draft){
 difference(){
     translate([start_x + additional_x_move, start_y + additional_y_move, 6])
     rotate ([0,90,0])
@@ -93,7 +93,7 @@ difference(){
 				            translate([-0.1, suspension_bow_diameter/2 + presah/2 - M3_screw_diameter, suspension_join_screw_distance/2])
 				                rotate([0, 90, 0]){
 				                    translate([0,0,-additional_thickness])
-				                    		cylinder(d= M3_screw_diameter, h = 30 + additional_thickness);
+				                    		cylinder(d= M3_screw_diameter, h = 30 + additional_thickness,$fn = draft?10:50);
 				             				translate([0,0,2.4 -  additional_height_nuts])
 				                				cylinder(d = M3_nut_diameter, h = M3_nut_height+0.2 + additional_height_nuts, $fn = 6);
 				            }
@@ -102,7 +102,7 @@ difference(){
             translate([-0.1, suspension_bow_diameter/2 - join_height - M3_screw_diameter, suspension_join_screw_distance/2])
                 rotate([0, 90, 0]){
                     translate([0,0,-additional_thickness])
-                    		cylinder(d= M3_screw_diameter, h = 30 + additional_thickness);
+                    		#cylinder(d= M3_screw_diameter, h = 30 + additional_thickness,$fn = draft?10:50);
                     translate([0,0,2.4 - additional_height_nuts])
                 				cylinder(d = M3_nut_diameter, h = M3_nut_height+0.2 + additional_height_nuts, $fn = 6);
                 }

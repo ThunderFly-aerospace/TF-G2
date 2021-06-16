@@ -7,4 +7,4 @@ use <../888_2004.scad>
 mirror_copy([1, 0, 0])
   rotate ([180,0,0])
     translate([-20,0,0])
-      888_2004();
+      888_2004(draft=false);
