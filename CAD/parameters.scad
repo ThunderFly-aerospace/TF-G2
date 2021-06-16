@@ -151,14 +151,14 @@ bearing_shaft_length = 20;    // Rozměr B3 v nákresu
 
 rotor_head_plate_thickness = 5;
 
-rotor_ball_joint_neck = 3; // vyska krcku tahla od stredu koule. 
+rotor_ball_joint_neck = 3; // vyska krcku tahla od stredu koule.
 
 
 // parametry pro dil, co se naklapi v roll a pitch, obsahuje tfprobe
 
-// delka dilu v podelne ose virniku - od osy pitch 
+// delka dilu v podelne ose virniku - od osy pitch
 rotor_head_rod_x = 35;
-// sirka dilu na stredy tahel 
+// sirka dilu na stredy tahel
 rotor_head_rod_y = rotor_head_rod_x*2 - rotor_ball_joint_neck*2;
 // vyska dilu az po rovinu rotoru
 rotor_head_rod_z = 0;
@@ -167,8 +167,8 @@ rotor_head_shaft_angle = 10;
 
 
 
-rotor_head_pitch = 10;
-rotor_head_roll = 10;
+rotor_head_pitch = 0;
+rotor_head_roll = 0;
 
 
 
@@ -195,7 +195,7 @@ engine_offset = 53;			// Posun motoru v ose X (dopredu)
 	motor_wire_holder_z_shift = 10;
 	motor_wire_holder_x_shift = 19;
 
-// Parametry pro ochranny ram nad motorem 
+// Parametry pro ochranny ram nad motorem
 	motor_protective_frame_x_shift = 20;
 	motor_protective_frame_z_base = 32;
 	motor_protective_frame_beam_width = 5;
