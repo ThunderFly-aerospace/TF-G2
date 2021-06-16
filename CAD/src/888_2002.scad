@@ -12,7 +12,7 @@ suspension_holder_flange_height = 25;
 suspension_holder_thickness = 0.41*15;
 suspension_camber = -2; // úhel zakončení, délka konstrukce
 suspension_join_length = 22;
-suspension_join_screw_distance = 10; // zvetsit na 20 nebo více po vyřešění: https://github.com/ThunderFly-aerospace/TF-G2/issues/86
+suspension_join_screw_distance = 20; // zvetsit na 20 nebo více po vyřešění: https://github.com/ThunderFly-aerospace/TF-G2/issues/86
 suspension_bow_diameter = 200;      //cylinder_r1
 suspension_bow_diameter_1 = 200 - 2*zmenseni;
 
