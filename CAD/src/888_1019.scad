@@ -1,8 +1,6 @@
-//@set_slicing_config(slicing/default.ini)
 //platform attaching point
 
 include <../parameters.scad>
-
 module 888_1019(){
   difference(){
     union(){

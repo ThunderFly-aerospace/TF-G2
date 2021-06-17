@@ -1,12 +1,7 @@
 include <../parameters.scad>
 include <lib/stdlib/polyScrewThread_r1.scad>
 
-
-
-
 module 888_4008(draft = true){
-
-
 
 // TODO: Je potreba procistit parametry, po predelani na spulku zde urcite mnoho parametru je nevyuzitych. Pripadne je okomentovat. [Roman, 2020/11]
 

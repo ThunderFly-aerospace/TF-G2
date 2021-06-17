@@ -1,20 +1,15 @@
-//@set_slicing_config(slicing/default.ini)
 //Pouozdro na akumulator
 
 include <../parameters.scad>
-
 module 888_1018(){
 
-
 translate([battery_length/2-10, 0, -battery_height]) rotate([0, 0, -90]) linear_extrude(battery_case_wall) text(str(week, " ^"), halign="center", valign="center", size=4);
-
-
 battery_case_holes = true;
 battery_case_wire_holes = true;
 
   difference(){
     union(){
-      
+
       translate([0, 0, -(battery_height+battery_case_wall)/2])
         translate([0, 0, -1]) minkowski(){
           cube([battery_length + 2* battery_case_wall - 4, battery_width+2*battery_case_wall -4, battery_height + battery_case_wall - 2], center = true);
@@ -37,7 +32,6 @@ battery_case_wire_holes = true;
               }
         }
     }
-
 
     // prostor na akumulator
     translate([0, 0, -(battery_height)/2+1])
@@ -71,7 +65,7 @@ battery_case_wire_holes = true;
               cylinder(d=4, h=1, $fn=30);
             }
           }
-        }   
+        }
     }
 
 

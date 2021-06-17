@@ -1,4 +1,4 @@
-//@set_slicing_config(../../slicing/head.ini)
+//@set_slicing_config(../../slicing/default.ini)
 
 //drzak zadniho kolecka
 include <../../parameters.scad>

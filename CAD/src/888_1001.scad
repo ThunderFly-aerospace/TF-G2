@@ -1,21 +1,9 @@
-//@set_slicing_config(slicing/default.ini)
-//nosna podlozka
-
+//nosna podlozka virniku1
 include <../parameters.scad>
 
 release_servo = 0;
 use_myxa = 1;
 use_xt60_flange = 1;
-
-////Simoniny parametry pro nosník
-//base_length = 145; //delka podlozky
-//base_width = 55; //sirka podlozky
-//base_height = 10; //vyska podlozky
-//rantl_thickness = 4; //sirka steny podlozky
-//niy=13; //pocet der podelne
-//nix=6; //pocet der pricne
-//M3_screw_diameter = 3.2;
-
 
 module 888_1001(){
     translate([0, 0, -base_thickness - rantl_height/2])
@@ -156,4 +144,3 @@ module 888_1001_crop_visualisation(){
 
 888_1001();
 888_1001_crop_visualisation();
-//888_1001_part(0);
