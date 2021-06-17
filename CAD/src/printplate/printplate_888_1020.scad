@@ -1,7 +1,8 @@
-include <../../parameters.scad>
+//@set_slicing_config(slicing/default.ini)
+//battery screw cap
 
-use <../lib/stdlib/hlava_na_sroub.scad>
+use <../888_1020.scad>
 
 for (i = [0, 24], j = [0, 24])
     translate([i, j, 0])
-        hlava_na_sroub ();
+        888_1020();

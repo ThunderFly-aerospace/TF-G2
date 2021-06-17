@@ -1,5 +1,5 @@
 //@set_slicing_config(slicing/default.ini)
-//nastavovac uhlu pro pylon
+//platform attaching point
 
 include <../parameters.scad>
 
