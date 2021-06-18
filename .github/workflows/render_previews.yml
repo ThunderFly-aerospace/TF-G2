@@ -36,13 +36,18 @@ jobs:
         sudo apt update
         sudo apt-get install libc-bin python3-setuptools xvfb
         sudo python3 -m pip install --upgrade pip
-        sudo python3 -m pip install stlsort
-        sudo python3 -m pip install lxml
+        sudo python3 -m pip install stlsort lxml
         sudo python3 -m pip install git+https://github.com/ThunderFly-aerospace/yagv
         sudo python3 -m pip install git+https://${{ secrets.AUTH_USER }}:${{ secrets.GITHUBPAT }}@github.com/ThunderFly-aerospace/processor3D.git
         wget https://files.openscad.org/OpenSCAD-2021.01-x86_64.AppImage -O ~/OpenSCAD.AppImage
         chmod +x ~/OpenSCAD.AppImage
         ~/OpenSCAD.AppImage --version
+    
+    - name: Clean repo
+      run: |
+        rm CAD/png/*.png ||:
+        rm CAD/stl/*.stl ||:
+        rm CAD/amf/*.amf ||:
 
     - name: Make
       run: |
