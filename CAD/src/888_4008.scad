@@ -90,8 +90,11 @@ module 888_4008(draft = true){
               // Zavit pro namotani provazku
               translate([0, 0, top_thickness]) difference(){
                   cylinder(d = starter_rope_d+10, h = rpm_sensor_h + starter_top_h);
-                  screw_thread(starter_rope_d, starter_rope_diameter, 45, rpm_sensor_h + starter_top_h, draft?3:PI/3, -2);
-
+                  if(draft){
+                    color("gray") cylinder(d = starter_rope_d, h = rpm_sensor_h + starter_top_h);
+                  }else{
+                      screw_thread(starter_rope_d, starter_rope_diameter, 45, rpm_sensor_h + starter_top_h, draft?5:PI/3, -2);
+                  }
                   // light blocking rim
                   translate([0, 0, rpm_sensor_h + starter_top_h - 1.5*starter_rope_diameter])
                       cylinder(d1 = starter_pipe_d_middle, d2 = starter_rope_d+starter_rope_diameter/2, h = starter_rope_diameter, $fn = draft?rpm_sensor_count:120);
@@ -163,11 +166,22 @@ module 888_4008(draft = true){
                   angle=(rotor_blades_count/2 == round(rotor_blades_count/2))? (i*angle_between_blades):i*angle_between_blades - angle_between_blades/2;
                   rotate([0,0, angle])
                   {
-                          translate([0, 3 + 4.5 + blade_mount_screw/2, 0])
-                              cylinder(d = blade_mount_screw, h = 2* (thickness+sensor_cap_height), center = true, $fn = 20);
+                      // Two screw holes around rotor axis
+                          translate([0, 3 + 4.5 + blade_mount_screw/2, -5])
+                              cylinder(d = blade_mount_screw, h = 8, $fn = 20);
+                            translate([0, 3 + 4.5 + blade_mount_screw/2, 4])   // Tloušťka pomocné ucpávky v místě díry pro šroub je asi 0.35 mm (pro z = 3.6 už vede díra skrz)
+                              cylinder(d = blade_mount_screw, h = 4, $fn = 20);
+
+                    translate([0, 3 + 4.5 + blade_mount_screw/2, screws_h/2+thickness/2-7])
+                      cylinder(d = M3_nut_diameter, h = 2.5, $fn = 6);
+                     translate([0, 3 + 4.5 + blade_mount_screw/2+4, screws_h/2+thickness/2-7+2.5/2])
+                      cube([M3_nut_diameter, 8  ,  2.5], center = true);
+
+
                   }
 
-                  hull(){
+
+            /*      hull(){
                     rotate([0,0, angle])
                     {
                           translate([0, 3 + 4.5 + blade_mount_screw/2, screws_h/2+thickness/2])
@@ -175,7 +189,7 @@ module 888_4008(draft = true){
                     }
                           translate([0, 0, screws_h/2+thickness/2])
                     cylinder(d = 5, h = screws_h*2.5);
-                  }
+                  }*/
 
               }
               // cross section for model construction
