@@ -37,7 +37,7 @@ $(AMF_DIR)/%.amf: $(SRC_DIR)/%.scad
 
 finish:
 	cd $(GIT_ROOT)/CAD/slicing/; rm ./*.ini 2> /dev/null
-
+	
 # gdefault: $(TARGETS)
 # $(GCD_DIR)/%.gcode: $(SRC_DIR)/%.scad
 # #     @echo ============== $<

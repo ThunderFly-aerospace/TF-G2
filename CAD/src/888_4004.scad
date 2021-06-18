@@ -61,10 +61,10 @@ module 888_4004() {
 		}
 
 
-		translate([move_index, blade_holder_widh/2, 0]) cylinder(d=screw_diameter, h=2, $fn=20);
-		translate([move_index+blade_screws_distance, blade_holder_widh/2, 0]) cylinder(d=screw_diameter, h=2, $fn=20);
-		translate([move_index, blade_holder_widh/2, 1.97]) cylinder(d=blade_mount_nut, h=M3_nut_height, $fn=6);
-		translate([move_index+blade_screws_distance, blade_holder_widh/2, 1.97]) cylinder(d=blade_mount_nut, h=M3_nut_height, $fn=6);
+		translate([move_index, blade_holder_widh/2, -1]) cylinder(d=screw_diameter, h=3, $fn=20);
+		translate([move_index+blade_screws_distance, blade_holder_widh/2, -1]) cylinder(d=screw_diameter, h=3, $fn=20);
+		translate([move_index, blade_holder_widh/2, 1.97]) cylinder(d=blade_mount_nut, h=M3_nut_height+1, $fn=6);
+		translate([move_index+blade_screws_distance, blade_holder_widh/2, 1.97]) cylinder(d=blade_mount_nut, h=M3_nut_height+1, $fn=6);
 	}
 }
 

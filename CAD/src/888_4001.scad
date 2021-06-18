@@ -1,11 +1,6 @@
-//// ThunderFly Auto-G2 3D printable Rotor blade
+//// ThunderFly TF-G2 3D printable Rotor blade
 
 /// Rotor blade
-
-//@set_slicing_config(../slicing/blades/blade.ini)
-
-//@set_modificator(888_4001_modificator)
-//@set_slicing_config(../slicing/blade_infill_modif.ini, 888_4001_modificator)
 
 DOC_SCALING_FACTOR = 100;
 DOC_HEIGHT = 50;

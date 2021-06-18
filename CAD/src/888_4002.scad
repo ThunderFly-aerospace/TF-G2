@@ -1,8 +1,3 @@
-
-//
-//
-//
-
 include <../parameters.scad>
 
 module 888_4002(hole_diameter=3)

@@ -1,0 +1,1 @@
+pdftk sticker_888_9001_motiv.pdf sticker_888_9001_orez.pdf cat output sticker_888_9001_print.pdf

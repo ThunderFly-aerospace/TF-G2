@@ -4,8 +4,8 @@
 include <../../parameters.scad>
 use <../888_1003.scad>
 
-$fn=50;
+$fn=100;
 
 
-translate([0, 48, 0]) 888_1003_part(2);
-translate([22, 0, 0]) mirror([0, 1, 0]) 888_1003_part(2);
+translate([0, 40, 0]) 888_1003_part(2);
+translate([0, 0, 0]) mirror([0, 1, 0]) 888_1003_part(2);

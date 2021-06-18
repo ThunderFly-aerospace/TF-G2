@@ -14,6 +14,9 @@ include <../../parameters.scad>
 include <position/position_888_1010.scad>
 include <position/position_888_1011.scad>
 include <position/position_888_1012.scad>
+
+include <position/position_888_4008.scad>
+//include <position/position_888_101.scad>
 //include <position/position_888_1018.scad>
 //include <position/position_rotor.scad>
 //include <../888_1016.scad>

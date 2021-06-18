@@ -1,21 +1,9 @@
-//@set_slicing_config(slicing/default.ini)
-//nosna podlozka
- 
+//nosna podlozka virniku1
 include <../parameters.scad>
 
 release_servo = 0;
 use_myxa = 1;
 use_xt60_flange = 1;
-
-////Simoniny parametry pro nosník
-//base_length = 145; //delka podlozky
-//base_width = 55; //sirka podlozky
-//base_height = 10; //vyska podlozky
-//rantl_thickness = 4; //sirka steny podlozky
-//niy=13; //pocet der podelne
-//nix=6; //pocet der pricne
-//M3_screw_diameter = 3.2;
-
 
 module 888_1001(){
     translate([0, 0, -base_thickness - rantl_height/2])
@@ -35,6 +23,12 @@ module 888_1001(){
                         cube([base_length-26, 3, 3], center = true);
             }
 
+            // Srazeni spodnich hran
+            for(y=[-base_width/2, base_width/2])
+                translate([base_length/2, y, 0])
+                    rotate([45, 0, 0]) cube([base_length+1, 2, 2], center=true);
+
+
             //XT60 konektor
             if(use_xt60_flange)
                 translate([15, base_width/4, 0])
@@ -51,9 +45,11 @@ module 888_1001(){
             if(use_myxa)
                 translate([80, -9, 0]){
                     for(x=[0, 30.6], y=[-29.5/2, 29.5/2])
-                        #translate([x, y, 0])
-                            cylinder(d = M2_5_screw_diameter, h = 10, center=true, $fn=10);
-                    %translate([-4, -39/2, 3]) cube([49, 39, 24]);
+                        translate([x, y, 0]){
+                            cylinder(d = M2_5_screw_diameter, h = 10, center=true, $fn=15);
+                            translate([0,0,-0.1]) cylinder(d1 = M2_5_screw_diameter+2, d2 = M2_5_screw_diameter, h = 1.5, $fn=15);
+                        }
+                    //%translate([-4, -39/2, 3]) cube([49, 39, 24]);
                 }
 
 
@@ -64,9 +60,9 @@ module 888_1001(){
                         cylinder(h=base_thickness+0.2, d=M3_screw_diameter, $fn=50);
 
             //dirky ve dnu
-            for (i=[10*2], j=[0])
-                translate([i,j*base_patern,-0.1])
-                    cylinder(h=base_thickness+0.2, d=M3_screw_diameter, $fn=50);
+            // for (i=[10*2], j=[0])
+            //     translate([i,j*base_patern,-0.1])
+            //         cylinder(h=base_thickness+0.2, d=M3_screw_diameter, $fn=50);
 
             if(release_servo) %translate([65, 5, 0]) rotate(90) cube([20, 8.5, 10]);
 
@@ -77,26 +73,36 @@ module 888_1001(){
                         cylinder(h=base_thickness+0.2, d=2, $fn=50);
 
             //Velke otvory ve spodni casti.
-            for (i=[base_patern:base_patern*2:base_length-base_patern], j=[-1, 1])
+            difference(){
+                for (i=[base_patern:base_patern*2:base_length-base_patern], j=[-1, 1])
                 if(!(i==10&&j==1))
                 hull(){
                     translate([i +base_patern/2,j*base_patern/2,-0.1])
-                        cylinder(h=base_thickness+0.2, d=M3_screw_diameter, $fn=50);
+                        cylinder(h=base_thickness+0.2, d=M4_screw_diameter, $fn=50);
                     translate([i+base_patern +base_patern/2,j*base_patern/2,-0.1])
-                        cylinder(h=base_thickness+0.2, d=M3_screw_diameter, $fn=50);
+                        cylinder(h=base_thickness+0.2, d=M4_screw_diameter, $fn=50);
                     translate([i +base_patern/2,j*(base_width/2-10),-0.1])
-                        cylinder(h=base_thickness+0.2, d=M3_screw_diameter, $fn=50);
+                        cylinder(h=base_thickness+0.2, d=M4_screw_diameter, $fn=50);
                     translate([i+base_patern +base_patern/2,j*(base_width/2-10),-0.1])
-                        cylinder(h=base_thickness+0.2, d=M3_screw_diameter, $fn=50);
+                        cylinder(h=base_thickness+0.2, d=M4_screw_diameter, $fn=50);
                 }
 
+
+
+            //dirky ve dnu dvojitá řada
+            for (i=[10:base_patern*2:base_length-base_patern], j=[-1, 1])
+                if(i!=10 && (i!=10*11 && use_myxa))
+                    translate([i,j*base_patern,-0.1])
+                        cylinder(h=base_thickness+0.2, d=M3_screw_diameter+5, $fn=50);
+
+            }
             //dirky v bocnich stenach
 
                 for(x = [10:10:base_length-10])
                     rotate([90, 0, 0])
                         translate([x, base_thickness + rantl_height/2, 0]){
                             cylinder(d = M3_screw_diameter, h = base_width+0.2, center = true, $fn = 50);
-                            cylinder(d = M3_nut_diameter, h = base_width-4, center = true, $fn = 6);
+                            if(x>20) cylinder(d = M3_nut_diameter, h = base_width-4, center = true, $fn = 6);
                         }
 
             for (i=[0:len(base_split_position)]) {
@@ -138,4 +144,3 @@ module 888_1001_crop_visualisation(){
 
 888_1001();
 888_1001_crop_visualisation();
-//888_1001_part(0);
