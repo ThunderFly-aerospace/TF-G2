@@ -76,7 +76,7 @@ jobs:
         commit_message: Automatic commit from workflow
      
   Update_blender:
-    needs: build
+    #needs: build
     runs-on: ubuntu-20.04
     steps:
     - name: Checkout repository
