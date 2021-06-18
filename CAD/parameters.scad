@@ -262,6 +262,9 @@ maximum_printable_size = 150;
 pylon_pipe_d = 4.2;
 pylon_suspension_height = 150;
 pylon_pipe_top_dist = 0;
+pylon_thickness = 0; // Netusim, co to je
+
+pylon_bottom_wall = 5;
 
 pylon_silentblocks_base_distance = 58;    // vzdalenost silentblocku pylonu od sebe
 pylon_pipe_top_y_dist = 25;

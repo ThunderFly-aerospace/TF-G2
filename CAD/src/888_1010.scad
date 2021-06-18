@@ -154,7 +154,8 @@ module 888_1010(){
                 }
     }
 
-        }
+    // objekty pro sestavu
+    translate([0, 0, pitch_axis_z]) rotate([90, 0, 90]) rotate([-rotor_head_pitch, 0, 0]) children();
 
     if($preview && 0){
         for(m = [0, 1]) mirror([0,m,0]) translate([-22, -5 - airspeed_width/2, 0]) rotate([90, 0, -90]) color("gray") servo_bms_115() {paka_jednostranna(); }
