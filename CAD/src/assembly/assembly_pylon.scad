@@ -1,6 +1,7 @@
 
 //@set_slicing_config(../slicing/default.ini)
 include <../../parameters.scad>
+
 // include <yasim.scad>
 
 //include <position/position_888_1001.scad> // podlozka
@@ -10,7 +11,7 @@ include <../../parameters.scad>
 include <position/position_888_1007.scad> // spodni pricka pylonu
 include <position/position_888_1007_silentblocks.scad> // spodni pricka pylonu
 include <position/position_888_1009.scad>
-include <position/position_888_1010.scad>
+//include <position/position_888_1010.scad> //TFSLOT
 //include <position/position_888_1013.scad>
 //include <position/position_888_1018.scad>
 //include <position/position_rotor.scad>
