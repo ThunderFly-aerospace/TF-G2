@@ -1,4 +1,4 @@
-//@set_slicing_config(slicing/default.ini)
+//@set_slicing_config(../../slicing/default.ini)
 //battery screw cap
 
 use <../888_1020.scad>
