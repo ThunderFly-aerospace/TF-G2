@@ -1,8 +1,6 @@
 //Spodni cast pylonu
 include <../parameters.scad>
-use <lib/stdlib/silentblock.scad>
 
-pylon_bottom_wall = 5;
 
 module pylon_silentblocks(){
 for(x = [-0.5, 0.5], y=[-0.5, 0.5])
@@ -11,6 +9,16 @@ for(x = [-0.5, 0.5], y=[-0.5, 0.5])
 }
 pylon_silentblocks();
 
+module 888_1007(){
+    translate([0, 0, pylon_thickness/2])
+    difference(){
+        union(){
+            // Zakladni tvar
+            hull(){
+                cube([pylon_base_length, 10, pylon_thickness], center = true);
+                translate([0, pilot_height_separation, 0])
+                    cube([pylon_ring_length, 10, pylon_thickness], center = true);
+            }
 
 module 888_1007(){
 
@@ -47,7 +55,6 @@ module 888_1007(){
           }
 
 
-        //pylon_pipes(pylon_pipe_d, 10, 0);
 
         for(x = [0,-20, 20])
             translate([x, 0, 0])
@@ -61,6 +68,4 @@ module 888_1007(){
     }
 }
 
-
-//%pylon_pipes();
 888_1007();

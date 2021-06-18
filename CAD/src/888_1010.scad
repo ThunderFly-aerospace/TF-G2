@@ -9,22 +9,47 @@ use <888_1011.scad>
 use <888_1012.scad>
 use <888_1009.scad> // data o pylonu
 
+L1 = rotor_head_width;  // Length of the middle part
+T1 = rotorhead_wall_thickness;  // Thickness of the middle wall
+T2 = rotorhead_wall_thickness;  // Thickness of the side walls
+H = 11;  // Hight of the part
+L2 = pylon_top_length;  // Length of the side walls
+
+/// Parameters for holes
+RC = M3_screw_diameter/2;  // Radius of the center screw holes
+RP = M2_screw_diameter/2;  // Radius of the periphery screw holes
+DY = horizontal_screw_distance;  // Y-axis distance of the periphery screw holes
+DZ = vertical_screw_distance;  // Z-axis distance of the periphery screw holes
+
+shift =  - 0;
+CHT = [0, shift, -20];  // Center hole translation
+
+fn = 100;  // default face number for cylinders
+/// Main object
+
+module body() {
+    translate([0,0, 0]) difference() {
+        union(){
+            translate([0, 0, 0])
+                cube([L1, pylon_top_length, .1], center= true);
+            hull(){
+                translate([0, 0, 0])
+                cube([L1, pylon_top_length, 10], center= true);
+                translate([0, 0, -15])
+                    rotate([0,90,0])
+                        cylinder(d=10, h=L1, center = true, $fn=fn);
 
 servo_z_offset = 3.5;
 tfslot_dist = 19;
 rotor_head_pylon_adapter_z = - tfslot_dist/2 - 7;
 pitch_axis_z = 30;
 
-side_wall = 2;
-
-pylon_adapter_mount_holes_distance = 15;
 
 
-// if(0){
-//     % rotate([0, 0, 180])for(a=[-1, 1]) translate([8, a*(6+airspeed_width/2+0.5), -5 + servo_z_offset]) rotate([90, 0, 90]) alignds420();
-//     % translate([0, 0, pitch_axis_z]) rotate([90, 0, 90]) 888_1011();
-//     % translate([-10, 0, pitch_axis_z+4]) rotate([0, -90, 0]) 888_1012();
-// }
+        }
+
+        translate([25 + rotor_head_width/2, 0, 0]) rotate([0, 90-pylon_top_angle, 0]) cube(50, center = true);
+        translate([-25 - rotor_head_width/2, 0, 0]) rotate([0, pylon_top_angle, 0]) cube(50, center = true);
 
 pylon_mount_adapter_center_distance = airspeed_dist/2+4;
 
