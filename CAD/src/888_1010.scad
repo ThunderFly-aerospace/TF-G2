@@ -51,13 +51,11 @@ module 888_1010(){
 
                         // Bocni svisle placky - horni cast
                         hull(){
-                            // Pro pripevneni adapteru na pylon
                             translate([pitch_axis_y, airspeed_width/2, 30]) rotate([90, 0, 0]) scale([1.3,1,1]) cylinder(d = 8, h = side_wall+1);
                             translate([pitch_axis_y, airspeed_width/2, airspeed_dist/2]) rotate([90, 0, 0]) scale([1.3,1,1]) cylinder(d = 8, h = side_wall+1);
                         }
 
                         hull(){
-                            // Pro pripevneni adapteru na pylon
                             translate([pitch_axis_y, airspeed_width/2, 30]) rotate([90, 0, 0]) scale([1.3,1,1]) cylinder(d = 8, h = side_wall);
                             translate([pitch_axis_y, airspeed_width/2, airspeed_dist/2]) rotate([90, 0, 0]) scale([1.3,1,1]) cylinder(d = 8, h = side_wall);
 
@@ -86,7 +84,7 @@ module 888_1010(){
 
 
             // Otvory pro srouby k pylonu
-            translate([0,                       -pylon_screw_top_y_dist/2, -airspeed_dist/2-4]){
+            translate([0,                       -pylon_screw_top_y_dist/2, -airspeed_dist/2-3.5]){
                 translate([0, 0, -5]) cylinder(d=M3_screw_diameter, h = 5+7, $fn=30);
                 hull(){
                     translate([0, 0, 2]) rotate(30) cylinder(d=M3_nut_diameter, h = M3_nut_height, $fn=6);
@@ -94,7 +92,7 @@ module 888_1010(){
                 }
 
             }
-            translate([-pylon_screw_top_x_dist, -pylon_screw_top_y_dist/2, -airspeed_dist/2-4]){
+            translate([-pylon_screw_top_x_dist, -pylon_screw_top_y_dist/2, -airspeed_dist/2-3.5]){
                 translate([0, 0, -5]) cylinder(d=M3_screw_diameter, h = 5+7, $fn=30);
                 hull(){
                     translate([0, 0, 2]) rotate(30) cylinder(d=M3_nut_diameter, h = M3_nut_height, $fn=6);
@@ -103,7 +101,7 @@ module 888_1010(){
             }
 
 
-            translate([0,                       pylon_screw_top_y_dist/2, -airspeed_dist/2-4]){
+            translate([0,                       pylon_screw_top_y_dist/2, -airspeed_dist/2-3.5]){
                 translate([0, 0, -5]) cylinder(d=M3_screw_diameter, h = 5+7, $fn=30);
                 hull(){
                     translate([0, 0, 2]) rotate(30) cylinder(d=M3_nut_diameter, h = M3_nut_height, $fn=6);
@@ -111,7 +109,7 @@ module 888_1010(){
                 }
 
             }
-            translate([-pylon_screw_top_x_dist, pylon_screw_top_y_dist/2, -airspeed_dist/2-4]){
+            translate([-pylon_screw_top_x_dist, pylon_screw_top_y_dist/2, -airspeed_dist/2-3.5]){
                 translate([0, 0, -5]) cylinder(d=M3_screw_diameter, h = 5+7, $fn=30);
                 hull(){
                     translate([0, 0, 2]) rotate(30) cylinder(d=M3_nut_diameter, h = M3_nut_height, $fn=6);
