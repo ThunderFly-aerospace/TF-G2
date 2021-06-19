@@ -14,6 +14,7 @@ servo_z_offset = 3.5;
 tfslot_dist = 19;
 rotor_head_pylon_adapter_z = - tfslot_dist/2 - 7;
 pitch_axis_z = 30;
+pitch_axis_y = -2;
 
 side_wall = 2;
 
@@ -30,7 +31,7 @@ pylon_mount_adapter_center_distance = airspeed_dist/2+4;
 
 module 888_1010(){
 
- translate([0, airspeed_width/2, 0]) rotate([90, 0, 180]) linear_extrude(1, center=true) text(str("< ", week), halign="center", valign="center", size=4);
+ translate([5, airspeed_width/2, 0]) rotate([90, 0, 180]) linear_extrude(1.4, center=true) text(str("< ", week), halign="center", valign="center", size=5);
 
     difference(){
             union(){
@@ -51,29 +52,29 @@ module 888_1010(){
                         // Bocni svisle placky - horni cast
                         hull(){
                             // Pro pripevneni adapteru na pylon
-                            translate([0, airspeed_width/2, 30]) rotate([90, 0, 0]) scale([1.3,1,1]) cylinder(d = 8, h = side_wall+1);
-                            translate([0, airspeed_width/2, airspeed_dist/2]) rotate([90, 0, 0]) scale([1.3,1,1]) cylinder(d = 8, h = side_wall+1);
+                            translate([pitch_axis_y, airspeed_width/2, 30]) rotate([90, 0, 0]) scale([1.3,1,1]) cylinder(d = 8, h = side_wall+1);
+                            translate([pitch_axis_y, airspeed_width/2, airspeed_dist/2]) rotate([90, 0, 0]) scale([1.3,1,1]) cylinder(d = 8, h = side_wall+1);
                         }
 
                         hull(){
                             // Pro pripevneni adapteru na pylon
-                            translate([0, airspeed_width/2, 30]) rotate([90, 0, 0]) scale([1.3,1,1]) cylinder(d = 8, h = side_wall);
-                            translate([0, airspeed_width/2, airspeed_dist/2]) rotate([90, 0, 0]) scale([1.3,1,1]) cylinder(d = 8, h = side_wall);
+                            translate([pitch_axis_y, airspeed_width/2, 30]) rotate([90, 0, 0]) scale([1.3,1,1]) cylinder(d = 8, h = side_wall);
+                            translate([pitch_axis_y, airspeed_width/2, airspeed_dist/2]) rotate([90, 0, 0]) scale([1.3,1,1]) cylinder(d = 8, h = side_wall);
 
-                            translate([-25, airspeed_width/2-side_wall, airspeed_dist/2]) cube([30, side_wall, 10]);
+                            #translate([-25, airspeed_width/2-side_wall, airspeed_dist/2]) cube([10, side_wall, 10]);
                         }
                     }
 
                     // Pro rotorovou hlavu (osa ROLL)
-                    translate([-0, airspeed_width/2-2-0.5, pitch_axis_z]) rotate([-90, 0, 0]) cylinder(d = M3_screw_diameter, h = 10, $fn = 15, center=true);
-                    translate([-0, 35/2-1, pitch_axis_z]) rotate([-90, 0, 0]) cylinder(d = M3_nut_diameter, h = 10, $fn = 6);
+                    translate([pitch_axis_y, airspeed_width/2-2-0.5, pitch_axis_z]) rotate([-90, 0, 0]) cylinder(d = M3_screw_diameter, h = 10, $fn = 15, center=true);
+                    translate([pitch_axis_y, 35/2-1, pitch_axis_z]) rotate([-90, 0, 0]) cylinder(d = M3_nut_diameter, h = 10, $fn = 6);
 
                     // Odecteni serva
                     rotate([0, 0, 180]) for(a=[-1, 1]) translate([8, a*(5+airspeed_width/2+0.5),  servo_z_offset]) rotate([90, 0, 90])
                         union(){
                             translate([0, 0, 10]) cube([11, 24, 20], center = true);
-                            translate([0, 14, 13]) rotate([0, 90, 0]) cylinder(d = 1.8, h = 55, $fn=10);
-                            translate([0, -14, 13]) rotate([0, 90, 0]) cylinder(d = 1.8, h = 55, $fn=10);
+                            translate([0, 14, 13]) rotate([0, 90, 0]) cylinder(d = 1.9, h = 55, $fn=10);
+                            translate([0, -14, 13]) rotate([0, 90, 0]) cylinder(d = 1.9, h = 55, $fn=10);
                         }
                 }
             }

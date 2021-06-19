@@ -40,17 +40,17 @@ module clamp(){
   difference(){
     union(){
       translate([0, 0, -2]) cylinder(d = pylon_pipe_d+3, h = 13+2, $fn=30);
-      translate([0, -2.5, 0]) cube([7.5, 5, 12]);
+      translate([0, -3.5, 0]) cube([7.5, 7, 12]);
 
     }
     translate([2, -0.5, 0]) cube([10, 1, 15]);
-    translate([2, -3.5, 3]) cube([10, 7, 0.2]);
+    translate([1.5, -4, 3]) cube([10, 8, 0.4]);
     translate([0, 0, 3]) cylinder(d = pylon_pipe_d, h = 16, $fn=30);
 
     translate([4, 0, 8]) rotate([90, 0, 0]){
         cylinder(d=M3_screw_diameter, h = 10, center=true, $fn=20);
-        translate([0, 0, 2]) rotate(30) cylinder(d=M3_nut_diameter, h = 10, $fn=6);
-        translate([0, 0, -2-10]) rotate(30) cylinder(d=M3_nut_diameter, h = 10, $fn=6);
+        translate([0, 0, 2.2]) rotate(30) cylinder(d=M3_nut_diameter, h = 10, $fn=6);
+        translate([0, 0, -2.2-10]) rotate(30) cylinder(d=M3_nut_diameter, h = 10, $fn=6);
     }
 
   }
