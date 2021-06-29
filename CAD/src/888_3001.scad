@@ -22,7 +22,7 @@ module tail_center(){
         union(){
         hull(){
             translate([0, 0, -below_height])
-                #sweep(gen_dat_2(M=below_height, dz=1,N=N), showslices = false);
+                sweep(gen_dat_2(M=below_height, dz=1,N=N), showslices = false);
 
             translate([0, 0, -5-12])
                 rotate([0, 90, 0])
@@ -80,15 +80,20 @@ module tail_center(){
         // krabice pro servo
         translate([60, 1, 0]) union(){
             //translate([-25/2, -11/2, -35]) cube([25, 11, 35]);
-            translate([-23.5/2, -11/2, -40]) cube([23.5, 11, 35]);
-            translate([-35/2, -11/2, -below_height+20+servo_z_shift]) cube([35, 11+5, 35]);
-            translate([-23.5/2, -11/2, -20+3-42]) cube([23.5, 11, 35]);
-            translate([-35/2, -2/2, -below_height-1]) cube([35, 2, 35]);
+            translate([-23.5/2, -10.5/2, -40]) cube([23.5, 10.5, 35]);
+            translate([-35/2, -10.5/2, -below_height+20+servo_z_shift]) cube([35, 10.5+5, 35]);
+            translate([-23.5/2, -10.5/2, -20+3-42]) cube([23.5, 10.5, 35]);
+            translate([-35/2, -1.7/2, -below_height-1]) cube([35, 1.7, 35]);
             translate([-35/2, -8/2, -below_height-1]) cube([20, 8, servo_z_shift+6]);
 
-            translate([-27.5/2, 0, -below_height+15+servo_z_shift]) rotate([90, 0, 0]) cylinder(d=2, h=50, center = true, $fn = 20);
-            translate([+27.5/2, 0, -below_height+15+servo_z_shift]) rotate([90, 0, 0]) cylinder(d=2, h=50, center = true, $fn = 20);
-
+            for(i=[1, -1])
+              translate([i*27.5/2, 0, -below_height+15+servo_z_shift])
+                rotate([-90, 0, 0])
+                {
+                  cylinder(d=2, h=13, center = true, $fn = 20);
+                  translate([0, 0, 6])
+                    cylinder(d=4, h=10, $fn = 20);
+                }
         }
 
         // kostky na pripevneni smerovky, otvory v nich na sroub a vystuzeni
