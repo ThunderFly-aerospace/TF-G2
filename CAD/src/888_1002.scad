@@ -68,8 +68,8 @@ difference(){
 			        translate([motor_x_shift-15, 0, 0]) cylinder(d = 20-thickness, h=10);
       }
 
-      translate([base_patern, 0, 0]) cube([2, base_width, 5*2], center=true);
-      translate([base_patern, 0, 0]) cube([6, base_width, 2], center=true);
+      //translate([base_patern, 0, 0]) cube([2, base_width, 5*2], center=true);
+      //translate([base_patern, 0, 0]) cube([6, base_width, 2], center=true);
     }
 
     difference(){

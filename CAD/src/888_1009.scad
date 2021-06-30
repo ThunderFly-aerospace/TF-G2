@@ -262,6 +262,35 @@ translate([0, 0, 150]) 888_1009_top();
 %translate([0, 0, -8]) pylon_silentblocks();
 
 
+
+module 888_1009_drill(){
+
+  difference(){
+  translate([-15/2, -5, -1]) cube([15, 15, 150+1+5]);
+    cylinder(d=4.3, h=170, $fn=30);
+    translate([-0.5, 0, -2]) cube([1, 10, 180]);
+    translate([-7, -2, 150]) cube([14, 20, 1.5]);
+
+    for(z = [5, 150-5]){
+      translate([0, 0, z]) {
+        rotate([0, 90, 0])
+          cylinder(d=3.1, h=20, center=true, $fn=20);
+      }
+    }
+    for(z = [5+10, 150-5-10]){
+      translate([0, 5, z])
+        rotate([0, 90, 0]) {
+          cylinder(d=M3_screw_diameter, h=20, center=true, $fn=20);
+          translate([0, 0, 3]) cylinder(d=M3_nut_diameter, h=20, $fn=6);
+          translate([0, 0, -3-20]) cylinder(d=M3_nut_diameter, h=20, $fn=6);
+      }
+    }
+
+  }
+
+}
+
+
 module pylon_assembly(){
     888_1009_bottom();
     translate([0, 0, 150]) 888_1009_top();
