@@ -272,7 +272,7 @@ module 888_1009_drill(){
     translate([-7, -2, 150]) cube([14, 20, 1.5]);
 
     for(z = [5, 150-5]){
-      translate([0, 0, z]) {
+      translate([0, M3_screw_diameter/2+pylon_pipe_d/(2*3), z]) {
         rotate([0, 90, 0])
           cylinder(d=3.1, h=20, center=true, $fn=20);
       }
@@ -285,9 +285,7 @@ module 888_1009_drill(){
           translate([0, 0, -3-20]) cylinder(d=M3_nut_diameter, h=20, $fn=6);
       }
     }
-
   }
-
 }
 
 

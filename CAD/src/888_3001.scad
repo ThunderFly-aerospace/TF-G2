@@ -71,7 +71,7 @@ module tail_center(){
 
         // prostor pro otaceni smerovky
         translate([depth_max - rudder_depth, 0, -below_height+10])
-            cylinder(d = 12, h=80);
+            cylinder(d = 10, h=80, $fn=30);
 
         // Otvor pro svislou osu
         translate([depth_max - rudder_depth, 0, -below_height+2])
