@@ -92,7 +92,7 @@ module tail_center(){
                 {
                   cylinder(d=2, h=13, center = true, $fn = 20);
                   translate([0, 0, 6])
-                    cylinder(d=4, h=10, $fn = 20);
+                    cylinder(d=5.2, h=10, $fn = 20);
                 }
         }
 
