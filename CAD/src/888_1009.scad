@@ -127,22 +127,26 @@ pole = [
 [
         [pylon_pipe_top_x_dist/2, pylon_pipe_top_y_dist/2, 0],
         [pylon_screw_top_x_dist/2, pylon_screw_top_y_dist/2, 0],
-        [rot_rr_x, rot_rr_y]
+        [rot_rr_x, rot_rr_y],
+        [1, 1]
 ],
 [
         [-pylon_pipe_top_x_dist/2, pylon_pipe_top_y_dist/2, 0],
         [-pylon_screw_top_x_dist/2, pylon_screw_top_y_dist/2, 0],
-        [rot_fr_x, rot_fr_y]
+        [rot_fr_x, rot_fr_y],
+        [-1, 1]
 ],
 [
         [pylon_pipe_top_x_dist/2, -pylon_pipe_top_y_dist/2, 0],
         [pylon_screw_top_x_dist/2, -pylon_screw_top_y_dist/2, 0],
-        [rot_rl_x, rot_rl_y]
+        [rot_rl_x, rot_rl_y],
+        [1, -1]
 ],
 [
         [-pylon_pipe_top_x_dist/2, -pylon_pipe_top_y_dist/2, 0],
         [-pylon_screw_top_x_dist/2, -pylon_screw_top_y_dist/2, 0],
-        [rot_fl_x, rot_fl_y]
+        [rot_fl_x, rot_fl_y],
+        [-1, -1]
 ]
 
 ];
@@ -154,12 +158,16 @@ for( i = [0, 1, 2, 3] ){
     difference(){
       union(){
 
+        // sloupek pro tycku
         intersection(){
-            translate(param[0])
+              translate(param[0])
                 cube([10, 10, 10], center=true);
             translate(param[0])
                 rotate([0, param[2][0], 0]) rotate([param[2][1], 0, 0])
+                  union(){
                    cylinder(d=pylon_pipe_d+2.5, h=25, center=true, $fn=48);
+                   translate([-5*param[3][0], 0, 0]) cube([10, 6, 20], center=true);
+                 }
         }
 
         // spodni nozicka pro prisroubovani
@@ -172,50 +180,53 @@ for( i = [0, 1, 2, 3] ){
                         cylinder(d=8, h=25, center=true, $fn=48);
             }
             translate(param[1]+[0, 0, +5-1.5])
-                cylinder(d=M3_nut_diameter+1, h=3, center=true, $fn=48);
-
+                cylinder(d2=M3_nut_diameter+1, d1=M3_nut_diameter, h=3, center=true, $fn=48);
        }
 
        hull(){
           intersection(){
               translate(param[0])
-                  cube([10, 10, 1], center=true);
+                  cube([10, 10, 5], center=true);
               translate(param[0])
                   rotate([0, param[2][0], 0]) rotate([param[2][1], 0, 0])
                      cylinder(d=pylon_pipe_d+2.5, h=25, center=true, $fn=48);
           }
-            intersection(){
-                translate(param[0]+[0, 0, +5-1])
-                    cube([15, 15, 2], center=true);
-                translate(param[0])
-                    rotate([0, param[2][0], 0]) rotate([param[2][1], 0, 0])
-                        cylinder(d=8, h=25, center=true, $fn=48);
-            }
-
-            translate(param[1]+[0, 0, +5-1.5])
-                cylinder(d=M3_nut_diameter+1, h=3, center=true, $fn=48);
-
+          intersection(){
+              translate(param[0]+[0, 0, +5-1])
+                  cube([15, 15, 2], center=true);
+              translate(param[0])
+                  rotate([0, param[2][0], 0]) rotate([param[2][1], 0, 0])
+                      cylinder(d=8, h=25, center=true, $fn=48);
+          }
        }
-
-
     }
 
-    translate(param[1]+[0, 0, -2])
-      cylinder(d=M3_head_diameter+1, h=5, $fn=48);
 
 
-        intersection(){
-            translate(param[0]+[0, 0, -1])
-                cube([10, 10, 10], center=true);
-            translate(param[0]+[0, 0, 0])
-                rotate([0, param[2][0], 0]) rotate([param[2][1], 0, 0])
-                    cylinder(d=pylon_pipe_d, h=25, center=true, $fn=24);
-        }
+
+    translate(param[1]+[0, 0, -2.5])
+      cylinder(d1=M3_head_diameter-1.5, d2=M3_head_diameter+1.5, h=6, $fn=48);
 
 
-        translate(param[1])
-            //rotate([0, param[2][0], 0]) rotate([param[2][1], 0, 0])
-                cylinder(d=M3_screw_diameter, h=25, center=true, $fn=24);
+    intersection(){
+        translate(param[0]+[0, 0, -1])
+            cube([10, 10, 10], center=true);
+        translate(param[0]+[0, 0, 0])
+            rotate([0, param[2][0], 0]) rotate([param[2][1], 0, 0])
+                cylinder(d=pylon_pipe_d, h=25, center=true, $fn=24);
+    }
+
+    translate(param[0] + [-(M3_screw_diameter/2+pylon_pipe_d/(2*3))*param[3][0], 0, -2]) rotate([90, 0, 0]){
+        cylinder(d=M3_screw_diameter, h = 10, center=true, $fn=20);
+        translate([0, 0, 2.4]) rotate(30) cylinder(d=M3_nut_diameter, h = 10, $fn=6);
+        translate([0, 0, -2.5-10]) rotate(30) cylinder(d=M3_nut_diameter, h = 10, $fn=6);
+
+        translate([-3*param[3][0], -5, 0]) cube([10, 20, 1], center=true);
+    }
+
+    translate(param[1])
+        //rotate([0, param[2][0], 0]) rotate([param[2][1], 0, 0])
+            cylinder(d=M3_screw_diameter, h=25, center=true, $fn=24);
 
 
 
