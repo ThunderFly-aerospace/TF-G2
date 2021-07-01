@@ -165,8 +165,8 @@ for( i = [0, 1, 2, 3] ){
             translate(param[0])
                 rotate([0, param[2][0], 0]) rotate([param[2][1], 0, 0])
                   union(){
-                   cylinder(d=pylon_pipe_d+2.5, h=25, center=true, $fn=48);
-                   translate([-5*param[3][0], 0, 0]) cube([10, 6, 20], center=true);
+                   cylinder(d=pylon_pipe_d+4, h=25, center=true, $fn=48);
+                   translate([-5*param[3][0], 0, 0]) cube([10, 8, 20], center=true);
                  }
         }
 
@@ -218,8 +218,8 @@ for( i = [0, 1, 2, 3] ){
 
     translate(param[0] + [-(M3_screw_diameter/2+pylon_pipe_d/(2*3))*param[3][0], 0, -2]) rotate([90, 0, 0]){
         cylinder(d=M3_screw_diameter, h = 10, center=true, $fn=20);
-        translate([0, 0, 2.4]) rotate(30) cylinder(d=M3_nut_diameter, h = 10, $fn=6);
-        translate([0, 0, -2.5-10]) rotate(30) cylinder(d=M3_nut_diameter, h = 10, $fn=6);
+        translate([0, 0, 3]) rotate(30) cylinder(d=M3_nut_diameter, h = 10, $fn=6);
+        translate([0, 0, -3-10]) rotate(30) cylinder(d=M3_nut_diameter, h = 10, $fn=6);
 
         translate([-3*param[3][0], -5, 0]) cube([10, 20, 1], center=true);
     }
