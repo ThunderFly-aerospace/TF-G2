@@ -10,7 +10,7 @@ below_height = 30;
 rudder_depth = 60;
 
 N = 80;
-rudder_radius = 6;
+rudder_radius = 5;
 
 module tail_vertical(){
 
@@ -38,7 +38,7 @@ module tail_vertical_bottom(){
         translate([depth_max - rudder_depth, -rudder_radius, 0])
             cube([depth_max, rudder_radius*2, height]);
         translate([depth_max - rudder_depth, 0, 0])
-            cylinder(r = rudder_radius, h = height );
+            cylinder(r = rudder_radius, h = height, $fn=40);
       }
 
       // beveled top of rudder

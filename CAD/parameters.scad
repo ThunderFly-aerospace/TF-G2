@@ -305,10 +305,29 @@ battery_type = "Zippy_4S_3700";
 	battery_case_start_x = 25;
 	battery_case_wall = 0.4*3;
 
-	battery_width = 45;
-	battery_height = 33;
-	battery_length = 145;
 
+// ZIPPY 3700 mAh
+	battery_width = 48;
+	battery_height = 35;
+	battery_length = 150;
 	battery_capacity = 3700;
 	battery_cells = 4;
+
+// ZIPPY 4500 mAh
+	battery_width = 48;
+	battery_height = 42;
+	battery_length = 160;
+	battery_capacity = 4500;
+	battery_cells = 4;
+
+
+// ZIPPY 5000 mAh
+	battery_width = 48;
+	battery_height = 42;
+	battery_length = 165;
+	battery_capacity = 5000;
+	battery_cells = 4;
+
+
+
 //}

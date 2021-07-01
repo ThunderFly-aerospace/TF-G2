@@ -39,7 +39,7 @@ use <888_1010.scad>
 module clamp(){
   difference(){
     union(){
-      translate([0, 0, -2]) cylinder(d = pylon_pipe_d+3, h = 13+2, $fn=30);
+      translate([0, 0, -2]) cylinder(d = pylon_pipe_d+4, h = 13+2, $fn=30);
       translate([0, -3.5, 0]) cube([7.5, 7, 12]);
 
     }
@@ -47,10 +47,10 @@ module clamp(){
     translate([1.5, -4, 3]) cube([10, 8, 0.4]);
     translate([0, 0, 3]) cylinder(d = pylon_pipe_d, h = 16, $fn=30);
 
-    translate([4, 0, 8]) rotate([90, 0, 0]){
+    translate([M3_screw_diameter/2+pylon_pipe_d/(2*3), 0, 8]) rotate([90, 0, 0]){
         cylinder(d=M3_screw_diameter, h = 10, center=true, $fn=20);
-        translate([0, 0, 2.2]) rotate(30) cylinder(d=M3_nut_diameter, h = 10, $fn=6);
-        translate([0, 0, -2.2-10]) rotate(30) cylinder(d=M3_nut_diameter, h = 10, $fn=6);
+        translate([0, 0, 2.6]) rotate(30) cylinder(d=M3_nut_diameter, h = 10, $fn=6);
+        translate([0, 0, -2.6-10]) rotate(30) cylinder(d=M3_nut_diameter, h = 10, $fn=6);
     }
 
   }
@@ -70,10 +70,14 @@ union(){
       }
 
   for(y = [-0.5, 0.5])
-    hull()
-      for(x = [-0.5, 0.5])
-        translate([(pylon_silentblocks_base_distance)*x, (pylon_silentblocks_base_distance)*y, 0])
-          cylinder(d=8, h = 2);
+    {
+      hull()
+        for(x = [-0.5, 0.5])
+          translate([(pylon_silentblocks_base_distance)*x, (pylon_silentblocks_base_distance)*y, 0])
+            cylinder(d=8, h = 2);
+      translate([0, pylon_silentblocks_base_distance*y, 2])
+          cube([pylon_silentblocks_base_distance, 2, 2], center=true);
+    }
   for(x = [-0.5, 0.5])
     hull()
       for(y = [-0.5, 0.5])
@@ -159,7 +163,27 @@ for( i = [0, 1, 2, 3] ){
         }
 
         // spodni nozicka pro prisroubovani
-        #hull(){
+        hull(){
+            intersection(){
+                translate(param[0]+[0, 0, +5-1])
+                    cube([15, 15, 2], center=true);
+                translate(param[0])
+                    rotate([0, param[2][0], 0]) rotate([param[2][1], 0, 0])
+                        cylinder(d=8, h=25, center=true, $fn=48);
+            }
+            translate(param[1]+[0, 0, +5-1.5])
+                cylinder(d=M3_nut_diameter+1, h=3, center=true, $fn=48);
+
+       }
+
+       hull(){
+          intersection(){
+              translate(param[0])
+                  cube([10, 10, 1], center=true);
+              translate(param[0])
+                  rotate([0, param[2][0], 0]) rotate([param[2][1], 0, 0])
+                     cylinder(d=pylon_pipe_d+2.5, h=25, center=true, $fn=48);
+          }
             intersection(){
                 translate(param[0]+[0, 0, +5-1])
                     cube([15, 15, 2], center=true);
@@ -168,13 +192,16 @@ for( i = [0, 1, 2, 3] ){
                         cylinder(d=8, h=25, center=true, $fn=48);
             }
 
-            translate(param[1]+[0, 0, +5-1])
-                cylinder(d=M3_nut_diameter+1, h=2, center=true, $fn=48);
+            translate(param[1]+[0, 0, +5-1.5])
+                cylinder(d=M3_nut_diameter+1, h=3, center=true, $fn=48);
 
        }
 
 
     }
+
+    translate(param[1]+[0, 0, -2])
+      cylinder(d=M3_head_diameter+1, h=5, $fn=48);
 
 
         intersection(){
@@ -187,7 +214,7 @@ for( i = [0, 1, 2, 3] ){
 
 
         translate(param[1])
-            rotate([0, param[2][0], 0]) rotate([param[2][1], 0, 0])
+            //rotate([0, param[2][0], 0]) rotate([param[2][1], 0, 0])
                 cylinder(d=M3_screw_diameter, h=25, center=true, $fn=24);
 
 
@@ -231,8 +258,35 @@ color("gray") pylon_pipes(below=0, above=0);
 888_1009_bottom();
 translate([0, 0, 150]) 888_1009_top();
 %translate([0, 0, -8]) 888_1007();
-%rotate([0, 0, 180]) translate([7.5, 0, -13.5+180]) 888_1010();
+%rotate([0, 0, 180]) translate([7.5, 0, -13.5+180+3]) 888_1010();
 %translate([0, 0, -8]) pylon_silentblocks();
+
+
+
+module 888_1009_drill(){
+
+  difference(){
+  translate([-15/2, -5, -1]) cube([15, 15, 150+1+5]);
+    cylinder(d=4.3, h=170, $fn=30);
+    translate([-0.5, 0, -2]) cube([1, 10, 180]);
+    translate([-7, -2, 150]) cube([14, 20, 1.5]);
+
+    for(z = [5, 150-5]){
+      translate([0, M3_screw_diameter/2+pylon_pipe_d/(2*3), z]) {
+        rotate([0, 90, 0])
+          cylinder(d=3.1, h=20, center=true, $fn=20);
+      }
+    }
+    for(z = [5+10, 150-5-10]){
+      translate([0, 5, z])
+        rotate([0, 90, 0]) {
+          cylinder(d=M3_screw_diameter, h=20, center=true, $fn=20);
+          translate([0, 0, 3]) cylinder(d=M3_nut_diameter, h=20, $fn=6);
+          translate([0, 0, -3-20]) cylinder(d=M3_nut_diameter, h=20, $fn=6);
+      }
+    }
+  }
+}
 
 
 module pylon_assembly(){
