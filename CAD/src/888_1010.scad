@@ -5,6 +5,7 @@ include <../parameters.scad>
 include <MCAD/servos.scad>
 use <lib/TFSLOT01/CAD/src/tfslot_888_1001.scad>
 use <lib/stdlib/servos.scad>
+use <lib/stdlib/naca4.scad>
 use <888_1011.scad>
 use <888_1012.scad>
 use <888_1009.scad> // data o pylonu
@@ -20,6 +21,8 @@ side_wall = 2;
 
 pylon_adapter_mount_holes_distance = 15;
 
+
+naca_pipe_length = 20;
 
 // if(0){
 //     % rotate([0, 0, 180])for(a=[-1, 1]) translate([8, a*(6+airspeed_width/2+0.5), -5 + servo_z_offset]) rotate([90, 0, 90]) alignds420();
@@ -46,7 +49,7 @@ module 888_1010(){
                         translate([-10, airspeed_width/2-side_wall, -airspeed_dist/2+0.5]) rotate([45, 0, 0]) cube([30, side_wall, 2], center=true);
 
                         // Kostky tvorici material pro prisroubovani
-                        translate([-25, -25/2-5+0.05, -pylon_mount_adapter_center_distance-5+0.05]) cube([30, 10-0.1, 10-0.1]);
+                        //translate([-25, -25/2-5+0.05, -pylon_mount_adapter_center_distance-5+0.05]) cube([30, 10-0.1, 10-0.1]);
 
 
                         // Bocni svisle placky - horni cast
@@ -75,16 +78,32 @@ module 888_1010(){
                             translate([0, -14, 13]) rotate([0, 90, 0]) cylinder(d = 1.9, h = 55, $fn=10);
                         }
                 }
+
+
+                // NACA pro stredni tycku
+                translate([15, 0, -naca_pipe_length - airspeed_dist/2]) rotate([0, 0, 180]) airfoil(naca = 0040, L = 40, N = 50, h= naca_pipe_length, open = false);
+
             }
 
 
             // tramky tvorici vyrez pro adaptery pylonu
-            translate([0, -pylon_screw_top_y_dist/2, -airspeed_dist/2-4]+[0, 0, -5]) cube([100, 10, 10], center=true);
-            translate([0, pylon_screw_top_y_dist/2, -airspeed_dist/2-4]+[0, 0, -5]) cube([100, 10, 10], center=true);
+            //translate([0, -pylon_screw_top_y_dist/2, -airspeed_dist/2-4]+[0, 0, -5]) cube([100, 10, 10], center=true);
+            //translate([0, pylon_screw_top_y_dist/2, -airspeed_dist/2-4]+[0, 0, -5]) cube([100, 10, 10], center=true);
+
+            // NACA pro stredni tycku
+            translate([5, 0, -naca_pipe_length - airspeed_dist/2-0.1]) cylinder(d=13, h=naca_pipe_length);
+            translate([5, 0, -naca_pipe_length - airspeed_dist/2-0.1]) translate([-20, -0.5, 0]) cube([20, 1, naca_pipe_length]);
+
+            translate([5, 0, -naca_pipe_length - airspeed_dist/2-0.1]) translate([-12, 0, 5]) rotate([90, 0, 0])
+                {
+                    cylinder(d=M3_screw_diameter, h=naca_pipe_length, center=true, $fn=30);
+                    translate([0, 0, naca_pipe_length/2+4]) cylinder(d=M3_nut_diameter, h=naca_pipe_length, center=true, $fn=6);
+                    translate([0, 0, -naca_pipe_length/2-4]) cylinder(d=M3_nut_diameter, h=naca_pipe_length, center=true, $fn=6);
+                }
 
 
             // Otvory pro srouby k pylonu
-            translate([0,                       -pylon_screw_top_y_dist/2, -airspeed_dist/2-3.5]){
+            /* translate([0,                       -pylon_screw_top_y_dist/2, -airspeed_dist/2-3.5]){
                 translate([0, 0, -5]) cylinder(d=M3_screw_diameter, h = 5+7, $fn=30);
                 hull(){
                     translate([0, 0, 2]) rotate(30) cylinder(d=M3_nut_diameter, h = M3_nut_height, $fn=6);
@@ -98,10 +117,10 @@ module 888_1010(){
                     translate([0, 0, 2]) rotate(30) cylinder(d=M3_nut_diameter, h = M3_nut_height, $fn=6);
                     translate([0, -10, 2]) rotate(30) cylinder(d=M3_nut_diameter, h = M3_nut_height, $fn=6);
                 }
-            }
+            } */
 
 
-            translate([0,                       pylon_screw_top_y_dist/2, -airspeed_dist/2-3.5]){
+            /* translate([0,                       pylon_screw_top_y_dist/2, -airspeed_dist/2-3.5]){
                 translate([0, 0, -5]) cylinder(d=M3_screw_diameter, h = 5+7, $fn=30);
                 hull(){
                     translate([0, 0, 2]) rotate(30) cylinder(d=M3_nut_diameter, h = M3_nut_height, $fn=6);
@@ -115,7 +134,7 @@ module 888_1010(){
                     translate([0, 0, 2]) rotate(30) cylinder(d=M3_nut_diameter, h = M3_nut_height, $fn=6);
                     translate([0, 10, 2]) rotate(30) cylinder(d=M3_nut_diameter, h = M3_nut_height, $fn=6);
                 }
-            }
+            } */
 
 
 
