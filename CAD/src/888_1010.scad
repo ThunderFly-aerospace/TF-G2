@@ -91,7 +91,7 @@ module 888_1010(){
             //translate([0, pylon_screw_top_y_dist/2, -airspeed_dist/2-4]+[0, 0, -5]) cube([100, 10, 10], center=true);
 
             // NACA pro stredni tycku
-            translate([5, 0, -naca_pipe_length - airspeed_dist/2-0.1]) cylinder(d=13, h=naca_pipe_length);
+            translate([5, 0, -naca_pipe_length - airspeed_dist/2-0.1]) cylinder(d=pylon_pipe_d, h=naca_pipe_length);
             translate([5, 0, -naca_pipe_length - airspeed_dist/2-0.1]) translate([-20, -0.5, 0]) cube([20, 1, naca_pipe_length]);
 
             translate([5, 0, -naca_pipe_length - airspeed_dist/2-0.1]) translate([-12, 0, 5]) rotate([90, 0, 0])

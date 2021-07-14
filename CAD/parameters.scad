@@ -218,10 +218,7 @@ Servo_screw = 1.5;
 Servo_nut_height = 1;
 Servo_nut_diameter = 2.7;
 
-tail_pipes_distance = 10.16*5;
-tail_pipes_diameter = M4_screw_diameter;
-tail_pipes_min_wall = 3;
-
+tail_pipe_d = 10.3;
 
 // elevator parameters
 
@@ -259,7 +256,7 @@ maximum_printable_size = 150;
 // pylon_height = 250 - pylon_holder_side_mount_height;
 
 
-pylon_pipe_d = 4.2;
+pylon_pipe_d = 10.3;
 pylon_suspension_height = 150;
 pylon_pipe_top_dist = 0;
 pylon_thickness = 0; // Netusim, co to je
@@ -306,19 +303,19 @@ battery_type = "Zippy_4S_3700";
 	battery_case_wall = 0.4*3;
 
 
-// ZIPPY 3700 mAh
+/* // ZIPPY 3700 mAh
 	battery_width = 48;
 	battery_height = 35;
 	battery_length = 150;
 	battery_capacity = 3700;
-	battery_cells = 4;
+	battery_cells = 4; */
 
-// ZIPPY 4500 mAh
+/* // ZIPPY 4500 mAh
 	battery_width = 48;
 	battery_height = 42;
 	battery_length = 160;
 	battery_capacity = 4500;
-	battery_cells = 4;
+	battery_cells = 4; */
 
 
 // ZIPPY 5000 mAh
