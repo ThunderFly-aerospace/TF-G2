@@ -180,7 +180,7 @@ motor_holder_motor_height = 25;
 motor_holder_side_mount_height = base_patern*2.5;
 pylon_holder_side_mount_height = base_patern*4.5;
 
-engine_angle = -5; // ongle of engine axis relative to fuselage main axis
+engine_angle = 0; // ongle of engine axis relative to fuselage main axis
 engine_diameter = 55;
 engine_offset = 53;			// Posun motoru v ose X (dopredu)
 
