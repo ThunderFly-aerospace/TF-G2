@@ -100,6 +100,9 @@ jobs:
         cd CAD/blender
         ./update_blend_file.sh 
 
+    - name: Checkout repository and set original GitHub token
+      uses: actions/checkout@v2
+
     - name: publish to git        
       uses: stefanzweifel/git-auto-commit-action@v4
       with:
