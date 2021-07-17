@@ -15,7 +15,7 @@ servo_z_offset = 2.5;
 tfslot_dist = 19;
 rotor_head_pylon_adapter_z = - tfslot_dist/2 - 7;
 pitch_axis_z = 30;
-pitch_axis_y = -40*0.3;
+pitch_axis_y = -40*0.3 - 5;
 
 side_wall = 2;
 
@@ -24,10 +24,11 @@ pylon_mount_adapter_center_distance = airspeed_dist/2+4;
 
 module 888_1010() translate([40*0.3, 0, 0]) {
 
-     translate([8, airspeed_width/2, 0])
+     translate([-7, airspeed_width/2, 0])
         rotate([90, 0, 180])
             linear_extrude(1.6, center=true)
                 text(str("<", week), halign="center", valign="center", size=6);
+    #translate([-40, -2.5, -26]) cube([0.3, 5, 5]);
 
     difference(){
             union(){
