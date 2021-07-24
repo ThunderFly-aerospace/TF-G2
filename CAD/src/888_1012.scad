@@ -39,11 +39,11 @@ starter_rope_d = 39.2;
     echo(bearing_shaft_shift);
   
 // Parametry pro spojení obou dílů  
-    PridavnaSirkaNaSpojeniDilu = 12;
+    PridavnaSirkaNaSpojeniDilu = 10;
     SirkaRohu = 8;      // Roh je označení pro sešikmené kvádry ve spojení obou dílů s dírami na šrouby
     VyskaRohu = 3;
     TloustkaDna = 6.6;   // V nejtlustším místě podstavy pro upevnění válce na trojúhleníkovém dílu
-    PosunDerY = 3.4;
+    PosunDerY = 3.6;
     PosunDerZ = 3.6;  
   
   // Parametry pro západky na uchycení válce
@@ -132,13 +132,25 @@ translate([-rod_size/2-1, -bearing_outer_diameter/2 - Bwall-PridavnaSirkaNaSpoje
         rotate([0, 90, 0])
         cylinder(d = M3_screw_diameter, h = 100, $fn = draft?16:120);
     
+       translate([rod_size/2-1, -bearing_outer_diameter/2 - Bwall-PridavnaSirkaNaSpojeniDilu/2 + PosunDerY, -BaseThickness-(bearing_outer_diameter)/2+ 5 + PosunDerZ])     
+        rotate([0, 90, 0])
+     rotate([0, 0, 30])  
+     cylinder(d = M3_head_diameter, h = M3_head_height+0.5, $fn = draft?16:120);
+    
+    translate([rod_size/2-1, -(-bearing_outer_diameter/2 - Bwall-PridavnaSirkaNaSpojeniDilu/2 +PosunDerY), -BaseThickness-(bearing_outer_diameter)/2+ 5 + PosunDerZ])     
+        rotate([0, 90, 0])
+     rotate([0, 0, 30])  
+     cylinder(d = M3_nut_diameter, h = M3_nut_height+0.5, $fn = draft?16:120);
+    
  
    // Zapusteni pro loziska
-   translate([bearing_shaft_shift + bearing_shaft_length - bearing_shaft_length + bearing_thickness - 100, 0, bearing_outer_diameter/2 + Bwall])
+   W_prepazky_pro_tisk = 0.02;  // Přepážka tvořící spodní podstavu válce - přidáno kvůli tisku
+   
+   translate([bearing_shaft_shift + bearing_thickness - 8.735+W_prepazky_pro_tisk, 0, bearing_outer_diameter/2 + Bwall])
         rotate([0, 90, 0])
-            cylinder(d = bearing_outer_diameter, h = 100, $fn = draft?16:120);
+            cylinder(d = bearing_outer_diameter, h = 8.735, $fn = draft?16:120);
 
-   translate([bearing_shaft_shift + bearing_shaft_length - bearing_shaft_length + bearing_thickness + layer_thickness, 0, bearing_outer_diameter/2 + Bwall])
+   translate([bearing_shaft_shift + bearing_thickness + layer_thickness, 0, bearing_outer_diameter/2 + Bwall])
         rotate([0, 90, 0])
             cylinder(d = bearing_inner_diameter, h = 100, $fn = draft?16:120);
 
