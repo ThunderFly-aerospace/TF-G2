@@ -135,12 +135,12 @@ translate([-rod_size/2-1, -bearing_outer_diameter/2 - Bwall-PridavnaSirkaNaSpoje
        translate([rod_size/2-1, -bearing_outer_diameter/2 - Bwall-PridavnaSirkaNaSpojeniDilu/2 + PosunDerY, -BaseThickness-(bearing_outer_diameter)/2+ 5 + PosunDerZ])     
         rotate([0, 90, 0])
      rotate([0, 0, 30])  
-     cylinder(d = M3_head_diameter, h = M3_head_height+0.5, $fn = draft?16:120);
+     cylinder(d = M3_head_diameter - 0.6, h = M3_head_height+1.7, $fn = draft?16:120);
     
     translate([rod_size/2-1, -(-bearing_outer_diameter/2 - Bwall-PridavnaSirkaNaSpojeniDilu/2 +PosunDerY), -BaseThickness-(bearing_outer_diameter)/2+ 5 + PosunDerZ])     
         rotate([0, 90, 0])
      rotate([0, 0, 30])  
-     cylinder(d = M3_nut_diameter, h = M3_nut_height+0.5, $fn = draft?16:120);
+     cylinder(d = M3_head_diameter -0.6, h = M3_head_height+1.7, $fn = draft?16:120);
     
  
    // Zapusteni pro loziska
