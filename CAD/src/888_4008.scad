@@ -164,8 +164,15 @@ Paw();
        for (i = [1:Number_of_holes]){
           rotate([0, 0, i*360/Number_of_holes])
           translate([starter_pipe_d_middle/2-End_Wall_Thickness/2, 0, top_thickness + M3_nut_height + sensor_cap_height/2+Ribbon_width/2+1.15])
-              cylinder(h = Depth_self_screw, d = Self_screw_diameter, center = true, $fn=20);
-                                    
+              cylinder(h = Depth_self_screw, d = Self_screw_diameter, center = true, $fn=20);                
+                            }
+                            
+        Number_of_holes3 = 2;                
+         // Holes for zero postition
+      for (i = [1:Number_of_holes3]){
+          rotate([0, 0, i*360/Number_of_holes3+90])
+          translate([starter_pipe_d_middle/2-End_Wall_Thickness/2, 0, -top_thickness + M3_nut_height + sensor_cap_height/2+Ribbon_width/2+1.15])
+              cylinder(h = Depth_self_screw, d = 3, center = true, $fn=20);
                             }
        }                 
                     
