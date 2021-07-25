@@ -144,11 +144,11 @@ translate([-rod_size/2-1, -bearing_outer_diameter/2 - Bwall-PridavnaSirkaNaSpoje
     
  
    // Zapusteni pro loziska
-   W_prepazky_pro_tisk = 0.02;  // Přepážka tvořící spodní podstavu válce - přidáno kvůli tisku
+   W_prepazky_pro_tisk = 0.2;  // Přepážka tvořící spodní podstavu válce - přidáno kvůli tisku
    
    translate([bearing_shaft_shift + bearing_thickness - 8.735+W_prepazky_pro_tisk, 0, bearing_outer_diameter/2 + Bwall])
         rotate([0, 90, 0])
-            cylinder(d = bearing_outer_diameter, h = 8.735, $fn = draft?16:120);
+            cylinder(d = bearing_outer_diameter, h = 8.735-W_prepazky_pro_tisk, $fn = draft?16:120);
 
    translate([bearing_shaft_shift + bearing_thickness + layer_thickness, 0, bearing_outer_diameter/2 + Bwall])
         rotate([0, 90, 0])
