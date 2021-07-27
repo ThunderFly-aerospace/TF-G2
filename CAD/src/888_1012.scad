@@ -157,6 +157,10 @@ translate([-rod_size/2-1, -bearing_outer_diameter/2 - Bwall-PridavnaSirkaNaSpoje
    translate([bearing_shaft_shift + bearing_shaft_length - bearing_thickness, 0, bearing_outer_diameter/2 + Bwall])
         rotate([0, 90, 0])
             cylinder(d = bearing_outer_diameter, h = bearing_thickness + 0.1 + 100, $fn = draft?16:120);
+                                         
+   translate([bearing_shaft_shift + bearing_thickness -10, 0, bearing_outer_diameter/2 + Bwall])
+        rotate([0, 90, 0])
+            cylinder(d = 0.6, h = 8.735-W_prepazky_pro_tisk, $fn = draft?16:120);  // Dírka pro tisk
 
 
     // podlozka pod hlavu sroubu
