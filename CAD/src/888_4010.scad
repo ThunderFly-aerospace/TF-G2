@@ -113,7 +113,7 @@ difference()
               
     }
     
-    //díra por list
+    //díra pro list
     rotate([colective,0,0])
     {
         translate([blade_d+blade_holder_l/2,0,0])
@@ -135,7 +135,7 @@ difference()
             cylinder(d=M3_nut_diameter,h=M3_nut_height,center=true,$fn=6);  
         
           //popisky
-          translate([blade_first_screw+blade_d+blade_screw_distance/2, 0, (2*blade_holder_h+blade_h)/2-0.5])            
+          translate([blade_first_screw+blade_d+blade_screw_distance/2, 0, (2*blade_holder_h+blade_h)/2+0.2])            
                 text(str(colective), size = 4, halign="center", valign="center");
     }
     
@@ -151,6 +151,32 @@ difference()
         //díra pro osu
         rotate([90,0,0])
             cylinder(d=ax_diameter,h=shaft_l+1,center=true,$fn=circle_fn);
+        translate([ax_diameter/2+2-0.1,0,0])
+            cube([4,shaft_l+1,0.5],center=true);
+        
+        translate([ax_diameter/2+1,5,0])
+        {
+            //dírka
+            cylinder(d=2,h=15,center=true,$fn=100);
+            //matička
+            translate([0,0,3])
+                cylinder(d=4,h=2,center=true,$fn=6);
+            //šroubek
+            translate([0,0,-3])
+                cylinder(d=4,h=3,center=true,$fn=100);
+            
+        }
+        
+        translate([ax_diameter/2+1,-5,0])
+        {
+            cylinder(d=2,h=15,center=true,$fn=100);
+            //matička
+            translate([0,0,3])
+                cylinder(d=4,h=2,center=true,$fn=6);
+            //šroubek
+            translate([0,0,-3])
+                cylinder(d=4,h=3,center=true,$fn=100);
+        }
     }
     
 }
