@@ -5,4 +5,4 @@ include <../../parameters.scad>
 use <../888_1012.scad>
 
     rotate([0, -90, 0])
-    LamaciValec(draft=false);
+    bearing_house(breaking_groove = false, draft=false);
