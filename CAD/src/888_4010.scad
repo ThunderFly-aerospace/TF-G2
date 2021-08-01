@@ -109,8 +109,16 @@ difference()
             translate([blade_screw_distance+blade_first_screw+blade_d,0,-(2*blade_holder_h+blade_h)/2])
                 cylinder(d=10,h=M3_nut_height,center=true,$fn=circle_fn);
         }
-        
-              
+       
+        //krčky pro matičky
+       rotate([0,0,delta_angle])
+       {
+          for(yy =[-5,5])        
+             translate([ax_diameter/2+M3_screw_diameter/2,yy,3])
+             {
+                cylinder(d=M3_nut_diameter+1.5,h=M3_nut_height,center=true,$fn=100); 
+             }
+       }
     }
     
     //díra pro list
@@ -135,8 +143,8 @@ difference()
             cylinder(d=M3_nut_diameter,h=M3_nut_height,center=true,$fn=6);  
         
           //popisky
-          translate([blade_first_screw+blade_d+blade_screw_distance/2, 0, (2*blade_holder_h+blade_h)/2+0.2])            
-                text(str(colective), size = 4, halign="center", valign="center");
+          /*translate([blade_first_screw+blade_d+blade_screw_distance/2, 0, (2*blade_holder_h+blade_h)/2+0.2])            
+                text(str(colective), size = 4, halign="center", valign="center");*/
     }
     
     //zabroušení usazení a díra pro osu
@@ -151,36 +159,34 @@ difference()
         //díra pro osu
         rotate([90,0,0])
             cylinder(d=ax_diameter,h=shaft_l+1,center=true,$fn=circle_fn);
-        translate([ax_diameter/2+2-0.1,0,0])
-            cube([4,shaft_l+1,0.5],center=true);
-        
-        translate([ax_diameter/2+1,5,0])
-        {
-            //dírka
-            cylinder(d=2,h=15,center=true,$fn=100);
-            //matička
-            translate([0,0,3])
-                cylinder(d=4,h=2,center=true,$fn=6);
-            //šroubek
-            translate([0,0,-3])
-                cylinder(d=4,h=3,center=true,$fn=100);
-            
-        }
-        
-        translate([ax_diameter/2+1,-5,0])
-        {
-            cylinder(d=2,h=15,center=true,$fn=100);
-            //matička
-            translate([0,0,3])
-                cylinder(d=4,h=2,center=true,$fn=6);
-            //šroubek
-            translate([0,0,-3])
-                cylinder(d=4,h=3,center=true,$fn=100);
-        }
+        translate([ax_diameter/2+3.5-0.1,0,0])
+            cube([7,shaft_l+1,1],center=true);
+
+        //přitažení osičky
+        for(yy =[-5,5])        
+            translate([ax_diameter/2+M3_screw_diameter/2,yy,0])
+            {
+                cylinder(d=M3_screw_diameter,h=15,center=true,$fn=100);
+                //matička
+                translate([0,0,4])
+                    rotate([0,0,30])
+                        cylinder(d=M3_nut_diameter,h=3,center=true,$fn=6);
+                //šroubek
+                translate([0,0,-4])
+                    cylinder(d=7.1,h=M3_head_height,center=true,$fn=100);
+            }
     }
     
 }
 }
+
+/*intersection()
+{
+    888_4010();
+    translate([0,46,0])
+        rotate([0,0,free_flap_delta_angle])   
+            cube([100,100,100], center=true);
+}*/
 
 888_4010();
         

@@ -2,7 +2,7 @@ include <../../../parameters.scad>
 use <../../888_4009.scad>
 use <../../888_4010.scad>
 
-flap=15;
+flap=-10;
 
 //intersection()
 union()
