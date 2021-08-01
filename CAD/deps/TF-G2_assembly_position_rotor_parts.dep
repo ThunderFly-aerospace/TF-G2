@@ -1,4 +1,7 @@
 position_rotor_parts.scad: \
+	../../../parameters.scad \
+	../../lib/stdlib/dimlines.scad \
+	../../lib/stdlib/naca4.scad \
 	../../../bolt_parameters.scad \
 	../../../parameters.scad \
 	../../888_4001.scad \
@@ -9,5 +12,8 @@ position_rotor_parts.scad: \
 	../../888_4006.scad \
 	../../888_4007.scad \
 	../../888_4008.scad \
+	../../lib/PrintedRotor/RotorBlade.scad \
+	../../lib/stdlib/TextGenerator.scad \
+	../../lib/stdlib/dimlines.scad \
 	../../lib/stdlib/naca4.scad \
 	../../lib/stdlib/polyScrewThread_r1.scad \
