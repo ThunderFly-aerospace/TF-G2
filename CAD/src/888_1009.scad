@@ -6,87 +6,99 @@ use <888_1010.scad>
 
 
 module 888_1009_bottom() {
- translate([-pylon_silentblocks_base_distance/2, 0, 0]) rotate([0, 0, 180]) linear_extrude(2+0.5) text(">", halign="center", valign="center");
- translate([pylon_silentblocks_base_distance/2, 0, 0]) rotate([0, 0, 90]) linear_extrude(2+0.5) text(week, halign="center", valign="center", size=4);
-  difference(){
-union(){
+    translate([-pylon_silentblocks_base_distance/2, 0, 0])
+        rotate([0, 0, 180])
+            linear_extrude(2+0.5)
+                text(">", halign="center", valign="center");
+    translate([pylon_silentblocks_base_distance/2, 0, 0])
+        rotate([0, 0, 90])
+            linear_extrude(2+0.5)
+                text(week, halign="center", valign="center", size=4);
+    difference(){
+        union(){
+            difference(){
+                translate([-40*0.3, 0, 0])
+                    airfoil(naca = 0035, L = 40, N = 50, h= pylon_pipe_counterbore_bottom+3, open = false);
 
-
-    translate([-40*0.3, 0, 0])
-        airfoil(naca = 0035, L = 40, N = 50, h= pylon_pipe_counterbore_bottom+3, open = false);
-
-
-  for(x = [-0.5, 0.5], y=[-0.5, 0.5])
-    translate([(pylon_silentblocks_base_distance)*x, (pylon_silentblocks_base_distance)*y, 0])
-      {
-          cylinder(d=10, h = 2, $fn=30);
-          translate([0, 0, 2])
-            cylinder(d1=10, d2=M3_nut_diameter, h = 2, $fn=30);
-      }
-
-  for(y = [-0.5, 0.5])
-    {
-      hull()
-        for(x = [-0.5, 0.5])
-          translate([(pylon_silentblocks_base_distance)*x, (pylon_silentblocks_base_distance)*y, 0])
-            cylinder(d=8, h = 2);
-      translate([0, pylon_silentblocks_base_distance*y, 2])
-          cube([pylon_silentblocks_base_distance, 2, 2], center=true);
-    }
-  for(x = [-0.5, 0.5])
-    hull()
-      for(y = [-0.5, 0.5])
-        translate([(pylon_silentblocks_base_distance)*x, (pylon_silentblocks_base_distance)*y, 0])
-            cylinder(d=8, h = 2);
-
-    for(r=[0,1,2,3])
-        rotate([0,0,90*r]){
-            hull(){
-                cylinder(d=M3_nut_diameter, h=10);
-                translate([pylon_silentblocks_base_distance*0.5, pylon_silentblocks_base_distance*0.5, 0])
-                    cylinder(d=M3_screw_diameter, h=3);
+                // detach pylon profile from the outer rectangle
+                rotate([0,0,-90])
+                  translate([0, pylon_silentblocks_base_distance/2, - pylon_silentblocks_base_distance/15])
+                    rotate([45,0,0])
+                      cube(pylon_silentblocks_base_distance/4, center = true);
             }
-            hull(){
-                cylinder(d=M3_nut_diameter, h=2);
-                translate([pylon_silentblocks_base_distance*0.5, pylon_silentblocks_base_distance*0.5, 0])
-                    cylinder(d=M3_nut_diameter, h=2);
+
+
+            for(x = [-0.5, 0.5], y=[-0.5, 0.5])
+              translate([(pylon_silentblocks_base_distance)*x, (pylon_silentblocks_base_distance)*y, 0])
+                {
+                    cylinder(d=10, h = 2, $fn=30);
+                    translate([0, 0, 2])
+                      cylinder(d1=10, d2=M3_nut_diameter, h = 2, $fn=30);
+                }
+
+            for(y = [-0.5, 0.5]){
+                hull()
+                  for(x = [-0.5, 0.5])
+                    translate([(pylon_silentblocks_base_distance)*x, (pylon_silentblocks_base_distance)*y, 0])
+                      cylinder(d=8, h = 2);
             }
+
+            for(x = [-0.5, 0.5])
+              hull()
+                for(y = [-0.5, 0.5])
+                  translate([(pylon_silentblocks_base_distance)*x, (pylon_silentblocks_base_distance)*y, 0])
+                      cylinder(d=8, h = 2);
+
+            for(r=[0,1,2,3])
+                rotate([0,0,90*r]){
+                    hull(){
+                        cylinder(d=M3_nut_diameter, h=10);
+                        translate([pylon_silentblocks_base_distance*0.5, pylon_silentblocks_base_distance*0.5, 0])
+                            cylinder(d=M3_screw_diameter, h=3);
+                    }
+                }
         }
 
-}
+        //strenght decreasing scratches
+        for(r=[0,1,2,3])
+            rotate([0,0,90*r])
+              rotate([0,0,45])
+                translate([0, pylon_silentblocks_base_distance/3, - pylon_silentblocks_base_distance/8])
+                  rotate([45,0,0])
+                    cube(pylon_silentblocks_base_distance/4, center = true);
 
-    translate([0, 0, 2])
-        cylinder(d= pylon_pipe_d, h = 50, $fn=30);
-    translate([0, 0, -2])
-        cylinder(d= pylon_pipe_d-2, h = 50, $fn=30);
-    hull(){
-        translate([12, 0, -2])
-            cylinder(d= 8, h = 50, $fn=30);
-        translate([20, 0, -2])
-            cylinder(d= 3, h = 50, $fn=30);
-    }
-    translate([0, -1, 2])
-        cube([20, 2, 50]);
-    translate([pylon_pipe_d/2, 0, 3 + pylon_pipe_screw_distance_from_bottom_end])
-        rotate([-90, 30, 0]){
-            cylinder(d=M3_screw_diameter, h=20, center=true, $fn=60);
-            translate([0, 0, -10-5])
-                cylinder(d=M3_nut_diameter, h=20, center=true, $fn=60);
-            translate([0, 0, 10+5])
-                cylinder(d=M3_nut_diameter, h=20, center=true, $fn=6);
+        translate([0, 0, 2])
+            cylinder(d= pylon_pipe_d, h = 50, $fn=30);
+        translate([0, 0, -2])
+            cylinder(d= pylon_pipe_d-2, h = 50, $fn=30);
+
+        hull(){
+            translate([12, 0, -2])
+                cylinder(d= 8, h = 50, $fn=30);
+            translate([20, 0, -2])
+                cylinder(d= 3, h = 50, $fn=30);
         }
 
+        translate([0, -1, 0])
+            cube([20, 2, 50]);
+        translate([pylon_pipe_d/2, 0, 3 + pylon_pipe_screw_distance_from_bottom_end])
+            rotate([-90, 30, 0]){
+                cylinder(d=M3_screw_diameter, h=20, center=true, $fn=60);
+                translate([0, 0, -10-5])
+                    cylinder(d=M3_head_diameter_ISO7380, h=20, center=true, $fn=60);
+                translate([0, 0, 10+5])
+                    cylinder(d=M3_nut_diameter, h=20, center=true, $fn=6);
+            }
 
-        translate([-40*0.3, 0, 3 + pylon_pipe_counterbore_bottom - pylon_airfoil_shell_overlap])
-            hollow_airfoil(naca = 0035, L = 40, N = 50, h= 22, open = true, wall_thickness=0.8);
 
-  // otvory pro prisroubovani silentbloku
-  for(x = [-0.5, 0.5], y=[-0.5, 0.5])
-    translate([(pylon_silentblocks_base_distance)*x, (pylon_silentblocks_base_distance)*y, -0.5])
-      cylinder(d=M3_screw_diameter, h = 10, $fn=30);
-}
+            translate([-40*0.3, 0, 3 + pylon_pipe_counterbore_bottom - pylon_airfoil_shell_overlap])
+                hollow_airfoil(naca = 0035, L = 40, N = 50, h= 22, open = true, wall_thickness=0.8);
 
-
+        // otvory pro prisroubovani silentbloku
+        for(x = [-0.5, 0.5], y=[-0.5, 0.5])
+            translate([(pylon_silentblocks_base_distance)*x, (pylon_silentblocks_base_distance)*y, -0.5])
+                cylinder(d=M3_screw_diameter, h = 10, $fn=30);
+    }
 }
 
 
