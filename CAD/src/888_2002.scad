@@ -130,6 +130,9 @@ module 888_2002(){
                 }
                 rotate([0, 90, 0])
                     cylinder(d = M3_screw_diameter, h = suspension_bow_diameter, center = true);
+               rotate([0, 90, 0])
+               translate([0, 0, -suspension_bow_diameter-wheel_mount_thickness + 3])
+                cylinder(d = M3_nut_diameter, h = suspension_bow_diameter, $fn = 6, center = false);     
             }
     }
     mirror_copy([0, 0, 1])
