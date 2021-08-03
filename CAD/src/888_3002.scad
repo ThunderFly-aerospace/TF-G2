@@ -33,26 +33,29 @@ module tail_vertical_bottom(){
         tail_vertical();
 
     // space for rudder
-    difference (){
-      union(){
-        translate([depth_max - rudder_depth, -rudder_radius, 0])
-            cube([depth_max, rudder_radius*2, height]);
-        translate([depth_max - rudder_depth, 0, 0])
-            cylinder(r = rudder_radius, h = height, $fn=40);
-      }
+    rotate([0, -rudder_inclination, 0])
+      translate([-15,0,-70])
+        difference (){
+            union(){
+              translate([depth_max - rudder_depth, -rudder_radius, -height/2])
+                  cube([depth_max, rudder_radius*2, 2*height]);
+              translate([depth_max - rudder_depth, 0, 0])
+                  cylinder(r = rudder_radius, h = 2*height, $fn=40);
+            }
+            // beveled top of rudder
+            translate([depth_max - rudder_depth - rudder_radius -5, 0, height_bottom_part + 15])
+                cylinder(r1 = rudder_radius/2, r2 = 8*rudder_radius, h = height - height_bottom_part + 40 );
+        }
 
-      // beveled top of rudder
-        translate([depth_max - rudder_depth - rudder_radius -5, 0, height_bottom_part - 10])
-            cylinder(r1 = rudder_radius/2, r2 = 4*rudder_radius, h = height - height_bottom_part + 10 );
-    }
-
-    translate([depth_max - rudder_depth, 0, -0.5])
-      cylinder(d = 2.5, h = height_bottom_part+10, $fn = 20);
+    rotate([0, -rudder_inclination, 0])
+     translate([depth_max - rudder_depth -15, 0, -1.3*height_bottom_part])
+        cylinder(d = 2.5, h = 2*height_bottom_part, $fn = 20);
 
 
     translate([30, 0, 0]) cube([15, 5, 20], center = true);
     translate([30+80, 0, 0]) cube([15, 5, 20], center = true);
 
+    //mounting screws
     translate([30, 0, 5])
         rotate([90, 0, 0]){
             cylinder(d=M3_screw_diameter, h=50, center=true, $fn = 60);

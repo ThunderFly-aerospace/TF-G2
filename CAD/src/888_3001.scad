@@ -43,11 +43,11 @@ module tail_center(){
             rotate([0, 90, 0])
                 cylinder(d = 10.4, h = 62.6, $fn=50);
 
-         translate([42 - 35, 0, -5-12])
+        translate([42 - 35, 0, -5-12])
             rotate([90, 0, 0]){
                 cylinder(d = M3_screw_diameter, h = 62.6, $fn=50, center = true);
                 translate([0, 0, 10/2+1]) cylinder(d = M3_nut_diameter, h = 10, $fn=6);
-                translate([0, 0, -10-10/2-1]) cylinder(d = M3_nut_diameter, h = 10, $fn=12);
+                translate([0, 0, -10-10/2-1]) cylinder(d = M3_head_diameter_ISO7380, h = 10, $fn=60);
             }
 
         // Otvor na vyvod kabelu
@@ -55,27 +55,16 @@ module tail_center(){
             rotate([0, 180, 0])
                 cylinder(d = 10, h = 30, $fn=50);
 
-
-        // vyrez na otocnou cast ostruhy
-        difference(){
+        translate([0, 0, -5*below_height])
+       rotate([0, -35, 0])
             translate([depth_max - rudder_depth -2, -10, -below_height])
-                cube([depth_max, 20, below_height]);
-            hull(){
-            translate([5, -10, -below_height])
-                cube([depth_max - rudder_depth - 10, 20, 10]);
-            translate([depth_max - rudder_depth, 0, -below_height+10-50])
-                cylinder(d = 6, h=50, $fn=50);
-            }
+                cube([depth_max, 20, 2*below_height]);
 
-        }
-
-        // prostor pro otaceni smerovky
-        translate([depth_max - rudder_depth, 0, -below_height+10])
-            cylinder(d = 10, h=80, $fn=30);
 
         // Otvor pro svislou osu
-        translate([depth_max - rudder_depth, 0, -below_height+2])
-            cylinder(d = 2.5, h=60, $fn = 20);
+        rotate([0, -rudder_inclination, 0])
+            translate([depth_max - rudder_depth - 15, 0, -2.3*below_height])
+                cylinder(d = 2.5, h = height_bottom_part, $fn = 20);
 
         // krabice pro servo
         translate([60, 1, 0]) union(){
