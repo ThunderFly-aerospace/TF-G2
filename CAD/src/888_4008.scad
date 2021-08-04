@@ -1,9 +1,6 @@
 include <../parameters.scad>
 include <lib/stdlib/polyScrewThread_r1.scad>
 
-module 888_4008(draft = true){
-
-// TODO: Je potreba procistit parametry, po predelani na spulku zde urcite mnoho parametru je nevyuzitych. Pripadne je okomentovat. [Roman, 2020/11]
 
     angle_between_blades = 360 / rotor_blades_count;
 
@@ -24,14 +21,14 @@ module 888_4008(draft = true){
     starter_top_r=14;
     starter_top_h=M3_screw_head_height+3;
     starter_pipe_d_top = 20;
-    starter_pipe_d_middle = 35;
+    starter_pipe_d_middle = 27;
     starter_pipe_d_bottom = 20;
     starter_neck_r=10;
     starter_neck_h=1;
-    starter_bottom_h=5;
+    starter_bottom_h=5-2;   // Snížení výšky dílu o 2 mm kvůli mezikusu
     starter_rope_diameter=2;
 
-    starter_rope_d = 39.2;
+    starter_rope_d = 27.0;
 
     sensor_cap_height=starter_top_h+starter_neck_h+starter_bottom_h;
 
@@ -49,13 +46,26 @@ module 888_4008(draft = true){
     Ribbon_width = 6;
     Ribbon_part_w = height_from_rotor_nut- (16.5 - 1.65) + Ribbon_width; // Auxiliary variable
     
+    /// Inner cliff
+     End_Wall_Thickness = 5;
+     
+       // Holes for self-cutting screws in inner cliff
+       Self_screw_diameter = 1.5;
+       Depth_self_screw = 30;
+       Number_of_holes = 4;
+
+module 888_4008(draft = true){
+
+// TODO: Je potreba procistit parametry, po predelani na spulku zde urcite mnoho parametru je nevyuzitych. Pripadne je okomentovat. [Roman, 2020/11]
+     
+    
                  /// Inner paws for nut holders
-         Paw_diameter = 10;
-         Paw_h = 20; // Total height of paw
-         Paw_thick = 2; // Thickness of the paw between screw head and nut
-                    Paw_hole_diameter = M3_screw_diameter+0.1;
+//         Paw_diameter = 10;
+//         Paw_h = 20; // Total height of paw
+//         Paw_thick = 2; // Thickness of the paw between screw head and nut
+//                    Paw_hole_diameter = M3_screw_diameter+0.1;
                     
- module Paw(){                   
+ /*module Paw(){                   
                  // Pomocná proměnná
      H = top_thickness + M3_nut_height + sensor_cap_height/2+sensor_cap_height*0.7+Ribbon_part_w+0.25-2.5;
      difference(){
@@ -86,7 +96,7 @@ module 888_4008(draft = true){
                                   
                     } 
                 }
-
+*/
 
     translate([0,0,-top_thickness])
         rotate([0,0, rotor_delta_angle]) {
@@ -142,9 +152,7 @@ mirror([1,0,0])
 translate([-4.2,0,0])                    
 Paw();   
  */  
-   /// Inner cliff
-     End_Wall_Thickness = 5;          
-                    
+   /// Inner cliff                        
    difference(){
        translate([0,0,top_thickness + M3_nut_height + sensor_cap_height/2-2.5])
        cylinder(h=sensor_cap_height*0.7+Ribbon_part_w+0.25, d1=starter_pipe_d_middle+0.2, d2 = starter_pipe_d_middle+0.2);
@@ -153,27 +161,17 @@ Paw();
        cylinder(h=sensor_cap_height*0.7+Ribbon_part_w+0.25, d1=starter_pipe_d_middle+0.2-2, d2 = starter_pipe_d_middle+0.2-End_Wall_Thickness*2);
        
        // Drážka pro uchycení stuhy
-      translate([0,starter_pipe_d_middle/2,top_thickness + M3_nut_height + sensor_cap_height/2+Ribbon_width/2+1.15])
-       cube([1,20,Ribbon_width], center=true ); 
+//       rotate(90+360/Number_of_holes/2)
+//      translate([0,starter_pipe_d_middle/2,top_thickness + M3_nut_height + sensor_cap_height/2+Ribbon_width/2+1.15])
+//       cube([1,20,Ribbon_width], center=true ); 
        
        // Holes for self-cutting screws
-       Self_screw_diameter = 1.5;
-       Depth_self_screw = 30;
-       Number_of_holes = 10;
-       
        for (i = [1:Number_of_holes]){
           rotate([0, 0, i*360/Number_of_holes])
           translate([starter_pipe_d_middle/2-End_Wall_Thickness/2, 0, top_thickness + M3_nut_height + sensor_cap_height/2+Ribbon_width/2+1.15])
               cylinder(h = Depth_self_screw, d = Self_screw_diameter, center = true, $fn=20);                
                             }
                             
-        Number_of_holes3 = 2;                
-         // Holes for zero postition
-      for (i = [1:Number_of_holes3]){
-          rotate([0, 0, i*360/Number_of_holes3+90])
-          translate([starter_pipe_d_middle/2-End_Wall_Thickness/2, 0, -top_thickness + M3_nut_height + sensor_cap_height/2+Ribbon_width/2+1.15])
-              cylinder(h = Depth_self_screw, d = 3, center = true, $fn=20);
-                            }
        }                 
                     
                 }
@@ -290,4 +288,51 @@ Paw();
 }
 
 
+Total_w_mezikus = 4;
+D_mezikus = starter_pipe_d_middle+0.2-End_Wall_Thickness*2+32;
+
+module Mezikus(){
+    difference(){
+       cylinder(d = D_mezikus, h = Total_w_mezikus); 
+        
+       cylinder(d = starter_pipe_d_middle+0.2-End_Wall_Thickness*2, h = Total_w_mezikus); 
+        
+       translate([0, 0, 0]) 
+       cylinder(d = starter_pipe_d_middle+0.4, h = Total_w_mezikus - 2);
+        
+      // Holes for self-cutting screws 
+       for (i = [1:Number_of_holes]){
+          rotate([0, 0, i*360/Number_of_holes])
+          translate([starter_pipe_d_middle/2-End_Wall_Thickness/2, 0, top_thickness + M3_nut_height + sensor_cap_height/2+Ribbon_width/2+1.15])
+              cylinder(h = Depth_self_screw, d = Self_screw_diameter, center = true, $fn=20);                
+                 }
+                 
+      // Groove for sensors
+        translate([0, 0, 2.5])
+         difference(){
+            
+           cylinder(d = D_mezikus-3, h = Total_w_mezikus-2.5);  
+            
+            cylinder(d = D_mezikus-19.4, h = Total_w_mezikus-2.5);
+            
+            }               
+                                               
+        }
+        
+        // Cliff for ribbon
+       translate([0, 0, -2]) 
+     difference(){   
+     cylinder(h = 2, d1 = D_mezikus+ 3, d2 = D_mezikus);
+     
+     cylinder(h = 2, d = D_mezikus- 3);    
+    
+    }
+
+}
+
+
+
 888_4008();
+
+translate([0, 0, starter_bottom_h+Ribbon_width+rpm_sensor_h - 2.4 + 0])
+ Mezikus();
