@@ -53,9 +53,25 @@ module tail_vertical_bottom(){
     translate([30, 0, 0]) cube([15, 5, 20], center = true);
     translate([30+80, 0, 0]) cube([15, 5, 20], center = true);
 
-    translate([30, 0, 5]) rotate([90, 0, 0]) cylinder(d=M3_screw_diameter, h=50, center=true, $fn = 60);
-    translate([30+80, 0, 5]) rotate([90, 0, 0]) cylinder(d=M3_screw_diameter, h=50, center=true, $fn = 60);
-
+    translate([30, 0, 5])
+        rotate([90, 0, 0]){
+            cylinder(d=M3_screw_diameter, h=50, center=true, $fn = 60);
+            translate([0, 0, 4])
+                cylinder(d=M3_head_diameter_ISO7380, h=50, center=false, $fn = 60);
+            translate([0, 0, -3])
+                rotate([180, 0, 0])
+                    cylinder(d=M3_nut_diameter, h=50, center=false, $fn = 6);
+        }
+    translate([30+80, 0, 5])
+        rotate([90, 0, 0]){
+            cylinder(d=M3_screw_diameter, h=50, center=true, $fn = 60);
+            cylinder(d=M3_screw_diameter, h=50, center=true, $fn = 60);
+            translate([0, 0, 4])
+                cylinder(d=M3_head_diameter_ISO7380, h=50, center=false, $fn = 60);
+            translate([0, 0, -3])
+                rotate([180, 0, 0])
+                    cylinder(d=M3_nut_diameter, h=50, center=false, $fn = 6);
+        }
     }
 }
 
