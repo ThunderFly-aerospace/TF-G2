@@ -293,11 +293,11 @@ module 888_1012(draft = true){
 
     }
  //Sloupky pro uchycení mlýnku
-/* translate([0, 0, -bearing_outer_diameter/2 - Bwall])
+ translate([0, 0, -bearing_outer_diameter/2 - Bwall])
     Sloupek();
     translate([0, 0, -bearing_outer_diameter/2 - Bwall])
     mirror([0, 90, 0])
-    Sloupek(); */
+    Sloupek();  /* */
 }
 
 // Spojení s lámacím válcem
