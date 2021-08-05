@@ -1,7 +1,7 @@
 include <../parameters.scad>
 include <lib/stdlib/polyScrewThread_r1.scad>
 
-//include <888_4008.scad>
+//use <888_4008.scad>;
 
 
 //  angle_between_blades = 360 / rotor_blades_count;
@@ -50,23 +50,25 @@ include <lib/stdlib/polyScrewThread_r1.scad>
        Number_of_holes = 4;
        
        D_mezikus = starter_pipe_d_middle+0.2-End_Wall_Thickness*2+32;
+       
+  
 
-module mill_rotor(draft = true){
+module mill_rot(draft = true){
     
     difference(){
     
-    cylinder(h=H_mill_disc, d=D_mill_disc);
+    cylinder(h=H_mill_disc, d=D_mill_disc, $fn = draft?16:120);
         
         
        //  Central hole
              translate([0,0,-5])
-       cylinder(h=sensor_cap_height*0.7+Ribbon_part_w+0.25, d = bearing_outer_diameter + Bwall*2+2.7);   
+       cylinder(h=sensor_cap_height*0.7+Ribbon_part_w+0.25, d = bearing_outer_diameter + Bwall*2+2.7, $fn = draft?16:120);   
         
-      // Holes for self-cutting screws  
+      // Holes for self-cutting screws  - ENLARGED
        for (i = [1:Number_of_holes]){
           rotate([0, 0, i*360/Number_of_holes])
           translate([starter_pipe_d_middle/2-End_Wall_Thickness/2, 0, top_thickness + M3_nut_height + sensor_cap_height/2+Ribbon_width/2+0.15])
-              cylinder(h = Depth_self_screw, d = Self_screw_diameter, center = true, $fn=20);                
+              cylinder(h = Depth_self_screw, d = Self_screw_diameter+1, center = true, $fn=20);                
                             }
                     
            Number_of_holes2 = 24;                
@@ -109,33 +111,60 @@ module mill_rotor(draft = true){
             // Mill butterfly
  Mill_Butterfly_count = 2;
               translate([0,0,-2])
+              minkowski(){
                 intersection() {
                     
                     difference(){
                     union(){  // sensor teeth outer rim
-                      cylinder(d = D_mill_disc-5, h = rpm_hole_h/4);
+                      cylinder(d = D_mill_disc-8, h = rpm_hole_h/4, $fn = draft?16:120);
                       translate([0, 0, - M3_nut_height - sensor_cap_height + rpm_sensor_h + starter_top_h - starter_rope_diameter])
-                        cylinder(d1 = starter_pipe_d_middle, d2 = starter_rope_d - starter_rope_diameter/2, h = starter_rope_diameter);
+                        cylinder(d1 = starter_pipe_d_middle, d2 = starter_rope_d - starter_rope_diameter/2, h = starter_rope_diameter, $fn = draft?16:120);
                     }
-                    cylinder(d = D_mezikus, h = rpm_hole_h/4);
+                    cylinder(d = D_mezikus+2*R_zaobleni, h = rpm_hole_h/4, $fn = draft?16:120);
                     }
 
                     for (i=[0:Mill_Butterfly_count]) rotate([0, 0, (360/Mill_Butterfly_count)*i + (360/Mill_Butterfly_count)/2]){
                         linear_extrude(height = rpm_hole_h)
-                        polygon(points=[[0,0],[D_mill_disc/2, ((D_mill_disc/2) * sin(360/Mill_Butterfly_count/2))/1], [D_mill_disc/2, -((D_mill_disc/2) * sin(360/Mill_Butterfly_count/2))/1]]);
+                        polygon(points=[[0,0],[(D_mill_disc)/2, (((D_mill_disc)/2) * sin(360/Mill_Butterfly_count/2)- R_zaobleni)/1 ], [D_mill_disc/2, -(((D_mill_disc)/2) * sin(360/Mill_Butterfly_count/2)-R_zaobleni)/1]]);
                     }
                     
                     
                 }
-                
-                
-                
+             R_zaobleni = 2;   
+              cylinder(r=R_zaobleni, h= 20, , $fn = 30);
                 } 
+            }
     }
     
+///////  
+///////   
+///////    
+module mill_static(draft = true){
+    difference(){
     
-    
+    cylinder(h=H_mill_disc, d=D_mill_disc, $fn = draft?16:120);
+        
+        
+       //  Central hole
+             translate([0,0,-5])
+       cylinder(h=sensor_cap_height*0.7+Ribbon_part_w+0.25, d = bearing_outer_diameter + Bwall*2+2.7, $fn = draft?16:120);   
+        
+      // Holes for self-cutting screws
+         PosunZ = 9.7;
+        PosunY = 12.2;
+        
+        translate([PosunY, PosunZ, -2])
+     cylinder(d = 1.5, h = 20, $fn = 20);   
+        
+           translate([-PosunY, PosunZ, -2])
+     cylinder(d = 1.5, h = 20, $fn = 20);   
+        
+     } 
+  }  
 
-mill_rotor();
+mill_rot();
+
+translate([0,0,H_mill_disc+2 ])  
+mill_static();
     
 
