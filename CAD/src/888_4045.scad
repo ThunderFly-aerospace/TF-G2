@@ -71,7 +71,7 @@ module mill_rot(draft = true){
               cylinder(h = Depth_self_screw, d = Self_screw_diameter+1, center = true, $fn=20);                
                             }
                     
-           Number_of_holes2 = 24;                
+           Number_of_holes2 = 26;                
          // Holes for rotation speed measurement
       for (i = [1:Number_of_holes2]){
           rotate([0, 0, i*360/Number_of_holes2+360/Number_of_holes2/2])
