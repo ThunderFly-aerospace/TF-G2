@@ -53,6 +53,9 @@ include <lib/stdlib/polyScrewThread_r1.scad>
        Self_screw_diameter = 1.5;
        Depth_self_screw = 30;
        Number_of_holes = 4;
+       
+    // Groove for sensors
+         Depth_Groove_Sensors = 1.5;  
 
 module 888_4008(draft = true){
 
@@ -292,12 +295,12 @@ module Mezikus(draft=true){
                  }
                  
       // Groove for sensors
-        translate([0, 0, 2.5])
+        translate([0, 0, Total_w_mezikus-Depth_Groove_Sensors])
          difference(){
             
-           cylinder(d = D_mezikus-3, h = Total_w_mezikus-2.5, $fn = draft?16:120);  
+           cylinder(d = D_mezikus-3, h = Depth_Groove_Sensors, $fn = draft?16:120);  
             
-            cylinder(d = D_mezikus-19.4, h = Total_w_mezikus-2.5, $fn = draft?16:120);
+            cylinder(d = D_mezikus-19.4, h = Depth_Groove_Sensors, $fn = draft?16:120);
             
             }               
                                                
@@ -308,9 +311,18 @@ module Mezikus(draft=true){
      difference(){   
      cylinder(h = 2, d1 = D_mezikus+ 3, d2 = D_mezikus, $fn = draft?16:120);
      
-     cylinder(h = 2, d = D_mezikus- 3, $fn = draft?16:120);    
-    
+     cylinder(h = 2, d = D_mezikus- 3, $fn = draft?16:120);       
     }
+
+       // Partitions between holes for sensors of rotation speed measurement
+           Number_of_holes2 = 26;                
+      translate([0, 0, Total_w_mezikus-Depth_Groove_Sensors/2])  
+      for (i = [1:Number_of_holes2]){
+          rotate([0, 0, i*360/Number_of_holes2])
+          translate([starter_pipe_d_middle/2-End_Wall_Thickness/2+7.7, 0, 0])
+              cube([8.6, 0.8  ,  Depth_Groove_Sensors], center = true);
+                            }
+
 
 }
 
