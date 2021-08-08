@@ -13,7 +13,7 @@ include <lib/stdlib/polyScrewThread_r1.scad>
 
     // %cylinder(d = 5, h = height_from_rotor_nut);
 
-    rotor_center_r=12 + 1;
+    rotor_center_r=12 + 1+0.5;
     edge_distance_from_center = 7.5;
     spacer_disc_diameter = 3 * M3_screw_diameter;
     spare_disc_height = 0.6;
@@ -28,7 +28,7 @@ include <lib/stdlib/polyScrewThread_r1.scad>
     starter_bottom_h=5;   
     starter_rope_diameter=2;
 
-    starter_rope_d = 27.0;
+    starter_rope_d = 27;
 
     sensor_cap_height=starter_top_h+starter_neck_h+starter_bottom_h;
 
@@ -55,7 +55,7 @@ include <lib/stdlib/polyScrewThread_r1.scad>
        Number_of_holes = 4;
        
     // Groove for sensors
-         Depth_Groove_Sensors = 1.5;  
+         Depth_Groove_Sensors = 3.5;  
 
 module 888_4008(draft = true){
 
@@ -149,14 +149,24 @@ module 888_4008(draft = true){
                                 cylinder(h=sensor_cap_height, d1=starter_pipe_d_middle, d2 = starter_pipe_d_bottom, $fn=draft?rpm_sensor_count:120); /*  */
                     }
 
-   /// Inner cliff                        
+////// INNER CLIFF                        
    difference(){
-       translate([0,0,top_thickness + M3_nut_height + sensor_cap_height/2-2.5])
-       cylinder(h=sensor_cap_height*0.7+Ribbon_part_w+0.25, d1=starter_pipe_d_middle+0.2, d2 = starter_pipe_d_middle+0.2, $fn = draft?16:120);
+       translate([0,0,top_thickness + M3_nut_height + sensor_cap_height/2-4.5])
+       cylinder(h=sensor_cap_height*0.7+Ribbon_part_w+2.25, d1=starter_pipe_d_middle, d2 = starter_pipe_d_middle, $fn = draft?16:120);
        
-       translate([0,0,top_thickness + M3_nut_height + sensor_cap_height/2-2.5])
-       cylinder(h=sensor_cap_height*0.7+Ribbon_part_w+0.25, d1=starter_pipe_d_middle+0.2-3, d2 = starter_pipe_d_middle+0.2-End_Wall_Thickness*2, $fn = draft?16:120);
-       
+       translate([0,0,top_thickness + M3_nut_height + sensor_cap_height/2-4.5])
+       cylinder(h=sensor_cap_height*0.7+Ribbon_part_w+2.25, d1=starter_pipe_d_middle-4.9, d2 = starter_pipe_d_middle-End_Wall_Thickness*2, $fn = draft?16:120);
+     
+       translate([0,0,top_thickness + M3_nut_height + sensor_cap_height/2-2.5+sensor_cap_height*0.7+Ribbon_part_w+0.25-4-0.2])
+     difference(){
+       cylinder(h=4, d1=starter_pipe_d_middle, d2 = starter_pipe_d_middle, $fn = draft?16:120);
+        
+       cylinder(h=4, d1=starter_pipe_d_middle, d2 = starter_pipe_d_middle-End_Wall_Thickness*2, $fn = draft?16:120);    
+     }
+     
+     translate([0,0,top_thickness + M3_nut_height + sensor_cap_height/2+30.7])
+    cube([50,50,50], true);
+     
        // Drážka pro uchycení stuhy
 //       rotate(90+360/Number_of_holes/2)
 //      translate([0,starter_pipe_d_middle/2,top_thickness + M3_nut_height + sensor_cap_height/2+Ribbon_width/2+1.15])
@@ -166,7 +176,7 @@ module 888_4008(draft = true){
        for (i = [1:Number_of_holes]){
           rotate([0, 0, i*360/Number_of_holes])
           translate([starter_pipe_d_middle/2-End_Wall_Thickness/2, 0, top_thickness + M3_nut_height + sensor_cap_height/2+Ribbon_width/2+1.15])
-              cylinder(h = Depth_self_screw, d = Self_screw_diameter, center = true, $fn=20);                
+              cylinder(h = 100, d = Self_screw_diameter, center = true, $fn=20);                
                             }
                             
        }                 
@@ -275,24 +285,25 @@ module 888_4008(draft = true){
 }
 
 
-Total_w_mezikus = 4;
-D_mezikus = starter_pipe_d_middle+0.2-End_Wall_Thickness*2+32;
+Total_w_mezikus = 6;
+D_mezikus = starter_pipe_d_middle+0.2-End_Wall_Thickness*2+35;
 
 module Mezikus(draft=true){
     difference(){
        cylinder(d = D_mezikus, h = Total_w_mezikus, $fn = draft?16:120); 
         
-       cylinder(d = starter_pipe_d_middle+0.2-End_Wall_Thickness*2, h = Total_w_mezikus, $fn = draft?16:120); 
+        translate([0, 0, 6-4-0.2]) 
+         cylinder(h=4, d1=starter_pipe_d_middle, d2 = starter_pipe_d_middle-End_Wall_Thickness*2, $fn = draft?16:120); 
+      cylinder(d = starter_pipe_d_middle-End_Wall_Thickness*2, h = Total_w_mezikus, $fn = draft?16:120); ///////
         
        translate([0, 0, 0]) 
-       cylinder(d = starter_pipe_d_middle+0.4, h = Total_w_mezikus - 2, $fn = draft?16:120);
+       cylinder(d = starter_pipe_d_middle+0.2, h = Total_w_mezikus - 4, $fn = draft?16:120);
         
-      // Holes for self-cutting screws 
+   // Holes for self-cutting screws  - ENLARGED
        for (i = [1:Number_of_holes]){
           rotate([0, 0, i*360/Number_of_holes])
-          translate([starter_pipe_d_middle/2-End_Wall_Thickness/2, 0, top_thickness + M3_nut_height + sensor_cap_height/2+Ribbon_width/2+1.15])
-              cylinder(h = Depth_self_screw, d = Self_screw_diameter, center = true, $fn=20);                
-                 }
+          translate([starter_pipe_d_middle/2-End_Wall_Thickness/2, 0, top_thickness + M3_nut_height + sensor_cap_height/2+Ribbon_width/2+0.15])
+              cylinder(h = Depth_self_screw, d = Self_screw_diameter+1, center = true, $fn=20);                  }
                  
       // Groove for sensors
         translate([0, 0, Total_w_mezikus-Depth_Groove_Sensors])
@@ -300,21 +311,21 @@ module Mezikus(draft=true){
             
            cylinder(d = D_mezikus-3, h = Depth_Groove_Sensors, $fn = draft?16:120);  
             
-            cylinder(d = D_mezikus-19.4, h = Depth_Groove_Sensors, $fn = draft?16:120);
+            cylinder(d = D_mezikus-22.4, h = Depth_Groove_Sensors, $fn = draft?16:120);
             
             }               
                                                
         }
         
         // Cliff for ribbon
-       translate([0, 0, -2]) 
+       translate([0, 0, -0]) 
      difference(){   
      cylinder(h = 2, d1 = D_mezikus+ 3, d2 = D_mezikus, $fn = draft?16:120);
      
      cylinder(h = 2, d = D_mezikus- 3, $fn = draft?16:120);       
     }
 
-       // Partitions between holes for sensors of rotation speed measurement
+ /*      // Partitions between holes for sensors of rotation speed measurement
            Number_of_holes2 = 26;                
       translate([0, 0, Total_w_mezikus-Depth_Groove_Sensors/2])  
       for (i = [1:Number_of_holes2]){
@@ -323,12 +334,12 @@ module Mezikus(draft=true){
               cube([8.6, 0.8  ,  Depth_Groove_Sensors], center = true);
                             }
 
-
+*/
 }
 
 
 
-888_4008(draft=true);
+888_4008(draft=false);
 
-translate([0, 0, starter_bottom_h+Ribbon_width+rpm_sensor_h - 1.4 ])
+translate([0, 0, starter_bottom_h+Ribbon_width+rpm_sensor_h - 3.4 + 20])
  Mezikus(draft=true);
