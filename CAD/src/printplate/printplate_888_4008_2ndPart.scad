@@ -3,5 +3,5 @@
 include <../../parameters.scad>
 
 use <../888_4008.scad>
-rotate([180, 0, 0])
+rotate([0, 0, 0])
 Mezikus(draft=false);
