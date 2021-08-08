@@ -56,16 +56,18 @@ starter_rope_d = 39.2;
 
 
     ZmenseniTisk = 0.2;
+    
+    // Parametry sloupků pro upevnění disku mlýnku
+        PosunZsl = 7.0;
+        PosunYsl = 13.9;
+        Vyska_sloupku = 4;
 
 
  // sloupky pro upevnění disku mlýnku
        module Sloupek(draft = true){
-        PosunZ = 9.7;
-        PosunY = 12.2;
-        Vyska_sloupku = 4;
-      translate([rod_size/2, PosunY, bearing_outer_diameter/2 + Bwall+ PosunZ]) rotate([0, 90, 0])
+              rotate([0, 90, 0])
            difference(){
-                cylinder(d = 5, h = Vyska_sloupku, $fn = draft?16:120);
+                cylinder(d = 4.3, h = Vyska_sloupku, $fn = draft?16:120);
                cylinder(d = 1.5, h = Vyska_sloupku, $fn = draft?16:120);
 
      }
@@ -212,13 +214,13 @@ module 888_1012(draft = true){
 
 
         // light blocking shield for TFPROBE sensor
-        difference(){
+ /*       difference(){
           translate([ rod_size/2 , -TFPROBE01_PCB_width, bearing_outer_diameter + Bwall*4])
               cube([3, TFPROBE01_PCB_width*2, 15]);
           translate([-rod_size/2, 0, bearing_outer_diameter/2 + Bwall]) rotate([0, 90, 0])
              cylinder(d = starter_rope_d+starter_rope_diameter/2, h = 50, $fn = draft?16:120);
 
-        }
+        } */
 
     }
 
@@ -293,11 +295,22 @@ module 888_1012(draft = true){
 
     }
  //Sloupky pro uchycení mlýnku
- translate([0, 0, -bearing_outer_diameter/2 - Bwall])
+    translate([rod_size/2, PosunYsl,  PosunZsl])
     Sloupek();
-    translate([0, 0, -bearing_outer_diameter/2 - Bwall])
-    mirror([0, 90, 0])
-    Sloupek();  /* */
+    translate([rod_size/2, -PosunYsl,  PosunZsl])
+    Sloupek();
+   
+   translate([rod_size/2, 0, 22.6])
+        rotate([0, 90, 0])
+           difference(){
+               union(){
+                cylinder(d = 4.3, h = Vyska_sloupku, $fn = draft?16:120);
+                translate([0.1, 0, 1.2])
+                cube([4.5, 15, 3], true);
+                   }
+               cylinder(d = 1.5, h = Vyska_sloupku, $fn = draft?16:120);
+               }
+    /* */
 }
 
 // Spojení s lámacím válcem
