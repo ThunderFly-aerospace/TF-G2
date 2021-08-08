@@ -22,26 +22,26 @@ translate([-10, 0, -42.5])
         888_1012();
     
     translate([-10 , -bearing_outer_diameter/2- Bwall + 6.7, -42.5 - 6.7 ])
-    rotate([0, 0, 180])
-    bearing_house();
+    rotate([0, 0, 180]) bearing_house();
+    
     
     
 }
 
 translate([183+42.5, 0, 250-16.5])
- rotate([0, 90, 0])
-rotor_head();
+ rotate([0, 90, 0]) rotor_head();
+
 
  translate([183, 0, 250+30-4.5+15-17.5])
     rotate([180, 0, 90]) {
         888_4008();
       
-    translate([0, 0, starter_bottom_h+Ribbon_width+rpm_sensor_h - 1.4 + 0])
-       Mezikus(); 
+    translate([0, 0, starter_bottom_h+Ribbon_width+rpm_sensor_h - 1.4 - 2]) Mezikus(); 
+      
     
    translate([0, 0, starter_bottom_h+Ribbon_width+rpm_sensor_h - 1.4 + 4])    mill_rot();
     
-    translate([0,0,starter_bottom_h+Ribbon_width+rpm_sensor_h -1.4 + 4 +1.6+2 ])  
-       mill_static();    
+    translate([0,0,starter_bottom_h+Ribbon_width+rpm_sensor_h -1.4 + 4 +1.6+2 ])  mill_static();   
+     
       
     }
