@@ -188,12 +188,38 @@ module mill_static(draft = true){
      
      translate([0, 22.6, -2])   
         cylinder(d = PrumerDirySloupek, h = 20, $fn = 20);
+        
+        // Hole for TFPROBE
+        R = starter_pipe_d_middle/2-End_Wall_Thickness/2+9.7+1;  // Vzdálenost otvorů pro senzor od středu  
+        rotate(52)
+         translate([R-1.94,-tfprobe_width/2+2.05,-0.1])
+         minkowski(){
+        TFPROBE();
+        cylinder(h = 7, r = 0.2);
+        }
      } 
-  }  
+  }
+
+
+tfprobe_lenght = 14;
+tfprobe_width = 10;
+tfprobe_thickness = 1.5; // Not sure
+module TFPROBE(){
+    difference(){
+    cube([tfprobe_lenght,tfprobe_width,tfprobe_thickness + 5]);
+        
+//        translate([1.94-1,3.05-1,-0.1])
+//        cube([2,2,1.7]);
+        
+    }
+    }
+  
 
 mill_rot();
+    
 
-//translate([0,0,H_mill_disc+2 ])   mill_static();
+
+translate([0,0,H_mill_disc+2 ])   mill_static();
   
 //translate([0, 0, -6]) Mezikus(draft=true);
  
