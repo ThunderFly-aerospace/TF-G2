@@ -50,12 +50,16 @@ include <lib/stdlib/polyScrewThread_r1.scad>
      End_Wall_Thickness = 5;
      
        // Holes for self-cutting screws in inner cliff
-       Self_screw_diameter = 1.5;
+       Self_screw_diameter = 2;
        Depth_self_screw = 30;
        Number_of_holes = 4;
        
     // Groove for sensors
          Depth_Groove_Sensors = 3.5;  
+         
+    // Mezikus
+    Total_w_mezikus = 6;
+D_mezikus = starter_pipe_d_middle+0.2-End_Wall_Thickness*2+34;
 
 module 888_4008(draft = true){
 
@@ -285,25 +289,23 @@ module 888_4008(draft = true){
 }
 
 
-Total_w_mezikus = 6;
-D_mezikus = starter_pipe_d_middle+0.2-End_Wall_Thickness*2+35;
 
 module Mezikus(draft=true){
     difference(){
        cylinder(d = D_mezikus, h = Total_w_mezikus, $fn = draft?16:120); 
         
-        translate([0, 0, 6-4-0.2]) 
+        translate([0, 0, 6-4-2.2]) 
          cylinder(h=4, d1=starter_pipe_d_middle, d2 = starter_pipe_d_middle-End_Wall_Thickness*2, $fn = draft?16:120); 
       cylinder(d = starter_pipe_d_middle-End_Wall_Thickness*2, h = Total_w_mezikus, $fn = draft?16:120); ///////
         
-       translate([0, 0, 0]) 
-       cylinder(d = starter_pipe_d_middle+0.2, h = Total_w_mezikus - 4, $fn = draft?16:120);
+//       translate([0, 0, 0]) 
+//       cylinder(d = starter_pipe_d_middle+0.2, h = Total_w_mezikus - 4, $fn = draft?16:120);
         
    // Holes for self-cutting screws  - ENLARGED
        for (i = [1:Number_of_holes]){
           rotate([0, 0, i*360/Number_of_holes])
           translate([starter_pipe_d_middle/2-End_Wall_Thickness/2, 0, top_thickness + M3_nut_height + sensor_cap_height/2+Ribbon_width/2+0.15])
-              cylinder(h = Depth_self_screw, d = Self_screw_diameter+1, center = true, $fn=20);                  }
+              cylinder(h = Depth_self_screw, d = Self_screw_diameter+0.5, center = true, $fn=20);                  }
                  
       // Groove for sensors
         translate([0, 0, Total_w_mezikus-Depth_Groove_Sensors])
@@ -311,7 +313,7 @@ module Mezikus(draft=true){
             
            cylinder(d = D_mezikus-3, h = Depth_Groove_Sensors, $fn = draft?16:120);  
             
-            cylinder(d = D_mezikus-22.4, h = Depth_Groove_Sensors, $fn = draft?16:120);
+            cylinder(d = starter_pipe_d_middle+2.5, h = Depth_Groove_Sensors, $fn = draft?16:120);
             
             }               
                                                
