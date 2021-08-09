@@ -79,9 +79,12 @@ module tail_center(){
               translate([i*27.5/2, 0, -below_height+15+servo_z_shift])
                 rotate([-90, 0, 0])
                 {
-                  cylinder(d=2, h=13, center = true, $fn = 20);
-                  translate([0, 0, 6])
-                    cylinder(d=5.2, h=10, $fn = 20);
+                // mounting screw holes
+                    cylinder(d=2, h=13, center = true, $fn = 20);
+                    translate([0, 0, 6])
+                        cylinder(d=2.5, h=13, center = true, $fn = 20);
+                    translate([0, 0, 6])
+                      cylinder(d=5.2, h=10, $fn = 20);
                 }
         }
 
