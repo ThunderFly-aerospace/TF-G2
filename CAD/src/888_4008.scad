@@ -43,7 +43,7 @@ include <lib/stdlib/polyScrewThread_r1.scad>
     screws_head_d=7;
     screws_h=14;
     
-    Ribbon_width = 6 - 1.2;
+    Ribbon_width = 6 - 0.2;
     Ribbon_part_w = height_from_rotor_nut- (16.5 - 1.65) + Ribbon_width; // Auxiliary variable
     
     /// Inner cliff
@@ -130,7 +130,7 @@ module 888_4008(draft = true){
                                  cube([M3_nut_diameter * 1.2,M3_nut_diameter*1.2+4,M3_nut_height], center = true); 
                                 translate([0,0,2.15])
                                  rotate([45,0,0])
-                                cube([M3_nut_diameter * 1.2,M3_nut_diameter*1.2+3,M3_nut_diameter*1.2+3], center = true); 
+                               cube([M3_nut_diameter * 1.2,M3_nut_diameter*1.2+3,M3_nut_diameter*1.2+3], center = true); 
                               }
 
 
@@ -158,8 +158,11 @@ module 888_4008(draft = true){
        translate([0,0,top_thickness + M3_nut_height + sensor_cap_height/2-4.5])
        cylinder(h=sensor_cap_height*0.7+Ribbon_part_w+2.25, d1=starter_pipe_d_middle, d2 = starter_pipe_d_middle, $fn = draft?16:120);
        
-       translate([0,0,top_thickness + M3_nut_height + sensor_cap_height/2-4.5])
+       translate([0,0,top_thickness + M3_nut_height + sensor_cap_height/2-5.5])
        cylinder(h=sensor_cap_height*0.7+Ribbon_part_w+2.25, d1=starter_pipe_d_middle-4.9, d2 = starter_pipe_d_middle-End_Wall_Thickness*2, $fn = draft?16:120);
+       
+       translate([0,0,top_thickness + M3_nut_height + sensor_cap_height/2-3.5])
+       cylinder(h=sensor_cap_height*0.7+Ribbon_part_w+2.25, d = starter_pipe_d_middle-End_Wall_Thickness*2, $fn = draft?16:120);
      
        translate([0,0,top_thickness + M3_nut_height + sensor_cap_height/2-2.5+sensor_cap_height*0.7+Ribbon_part_w+0.25-4-0.2])
      difference(){
@@ -168,7 +171,7 @@ module 888_4008(draft = true){
        cylinder(h=4, d1=starter_pipe_d_middle, d2 = starter_pipe_d_middle-End_Wall_Thickness*2, $fn = draft?16:120);    
      }
      
-     translate([0,0,top_thickness + M3_nut_height + sensor_cap_height/2+30.7])
+     translate([0,0,top_thickness + M3_nut_height + sensor_cap_height/2+31.7])
     cube([50,50,50], true);
      
        // Drážka pro uchycení stuhy
@@ -268,13 +271,13 @@ module 888_4008(draft = true){
                       // Two screw holes around rotor axis
                           translate([0, 3 + 4.5 + blade_mount_screw/2, -5])
                               cylinder(d = blade_mount_screw, h = 8, $fn = 20);
-                            translate([0, 3 + 4.5 + blade_mount_screw/2, 3.9])   // Tloušťka pomocné ucpávky v místě díry pro šroub je asi 0.25 mm (pro z = 3.6 už vede díra skrz)
-                              cylinder(d = blade_mount_screw, h = 4, $fn = 20);
+                            translate([0, 3 + 4.5 + blade_mount_screw/2,1.15 + M3_nut_height + layer_thickness]) 
+                              cylinder(d = blade_mount_screw, h = 3, $fn = 20);
                     
                     translate([0, 3 + 4.5 + blade_mount_screw/2, screws_h/2+thickness/2-7])
-                      cylinder(d = M3_nut_diameter, h = 2.5, $fn = 6);
-                     translate([0, 3 + 4.5 + blade_mount_screw/2+4, screws_h/2+thickness/2-7+2.5/2])
-                      cube([M3_nut_diameter, 8  ,  2.5], center = true);
+                     cylinder(d = M3_nut_diameter, h =M3_nut_height, $fn = 6);
+                     translate([0, 3 + 4.5 + blade_mount_screw/2+4, screws_h/2+thickness/2-7+M3_nut_height/2])
+                      cube([M3_nut_diameter, 8  ,  M3_nut_height], center = true);
                       
                       
                   }
@@ -294,12 +297,12 @@ module Mezikus(draft=true){
     difference(){
        cylinder(d = D_mezikus, h = Total_w_mezikus, $fn = draft?16:120); 
         
-        translate([0, 0, 6-4-2.2]) 
+        translate([0, 0, 6-4-1.2]) 
          cylinder(h=4, d1=starter_pipe_d_middle, d2 = starter_pipe_d_middle-End_Wall_Thickness*2, $fn = draft?16:120); 
       cylinder(d = starter_pipe_d_middle-End_Wall_Thickness*2, h = Total_w_mezikus, $fn = draft?16:120); ///////
         
-//       translate([0, 0, 0]) 
-//       cylinder(d = starter_pipe_d_middle+0.2, h = Total_w_mezikus - 4, $fn = draft?16:120);
+       translate([0, 0, -1]) 
+       cylinder(d = starter_pipe_d_middle+0.2, h = Total_w_mezikus -4, $fn = draft?16:120);
         
    // Holes for self-cutting screws  - ENLARGED
        for (i = [1:Number_of_holes]){
