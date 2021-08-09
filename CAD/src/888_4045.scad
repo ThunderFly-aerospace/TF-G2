@@ -45,11 +45,11 @@ use <888_4008.scad>;
        Bwall = 1.6; // wall around bearing
     
              // Holes for self-cutting screws
-       Self_screw_diameter = 1.5;
+       Self_screw_diameter = 2; 
        Depth_self_screw = 30;
        Number_of_holes = 4;
        
-       D_mezikus = starter_pipe_d_middle+0.2-End_Wall_Thickness*2+35;
+       D_mezikus = starter_pipe_d_middle+0.2-End_Wall_Thickness*2+34;
        
   
 
@@ -68,20 +68,26 @@ module mill_rot(draft = true){
        for (i = [1:Number_of_holes]){
           rotate([0, 0, i*360/Number_of_holes])
           translate([starter_pipe_d_middle/2-End_Wall_Thickness/2, 0, top_thickness + M3_nut_height + sensor_cap_height/2+Ribbon_width/2+0.15])
-              cylinder(h = Depth_self_screw, d = Self_screw_diameter+1, center = true, $fn=20);                                 }
+              cylinder(h = Depth_self_screw, d = Self_screw_diameter + 0.5, center = true, $fn=20);                                 }
                     
-           Number_of_holes2 = 26;                
+           Number_of_holes2 = 24;                
          // Holes for rotation speed measurement
       for (i = [1:Number_of_holes2]){
-              r = 1;
-              s = 2;  // Vzdálenost děr stadionu
-              R = starter_pipe_d_middle/2-End_Wall_Thickness/2+10;  // Vzdálenost bližšího kruhu od středu
+            R = starter_pipe_d_middle/2-End_Wall_Thickness/2+9.7;  // Vzdálenost bližších kruhů od středu  
+            r = 1;
+            vzd = 2*PI*R/48/2;
+            s = 2;  // Vzdálenost děr stadionu
+              
           rotate([0, 0, i*360/Number_of_holes2+360/Number_of_holes2/2])
             hull(){
-                translate([R, 0, -5])
+                translate([R, -(vzd - r), -5])
               cylinder(h = Depth_self_screw, d = 2*r, center = true, $fn=20);
-                 translate([R+s, 0, -5])
-              cylinder(h = Depth_self_screw, d = 2*(r+s*r/(R-s)), center = true, $fn=20);   
+                translate([R, vzd - r, -5])
+              cylinder(h = Depth_self_screw, d = 2*r, center = true, $fn=20);
+                translate([R+s, -((vzd+s*vzd/(R-s))-r), -5])
+              cylinder(h = Depth_self_screw, d = 2*r, center = true, $fn=20); 
+                translate([R+s, ((vzd+s*vzd/(R-s))-r), -5])
+              cylinder(h = Depth_self_screw, d = 2*r, center = true, $fn=20);   
                     }
                           } 
                                          
@@ -89,16 +95,22 @@ module mill_rot(draft = true){
             Number_of_holes3 = 2;                
          // Holes for zero postition sensor                            
       for (i = [1:Number_of_holes3]){
+              R = starter_pipe_d_middle/2-End_Wall_Thickness/2+4.7;  // Vzdálenost bližších kruhů od středu
               r = 1;
+              vzd = 2*PI*R/48/2;
               s = 2;  // Vzdálenost děr stadionu
-              R = starter_pipe_d_middle/2-End_Wall_Thickness/2+5;  // Vzdálenost bližšího kruhu od středu
+              
           rotate([0, 0, i*360/Number_of_holes3+90])
-             hull(){
-                translate([R, 0, -5])
+            hull(){
+                translate([R, -(vzd - r), -5])
               cylinder(h = Depth_self_screw, d = 2*r, center = true, $fn=20);
-                 translate([R+s, 0, -5])
-              cylinder(h = Depth_self_screw, d = 2*(r+s*r/(R-s)), center = true, $fn=20);
-                }
+                translate([R, vzd - r, -5])
+              cylinder(h = Depth_self_screw, d = 2*r, center = true, $fn=20);
+                translate([R+s, -((vzd+s*vzd/(R-s))-r), -5])
+              cylinder(h = Depth_self_screw, d = 2*r, center = true, $fn=20); 
+                translate([R+s, ((vzd+s*vzd/(R-s))-r), -5])
+              cylinder(h = Depth_self_screw, d = 2*r, center = true, $fn=20);   
+                    }
                             } 
     /*                         
         // Otvory pro senzor
@@ -181,7 +193,7 @@ module mill_static(draft = true){
 
 mill_rot();
 
-translate([0,0,H_mill_disc+2 ])   mill_static();
+//translate([0,0,H_mill_disc+2 ])   mill_static();
   
 //translate([0, 0, -6]) Mezikus(draft=true);
  
