@@ -61,6 +61,7 @@ starter_rope_d = 39.2;
         PosunZsl = 7.0;
         PosunYsl = 13.9;
         Vyska_sloupku = 4;
+        Self_screw_diameter = 2;
 
 
  // sloupky pro upevnění disku mlýnku
@@ -68,7 +69,7 @@ starter_rope_d = 39.2;
               rotate([0, 90, 0])
            difference(){
                 cylinder(d = 4.3, h = Vyska_sloupku, $fn = draft?16:120);
-               cylinder(d = 1.5, h = Vyska_sloupku, $fn = draft?16:120);
+               cylinder(d = Self_screw_diameter, h = Vyska_sloupku, $fn = draft?16:120);
 
      }
         }
@@ -305,10 +306,10 @@ module 888_1012(draft = true){
            difference(){
                union(){
                 cylinder(d = 4.3, h = Vyska_sloupku, $fn = draft?16:120);
-                translate([0.1, 0, 1.2])
+                translate([0.1, 0, 1.3])
                 cube([4.5, 15, 3], true);
                    }
-               cylinder(d = 1.5, h = Vyska_sloupku, $fn = draft?16:120);
+               cylinder(d = Self_screw_diameter, h = Vyska_sloupku, $fn = draft?16:120);
                }
     /* */
 }
