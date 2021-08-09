@@ -56,7 +56,7 @@ starter_rope_d = 39.2;
 
 
     ZmenseniTisk = 0.2;
-    
+
     // Parametry sloupků pro upevnění disku mlýnku
         PosunZsl = 7.0;
         PosunYsl = 13.9;
@@ -167,8 +167,8 @@ module bearing_house(breaking_groove = true, draft = true){
         cylinder(d = 9, h = 5, $fn = draft?16:120);
 
     // TFPROBE01 RPM sensor
-    translate([-rod_size/2, -9/2, bearing_outer_diameter + Bwall*4])
-        cube([rod_size + TFPROBE01_sensor_height/3,9,rod_y_distance]);
+    //translate([-rod_size/2, -9/2, bearing_outer_diameter + Bwall*4])
+    //    cube([rod_size + TFPROBE01_sensor_height/3,9,rod_y_distance]);
 
     if(breaking_groove == true)
     translate([rod_size/2 + bearing_outer_diameter - rod_size +1, 0, bearing_outer_diameter/2 + Bwall]) rotate([0, 90, 0])
@@ -212,19 +212,7 @@ module 888_1012(draft = true){
             translate([0 , -rod_y_distance/2 + rod_size/4, rod_x_distance + rod_size/2])
                 cube([rod_size, rod_size/2, rod_size],center = true);
         }
-
-
-        // light blocking shield for TFPROBE sensor
- /*       difference(){
-          translate([ rod_size/2 , -TFPROBE01_PCB_width, bearing_outer_diameter + Bwall*4])
-              cube([3, TFPROBE01_PCB_width*2, 15]);
-          translate([-rod_size/2, 0, bearing_outer_diameter/2 + Bwall]) rotate([0, 90, 0])
-             cylinder(d = starter_rope_d+starter_rope_diameter/2, h = 50, $fn = draft?16:120);
-
-        } */
-
     }
-
 
     // servo nuts
    translate([0, rod_y_distance/4, rod_x_distance + rod_size])
@@ -254,12 +242,6 @@ module 888_1012(draft = true){
     translate([0, 0, bearing_outer_diameter + Bwall*2+1])
         cylinder(d = 9, h = 5, $fn = draft?16:120);
 
-
-    // TFPROBE01 RPM sensor PCB
-    translate([-TFPROBE01_PCB_thickness + rod_size/2 - TFPROBE01_sensor_height*2/3, -TFPROBE01_PCB_width/2, bearing_outer_diameter + Bwall*4])
-        cube([TFPROBE01_PCB_thickness, TFPROBE01_PCB_width, rod_y_distance]);
-
-
     // diry v sloupku pro pridelai kuloveho drzaku pro tahlo
     translate([0, 0, rod_x_distance + rod_size/2])
         rotate([90, 0, 0])
@@ -273,13 +255,13 @@ module 888_1012(draft = true){
      // Odečtení kvádru patřícího ke sloupku
     translate([-rod_size/2, -bearing_outer_diameter/2 - Bwall-PridavnaSirkaNaSpojeniDilu/2, -BaseThickness])
                 cube([bearing_outer_diameter, bearing_outer_diameter + Bwall*2 +PridavnaSirkaNaSpojeniDilu, bearing_outer_diameter + Bwall*2+3]);
-                
+
       // Prodloužení děr ve sloupcích pro připevnění disku
           rotate([0, 90, 0]){
-                                 
+
                translate([ -bearing_outer_diameter/2 - Bwall-PosunZsl,  PosunYsl, -5])
              cylinder(d = Self_screw_diameter, h = Vyska_sloupku+10, $fn = draft?16:120);
-              
+
               translate([ -bearing_outer_diameter/2 - Bwall-PosunZsl,  -PosunYsl, -5])
              cylinder(d = Self_screw_diameter, h = Vyska_sloupku+10, $fn = draft?16:120);
          }
@@ -310,7 +292,7 @@ module 888_1012(draft = true){
     Sloupek();
     translate([rod_size/2, -PosunYsl,  PosunZsl])
     Sloupek();
-   
+
    translate([rod_size/2, 0, 22.6])
         rotate([0, 90, 0])
            difference(){
@@ -321,10 +303,10 @@ module 888_1012(draft = true){
                    }
                translate([0, 0, -7])
                cylinder(d = Self_screw_diameter, h = Vyska_sloupku+10, $fn = draft?16:120);
-                
-                rotate([0, -90, 0])   
+
+                rotate([0, -90, 0])
                 translate([-6, 0, -4])
-               cylinder(d = 9, h = Vyska_sloupku+10, $fn = draft?16:120);   
+               cylinder(d = 9, h = Vyska_sloupku+10, $fn = draft?16:120);
                }
     /* */
 }
