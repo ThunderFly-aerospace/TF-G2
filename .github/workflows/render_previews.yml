@@ -13,7 +13,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-20.04
-    if: ${{ github.actor != 'TFbot'}}
 
     env:
       OPENSCAD_BIN: xvfb-run --auto-servernum ~/OpenSCAD.AppImage
@@ -36,17 +35,27 @@ jobs:
         sudo apt update
         sudo apt-get install libc-bin python3-setuptools xvfb
         sudo python3 -m pip install --upgrade pip
-        sudo python3 -m pip install stlsort
-        sudo python3 -m pip install lxml
+        sudo python3 -m pip install stlsort lxml
         sudo python3 -m pip install git+https://github.com/ThunderFly-aerospace/yagv
         sudo python3 -m pip install git+https://${{ secrets.AUTH_USER }}:${{ secrets.GITHUBPAT }}@github.com/ThunderFly-aerospace/processor3D.git
         wget https://files.openscad.org/OpenSCAD-2021.01-x86_64.AppImage -O ~/OpenSCAD.AppImage
         chmod +x ~/OpenSCAD.AppImage
         ~/OpenSCAD.AppImage --version
+    
+    - name: Clean repo
+      run: |
+        rm CAD/png/*.png ||:
+        rm CAD/stl/*.stl ||:
+        rm CAD/amf/*.amf ||:
 
     - name: Make
       run: |
         cd CAD/src
+        make
+
+    - name: Make
+      run: |
+        cd CAD/src/assembly
         make
         
     - name: Upload a PNG Artifact
@@ -65,4 +74,38 @@ jobs:
       uses: stefanzweifel/git-auto-commit-action@v4
       with:
         commit_message: Automatic commit from workflow
+     
+  Update_blender:
+    needs: build
+    runs-on: ubuntu-20.04
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+#      with:
+#        token: ${{ secrets.GITHUBPAT }}
+#        submodules: recursive
+#    
+#    - name: Checkout repository and set original GitHub token
+#      uses: actions/checkout@v2
+#      with:
+#        token: ${{ github.token }}
+        
+    - name: install blender
+      run: |
+        sudo apt update
+        sudo apt-get install blender
+
+    - name: Update blender
+      run: |
+        cd CAD/blender
+        ./update_blend_file.sh 
+
+    - name: Checkout repository and set original GitHub token
+      uses: actions/checkout@v2
+
+    - name: publish to git        
+      uses: stefanzweifel/git-auto-commit-action@v4
+      with:
+        commit_message: Automatic commit from workflow            
+     
         

@@ -34,6 +34,7 @@ M3_nut_diameter = 6.6;
 M3_screw_head_height = 3;
 M3_nut_pocket = 5.6;
 M3_head_diameter = 6.6;
+M3_head_diameter_ISO7380 = 7.6; //https://eshop.killich.cz/signys_data/eobchod/navody/katalog/strany/iso7380a.pdf
 M3_head_height = 3.0;
 
 

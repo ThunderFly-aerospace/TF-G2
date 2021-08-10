@@ -1,6 +1,5 @@
-/home/roman/repos/tf/TF-G2/CAD/stl/position_888_1001.stl: \
-	/home/roman/repos/tf/TF-G2/CAD/src/lib/stdlib/naca4.scad \
-	/home/roman/repos/tf/TF-G2/CAD/src/888_1001.scad \
-	/home/roman/repos/tf/TF-G2/CAD/bolt_parameters.scad \
-	/home/roman/repos/tf/TF-G2/CAD/parameters.scad \
-	/home/roman/repos/tf/TF-G2/CAD/src/assembly/position/position_888_1001.scad
+position_888_1001.scad: \
+	../../../bolt_parameters.scad \
+	../../../parameters.scad \
+	../../888_1001.scad \
+	../../lib/stdlib/naca4.scad \

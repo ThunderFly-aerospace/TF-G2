@@ -1,5 +1,3 @@
-
-//@set_slicing_config(../slicing/default.ini)
 include <../parameters.scad>
 
 $fn = 90;
@@ -12,7 +10,7 @@ suspension_holder_flange_height = 25;
 suspension_holder_thickness = 0.41*15;
 suspension_camber = -2; // úhel zakončení, délka konstrukce
 suspension_join_length = 22;
-suspension_join_screw_distance = 10; // zvetsit na 20 nebo více po vyřešění: https://github.com/ThunderFly-aerospace/TF-G2/issues/86
+suspension_join_screw_distance = 20; // zvetsit na 20 nebo více po vyřešění: https://github.com/ThunderFly-aerospace/TF-G2/issues/86
 suspension_bow_diameter = 200;      //cylinder_r1
 suspension_bow_diameter_1 = 200 - 2*zmenseni;
 
@@ -132,6 +130,9 @@ module 888_2002(){
                 }
                 rotate([0, 90, 0])
                     cylinder(d = M3_screw_diameter, h = suspension_bow_diameter, center = true);
+               rotate([0, 90, 0])
+               translate([0, 0, -suspension_bow_diameter-wheel_mount_thickness + 3])
+                cylinder(d = M3_nut_diameter, h = suspension_bow_diameter, $fn = 6, center = false);     
             }
     }
     mirror_copy([0, 0, 1])

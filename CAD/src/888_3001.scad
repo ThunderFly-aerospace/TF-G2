@@ -9,6 +9,8 @@ depth_max = 200;
 below_height = 30;
 rudder_depth = 60;
 
+servo_z_shift = 2;
+
 N = 80;
 
 
@@ -21,18 +23,14 @@ module tail_center(){
         hull(){
             translate([0, 0, -below_height])
                 sweep(gen_dat_2(M=below_height, dz=1,N=N), showslices = false);
-            #intersection(){
-                union(){
-                    elevator(position = 1);
-                    mirror([0, 1, 0])
-                        elevator(position = 1);
-                }
-                cube([500, 20, 100], center=true);
-            }
 
             translate([0, 0, -5-12])
                 rotate([0, 90, 0])
                     cylinder(d = 10.4+2, h = 40);
+
+
+            translate([60, 1, 0])
+              translate([-35/2, -15/2, -below_height]) cube([23.5, 15, below_height/2]);
         }
 
         // kostky na pripevneni smerovky
@@ -57,15 +55,6 @@ module tail_center(){
             rotate([0, 180, 0])
                 cylinder(d = 10, h = 30, $fn=50);
 
-        // Otvory na tycky pro privpevneni vyskovky
-        translate([0, 0, -25])
-            rotate([90, -elevator_pitch, 0])
-                union(){
-                    translate([20, 0, 0])
-                        cylinder(d = 2.5, h = 100, center = true, $fn = 20);
-                    translate([20+60, 0, 0])
-                        cylinder(d = 2.5, h = 100, center = true, $fn = 20);
-                }
 
         // vyrez na otocnou cast ostruhy
         difference(){
@@ -82,7 +71,7 @@ module tail_center(){
 
         // prostor pro otaceni smerovky
         translate([depth_max - rudder_depth, 0, -below_height+10])
-            cylinder(d = 7, h=80);
+            cylinder(d = 10, h=80, $fn=30);
 
         // Otvor pro svislou osu
         translate([depth_max - rudder_depth, 0, -below_height+2])
@@ -91,21 +80,20 @@ module tail_center(){
         // krabice pro servo
         translate([60, 1, 0]) union(){
             //translate([-25/2, -11/2, -35]) cube([25, 11, 35]);
-            translate([-35/2, -11/2, -40]) cube([35, 13.5, 35]);
-            translate([-35/2, -11/2, -20+3]) cube([35, 11+5, 35]);
-            translate([-35/2, -11/2, -20+3-42]) cube([35, 11+5, 35]);
+            translate([-23.5/2, -10.5/2, -40]) cube([23.5, 10.5, 35]);
+            translate([-35/2, -10.5/2, -below_height+20+servo_z_shift]) cube([35, 10.5+5, 35]);
+            translate([-23.5/2, -10.5/2, -20+3-42]) cube([23.5, 10.5, 35]);
+            translate([-35/2, -1.7/2, -below_height-1]) cube([35, 1.7, 35]);
+            translate([-35/2, -8/2, -below_height-1]) cube([20, 8, servo_z_shift+6]);
 
-            /*
-            translate([-25/2, -11/2, -35]) cube([25, 11, 35]);
-            translate([-35/2, -11/2, -20]) cube([35, 11, 35]);
-            translate([-35/2, -11/2, -20+10]) cube([35, 11+5, 35]);
-            hull(){
-                translate([-25/2, -11/2, -20-2]) cube([25, 11, 1]);
-                translate([-35/2, -11/2, -35]) cube([35, 11, 1]);
-            }
-            translate([-28/2, 0, -20+10]) cylinder(d=2, h=100, center = true, $fn = 20);
-            translate([+28/2, 0, -20+10]) cylinder(d=2, h=100, center = true, $fn = 20);
-            */
+            for(i=[1, -1])
+              translate([i*27.5/2, 0, -below_height+15+servo_z_shift])
+                rotate([-90, 0, 0])
+                {
+                  cylinder(d=2, h=13, center = true, $fn = 20);
+                  translate([0, 0, 6])
+                    cylinder(d=5.2, h=10, $fn = 20);
+                }
         }
 
         // kostky na pripevneni smerovky, otvory v nich na sroub a vystuzeni
@@ -128,7 +116,7 @@ module tail_center(){
     //function thickness_2(i) = 0.03;   //0.5*sin(i*i)+.1;
 
     //function edge_shift(i) = (i/60)^(22)+i*0.75;
-    function thickness_2(i) = (1-i/100)*0.01;   //0.5*sin(i*i)+.1;
+    function thickness_2(i) = (1-i/100)*0.001;   //0.5*sin(i*i)+.1;
 
     function extra_length_2(i) = depth_max;
 

@@ -1,6 +1,4 @@
-//@set_slicing_config(slicing/default.ini)
 //Spodni cast pylonu
-
 include <../parameters.scad>
 use <lib/stdlib/silentblock.scad>
 
@@ -9,13 +7,9 @@ pylon_bottom_wall = 5;
 module pylon_silentblocks(){
 for(x = [-0.5, 0.5], y=[-0.5, 0.5])
   translate([(pylon_silentblocks_base_distance)*x, (pylon_silentblocks_base_distance)*y, 4])
-    silentblock(do=8, l=8, dt=3, l1=6, l2=-3);
+    silentblock(do=8, l=8, dt=3, l1=5, l2=5);
 }
 pylon_silentblocks();
-
-
-
-pylon_silentblocks_base_distance = 58;
 
 
 module 888_1007(){

@@ -8,7 +8,7 @@ translate([0, 0, 1.5]) difference(){
 
         translate([0, 0, 5+3])
             rotate([0, 90, 0])
-                cylinder(d=10+4, h=10, center = true, $fn=$preview?10:80);
+                cylinder(d=tail_pipe_d+4, h=10, center = true, $fn=$preview?15:80);
         translate([0, 0, 15])
             cube([10, 6, 10], center=true);
     }
@@ -18,7 +18,7 @@ translate([0, 0, 1.5]) difference(){
 
     translate([0, 0, 5+3])
         rotate([0, 90, 0])
-            cylinder(d=10.2, h=10.2, center = true, $fn=$preview?10:80);
+            cylinder(d=tail_pipe_d, h=10.2, center = true, $fn=$preview?15:80);
 
     for(y = [-10, 10]){
         translate([0, y, -3/2-.1])

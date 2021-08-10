@@ -10,7 +10,7 @@ below_height = 30;
 rudder_depth = 60;
 
 N = 80;
-rudder_radius = 6;
+rudder_radius = 5;
 
 module tail_vertical(){
 
@@ -38,7 +38,7 @@ module tail_vertical_bottom(){
         translate([depth_max - rudder_depth, -rudder_radius, 0])
             cube([depth_max, rudder_radius*2, height]);
         translate([depth_max - rudder_depth, 0, 0])
-            cylinder(r = rudder_radius, h = height );
+            cylinder(r = rudder_radius, h = height, $fn=40);
       }
 
       // beveled top of rudder
@@ -53,9 +53,25 @@ module tail_vertical_bottom(){
     translate([30, 0, 0]) cube([15, 5, 20], center = true);
     translate([30+80, 0, 0]) cube([15, 5, 20], center = true);
 
-    translate([30, 0, 5]) rotate([90, 0, 0]) cylinder(d=M3_screw_diameter, h=50, center=true, $fn = 60);
-    translate([30+80, 0, 5]) rotate([90, 0, 0]) cylinder(d=M3_screw_diameter, h=50, center=true, $fn = 60);
-
+    translate([30, 0, 5])
+        rotate([90, 0, 0]){
+            cylinder(d=M3_screw_diameter, h=50, center=true, $fn = 60);
+            translate([0, 0, 4])
+                cylinder(d=M3_head_diameter_ISO7380, h=50, center=false, $fn = 60);
+            translate([0, 0, -3])
+                rotate([180, 0, 0])
+                    cylinder(d=M3_nut_diameter, h=50, center=false, $fn = 6);
+        }
+    translate([30+80, 0, 5])
+        rotate([90, 0, 0]){
+            cylinder(d=M3_screw_diameter, h=50, center=true, $fn = 60);
+            cylinder(d=M3_screw_diameter, h=50, center=true, $fn = 60);
+            translate([0, 0, 4])
+                cylinder(d=M3_head_diameter_ISO7380, h=50, center=false, $fn = 60);
+            translate([0, 0, -3])
+                rotate([180, 0, 0])
+                    cylinder(d=M3_nut_diameter, h=50, center=false, $fn = 6);
+        }
     }
 }
 

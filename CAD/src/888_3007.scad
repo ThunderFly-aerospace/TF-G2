@@ -1,4 +1,3 @@
-// Drzak ocasni tyce pod podlozkou
 
 include<../parameters.scad>
 
