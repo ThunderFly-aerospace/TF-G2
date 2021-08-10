@@ -75,13 +75,13 @@ difference()
             translate([cut_d-2-cut_d/4,-blade_w/4,0])
                 cube([cut_d/2,blade_w/2,cut_h],center=true);  
         
-        //cut neck
+        /*//cut neck
         translate([cut_d-0.5,0,0])
             cube([1,cut_w,cut_h],center=true);
         }   
             
         hull()
-        {
+        {*/
         //cut neck
         translate([cut_d-0.5,0,0])
             cube([1,cut_w,cut_h],center=true);

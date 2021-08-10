@@ -75,12 +75,12 @@ difference()
                     rotate([0,negativ_flap_limit,0])
                         translate([(bearings_outer_diameter+bearing_add)/2,0,shaft_h/2])
                         {
-                            cube([2*(bearings_outer_diameter+bearing_add)+0.1,shaft_l+0.1,2*shaft_h],center=true);
+                            cube([2*(bearings_outer_diameter+bearing_add),shaft_l+0.2,2*shaft_h+0.2],center=true);
                             hull()
                             {
                             for(yy=[-4,4])
                                 translate([1,yy,-3])
-                                    cylinder(d=10,h=2*shaft_h,center=true,$fn=100);
+                                    cylinder(d=10,h=2*shaft_h+0.2,center=true,$fn=100);
                             }
                         }
                         

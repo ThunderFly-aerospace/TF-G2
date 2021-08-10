@@ -250,7 +250,7 @@ free_flap_shaft_h=free_flap_ax_diameter+free_flap_bearing_add;
 free_flap_shaft_neck_l=7;
 
 free_flap_cut_d=12;
-free_flap_cut_h=1.8;
+free_flap_cut_h=2;
 free_flap_cut_w=12;
 
 free_flap_blade_d=20;
