@@ -2,18 +2,33 @@ include <bolt_parameters.scad>
 use <./src/lib/stdlib/naca4.scad>
 
 week = "77";  // dummy value for visual rendering not used for printing.
-global_clearance = 0.5;
 
-layer_thickness = 0.3;
+global_clearance = 0.2;
+clearance = global_clearance;
 
+layer_thickness = 0.2;
 base_patern = 10;
 
 gliding_angle = 14;         // tenhle úhel by se zřejmě v budoucnu měl počítat z požadované klouzavosti.
 
+
+
+////Simoniny parametry pro nosník rotoru
+base_length = 290; //delka podlozky
+base_split_position = [0, 149, base_length];
+base_width = 70; //sirka podlozky - vnější šířka nosníku
+base_thickness = 3; //vyska podlozky
+rantl_thickness = 3; //sirka steny podlozky
+rantl_height = 6.5;
+niy=4; //pocet der podelne
+
+side_base_thickness = 0.2*6; // minimalni tlouska  u bocnic napr. sten
+
+
+
 // Rotor parameters
 
 rotor_blade_AOA = 1.5;      // nastavení úhlu náběhu rotorového listu
-
 rotor_blade_rod = true;  // generovat diru pro uhlikove tycky
 rotor_blade_length = 500;   // délka rotorového listu
 // rotor_blade_length = 450 - 15;   // délka rotorového listu -- nastaveni prvniho vytisku
@@ -28,16 +43,14 @@ blade_mount_thickness = 4.6;
 blade_mount_screw_offset = 5; // distance of first screw from rotor end
 
 // Testovaci maly rotor
-
-        /*
-        rotor_blade_rod = false;
-        rotor_blade_length = 145;   // délka rotorového listu
-        rotor_blade_depth = 45.5 * (145/385);     // hloubka rotorového listu
-        blade_mount_length = 20;
-        blade_mount_width = 10;
-        blade_mount_thickness = 4;
-        */
-
+    /*
+    rotor_blade_rod = false;
+    rotor_blade_length = 145;   // délka rotorového listu
+    rotor_blade_depth = 45.5 * (145/385);     // hloubka rotorového listu
+    blade_mount_length = 20;
+    blade_mount_width = 10;
+    blade_mount_thickness = 4;
+    */
 // konec parametru pro testovaci maly rotor
 
 rotor_height = 180;         // výška otočného kloubu rotoru nad hlavní trubkou vírníku (odhad)
@@ -103,8 +116,15 @@ rotor_blade_part_list = [0, 50, 200, 350, 500];
 
 
 // vzdalenosti der pro kryty
-cover_holes = [base_patern*5, base_patern*13, base_patern*17, base_patern*26];
+//platform_mount_points = [base_patern*5, base_patern*13, base_patern*17, base_patern*26];
+// Otvory pro pripevneni na platformu
+platform_mount_points = [base_patern*8, base_patern*26];
 
+
+
+/////
+// Tohle jsou parametry jeste z AUto-G2
+/////
 rotor_head_width =  30;    //Rozměr 1 v nákresu
 pylon_wall_thickness = 4.2;  // Rozměr 2 v nákresu
 horizontal_screw_distance = 14.5;   // Rozměr 4 v nákresu
@@ -119,6 +139,38 @@ bearing_thickness = 4;        // Rozměr B2 v nákresu
 //bearing_shaft_length = 19.5;    // Rozměr B3 v nákresu, Originalni hodnota 19.5
 bearing_shaft_length = 20;    // Rozměr B3 v nákresu
 
+/////
+// Parametry rotorové hlavy
+/////
+
+////
+//
+//	Navrh geometrie rotorove hlavy vychazi z nakresu od Dobiase
+//
+////
+
+rotor_head_plate_thickness = 5;
+
+rotor_ball_joint_neck = 3; // vyska krcku tahla od stredu koule. 
+
+
+// parametry pro dil, co se naklapi v roll a pitch, obsahuje tfprobe
+
+// delka dilu v podelne ose virniku - od osy pitch 
+rotor_head_rod_x = 35;
+// sirka dilu na stredy tahel 
+rotor_head_rod_y = rotor_head_rod_x*2 - rotor_ball_joint_neck*2;
+// vyska dilu az po rovinu rotoru
+rotor_head_rod_z = 0;
+
+rotor_head_shaft_angle = 10;
+
+
+
+rotor_head_pitch = 10;
+rotor_head_roll = 10;
+
+
 
 // Engine and engine holder parameters
 
@@ -128,15 +180,40 @@ motor_holder_motor_height = 25;
 motor_holder_side_mount_height = base_patern*2.5;
 pylon_holder_side_mount_height = base_patern*4.5;
 
-engine_angle = -8; // ongle of engine axis relative to fuselage main axis
+engine_angle = -5; // ongle of engine axis relative to fuselage main axis
 engine_diameter = 55;
-engine_offset = 55;
+engine_offset = 53;			// Posun motoru v ose X (dopredu)
 
+
+
+
+// Parametry pro hacek na kabely od motoru
+	motor_wire_holder_width = 5;
+	motor_wire_holder_height = 10;
+	motor_wire_holder_space = 3;
+	motor_wire_holder_thickness = 2.5;
+	motor_wire_holder_z_shift = 10;
+	motor_wire_holder_x_shift = 19;
+
+// Parametry pro ochranny ram nad motorem 
+	motor_protective_frame_x_shift = 20;
+	motor_protective_frame_z_base = 32;
+	motor_protective_frame_beam_width = 5;
+	motor_protective_frame_beam_thickness = 3;
+	motor_protective_frame_width = base_width-3;
+	motor_protective_frame_plug_thickness = 2;
+	motor_protective_frame_plug_length = 4;
+	motor_protective_frame_thickness = 5;
+	motor_protective_frame_z_scale = 0.75;
+
+
+
+// Overit, jestli tyto parametry jsou pouzite
 engine_screws_radius = 15;
 engine_holes_radius = (24 + 44)/4;
 engine_shatf_hole_diameter = 13;
 
-//šroub servo
+//sroub servo
 Servo_screw = 1.5;
 Servo_nut_height = 1;
 Servo_nut_diameter = 2.7;
@@ -175,53 +252,34 @@ uhel_x = 90 - 79;
 maximum_printable_size = 150;
 
 
-////Pitotova trubice
-Pitot_tube_diameter = 4.02 + 1;
-Distance_hole_from_tube = 11.92;  //vzdálenost otvoru pro připevnění od samotné trubičky
-
-
-////Aerotow hitch
-tow_ring_diameter = 20;
-tow_ring_thickness = 5;
-tow_ring_groove = 2;
-tow_ring_hole_diameter = M3_screw_diameter;
-
-////Simoniny parametry pro nosník rotoru
-base_length = 290; //delka podlozky
-base_split_position = [0, 290/2, base_length];
-base_width = 70; //sirka podlozky - vnější šířka nosníku
-base_thickness = 3; //vyska podlozky
-rantl_thickness = 3; //sirka steny podlozky
-rantl_height = 6.5;
-niy=4; //pocet der podelne
 
 // Rotor pylon parameters
 
 
 // pylon_height = 250 - pylon_holder_side_mount_height;
+
+
+pylon_pipe_d = 4.2;
+pylon_suspension_height = 150;
+pylon_pipe_top_dist = 0;
+
+pylon_silentblocks_base_distance = 58;
+pylon_pipe_top_y_dist = 25;
+pylon_pipe_top_x_dist = 30;
+pylon_screw_top_y_dist = 25;
+pylon_screw_top_x_dist = 15;
+
 pylon_height = 180 + 50 - pylon_holder_side_mount_height;
-pilot_height_separation = 120 + 30 - pylon_holder_side_mount_height;
-pylon_thickness = 3;
-pylon_beam_width = 10;
-pylon_base_length = 60;
-pylon_ring_length = 40;
-pylon_ring_thickness = 3;
 
-pylon_top_width = 20;
-pylon_top_length = 20;
+airspeed_width = 35;
+airspeed_naca = 0004;
+airspeed_dist = 20;
 
-pylon_ring_width = 45;
-pylon_ring_height_rantl = 12+0.5;
-pylon_ring_height = 3;
 
-pylon_angle = atan2(pylon_height,(base_width-pylon_top_width)/2);
-echo(pylon_angle);
+// Parametry k akumulatoru
 
-pylon_bottom_angle = atan2(pilot_height_separation,(base_width-pylon_ring_width)/2-pylon_thickness*1.5);
-echo(pylon_bottom_angle);
-pylon_top_angle = atan2(pylon_height - pilot_height_separation,(pylon_ring_width - rotor_head_width)/2 - pylon_thickness - pylon_ring_thickness);
-echo(pylon_top_angle);
-
+battery_type = "Zippy_4S_3700";
+//  GensACE 3300 mAh
 
 //free-flap-head
 free_flap_ax_length=28;
@@ -264,16 +322,30 @@ free_flap_blade_first_screw=blade_mount_screw_offset+0.5;
 free_flap_blade_holder_radius=0.7*free_flap_blade_holder_h;
 free_flap_colective=-1;
 
-// Parametry k akumulatoru
+//if(battery_type == "GensACE_3S_3300"){
+	// battery_case_height = 25;
+	// battery_case_start_x = 25;
+	// battery_case_wall = 1;
+
+	// battery_width = 50;
+	// battery_height = 20;
+	// battery_length = 150;
+
+	// battery_capacity = 3300;
+	// battery_cells = 3;
+//}
 
 
+// ZIPPY 3700 mAh
+//if(battery_type == "Zippy_4S_3700"){
+	battery_case_height = 0;
+	battery_case_start_x = 25;
+	battery_case_wall = 0.4*3;
 
-//  GensACE 3300 mAh
+	battery_width = 45;
+	battery_height = 33;
+	battery_length = 145;
 
-battery_case_height = 25;
-battery_case_start_x = 15;
-battery_case_wall = 3;
-
-battery_width = 50;
-battery_height = 20;
-battery_length = 150;
+	battery_capacity = 3700;
+	battery_cells = 4;
+//}

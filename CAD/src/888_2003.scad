@@ -66,7 +66,7 @@ module 888_2003(){
     //   other flat tire material (such as rubber bands), jsut specify the its thickness. If you're not
     //   using any tire at all, set the tireCSDiameter to zero.
 
-    wheelWidth     = 7;     // The width (or thickness) of the wheel at the rim.
+    wheelWidth     = 6;     // The width (or thickness) of the wheel at the rim.
     tireCSDiameter = 4;     // Cross-sectional diameter (CS) -- How thick is the tire rubber?
     tireID         = 45+2;    // Internal diameter (ID) -- How wide is the inside opening?
     tireStretch    = 1.01;  // Circumferential stretch percentage (usually 1 + 0-5%, e.g. 1.02) -- How
@@ -85,7 +85,7 @@ module 888_2003(){
     //   position them along the circumference. Directional timing holes essentially double the
     //   resolution. You can also double resolution by looking for both rising and falling edges.
 
-    rimHeight      = 3.5;        // The height of the rim portion of the wheel.
+    rimHeight      = 3;        // The height of the rim portion of the wheel.
     timingHoles    = 0;        // The number of timing holes to carve into the rim
     timingHolePad  = [1,0.5,3]; // The [inside,middle,outside] padding for the timing holes
     directional    = false;      // A directional encoder renders two sets of slots, 90 deg out of phase
@@ -178,13 +178,16 @@ module 888_2003(){
     spokeStyle        = "spiral";   // none, biohazard, circle, circlefit, diamond, line, rectangle, spiral, fill
     spokeInset        = [0,0];      // The [inner,outer] inset of the spoke area from the surface
     numberOfSpokes    = 9;          // Number of "spokes." Set this to three if you're doing the biohazard design
-    spokeWidth        = 1.3;          // This is how wide each spoke is.
+    spokeWidth        = 1.8;          // This is how wide each spoke is.
     proportion        = [1.4,1.4];  // proportion to rim, proportion of width
-    curvature         = 0.95;       // For "spiral", this is how curvey the spokes are. >0, but <=1, where
+    curvature         = 0.96;       // For "spiral", this is how curvey the spokes are. >0, but <=1, where
                                     //     1 is a half circle
     reverse           = false;      // For "spiral", setting this to "true" reverses the direction of the spirals
     outerHoleDiameter = 10;         // For "circlefit", the diameter of the outer holes, or zero for none
     concavity         = [0,0];      // Concavity distance of spoke area for [inside, outside] of wheel
+
+    spokeAngle = 23;
+
 
     // Hub Parameters:
     //      These properties define the hub.
@@ -832,13 +835,16 @@ module 888_2003(){
     				cylinder( r=spokeRadius, h=wheelWidth, center=true );
     				cylinder( r=spokeRadius-(spokeWidth/2), h=wheelWidth+1, center=true );
     			}
+                rotate([0, 0, spokeAngle]) translate([spokeRadius - spokeWidth/2, 0, 0] )
+                    rotate([0, 0, 45-spokeAngle/3])
+                        cube([2,2, wheelWidth], center=true);
     		}
     		if ( reverse )
     			translate ( [-spokeRadius, -spokeRadius/2, 0] )
-    				cube( [spokeRadius*2,spokeRadius,wheelWidth+1], center=true );
+    				cube( [spokeRadius*3,spokeRadius,wheelWidth+1], center=true );
     		else
     			translate ( [-spokeRadius, spokeRadius/2, 0] )
-    				cube( [spokeRadius*2,spokeRadius,wheelWidth+1], center=true );
+    				cube( [spokeRadius*3,spokeRadius,wheelWidth+1], center=true );
     	}
     }
 

@@ -2,6 +2,9 @@ name: Render previews
 
 on:
   push:
+    paths:
+      - '**.scad'
+      - '**.ini'
     branches:
      - '*'
   workflow_dispatch:
@@ -10,6 +13,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-20.04
+    if: ${{ github.actor != 'TFbot'}}
 
     env:
       OPENSCAD_BIN: xvfb-run --auto-servernum ~/OpenSCAD.AppImage
@@ -18,8 +22,14 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
       with:
+        token: ${{ secrets.GITHUBPAT }}
         submodules: recursive
-
+    
+    - name: Checkout repository and set original GitHub token
+      uses: actions/checkout@v2
+      with:
+        token: ${{ github.token }}
+        
     - name: Install requirements
       run: |
         uname -p
@@ -38,7 +48,7 @@ jobs:
       run: |
         cd CAD/src
         make
-
+        
     - name: Upload a PNG Artifact
       uses: actions/upload-artifact@v2.2.2
       with:
@@ -50,10 +60,9 @@ jobs:
       with:
         name: 'render_stl'
         path: './**/*.stl'
-
-    - name: publish to git
-      run: |
-        git config --local user.email "work.flow@gmail.com"
-        git config --local user.name "Workflow"
-        git add -A && git commit --allow-empty -m "Automatic commit from workflow"
-        git push
+        
+    - name: publish to git        
+      uses: stefanzweifel/git-auto-commit-action@v4
+      with:
+        commit_message: Automatic commit from workflow
+        

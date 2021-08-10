@@ -27,3 +27,7 @@ Autogyro model for UAV pilot training and learning purposes.
 
 ![TF-G2 on grass](./doc/img/TF-G2_grass_front.jpg "TF-G2 autogyro sitting on the grass before test")
 ![TF-G2 on grass side view](./doc/img/TF-G2_grass_side.jpg "TF-G2 autogyro sitting on the grass")
+
+
+### Contribution
+How to contribute to an open-source project is described on [own page](https://github.com/ThunderFly-aerospace/TF-G2/blob/4s/CONTRIBUTING.md). Your contribution is very welcomed. For the contribution, you can get optimized prining files (gcodes). 

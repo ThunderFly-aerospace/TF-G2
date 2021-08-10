@@ -1,6 +1,6 @@
 STL_DIR=../../stl
 AMF_DIR=../../amf
-# IMG_DIR=../../img
+IMG_DIR=png
 SRC_DIR=../../src/assembly/position
 # DEP_DIR=../../dep
 # GCD_DIR=../../gcode

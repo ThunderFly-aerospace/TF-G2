@@ -10,25 +10,7 @@ use <../../888_4008.scad>
 
 
 module rotor_head(){
-translate([-8, 0, 0])
-    rotate([180, 0, -90])
-        Part1();
-
-translate([-9, 0, -4])
-    rotate([90, 0, -90])
-        Part2();
-
-rotate([0, -90, 180])
-    Part3();
+translate([-15/2-10, 0, -30])
+    rotate([0, 0, 180])
+        888_1010() 888_1011() 888_1012();
 }
-
-translate([183, 0, 250])
-difference(){
-  translate([0, 0, 30])
-    rotate([180, 0, 0])
-      888_4008();
-  //  cube(50);
-}
-
-translate([183, 0, 250])
-  rotor_head();

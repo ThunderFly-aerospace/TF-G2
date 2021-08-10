@@ -1,32 +1,36 @@
-
-//@set_slicing_config(../slicing/default.ini)
 include <../../parameters.scad>
+$fn=10;
+
 // include <yasim.scad>
 
-include <position/position_888_1001.scad>
-include <position/position_888_1002.scad>
-include <position/position_888_1006.scad>
-include <position/position_888_1003.scad>
-/* include <position/position_888_1007.scad>
-include <position/position_888_1008.scad>
-include <position/position_888_1009.scad>
-include <position/position_888_1013.scad>
-include <position/position_888_1018.scad> */
+include <position/position_888_1001.scad> // podlozka
+include <position/position_888_1002.scad> // Motorova pricka
+include <position/position_888_1003.scad> // Bocnice
+include <position/position_888_1006.scad> // Policka na payload
+include <position/position_888_1007.scad> // spodni pricka pylonu
+//include <position/position_888_1008.scad> // horni pricka pylonu
+include <position/position_888_1009.scad> // 
+include <position/position_888_1010.scad> // TFSLOT
+include <position/position_888_1011.scad>
+include <position/position_888_1012.scad>
+//include <position/position_888_1009.scad>
+//include <position/position_888_1013.scad>
+//include <position/position_888_1018.scad>
 //include <position/position_rotor.scad>
 //include <../888_1016.scad>
-include <position/position_888_2002.scad>
+// include <position/position_888_2002.scad> // podvozek
 //include <position/position_888_3000.scad>
-/* include <position/position_888_3006.scad>
+//include <position/position_888_3006.scad>
 include <position/position_screw_01.scad>
-include <position/position_screw_02.scad>
-include <position/position_screw_03.scad>
+//include <position/position_screw_02.scad>
+//include <position/position_screw_03.scad>
 include <position/position_motor.scad>
-include <position/position_tailPipe.scad>
-include <position/position_rotorhead.scad> */
-use <../888_1003.scad>
-use <../888_1004.scad>
-use <../888_1005.scad>
-use <../888_1005.scad>
+//include <position/position_tailPipe.scad>
+include <position/position_rotorhead.scad>
+//use <../888_1003.scad>
+//use <../888_1004.scad>
+//use <../888_1005.scad>
+//use <../888_1005.scad>
 
 
 // include <position/position_888_1016_rear_difference.scad>
