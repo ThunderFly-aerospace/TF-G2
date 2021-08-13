@@ -25,8 +25,11 @@ module tail_rudder() translate([0, 0, 0]){
             translate([-15,0,-70])
             difference(){
                 hull(){
+                    rotate([0, rudder_inclination, 0])
+                        translate([depth_max - rudder_depth, -10, height/2])
+                            cube([rudder_depth*2/3, 20, height]);
                     translate([depth_max - rudder_depth+10, -10, -20])
-                        cube([2*rudder_depth, 20, 2*height]);
+                        cube([rudder_depth/2, 20, 2*height]);
                     translate([depth_max - rudder_depth, 0, 0])
                         cylinder(d = 5, h = 2*height_bottom_part, $fn=60);
                 }
@@ -36,11 +39,13 @@ module tail_rudder() translate([0, 0, 0]){
 
             }
         }
+        // hole for rotation axis
         rotate([0, -rudder_inclination, 0])
             translate([depth_max - rudder_depth - 15, 0, -1.3*height_bottom_part])
               cylinder(d = 2.6, h = 2*height_bottom_part+rudder_below+1, $fn = 60);
     }
 
+    // servo hand
     translate([depth_max - rudder_depth, 0, 0]) difference(){
         hull(){
             translate([10, 0, 1]) cube([10, 2, 2], center = true);
