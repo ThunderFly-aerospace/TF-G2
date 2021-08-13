@@ -4,6 +4,5 @@
 include <../../parameters.scad>
 use <../888_1009.scad>
 
-rotate([0, 0, 50])
-translate([0, 0, 10])
-888_1009_bottom();
+rotate([90, 0, 0])
+888_1009_drill();
