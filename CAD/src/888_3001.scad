@@ -1,6 +1,8 @@
 include<../parameters.scad>
 
 include<lib/stdlib/sweep.scad>
+use <888_3004.scad>
+
 
 height = 150;
 height_bottom_part = 130;
@@ -97,6 +99,15 @@ module tail_center(){
             translate([-13/3, 0, 0]) cylinder(d=1.5, h=20, center=true);
         }
 
+        // generate correct shape for moving rudder part
+        for(x = [-30:60:30]){
+            translate([depth_max  + 15, 0, -1.3*height_bottom_part])
+                rotate([0, -rudder_inclination, 0])
+                    rotate([0, 0, x])
+                        rotate([0, rudder_inclination, 0])
+                            translate([-depth_max-15, 0, 1.3*height_bottom_part])
+                                tail_rudder(servo_hand = false, axis = false);
+        }
     }
 
     // specific generator function
@@ -141,5 +152,6 @@ module elevator(position = 0){
 
 
 tail_center();
+
 
 module 888_3001() tail_center();

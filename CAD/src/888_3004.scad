@@ -15,7 +15,7 @@ rudder_below = 10;
 rudder_radius = 6;
 
 
-module tail_rudder() translate([0, 0, 0]){
+module tail_rudder(servo_hand = true, axis = true){
     difference(){
         intersection(){
             tail_vertical();
@@ -40,12 +40,14 @@ module tail_rudder() translate([0, 0, 0]){
             }
         }
         // hole for rotation axis
+        if(axis == true)
         rotate([0, -rudder_inclination, 0])
             translate([depth_max - rudder_depth - 15, 0, -1.3*height_bottom_part])
               cylinder(d = 2.6, h = 2*height_bottom_part+rudder_below+1, $fn = 60);
     }
 
     // servo hand
+    if(servo_hand == true)
     translate([depth_max - rudder_depth, 0, 0]) difference(){
         hull(){
             translate([10, 0, 1]) cube([10, 2, 2], center = true);
@@ -57,7 +59,8 @@ module tail_rudder() translate([0, 0, 0]){
 
 tail_rudder();
 
-module 888_3004() tail_rudder();
+module 888_3004()
+    tail_rudder();
 
 module 888_3004_modif_pipe(){
   difference(){
