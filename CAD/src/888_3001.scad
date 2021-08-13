@@ -24,10 +24,10 @@ module tail_center(){
             translate([0, 0, -below_height])
                 sweep(gen_dat_2(M=below_height, dz=1,N=N), showslices = false);
 
+            // tail pipe material
             translate([0, 0, -5-12])
                 rotate([0, 90, 0])
-                    cylinder(d = 10.4+2, h = 40);
-
+                    cylinder(d = tail_pipe_d+3, h = 40);
 
             translate([60, 1, 0])
               translate([-35/2, -15/2, -below_height]) cube([23.5, 15, below_height/2]);
@@ -38,16 +38,18 @@ module tail_center(){
             translate([-(15-0.5)/2 + 30 + 80, -(5-0.5)/2, 0]) cube([15-0.5, 5-0.5, 10-0.7]);
         }
 
-        // Otvor na podelnou tyc
+        // tail pipe hole
         translate([-20, 0, -5-12])
             rotate([0, 90, 0])
-                cylinder(d = 10.4, h = 62.6, $fn=50);
+                cylinder(d = tail_pipe_d, h = 62.6, $fn=50);
 
         translate([42 - 35, 0, -5-12])
             rotate([90, 0, 0]){
                 cylinder(d = M3_screw_diameter, h = 62.6, $fn=50, center = true);
-                translate([0, 0, 10/2+1]) cylinder(d = M3_nut_diameter, h = 10, $fn=6);
-                translate([0, 0, -10-10/2-1]) cylinder(d = M3_head_diameter_ISO7380, h = 10, $fn=60);
+                translate([0, 0, tail_pipe_d/2+1])
+                    cylinder(d = M3_nut_diameter, h = 10, $fn=6);
+                translate([0, 0, -10-tail_pipe_d/2-1])
+                    cylinder(d = M3_head_diameter_ISO7380, h = 10, $fn=60);
             }
 
         // Otvor na vyvod kabelu
