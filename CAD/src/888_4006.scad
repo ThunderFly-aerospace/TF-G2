@@ -1,6 +1,6 @@
 include <../parameters.scad>
 
-module 888_4002(hole_diameter=3)
+module 888_4006(hole_diameter=3)
 {
     angle_between_blades = 360 / rotor_blades_count;
     shaft_diameter = M3_screw_diameter;
@@ -14,12 +14,12 @@ module 888_4002(hole_diameter=3)
           hull(){
             cylinder(r = 3+9, h = thickness, center = true, $fn = 100);
             translate([0, blade_screws_distance, 0])
-                cube([blade_holder_widh, blade_screws_distance/2, thickness], center = true); 
-          }     
-                
+                cube([blade_holder_widh, blade_screws_distance/2, thickness], center = true);
+          }
+
                     translate([0, 20, 0])
                         cube([blade_holder_widh, 30, thickness], center = true);
-            
+
         }
                 translate([0, 16.5 + blade_screws_distance/2, 0]) {
                     translate([0, blade_screws_distance/2, 0])
@@ -28,12 +28,12 @@ module 888_4002(hole_diameter=3)
                         cylinder(d = blade_mount_screw, h = 2* thickness, center = true, $fn = 20);
                 }
         //odstarnění poloviny a vytvoření rotor_delta_angle
-            
+
                 translate([0, -25, 0])
                 cube ([50, 50, 50], center = true);
 
         //rotate([0,0, -rotor_delta_angle])
-     
+
 
         translate([-3.5, 3, 0.4])
           linear_extrude(1)
@@ -45,4 +45,4 @@ module 888_4002(hole_diameter=3)
     }
 }
 
-888_4002();
+888_4006();
