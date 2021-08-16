@@ -134,6 +134,14 @@ module mill_rot(draft = true){
                 }
                 */ 
                 
+           // Cylindrical holes for the right compilation with bell part 2
+         rotate([0, 0, 45])
+       translate([starter_pipe_d_middle/2-End_Wall_Thickness/2, 0, -5])
+        cylinder(h = 10, d = 3.2, $fn = 20);
+        rotate([0, 0, 180+45])
+       translate([starter_pipe_d_middle/2-End_Wall_Thickness/2, 0, -5])
+        cylinder(h = 10, d = 3.2, $fn = 20);
+                
             // Mill butterfly
  Mill_Butterfly_count = 2;
               translate([0,0,-2])
@@ -189,14 +197,14 @@ module mill_static(draft = true){
      translate([0, 22.6, -2])   
         cylinder(d = PrumerDirySloupek, h = 20, $fn = 20);
         
-        // Hole for TFPROBE
+   /*     // Hole for TFPROBE
         R = starter_pipe_d_middle/2-End_Wall_Thickness/2+9.7+1;  // Vzdálenost otvorů pro senzor od středu  
         rotate(52)
          translate([R-1.94,-tfprobe_width/2+2.05,-0.1])
          minkowski(){
         TFPROBE();
         cylinder(h = 7, r = 0.2);
-        }
+        }  */
      } 
   }
 
@@ -215,11 +223,11 @@ module TFPROBE(){
     }
   
 
-mill_rot();
+//projection() mill_rot(draft = false);
     
 
 
-translate([0,0,H_mill_disc+2 ])   mill_static();
+projection() translate([0,0,0 ])   mill_static(draft = false);
   
 //translate([0, 0, -6]) Mezikus(draft=true);
  
