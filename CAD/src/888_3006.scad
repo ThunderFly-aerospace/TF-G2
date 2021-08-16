@@ -12,7 +12,7 @@ holder_wall_thickness = 2;
                 rotate([0, 90, 0])
                     cylinder(d=tail_pipe_d + 2*holder_wall_thickness, h=10, center = true, $fn=$preview?15:80);
             translate([0, 0, tail_pipe_d + tail_pipe_d/2 ])
-                cube([10, 6, tail_pipe_d/2 + holder_wall_thickness], center=true);
+                cube([10, 4*holder_wall_thickness, tail_pipe_d/2 + holder_wall_thickness], center=true);
         }
 
         translate([0, 0, tail_pipe_d + tail_pipe_d/2])
@@ -30,8 +30,10 @@ holder_wall_thickness = 2;
         translate([0, 0, tail_pipe_d + tail_pipe_d/2])
             rotate([90, 0, 0]){
                 cylinder(d=M3_screw_diameter, h = 20, center = true, $fn=$preview?10:20);
-                rotate(30) translate([0, 0, 2]) cylinder(d=M3_nut_diameter, h = 20, $fn=6);
-            }
+                rotate(30)
+                    translate([0, 0, 2*holder_wall_thickness - M3_nut_height/2 ])
+                        cylinder(d=M3_nut_diameter, h = 20, $fn=6);
+        }
     }
 }
 
