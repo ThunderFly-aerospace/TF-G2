@@ -113,7 +113,7 @@ difference()
         //krčky pro matičky
        rotate([0,0,delta_angle])
        {
-          for(yy =[-5,5])        
+          for(yy =[-4,4])        
              translate([ax_diameter/2+M3_screw_diameter/2,yy,3])
              {
                 cylinder(d=M3_nut_diameter+1.5,h=M3_nut_height,center=true,$fn=100); 
@@ -124,8 +124,16 @@ difference()
     //díra pro list
     rotate([colective,0,0])
     {
-        translate([blade_d+blade_holder_l/2,0,0])
-            cube([blade_holder_l+0.1,blade_w+0.1,blade_h],center=true);
+        hull()
+        {
+            translate([blade_d+blade_holder_l/2,0,0])            
+                cube([blade_holder_l+0.1,blade_w+0.1,blade_h],center=true);
+            translate([blade_d,0,0])
+                rotate([90,0,0])
+                    cylinder(d=blade_h,h=blade_w+0.1,center=true,$fn=100);
+            translate([blade_d-5,0,0])
+                sphere(d=blade_h*3/4, $fn=100);
+        }
         
         //díry pro přišroubování listu
         translate([blade_first_screw+blade_d,0,0])
@@ -143,8 +151,9 @@ difference()
             cylinder(d=M3_nut_diameter,h=M3_nut_height,center=true,$fn=6);  
         
           //popisky
-          /*translate([blade_first_screw+blade_d+blade_screw_distance/2, 0, (2*blade_holder_h+blade_h)/2+0.2])            
-                text(str(colective), size = 4, halign="center", valign="center");*/
+        translate([blade_first_screw+blade_d+blade_screw_distance/2, 0, (2*blade_holder_h+blade_h)/2-0.1])
+          linear_extrude(4)
+                text(str(colective), size = 4, halign="center", valign="center");
     }
     
     //zabroušení usazení a díra pro osu
@@ -163,7 +172,7 @@ difference()
             cube([7,shaft_l+1,1],center=true);
 
         //přitažení osičky
-        for(yy =[-5,5])        
+        for(yy =[-4,4])        
             translate([ax_diameter/2+M3_screw_diameter/2,yy,0])
             {
                 cylinder(d=M3_screw_diameter,h=15,center=true,$fn=100);

@@ -1,8 +1,8 @@
-include <../../../parameters.scad>
-use <../../888_4009.scad>
-use <../../888_4010.scad>
+include <../../parameters.scad>
+use <../888_4009.scad>
+use <../888_4010.scad>
 
-flap=-10;
+flap=-5;
 
 //intersection()
 union()

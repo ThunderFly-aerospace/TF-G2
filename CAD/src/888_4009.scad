@@ -73,16 +73,19 @@ difference()
                         cube([2*(bearings_outer_diameter+bearing_add)+0.1,shaft_l+0.1,2*shaft_h],center=true);
                     //díra pro list v záporném flappingu
                     rotate([0,negativ_flap_limit,0])
+                    {
                         translate([(bearings_outer_diameter+bearing_add)/2,0,shaft_h/2])
-                        {
                             cube([2*(bearings_outer_diameter+bearing_add),shaft_l+0.2,2*shaft_h+0.2],center=true);
-                            hull()
-                            {
-                            for(yy=[-4,4])
-                                translate([1,yy,-3])
-                                    cylinder(d=10,h=2*shaft_h+0.2,center=true,$fn=100);
-                            }
+
+                        hull()
+                        {
+                            for(yy=[-1,1])
+                                translate([ax_diameter/2+M3_screw_diameter/2,yy*4,0])
+                                    cylinder(d=M3_head_diameter,h=20,center=true,$fn=100);
+                           translate([ax_diameter/2+M3_screw_diameter/2+5,0,-0])
+                                cube([M3_head_diameter,ax_length-2*bearings_length+0.2,20],center=true);
                         }
+                    }
                         
                 }
             
