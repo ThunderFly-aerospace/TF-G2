@@ -45,24 +45,33 @@ module tail_center(){
             rotate([0, 90, 0])
                 cylinder(d = tail_pipe_d, h = 62.6, $fn=50);
 
-        translate([42 - 35, 0, -5-12])
+        // tail pipe mount cut
+        translate([-20, -tail_pipe_d/20, -below_height])
+            cube([62.6, tail_pipe_d/10, tail_pipe_d ]);
+
+        //tail mount screw
+        translate([42/3, 0, -below_height +  0.6* M3_nut_diameter])
             rotate([90, 0, 0]){
-                cylinder(d = M3_screw_diameter, h = 62.6, $fn=50, center = true);
-                translate([0, 0, tail_pipe_d/2+1])
+                cylinder(d = M3_screw_diameter, h = 2*tail_pipe_d, $fn=50, center = true);
+                translate([0, 0, tail_pipe_d/3])
                     cylinder(d = M3_nut_diameter, h = 10, $fn=6);
-                translate([0, 0, -10-tail_pipe_d/2-1])
+                translate([0, 0, -10-tail_pipe_d/3])
                     cylinder(d = M3_head_diameter_ISO7380, h = 10, $fn=60);
             }
 
-        // Otvor na vyvod kabelu
-        translate([42, 0, -5-12])
-            rotate([0, 180, 0])
-                cylinder(d = 10, h = 30, $fn=50);
+        // Servo cable guide
+        translate([42, 0, -below_height])
+            cylinder(d = 10, h = below_height/3, $fn=50);
 
+        translate([42, 0, -below_height + below_height/3])
+                cylinder(d1 = 10, d2 = 0, h = 5, $fn=50);
+
+
+        // beveled bottom bellow rudder
         translate([0, 0, -5*below_height])
-       rotate([0, -35, 0])
-            translate([depth_max - rudder_depth -2, -10, -below_height])
-                cube([depth_max, 20, 2*below_height]);
+           rotate([0, -35, 0])
+                translate([depth_max - rudder_depth -2, -10, -below_height])
+                    cube([depth_max, 20, 2*below_height]);
 
 
         // Otvor pro svislou osu
@@ -80,14 +89,14 @@ module tail_center(){
             translate([-35/2, -8/2, -below_height-1]) cube([20, 8, servo_z_shift+6]);
 
             for(i=[1, -1])
-              translate([i*27.5/2, 0, -below_height+15+servo_z_shift])
+              translate([i*30/2, 0, -below_height+15+servo_z_shift])
                 rotate([-90, 0, 0])
                 {
                 // mounting screw holes
                     cylinder(d=2, h=13, center = true, $fn = 20);
                     translate([0, 0, 6])
                         cylinder(d=2.5, h=13, center = true, $fn = 20);
-                    translate([0, 0, 6])
+                    translate([0, 0, 3])
                       cylinder(d=5.2, h=10, $fn = 20);
                 }
         }
