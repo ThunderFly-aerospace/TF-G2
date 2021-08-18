@@ -51,6 +51,12 @@ use <888_4008.scad>;
        
        D_mezikus = starter_pipe_d_middle+0.2-End_Wall_Thickness*2+34;
        
+       
+  // Parameters of holes for sensors
+    Zero_dist = starter_pipe_d_middle/2-End_Wall_Thickness/2+4.7 +1;  // Distance of zero position sensor from the center
+    RotSpeed_dist = starter_pipe_d_middle/2-End_Wall_Thickness/2+9.7 +1;  // Distance of rotation speed sensor from the center
+    Zero_angle = 20; // Angle of zero position sensor from y axis
+       
   
 
 module mill_rot(draft = true){
@@ -73,10 +79,11 @@ module mill_rot(draft = true){
            Number_of_holes2 = 24;                
          // Holes for rotation speed measurement
       for (i = [1:Number_of_holes2]){
-            R = starter_pipe_d_middle/2-End_Wall_Thickness/2+9.7;  // Vzdálenost bližších kruhů od středu  
+            s = 2;  // Vzdálenost děr stadionu
+            R = RotSpeed_dist-s/2;  // Vzdálenost bližších kruhů od středu  
             r = 1;
             vzd = 2*PI*R/48/2;
-            s = 2;  // Vzdálenost děr stadionu
+         
               
           rotate([0, 0, i*360/Number_of_holes2+360/Number_of_holes2/2])
             hull(){
@@ -95,12 +102,13 @@ module mill_rot(draft = true){
             Number_of_holes3 = 2;                
          // Holes for zero postition sensor                            
       for (i = [1:Number_of_holes3]){
-              R = starter_pipe_d_middle/2-End_Wall_Thickness/2+4.7;  // Vzdálenost bližších kruhů od středu
+              s = 2;  // Vzdálenost děr stadionu
+              R = Zero_dist - s/2;  // Vzdálenost bližších kruhů od středu
               r = 1;
               vzd = 2*PI*R/48/2;
-              s = 2;  // Vzdálenost děr stadionu
               
-          rotate([0, 0, i*360/Number_of_holes3+90])
+              
+          rotate([0, 0, i*360/Number_of_holes3+90+Zero_angle])
             hull(){
                 translate([R, -(vzd - r), -5])
               cylinder(h = Depth_self_screw, d = 2*r, center = true, $fn=20);
@@ -205,7 +213,7 @@ module mill_static(draft = true){
         cylinder(d = PrumerDirySloupek, h = 20, $fn = 20);
         
    /*     // Hole for TFPROBE
-        R = starter_pipe_d_middle/2-End_Wall_Thickness/2+9.7+1;  // Vzdálenost otvorů pro senzor od středu  
+        R = RotSpeed_dist;  // Vzdálenost otvorů pro senzor od středu  
         rotate(52)
          translate([R-1.94,-tfprobe_width/2+2.05,-0.1])
          minkowski(){
@@ -289,11 +297,11 @@ module TFPROBE(){
              union(){
          Cu_butterfly();
          
-          rotate([0, 0, 20])
-         translate([0,starter_pipe_d_middle/2-End_Wall_Thickness/2+4.7 +1,0])
+          rotate([0, 0, Zero_angle])
+         translate([0,Zero_dist,0])
          cube([3,3,10],center = true);
-          rotate([0, 0, 20])
-         translate([0,starter_pipe_d_middle/2-End_Wall_Thickness/2+9.7 +1,0])
+          rotate([0, 0, Zero_angle])
+         translate([0,RotSpeed_dist,0])
          cube([3,3,10],center = true);
              }
              R_zaobleni = 0.6;   
@@ -314,7 +322,10 @@ translate([0,0,-5])   mill_static(draft = true);
 //projection() Cu_inv_butterfly();       
        
 //translate([0, 0, -6]) Mezikus(draft=true);
- 
+echo(Zero_dist);
+echo(RotSpeed_dist);
+echo(Zero_angle);
+     
 
     
 
