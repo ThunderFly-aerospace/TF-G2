@@ -138,6 +138,15 @@ module 888_1010() translate([40*0.3, 0, 0]) {
                                     rotate([0, 90, 0])
                                         cylinder(d = 1.9, h = 20, $fn=20, center=true);
                             }
+                
+        // airspeed senzor diry pro srouby
+        union() {
+            translate([-10, (15+6)/2, 8.01])
+            cylinder(d = 1.9, h = 10, $fn=20);
+                                
+            translate([-10, -(15+6)/2, 8.01])
+            cylinder(d = 1.9, h = 10, $fn=20);
+        }
     }
 
     // objekty pro sestavu
