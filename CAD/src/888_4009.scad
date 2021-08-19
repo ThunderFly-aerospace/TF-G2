@@ -66,7 +66,7 @@ difference()
                 rotate([0,0,delta_angle])
                 {
                     rotate([90,0,0])
-                        cylinder(d=ax_diameter+0.1,h=2*ax_length, center=true,$fn=circle_fn);
+                        cylinder(d=ax_diameter+0.1,h=ax_length+5, center=true,$fn=circle_fn);
                     
                     //díra pro list
                     translate([(bearings_outer_diameter+bearing_add)/2,0,shaft_h/2])
