@@ -211,6 +211,7 @@ elevator_pitch = 2; // elevator pitch relative to main fuselage axis
 rudder_height = 150;
 height_bottom_part = 130;
 rudder_depth_max = 200;
+rudder_inclination = 25;
 
 below_rudder_height = 30;
 rudder_depth = 60;
