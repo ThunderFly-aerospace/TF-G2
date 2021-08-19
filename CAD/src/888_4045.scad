@@ -47,7 +47,7 @@ use <888_4008.scad>;
              // Holes for self-cutting screws
        Self_screw_diameter = 2; 
        Depth_self_screw = 30;
-       Number_of_holes = 4;
+       Number_of_holes = 3;
        
        D_mezikus = starter_pipe_d_middle+0.2-End_Wall_Thickness*2+34;
        
@@ -143,10 +143,10 @@ module mill_rot(draft = true){
                 */ 
                 
            // Cylindrical holes for the right compilation with bell part 2
-         rotate([0, 0, 45])
+         rotate([0, 0, 35])
        translate([starter_pipe_d_middle/2-End_Wall_Thickness/2, 0, -5])
         cylinder(h = 10, d = 3.2, $fn = 20);
-        rotate([0, 0, 180+45])
+        rotate([0, 0, 180+35])
        translate([starter_pipe_d_middle/2-End_Wall_Thickness/2, 0, -5])
         cylinder(h = 10, d = 3.2, $fn = 20);
                 

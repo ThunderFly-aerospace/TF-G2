@@ -52,7 +52,7 @@ include <lib/stdlib/polyScrewThread_r1.scad>
        // Holes for self-cutting screws in inner cliff
        Self_screw_diameter = 2;
        Depth_self_screw = 30;
-       Number_of_holes = 4;
+       Number_of_holes = 3;
        
     // Groove for sensors
          Depth_Groove_Sensors = 3.5;  
@@ -341,10 +341,10 @@ module Mezikus(draft=true){
         }
         
         // Cylinders for the right compilation with disc
-         rotate([0, 0, 45])
+         rotate([0, 0, 35])
        translate([starter_pipe_d_middle/2-End_Wall_Thickness/2, 0, Total_w_mezikus])
         cylinder(h = 2, d = 3, $fn = 20);
-        rotate([0, 0, 180+45])
+        rotate([0, 0, 180+35])
        translate([starter_pipe_d_middle/2-End_Wall_Thickness/2, 0, Total_w_mezikus])
         cylinder(h = 2, d = 3, $fn = 20);
         
