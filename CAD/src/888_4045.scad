@@ -60,7 +60,7 @@ use <888_4008.scad>;
   
 
 module mill_rot(draft = true){
-    
+    rotate([0,0, rotor_delta_angle])
     difference(){
     
     cylinder(h=H_mill_disc, d=D_mill_disc, $fn = draft?16:120);
@@ -143,10 +143,10 @@ module mill_rot(draft = true){
                 */ 
                 
            // Cylindrical holes for the right compilation with bell part 2
-         rotate([0, 0, 35])
+         rotate([0, 0, 35-rotor_delta_angle])
        translate([starter_pipe_d_middle/2-End_Wall_Thickness/2, 0, -5])
         cylinder(h = 10, d = 3.2, $fn = 20);
-        rotate([0, 0, 180+35])
+        rotate([0, 0, 180+35-rotor_delta_angle])
        translate([starter_pipe_d_middle/2-End_Wall_Thickness/2, 0, -5])
         cylinder(h = 10, d = 3.2, $fn = 20);
                 
@@ -316,12 +316,12 @@ mill_rot(draft = true);
 //projection() mill_rot(draft = false);
          
 
-translate([0,0,-5])   mill_static(draft = true);
+//translate([0,0,-5])   mill_static(draft = true);
 //projection() translate([0,0,0 ])   mill_static(draft = false);
 // projection() Cu_butterfly();
-//projection() Cu_inv_butterfly();       
+//# rotate([0,0, rotor_delta_angle]) projection() Cu_inv_butterfly();       
        
-//translate([0, 0, -6]) Mezikus(draft=true);
+//#translate([0, 0, -6]) Mezikus(draft=true);
 echo(Zero_dist);
 echo(RotSpeed_dist);
 echo(Zero_angle);
