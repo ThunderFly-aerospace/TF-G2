@@ -190,10 +190,10 @@ module 888_4008(draft = true){
        } 
 
            // Triangular protrusions for the right compilation with the second part
-         rotate([0, 0, 90 + 45])
+         rotate([0, 0, 90 + 55])
        translate([starter_pipe_d_middle/2-End_Wall_Thickness/2, 0, top_thickness + M3_nut_height + sensor_cap_height/2+Ribbon_width/2])
         cylinder(h = 3.5, d = 3, $fn = 3);
-        rotate([0, 0, -90+45])
+        rotate([0, 0, -90+55])
        translate([starter_pipe_d_middle/2-End_Wall_Thickness/2, 0, top_thickness + M3_nut_height + sensor_cap_height/2+Ribbon_width/2])
         cylinder(h = 3.5, d = 3, $fn = 3);
                     
@@ -303,6 +303,7 @@ module 888_4008(draft = true){
 
 
 module Mezikus(draft=true){
+    rotate([0,0, rotor_delta_angle])
     difference(){
        cylinder(d = D_mezikus, h = Total_w_mezikus, $fn = draft?16:120); 
         
@@ -320,10 +321,10 @@ module Mezikus(draft=true){
               cylinder(h = Depth_self_screw, d = Self_screw_diameter+0.5, center = true, $fn=20);                  }
               
          // Triangular holes for the right compilation with the bell
-         rotate([0, 0, 90 + 45])
+         rotate([0, 0, 90 + 55])
        translate([starter_pipe_d_middle/2-End_Wall_Thickness/2, 0, 0])
         cylinder(h = 10, d = 3.2, $fn = 3);
-        rotate([0, 0, -90+45])
+        rotate([0, 0, -90+55])
        translate([starter_pipe_d_middle/2-End_Wall_Thickness/2, 0, 0])
         cylinder(h = 10, d = 3.2, $fn = 3);
               
@@ -372,5 +373,5 @@ module Mezikus(draft=true){
 
 888_4008(draft=false);
 
-translate([0, 0, starter_bottom_h+Ribbon_width+rpm_sensor_h - 3.4 + 20])
- Mezikus(draft=true);
+translate([0, 0, starter_bottom_h+Ribbon_width+rpm_sensor_h - 3.4 ])
+# Mezikus(draft=true);
