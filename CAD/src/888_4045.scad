@@ -165,7 +165,7 @@ module mill_rot(draft = true){
                     
                     difference(){
                     union(){  // sensor teeth outer rim
-                      cylinder(d = D_mill_disc-8, h = rpm_hole_h/4, $fn = draft?16:120);
+                      cylinder(d = D_mill_disc-5, h = rpm_hole_h/4, $fn = draft?16:120);
                       translate([0, 0, - M3_nut_height - sensor_cap_height + rpm_sensor_h + starter_top_h - starter_rope_diameter])
                         cylinder(d1 = starter_pipe_d_middle, d2 = starter_rope_d - starter_rope_diameter/2, h = starter_rope_diameter, $fn = draft?16:120);
                     }
@@ -202,7 +202,7 @@ module mill_static(draft = true){
          PosunZsl = 7.0;
         PosunYsl = 13.9;
         PrumerDirySloupek = 1.5 + 1;
-        
+       rotate([0, 0, -90])  { 
         translate([PosunYsl, PosunZsl, -2])
      cylinder(d = PrumerDirySloupek, h = 20, $fn = 20);   
         
@@ -220,6 +220,7 @@ module mill_static(draft = true){
         TFPROBE();
         cylinder(h = 7, r = 0.2);
         }  */
+       }
      } 
   }
 
@@ -304,7 +305,7 @@ module TFPROBE(){
          translate([0,RotSpeed_dist,0])
          cube([3,3,10],center = true);
              }
-             R_zaobleni = 0.6;   
+             R_zaobleni = 1;   
               cylinder(r=R_zaobleni, h= 20, , $fn = 30);
              
          }
@@ -319,7 +320,7 @@ mill_rot(draft = true);
 //translate([0,0,-5])   mill_static(draft = true);
 //projection() translate([0,0,0 ])   mill_static(draft = false);
 // projection() Cu_butterfly();
-//# rotate([0,0, rotor_delta_angle]) projection() Cu_inv_butterfly();       
+# rotate([0,0, rotor_delta_angle]) projection() Cu_inv_butterfly();       
        
 //#translate([0, 0, -6]) Mezikus(draft=true);
 echo(Zero_dist);
