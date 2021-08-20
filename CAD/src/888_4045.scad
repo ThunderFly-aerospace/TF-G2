@@ -47,7 +47,7 @@ use <888_4008.scad>;
              // Holes for self-cutting screws
        Self_screw_diameter = 2;
        Depth_self_screw = 30;
-       Number_of_holes = 3;
+       Number_of_holes = 6;
 
        D_mezikus = starter_pipe_d_middle+0.2-End_Wall_Thickness*2+34;
 
@@ -329,15 +329,15 @@ module Cu_unmasked(draft = true){
      }
 }
 
-//mill_rot(draft = true);
+mill_rot(draft = true);
 //projection() mill_rot(draft = true);
 
 
 //translate([0,0,-5])   mill_static(draft = true);
 //projection() translate([0,0,0 ])   mill_static(draft = true);
- projection() Cu_butterfly(draft = true);
+// projection() Cu_butterfly(draft = true);
 //rotate([0,0, rotor_delta_angle]) projection() Cu_inv_butterfly(draft=true);
-# Cu_unmasked(draft = true);
+//# Cu_unmasked(draft = true);
 
 //#translate([0, 0, -6]) Mezikus(draft=true);
 echo(Zero_dist);
