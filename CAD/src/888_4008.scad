@@ -52,7 +52,7 @@ include <lib/stdlib/polyScrewThread_r1.scad>
        // Holes for self-cutting screws in inner cliff
        Self_screw_diameter = 2;
        Depth_self_screw = 30;
-       Number_of_holes = 3;
+       Number_of_holes = 6;
        
     // Groove for sensors
          Depth_Groove_Sensors = 3.5;  
