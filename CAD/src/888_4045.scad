@@ -165,7 +165,7 @@ module Mill_butterfly(draft){
 
                 difference(){
                 union(){  // sensor teeth outer rim
-                  cylinder(d = D_mill_disc-5, h = rpm_hole_h/4, $fn = draft?16:120);
+                  cylinder(d = D_mill_disc-8, h = rpm_hole_h/4, $fn = draft?16:120);
                   translate([0, 0, - M3_nut_height - sensor_cap_height + rpm_sensor_h + starter_top_h - starter_rope_diameter])
                     cylinder(d1 = starter_pipe_d_middle, d2 = starter_rope_d - starter_rope_diameter/2, h = starter_rope_diameter, $fn = draft?16:120);
                 }
@@ -248,40 +248,42 @@ module TFPROBE(){
 
            union(){
                Mill_butterfly(draft);
-
-            // Two distance cubes
-                rotate([0, 0, 45])
-          translate([0,D_mezikus/2-1,-2])
-           cube([2.55,6.5,10], center = true);
-                rotate([0, 0, 90+45])
-          translate([0,D_mezikus/2-1,-2])
-           cube([2.55,6.5,10], center = true);
-
-
-               // Connection of the butterflies
-                Mill_Butterfly_count = 1;
-                  translate([0,0,-2])
-            #        minkowski(){
-                      intersection() {
-
-                          difference(){
-                          union(){  // sensor teeth outer rim
-                            cylinder(d = D_mezikus-9, h = rpm_hole_h/4, $fn = draft?16:120);
-                            translate([0, 0, - M3_nut_height - sensor_cap_height + rpm_sensor_h + starter_top_h - starter_rope_diameter])
-                              cylinder(d1 = starter_pipe_d_middle, d2 = starter_rope_d - starter_rope_diameter/2, h = starter_rope_diameter, $fn = draft?16:120);
-                          }
-                          cylinder(d = D_mezikus-10, h = rpm_hole_h/4, $fn = draft?16:120);
-                          }
-
-                          for (i=[0:Mill_Butterfly_count]) rotate([0, 0, (360/Mill_Butterfly_count)*i + (360/Mill_Butterfly_count)/2]){
-                              linear_extrude(height = rpm_hole_h)
-                              polygon(points=[[0,0],[(D_mill_disc)/2, (((D_mill_disc)/2) * sin(90)+1.1) ], [D_mill_disc/2, -(((D_mill_disc)/2) * sin(90)+1.1)]]);
-                          }
+               
+                  Mill_Butterfly_count = 1;
+             translate([0,0,-2])
+             minkowski(){
+                        union(){
+                            // Two distance cubes
+                                rotate([0, 0, 45])
+                          translate([0,D_mezikus/2-0.3,0])
+                           cube([0.1,1.99,10], center = true);
+                                rotate([0, 0, 90+45])
+                          translate([0,D_mezikus/2-0.3,0])
+                           cube([0.1,1.99,10], center = true);
 
 
-                      }
-                      R_zaobleni = 1;
-                      cylinder(r=R_zaobleni, h= 20, , $fn = draft?5:30);
+                               // Connection of electrodes
+                             
+                                      intersection() {
+
+                                          difference(){
+                                          union(){  // sensor teeth outer rim
+                                            cylinder(d = D_mezikus-2.5, h = rpm_hole_h/4, $fn = draft?16:120);
+                                            translate([0, 0, - M3_nut_height - sensor_cap_height + rpm_sensor_h + starter_top_h - starter_rope_diameter])
+                                              cylinder(d1 = starter_pipe_d_middle, d2 = starter_rope_d - starter_rope_diameter/2, h = starter_rope_diameter, $fn = draft?16:120);
+                                          }
+                                          cylinder(d = D_mezikus-2.7, h = rpm_hole_h/4, $fn = draft?16:120);
+                                          }
+
+                                          for (i=[0:Mill_Butterfly_count]) rotate([0, 0, (360/Mill_Butterfly_count)*i + (360/Mill_Butterfly_count)/2]){
+                                              linear_extrude(height = rpm_hole_h)
+                                              polygon(points=[[0,0],[(D_mill_disc)/2, (((D_mill_disc)/2) * sin(90)+0.16) ], [D_mill_disc/2, -(((D_mill_disc)/2) * sin(90)+0.16)]]);
+                                          }
+
+                                      }
+                                  }
+                      R_zaobleni = 0.2;
+                      cylinder(r=R_zaobleni, h= 5, , $fn = draft?5:30);
                     }
 
 
@@ -315,7 +317,7 @@ mill_rot(draft = true);
 //projection() mill_rot(draft = false);
 
 
-//translate([0,0,-5])   mill_static(draft = true);
+translate([0,0,-5])   mill_static(draft = true);
 //projection() translate([0,0,0 ])   mill_static(draft = false);
 // projection() Cu_butterfly();
 //rotate([0,0, rotor_delta_angle]) projection() Cu_inv_butterfly(draft=false);
