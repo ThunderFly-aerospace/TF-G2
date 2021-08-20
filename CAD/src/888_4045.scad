@@ -312,15 +312,32 @@ module TFPROBE(){
          }
 
      }
+     
+module Cu_unmasked(draft = true){
 
-mill_rot(draft = true);
-//projection() mill_rot(draft = false);
+     intersection(){
+          mill_static(draft);
+
+           minkowski(){
+               Mill_butterfly(draft);
+               
+              R_zaobleni = 0.5;
+             cylinder(r=R_zaobleni, h= 20, , $fn = draft?5:30);  
 
 
-translate([0,0,-5])   mill_static(draft = true);
-//projection() translate([0,0,0 ])   mill_static(draft = false);
-// projection() Cu_butterfly();
-//rotate([0,0, rotor_delta_angle]) projection() Cu_inv_butterfly(draft=false);
+           }
+     }
+}
+
+//mill_rot(draft = true);
+//projection() mill_rot(draft = true);
+
+
+//translate([0,0,-5])   mill_static(draft = true);
+//projection() translate([0,0,0 ])   mill_static(draft = true);
+ projection() Cu_butterfly(draft = true);
+//rotate([0,0, rotor_delta_angle]) projection() Cu_inv_butterfly(draft=true);
+# Cu_unmasked(draft = true);
 
 //#translate([0, 0, -6]) Mezikus(draft=true);
 echo(Zero_dist);
