@@ -47,7 +47,7 @@ use <888_4008.scad>;
              // Holes for self-cutting screws
        Self_screw_diameter = 2;
        Depth_self_screw = 30;
-       Number_of_holes = 6;
+       Number_of_holes = 3;
 
        D_mezikus = starter_pipe_d_middle+0.2-End_Wall_Thickness*2+34;
 
@@ -74,7 +74,14 @@ module mill_rot(draft = true){
        for (i = [1:Number_of_holes]){
           rotate([0, 0, i*360/Number_of_holes])
           translate([starter_pipe_d_middle/2-End_Wall_Thickness/2, 0, top_thickness + M3_nut_height + sensor_cap_height/2+Ribbon_width/2+0.15])
-              cylinder(h = Depth_self_screw, d = Self_screw_diameter + 0.5, center = true, $fn=20);                                 }
+              cylinder(h = Depth_self_screw, d = Self_screw_diameter + 0.5, center = true, $fn=20); 
+                                }
+                                
+                                for (i = [1:4]){
+          rotate([0, 0, i*360/4])
+          translate([starter_pipe_d_middle/2-End_Wall_Thickness/2, 0, top_thickness + M3_nut_height + sensor_cap_height/2+Ribbon_width/2+0.15])
+              cylinder(h = Depth_self_screw, d = Self_screw_diameter + 0.5, center = true, $fn=20); 
+                                }
 
            Number_of_holes2 = 24;
          // Holes for rotation speed measurement
@@ -344,14 +351,14 @@ module Cu_unmasked(draft = true){
      }
 }
 //
-//mill_rot(draft = true);
+mill_rot(draft = true);
 //projection() mill_rot(draft = true);
 
 
-translate([0,0,-5])   mill_static(draft = true);
+//translate([0,0,-5])   mill_static(draft = true);
 //projection() translate([0,0,0 ])   mill_static(draft = true);
 // projection() Cu_butterfly(draft = true);
-//rotate([0,0, rotor_delta_angle]) projection() Cu_inv_butterfly(draft=true);
+//# rotate([0,0, rotor_delta_angle]) projection() Cu_inv_butterfly(draft=true);
 //# Cu_unmasked(draft = true);
 
 //#translate([0, 0, -6]) Mezikus(draft=true);
