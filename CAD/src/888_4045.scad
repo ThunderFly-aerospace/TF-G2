@@ -187,6 +187,9 @@ module Mill_butterfly(draft){
 ///////
 ///////
 ///////
+Pin_length_disc = 10;
+Pin_D_disc = 5;
+Pin_D_cylinder = 4;
 module mill_static(draft = true){
     difference(){
 
@@ -196,6 +199,18 @@ module mill_static(draft = true){
        //  Central hole
              translate([0,0,-5])
        cylinder(h=sensor_cap_height*0.7+Ribbon_part_w+0.25, d = bearing_outer_diameter + Bwall*2+2.7, $fn = draft?16:120);
+        
+      // Hole for pin to bearings
+         translate([bearing_outer_diameter/2 + Bwall +2.7/2+Pin_length_disc/2-2,0,0])
+            minkowski(){
+                union(){
+                cube([Pin_length_disc +2,Pin_D_disc - 3,10], center = true);
+                translate([-Pin_length_disc/2+0.8,0,0])
+                cube([2,Pin_D_disc - 2,10], center = true);    
+                }
+                     R_zaobleni = 1;
+                      cylinder(r=R_zaobleni, h= 5, , $fn = draft?5:30);    
+        }
 
       // Holes for self-cutting screws
          PosunZsl = 7.0;
@@ -328,12 +343,12 @@ module Cu_unmasked(draft = true){
            }
      }
 }
-
-mill_rot(draft = true);
+//
+//mill_rot(draft = true);
 //projection() mill_rot(draft = true);
 
 
-//translate([0,0,-5])   mill_static(draft = true);
+translate([0,0,-5])   mill_static(draft = true);
 //projection() translate([0,0,0 ])   mill_static(draft = true);
 // projection() Cu_butterfly(draft = true);
 //rotate([0,0, rotor_delta_angle]) projection() Cu_inv_butterfly(draft=true);
