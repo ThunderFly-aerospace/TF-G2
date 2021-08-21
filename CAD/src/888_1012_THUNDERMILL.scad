@@ -83,7 +83,6 @@ module bearing_house(breaking_groove = true, draft = true){
     // Groove on the main cylinder
     Groove_height = 1;
     Inner_diameter = 11.6;
-    W_prepazky_pro_tisk = 0.2;  // Přepážka tvořící spodní podstavu válce - přidáno kvůli tisku
 
     difference(){
         union(){
@@ -107,13 +106,13 @@ module bearing_house(breaking_groove = true, draft = true){
                   translate([-rod_size/2+TloustkaDna-VyskaRohu, -bearing_outer_diameter/2 - Bwall-PridavnaSirkaNaSpojeniDilu/2, -BaseThickness])
                       cube([VyskaRohu, bearing_outer_diameter + Bwall*2 +PridavnaSirkaNaSpojeniDilu, bearing_outer_diameter + Bwall*2+3]);
 
-                translate([-rod_size/2+TloustkaDna-VyskaRohu, -bearing_outer_diameter/2 - Bwall-PridavnaSirkaNaSpojeniDilu/2+SirkaRohu, -BaseThickness])
+                  translate([-rod_size/2+TloustkaDna-VyskaRohu, -bearing_outer_diameter/2 - Bwall-PridavnaSirkaNaSpojeniDilu/2+SirkaRohu, -BaseThickness])
                       cube([VyskaRohu, bearing_outer_diameter + Bwall*2 +PridavnaSirkaNaSpojeniDilu - 2*SirkaRohu, bearing_outer_diameter + Bwall*2+3]);
 
-                 translate([-rod_size/2+TloustkaDna-8, -bearing_outer_diameter/2 - Bwall-PridavnaSirkaNaSpojeniDilu/2+SirkaRohu, -BaseThickness])
-                 rotate([0,0,-45])
-                 translate([0,-5,0])
-                      cube([6, 12, bearing_outer_diameter + Bwall*2+3]);
+                  translate([-rod_size/2+TloustkaDna-8, -bearing_outer_diameter/2 - Bwall-PridavnaSirkaNaSpojeniDilu/2+SirkaRohu, -BaseThickness])
+                     rotate([0,0,-45])
+                        translate([0,-5,0])
+                            cube([6, 12, bearing_outer_diameter + Bwall*2+3]);
 
               mirror([0,1,0])
                    translate([-rod_size/2+TloustkaDna-8, -bearing_outer_diameter/2 - Bwall-PridavnaSirkaNaSpojeniDilu/2+SirkaRohu, -BaseThickness])
@@ -144,31 +143,33 @@ module bearing_house(breaking_groove = true, draft = true){
                 cylinder(d = M3_head_diameter -0.6, h = M3_head_height+1.7, $fn = draft?16:120);
 
 
-    // Zapusteni pro loziska
-    translate([bearing_shaft_shift + bearing_thickness - 8.735+W_prepazky_pro_tisk, 0, bearing_outer_diameter/2 + Bwall])
-        rotate([0, 90, 0])
-            cylinder(d = bearing_outer_diameter, h = 8.735-W_prepazky_pro_tisk, $fn = draft?16:120);
+    // bottom bearing
+    translate([bearing_shaft_shift + bearing_thickness, 0, bearing_outer_diameter/2 + Bwall])
+         rotate([0, 90, 180])
+             cylinder(d = bearing_outer_diameter, h = 100);
 
+    // rotor shaft hole
     translate([bearing_shaft_shift + bearing_thickness + layer_thickness, 0, bearing_outer_diameter/2 + Bwall])
         rotate([0, 90, 0])
             cylinder(d = bearing_inner_diameter, h = 100, $fn = draft?16:120);
 
+    //top bearing
     translate([bearing_shaft_shift + bearing_shaft_length - bearing_thickness, 0, bearing_outer_diameter/2 + Bwall])
         rotate([0, 90, 0])
-            cylinder(d = bearing_outer_diameter, h = bearing_thickness + 0.1 + 100, $fn = draft?16:120);
+            cylinder(d = bearing_outer_diameter, h = bearing_thickness + global_clearance, $fn = draft?16:120);
 
+    // hollows slicing bug workaround hole
     translate([bearing_shaft_shift + bearing_thickness -10, 0, bearing_outer_diameter/2 + Bwall])
         rotate([0, 90, 0])
-            cylinder(d = 0.6, h = 8.735-W_prepazky_pro_tisk, $fn = draft?16:120);  // Dírka pro tisk
+            cylinder(d = 0.6, h = 2*layer_thickness, $fn = draft?16:120);  // Dírka pro tisk
 
-
-    // podlozka pod hlavu sroubu
+    // podlozka pod hlavu sroubu - roll axis
     translate([0, 0, bearing_outer_diameter + Bwall*2+1])
         cylinder(d = 9, h = 5, $fn = draft?16:120);
 
     // TFPROBE01 RPM sensor
-    //translate([-rod_size/2, -9/2, bearing_outer_diameter + Bwall*4])
-    //    cube([rod_size + TFPROBE01_sensor_height/3,9,rod_y_distance]);
+    translate([-rod_size/2, -9/2, bearing_outer_diameter + Bwall*4])
+        cube([rod_size + TFPROBE01_sensor_height/3,9,rod_y_distance]);
 
     if(breaking_groove == true)
     translate([rod_size/2 + bearing_outer_diameter - rod_size +1, 0, bearing_outer_diameter/2 + Bwall]) rotate([0, 90, 0])
@@ -190,6 +191,15 @@ module bearing_house(breaking_groove = true, draft = true){
             translate([0, 0,  PosunZ])
                 cube([ZapadkaX+4, ZapadkaY, ZapadkaZ+4]);
   }
+
+  // bridge slicing helper
+  translate([-rod_size/2+TloustkaDna, 0, bearing_outer_diameter/2 + Bwall])
+      rotate([0, 90, 0])
+          difference(){
+              cylinder(d = bearing_outer_diameter + 2*global_clearance, h = layer_thickness, $fn = draft?16:120);  // Dírka pro tisk
+              // hollows slicing bug workaround hole
+              cylinder(d = 2*global_clearance, h = 2*layer_thickness, $fn = draft?16:120);  // Dírka pro tisk
+          }
 }
 
 module 888_1012(draft = true){
