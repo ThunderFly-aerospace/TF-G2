@@ -74,13 +74,13 @@ module mill_rot(draft = true){
        for (i = [1:Number_of_holes]){
           rotate([0, 0, i*360/Number_of_holes])
           translate([starter_pipe_d_middle/2-End_Wall_Thickness/2, 0, top_thickness + M3_nut_height + sensor_cap_height/2+Ribbon_width/2+0.15])
-              cylinder(h = Depth_self_screw, d = Self_screw_diameter + 0.5, center = true, $fn=20); 
+              cylinder(h = Depth_self_screw, d = Self_screw_diameter + 0.5, center = true, $fn=20);
                                 }
-                                
+
                                 for (i = [1:4]){
           rotate([0, 0, i*360/4])
           translate([starter_pipe_d_middle/2-End_Wall_Thickness/2, 0, top_thickness + M3_nut_height + sensor_cap_height/2+Ribbon_width/2+0.15])
-              cylinder(h = Depth_self_screw, d = Self_screw_diameter + 0.5, center = true, $fn=20); 
+              cylinder(h = Depth_self_screw, d = Self_screw_diameter + 0.5, center = true, $fn=20);
                                 }
 
            Number_of_holes2 = 24;
@@ -194,9 +194,13 @@ module Mill_butterfly(draft){
 ///////
 ///////
 ///////
-Pin_length_disc = 10;
+Pin_length_disc = 5.4;
+Pin_slot_width = 1.55;
 Pin_D_disc = 5;
 Pin_D_cylinder = 4;
+pcb_inner_diameter = bearing_outer_diameter + Bwall*2+2.7;
+echo("PCB INNER DIAMETER", pcb_inner_diameter);
+
 module mill_static(draft = true){
     difference(){
 
@@ -204,26 +208,35 @@ module mill_static(draft = true){
 
 
        //  Central hole
-             translate([0,0,-5])
-       cylinder(h=sensor_cap_height*0.7+Ribbon_part_w+0.25, d = bearing_outer_diameter + Bwall*2+2.7, $fn = draft?16:120);
-        
-      // Hole for pin to bearings
-         translate([bearing_outer_diameter/2 + Bwall +2.7/2+Pin_length_disc/2-2,0,0])
-            minkowski(){
+    translate([0,0,-5])
+        cylinder(h=sensor_cap_height*0.7+Ribbon_part_w+0.25, d = pcb_inner_diameter, $fn = draft?16:120);
+
+    // Hole for pin to bearings
+    rotate([0, 0, 180])
+        translate([pcb_inner_diameter/2,0,-5])
+            //minkowski(){
                 union(){
-                cube([Pin_length_disc +2,Pin_D_disc - 3,10], center = true);
-                translate([-Pin_length_disc/2+0.8,0,0])
-                cube([2,Pin_D_disc - 2,10], center = true);    
-                }
-                     R_zaobleni = 1;
-                      cylinder(r=R_zaobleni, h= 5, , $fn = draft?5:30);    
+                    translate([-1, -Pin_slot_width/2, 0])
+                        cube([1+ Pin_length_disc, Pin_slot_width, 10]);
+                    translate([Pin_length_disc-1, 0, 0])
+                        hull(){
+                            translate([0, 1, 0])
+                                cylinder(d=2.1, h=10, $fn=20);
+                            translate([0, -1, 0])
+                                cylinder(d=2.1, h=10, $fn=20);
+                        }
+                    //translate([-Pin_length_disc/2+0.8,0,0])
+                    //    cube([2,Pin_D_disc - 2,10]);
+                //}
+                //R_zaobleni = 1;
+                //cylinder(r=R_zaobleni, h= 5, , $fn = draft?5:30);
         }
 
       // Holes for self-cutting screws
          PosunZsl = 7.0;
         PosunYsl = 13.9;
         PrumerDirySloupek = 1.5 + 1;
-       rotate([0, 0, -90])  {
+       rotate([0, 0, 90])  {
         translate([PosunYsl, PosunZsl, -2])
      cylinder(d = PrumerDirySloupek, h = 20, $fn = 20);
 
@@ -263,49 +276,46 @@ module TFPROBE(){
 
 //// Copper on the static plate - part 1
 
+R_zaobleni = 0.3;
+butteryfly_interconnection_thickness = 0.5 - R_zaobleni; // tloustka cesticky mezi elektrodami
+butteryfly_interconnection_offset = 18; // Jak moc hluboko (oproti vnitrni hrane elektrod) ma byt veden propoj
+
  module Cu_butterfly(draft = true){
 
      intersection(){
           mill_static(draft);
 
-           union(){
+            union(){
                Mill_butterfly(draft);
-               
-                  Mill_Butterfly_count = 1;
-             translate([0,0,-2])
-             minkowski(){
+
+                Mill_Butterfly_count = 1;
+                translate([0,0,-2])
+                    minkowski(){
                         union(){
                             // Two distance cubes
-                                rotate([0, 0, 45])
-                          translate([0,D_mezikus/2-0.3,0])
-                           cube([0.1,1.99,10], center = true);
-                                rotate([0, 0, 90+45])
-                          translate([0,D_mezikus/2-0.3,0])
-                           cube([0.1,1.99,10], center = true);
+                            rotate([0, 0, 45])
+                                translate([0,D_mezikus/2-0.3,5])
+                                    cube([0.1,butteryfly_interconnection_offset-0.5,10], center = true);
+                            rotate([0, 0, 90+45])
+                                translate([0,D_mezikus/2,5])
+                                    cube([0.1,butteryfly_interconnection_offset-0.5,10], center = true);
 
 
-                               // Connection of electrodes
-                             
-                                      intersection() {
+                            // Connection of electrodes
 
-                                          difference(){
-                                          union(){  // sensor teeth outer rim
-                                            cylinder(d = D_mezikus-2.5, h = rpm_hole_h/4, $fn = draft?16:120);
-                                            translate([0, 0, - M3_nut_height - sensor_cap_height + rpm_sensor_h + starter_top_h - starter_rope_diameter])
-                                              cylinder(d1 = starter_pipe_d_middle, d2 = starter_rope_d - starter_rope_diameter/2, h = starter_rope_diameter, $fn = draft?16:120);
-                                          }
-                                          cylinder(d = D_mezikus-2.7, h = rpm_hole_h/4, $fn = draft?16:120);
-                                          }
+                            intersection() {
+                                difference(){
+                                    cylinder(d = D_mezikus-butteryfly_interconnection_offset, h = rpm_hole_h/4, $fn = draft?16:120);
+                                    cylinder(d = D_mezikus-butteryfly_interconnection_offset-butteryfly_interconnection_thickness, h = rpm_hole_h/4, $fn = draft?16:120);
+                                }
 
-                                          for (i=[0:Mill_Butterfly_count]) rotate([0, 0, (360/Mill_Butterfly_count)*i + (360/Mill_Butterfly_count)/2]){
-                                              linear_extrude(height = rpm_hole_h)
-                                              polygon(points=[[0,0],[(D_mill_disc)/2, (((D_mill_disc)/2) * sin(90)+0.16) ], [D_mill_disc/2, -(((D_mill_disc)/2) * sin(90)+0.16)]]);
-                                          }
-
-                                      }
-                                  }
-                      R_zaobleni = 0.2;
-                      cylinder(r=R_zaobleni, h= 5, , $fn = draft?5:30);
+                                for (i=[0:Mill_Butterfly_count]) rotate([0, 0, (360/Mill_Butterfly_count)*i + (360/Mill_Butterfly_count)/2]){
+                                    linear_extrude(height = rpm_hole_h)
+                                    polygon(points=[[0,0],[(D_mill_disc)/2, (((D_mill_disc)/2) * sin(90)+0.16) ], [D_mill_disc/2, -(((D_mill_disc)/2) * sin(90)+0.16)]]);
+                                }
+                            }
+                        }
+                        cylinder(r=R_zaobleni, h= 5, , $fn = draft?20:30);
                     }
 
 
@@ -334,7 +344,7 @@ module TFPROBE(){
          }
 
      }
-     
+
 module Cu_unmasked(draft = true){
 
      intersection(){
@@ -342,25 +352,26 @@ module Cu_unmasked(draft = true){
 
            minkowski(){
                Mill_butterfly(draft);
-               
+
               R_zaobleni = 0.5;
-             cylinder(r=R_zaobleni, h= 20, , $fn = draft?5:30);  
+             cylinder(r=R_zaobleni, h= 20, , $fn = draft?5:30);
 
 
            }
      }
 }
 //
-mill_rot(draft = true);
+//mill_rot(draft = true);
 //projection() mill_rot(draft = true);
 
 
 //translate([0,0,-5])   mill_static(draft = true);
-//projection() translate([0,0,0 ])   mill_static(draft = true);
-// projection() Cu_butterfly(draft = true);
+translate([0, 0, -5]){
+projection() translate([0,0,0 ])   mill_static(draft = true);
+translate([0, 0, 0.1]) color("yellow") projection() Cu_butterfly(draft = true);
 //# rotate([0,0, rotor_delta_angle]) projection() Cu_inv_butterfly(draft=true);
 //# Cu_unmasked(draft = true);
-
+}
 //#translate([0, 0, -6]) Mezikus(draft=true);
 echo(Zero_dist);
 echo(RotSpeed_dist);
