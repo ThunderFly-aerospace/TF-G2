@@ -25,7 +25,7 @@ include <lib/stdlib/polyScrewThread_r1.scad>
     starter_pipe_d_bottom = 20;
     starter_neck_r=10;
     starter_neck_h=1;
-    starter_bottom_h=5;   
+    starter_bottom_h=5;  
     starter_rope_diameter=2;
 
     starter_rope_d = 27;
@@ -52,7 +52,7 @@ include <lib/stdlib/polyScrewThread_r1.scad>
        // Holes for self-cutting screws in inner cliff
        Self_screw_diameter = 2;
        Depth_self_screw = 30;
-       Number_of_holes = 6;
+       Number_of_holes = 3;
        
     // Groove for sensors
          Depth_Groove_Sensors = 3.5;  
@@ -187,6 +187,12 @@ module 888_4008(draft = true){
               cylinder(h = 100, d = Self_screw_diameter, center = true, $fn=20);                
                             }
                             
+                                  for (i = [1:4]){
+          rotate([0, 0, i*360/4])
+          translate([starter_pipe_d_middle/2-End_Wall_Thickness/2, 0, top_thickness + M3_nut_height + sensor_cap_height/2+Ribbon_width/2+0.15])
+              cylinder(h = Depth_self_screw, d = Self_screw_diameter, center = true, $fn=20); 
+                                }
+                            
        } 
 
            // Triangular protrusions for the right compilation with the second part
@@ -318,7 +324,13 @@ module Mezikus(draft=true){
        for (i = [1:Number_of_holes]){
           rotate([0, 0, i*360/Number_of_holes])
           translate([starter_pipe_d_middle/2-End_Wall_Thickness/2, 0, top_thickness + M3_nut_height + sensor_cap_height/2+Ribbon_width/2+0.15])
-              cylinder(h = Depth_self_screw, d = Self_screw_diameter+0.5, center = true, $fn=20);                  }
+              cylinder(h = Depth_self_screw, d = Self_screw_diameter+0.5, center = true, $fn=20);           }
+              
+                    for (i = [1:4]){
+          rotate([0, 0, i*360/4])
+          translate([starter_pipe_d_middle/2-End_Wall_Thickness/2, 0, top_thickness + M3_nut_height + sensor_cap_height/2+Ribbon_width/2+0.15])
+              cylinder(h = Depth_self_screw, d = Self_screw_diameter + 0.5, center = true, $fn=20); 
+                                }
               
          // Triangular holes for the right compilation with the bell
          rotate([0, 0, 90 + 55])
@@ -371,7 +383,7 @@ module Mezikus(draft=true){
 
 
 
-888_4008(draft=false);
+888_4008(draft=true);
 
 translate([0, 0, starter_bottom_h+Ribbon_width+rpm_sensor_h - 3.4 ])
 # Mezikus(draft=true);
