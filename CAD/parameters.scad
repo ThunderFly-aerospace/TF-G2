@@ -129,7 +129,7 @@ platform_mount_points = [base_patern*8, base_patern*26];
 
 bearing_outer_diameter = 10.2;
 bearing_thickness = 4;
-bearing_shaft_length = 20;
+bearing_shaft_length = 20.6;
 
 
 ////
