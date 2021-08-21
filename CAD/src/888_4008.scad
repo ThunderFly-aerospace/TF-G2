@@ -43,7 +43,7 @@ include <lib/stdlib/polyScrewThread_r1.scad>
     screws_head_d=7;
     screws_h=14;
     
-    Ribbon_width = 6 + 0.4;
+    Ribbon_width = 6 - 1.2;
     Ribbon_part_w = height_from_rotor_nut- (16.5 - 1.65) + Ribbon_width; // Auxiliary variable
     
     /// Inner cliff
@@ -165,7 +165,7 @@ module 888_4008(draft = true){
        translate([0,0,top_thickness + M3_nut_height + sensor_cap_height/2-3.5])
        cylinder(h=sensor_cap_height*0.7+Ribbon_part_w+2.25, d = starter_pipe_d_middle-End_Wall_Thickness*2, $fn = draft?16:120);
      
-       translate([0,0,top_thickness + M3_nut_height + sensor_cap_height/2-2.5+sensor_cap_height*0.7+Ribbon_part_w+0.25-4-0.2])
+       translate([0,0,top_thickness + M3_nut_height + sensor_cap_height/2-2.5+sensor_cap_height*0.7+Ribbon_part_w+0.25-4-0])
      difference(){
        cylinder(h=4, d1=starter_pipe_d_middle, d2 = starter_pipe_d_middle, $fn = draft?16:120);
         
@@ -313,11 +313,11 @@ module Mezikus(draft=true){
     difference(){
        cylinder(d = D_mezikus, h = Total_w_mezikus, $fn = draft?16:120); 
         
-        translate([0, 0, 6-4-0.6]) 
+        translate([0, 0, 6-4-1.6]) 
          cylinder(h=4, d1=starter_pipe_d_middle, d2 = starter_pipe_d_middle-End_Wall_Thickness*2, $fn = draft?16:120); 
       cylinder(d = starter_pipe_d_middle-End_Wall_Thickness*2, h = Total_w_mezikus, $fn = draft?16:120); ///////
         
-       translate([0, 0, -0.6]) 
+       translate([0, 0, -1.6]) 
        cylinder(d = starter_pipe_d_middle+0.2, h = Total_w_mezikus -4, $fn = draft?16:120);
         
    // Holes for self-cutting screws  - ENLARGED
