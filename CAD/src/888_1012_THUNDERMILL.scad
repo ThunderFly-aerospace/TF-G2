@@ -167,6 +167,10 @@ module bearing_house(breaking_groove = true, draft = true){
     translate([0, 0, bearing_outer_diameter + Bwall*2+1])
         cylinder(d = 9, h = 5, $fn = draft?16:120);
 
+    translate([10, 0, bearing_outer_diameter + Bwall*2+1])
+        sphere(d = 6, $fn = draft?16:120);
+
+
     // TFPROBE01 RPM sensor
     translate([-rod_size/2, -9/2, bearing_outer_diameter + Bwall*4])
         cube([rod_size + TFPROBE01_sensor_height/3,9,rod_y_distance]);
