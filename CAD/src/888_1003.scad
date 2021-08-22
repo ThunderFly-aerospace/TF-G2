@@ -82,9 +82,51 @@ module 888_1003_outline(){
 				}
 		}
 }
+module 888_1003_shell(){
+		projection()
+			difference(){
+				union(){
+					hull(){
+	          //kvadrik ("spolecny s podlozkou")
+		        translate([10+15, -base_thickness -rantl_height/2, 0])
+		        	cube([base_length+6-15, base_thickness + rantl_height, 1]);
+
+				       	// vepredu ve vysce prostrednich der na policky
+				    translate([10*3, motor_holder_side_mount_height, 0])
+				    	cube([M3_screw_diameter+7, M3_screw_diameter+15, 1], center = true);
+							//cylinder(d = M3_screw_diameter+7, h = 1);
+
+						translate([45, 45-bellow, 0])
+							cylinder(d = 12, h = 1);
+
+						translate([50-front_overlap + 13 + 200, -bellow + height + 22, 0])
+							cylinder(d = 20, h = 1);
+
+            for(x = [42:10:10*26+2])
+	            translate([x, pylon_holder_side_mount_height, -0.1])
+                cylinder(d = 5.5+5, h = 10);
+					}
+
+		      translate([battery_case_start_x,0,0])
+			      hull(){
+		        //Spodni cast pro akumulator
+        			translate([0, -base_thickness -rantl_height/2, 0])
+        				cube([battery_length+20, base_thickness + rantl_height, 1]);
+
+  		        translate([10, -bellow - 10, 0])
+							  cylinder(d = 8, h = 1);
+
+						  translate([battery_length+10, -bellow - 10, 0])
+							  cylinder(d = 8, h = 1);
+					  }
+				}
+		}
+}
 
 
 module 888_1003(){
+    #linear_extrude(0.4) 888_1003_shell();
+
 	difference(){
 		union(){
 			linear_extrude(side_base_thickness)
