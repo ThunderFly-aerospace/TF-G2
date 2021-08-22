@@ -62,6 +62,12 @@ starter_rope_d = 39.2;
         PosunYsl = 13.9;
         Vyska_sloupku = 4;
         Self_screw_diameter = 2;
+        
+      // hollows slicing bug workaround hole
+        H_mill_disc = 1.6;   // Thickness of thundermills PCB
+        Pin_slot_height = 1.78; // Height of the used pin slot
+        
+      
 
 
  // sloupky pro upevnění disku mlýnku
@@ -158,7 +164,6 @@ module bearing_house(breaking_groove = true, draft = true){
         rotate([0, 90, 0])
             cylinder(d = bearing_outer_diameter, h = bearing_thickness + global_clearance, $fn = draft?16:120);
 
-    // hollows slicing bug workaround hole
     translate([bearing_shaft_shift + bearing_thickness -10, 0, bearing_outer_diameter/2 + Bwall])
         rotate([0, 90, 0])
             cylinder(d = 0.6, h = 2*layer_thickness, $fn = draft?16:120);  // Dírka pro tisk
@@ -167,8 +172,12 @@ module bearing_house(breaking_groove = true, draft = true){
     translate([0, 0, bearing_outer_diameter + Bwall*2+1])
         cylinder(d = 9, h = 5, $fn = draft?16:120);
 
-    translate([10, 0, bearing_outer_diameter + Bwall*2+1])
+    // hollows slicing bug workaround hole
+    translate([rod_size/2+Vyska_sloupku+H_mill_disc-Pin_slot_height/2, 0, bearing_outer_diameter + Bwall*2+2])
         sphere(d = 6, $fn = draft?16:120);
+        
+/*         translate([rod_size/2+Vyska_sloupku+H_mill_disc-Pin_slot_height/2, 0, bearing_outer_diameter + Bwall*2-6])
+    #    cylinder(d = 1.07, h = 20, $fn = draft?16:120); */  // Testovací válec o průměru pinu
 
 
     // TFPROBE01 RPM sensor
