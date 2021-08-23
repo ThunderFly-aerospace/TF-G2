@@ -176,23 +176,23 @@ engine_offset = 53;			// Posun motoru v ose X (dopredu)
 
 
 // Parametry pro hacek na kabely od motoru
-	motor_wire_holder_width = 5;
-	motor_wire_holder_height = 10;
-	motor_wire_holder_space = 3;
-	motor_wire_holder_thickness = 2.5;
-	motor_wire_holder_z_shift = 10;
-	motor_wire_holder_x_shift = 19;
+motor_wire_holder_width = 5;
+motor_wire_holder_height = 10;
+motor_wire_holder_space = 3;
+motor_wire_holder_thickness = 2.5;
+motor_wire_holder_z_shift = 10;
+motor_wire_holder_x_shift = 19;
 
 // Parametry pro ochranny ram nad motorem
-	motor_protective_frame_x_shift = 20;
-	motor_protective_frame_z_base = 32;
-	motor_protective_frame_beam_width = 5;
-	motor_protective_frame_beam_thickness = 3;
-	motor_protective_frame_width = base_width-3;
-	motor_protective_frame_plug_thickness = 2;
-	motor_protective_frame_plug_length = 4;
-	motor_protective_frame_thickness = 5;
-	motor_protective_frame_z_scale = 0.75;
+motor_protective_frame_x_shift = 20;
+motor_protective_frame_z_base = 32;
+motor_protective_frame_beam_width = 5;
+motor_protective_frame_beam_thickness = 3;
+motor_protective_frame_width = base_width-3;
+motor_protective_frame_plug_thickness = 2;
+motor_protective_frame_plug_length = 4;
+motor_protective_frame_thickness = 5;
+motor_protective_frame_z_scale = 0.75;
 
 
 //sroub servo
@@ -250,7 +250,6 @@ pylon_airfoil_shell_overlap = 3;  // presah profilu (krytu) pylonu a montaznich 
 pylon_pipe_d = 10.3;
 pylon_suspension_height = 150;
 pylon_pipe_top_dist = 0;
-pylon_thickness = 0; // Netusim, co to je
 
 pylon_bottom_wall = 5;
 
@@ -268,20 +267,19 @@ pylon_base_length = 60;
 pylon_ring_length = 40;
 pylon_ring_thickness = 3;
 
+pylon_bottom_angle = atan2(pilot_height_separation,(base_width-pylon_ring_width)/2-pylon_thickness*1.5);
+echo(pylon_bottom_angle);
+pylon_top_angle = atan2(pylon_height - pilot_height_separation,(pylon_ring_width - rotor_head_width)/2 - pylon_thickness - pylon_ring_thickness);
+echo(pylon_top_angle);
+
 airspeed_width = 35;
 airspeed_naca = 0004;
 airspeed_dist = 20;
-
 
 // Parametry k akumulatoru
 
 battery_type = "Zippy_4S_3700";
 //  GensACE 3300 mAh
-
-pylon_bottom_angle = atan2(pilot_height_separation,(base_width-pylon_ring_width)/2-pylon_thickness*1.5);
-echo(pylon_bottom_angle);
-pylon_top_angle = atan2(pylon_height - pilot_height_separation,(pylon_ring_width - rotor_head_width)/2 - pylon_thickness - pylon_ring_thickness);
-echo(pylon_top_angle);
 
 //if(battery_type == "GensACE_3S_3300"){
 	// battery_case_height = 25;
