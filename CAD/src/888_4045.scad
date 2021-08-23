@@ -361,17 +361,13 @@ module Cu_unmasked(draft = true){
      }
 }
 //
-//mill_rot(draft = true);
-//projection() mill_rot(draft = true);
+translate([0,-80,5]) mill_rot(draft = true);
 
+translate([0,80,-5])   mill_static(draft = true);
+//translate([0, 0, -5]){projection() translate([0,0,0 ])   mill_static(draft = true);
+//translate([0, 0, 0.1]) color("yellow") projection() Cu_butterfly(draft = true);
+projection() Cu_inv_butterfly(draft=true);
 
-//translate([0,0,-5])   mill_static(draft = true);
-translate([0, 0, -5]){
-projection() translate([0,0,0 ])   mill_static(draft = true);
-translate([0, 0, 0.1]) color("yellow") projection() Cu_butterfly(draft = true);
-//# rotate([0,0, rotor_delta_angle]) projection() Cu_inv_butterfly(draft=true);
-//# Cu_unmasked(draft = true);
-}
 //#translate([0, 0, -6]) Mezikus(draft=true);
 echo(Zero_dist);
 echo(RotSpeed_dist);
