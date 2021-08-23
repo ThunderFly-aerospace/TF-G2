@@ -279,6 +279,7 @@ module TFPROBE(){
 R_zaobleni = 0.3;
 butteryfly_interconnection_thickness = 0.5 - R_zaobleni; // tloustka cesticky mezi elektrodami
 butteryfly_interconnection_offset = 18; // Jak moc hluboko (oproti vnitrni hrane elektrod) ma byt veden propoj
+propojeni = 0;
 
  module Cu_butterfly(draft = true){
 
@@ -289,7 +290,7 @@ butteryfly_interconnection_offset = 18; // Jak moc hluboko (oproti vnitrni hrane
                Mill_butterfly(draft);
 
                 Mill_Butterfly_count = 1;
-                translate([0,0,-2])
+                if(propojeni) translate([0,0,-2])
                     minkowski(){
                         union(){
                             // Two distance cubes
@@ -321,6 +322,19 @@ butteryfly_interconnection_offset = 18; // Jak moc hluboko (oproti vnitrni hrane
 
            }
      }
+}
+
+
+connection_from_edge = 6;
+connection_thickness = 0.4;
+
+module Cu_butterfly_wire(draft){
+    difference(){
+        cylinder(d=D_mill_disc-connection_from_edge+connection_thickness, h=2);
+        cylinder(d=D_mill_disc-connection_from_edge-connection_thickness, h=2);
+        
+        for(r=[40, 180+50, -45])rotate([0, 0, r]) cube(100);
+    }
 }
 
  module Cu_inv_butterfly(draft){
@@ -369,6 +383,7 @@ module Cu_unmasked(draft = true){
 translate([0, 0, -5]){
 projection() translate([0,0,0 ])   mill_static(draft = true);
 translate([0, 0, 0.1]) color("yellow") projection() Cu_butterfly(draft = true);
+translate([0, 0, 2]) color("gold") projection() Cu_butterfly_wire(draft = true);
 //# rotate([0,0, rotor_delta_angle]) projection() Cu_inv_butterfly(draft=true);
 //# Cu_unmasked(draft = true);
 }
