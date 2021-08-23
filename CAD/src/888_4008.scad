@@ -197,11 +197,13 @@ module 888_4008(draft = true){
 
            // Triangular protrusions for the right compilation with the second part
          rotate([0, 0, 90 + 55])
-       translate([starter_pipe_d_middle/2-End_Wall_Thickness/2, 0, top_thickness + M3_nut_height + sensor_cap_height/2+Ribbon_width/2])
-        cylinder(h = 3.5, d = 3, $fn = 3);
+       translate([starter_pipe_d_middle/2-End_Wall_Thickness/2, 0, top_thickness + M3_nut_height + sensor_cap_height/2+Ribbon_width/2+0.6])
+       rotate([0, 0, 60])
+        cylinder(h = 3, d1 = 4.4, d2 = 0, $fn = 3);
         rotate([0, 0, -90+55])
-       translate([starter_pipe_d_middle/2-End_Wall_Thickness/2, 0, top_thickness + M3_nut_height + sensor_cap_height/2+Ribbon_width/2])
-        cylinder(h = 3.5, d = 3, $fn = 3);
+        translate([starter_pipe_d_middle/2-End_Wall_Thickness/2, 0, top_thickness + M3_nut_height + sensor_cap_height/2+Ribbon_width/2+0.6])
+       rotate([0, 0, 60])
+        cylinder(h = 3, d1 = 4.4, d2 = 0, $fn = 3);
                     
                 }
 
@@ -331,15 +333,17 @@ module Mezikus(draft=true){
           translate([starter_pipe_d_middle/2-End_Wall_Thickness/2, 0, top_thickness + M3_nut_height + sensor_cap_height/2+Ribbon_width/2+0.15])
               cylinder(h = Depth_self_screw, d = Self_screw_diameter + 0.5, center = true, $fn=20); 
                                 }
-              
+ //////// TODO ///////////             
          // Triangular holes for the right compilation with the bell
-         rotate([0, 0, 90 + 55])
-       translate([starter_pipe_d_middle/2-End_Wall_Thickness/2, 0, 0])
-        cylinder(h = 10, d = 3.2, $fn = 3);
+           rotate([0, 0, 90 + 55])
+       translate([starter_pipe_d_middle/2-End_Wall_Thickness/2, 0, top_thickness + M3_nut_height + sensor_cap_height/2+Ribbon_width/2+0.6-(starter_bottom_h+Ribbon_width+rpm_sensor_h - 3.4)])
+       rotate([0, 0, 60])   
+    #    cylinder(h = 3, d1 = 4.4, d2 = 0, $fn = 3);   // Not in the right position yet
         rotate([0, 0, -90+55])
-       translate([starter_pipe_d_middle/2-End_Wall_Thickness/2, 0, 0])
-        cylinder(h = 10, d = 3.2, $fn = 3);
-              
+        translate([starter_pipe_d_middle/2-End_Wall_Thickness/2, 0, top_thickness + M3_nut_height + sensor_cap_height/2+Ribbon_width/2+0.6])
+       rotate([0, 0, 60])
+        cylinder(h = 3, d1 = 4.4, d2 = 0, $fn = 3);   // Not in the right position yet
+ /////////////////////////             
                  
       // Groove for sensors
         translate([0, 0, Total_w_mezikus-Depth_Groove_Sensors])
@@ -385,5 +389,5 @@ module Mezikus(draft=true){
 
 888_4008(draft=true);
 
-translate([0, 0, starter_bottom_h+Ribbon_width+rpm_sensor_h - 3.4 ])
+translate([0, 0, starter_bottom_h+Ribbon_width+rpm_sensor_h - 3.4 + 20])
 # Mezikus(draft=true);
