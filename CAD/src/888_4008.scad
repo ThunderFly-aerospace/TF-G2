@@ -180,6 +180,11 @@ module 888_4008(draft = true) {
                     translate([starter_pipe_d_middle/2-End_Wall_Thickness/2-.5, 0, 0])
                     rotate([0, 0, 60])
                     cylinder(h = 10, d1 = 8, d2 = 0, $fn = 3);
+                    
+                    rotate([0, 0, - 90 - 55])
+                    translate([starter_pipe_d_middle/2-End_Wall_Thickness/2-.5, 0, 0])
+                    rotate([0, 0, 60])
+                    cylinder(h = 10, d1 = 8, d2 = 0, $fn = 3);
                 }
         
                 translate([0,0,top_thickness + M3_nut_height + sensor_cap_height/2+32.3])
@@ -341,6 +346,11 @@ module Mezikus(draft=true){
                 translate([starter_pipe_d_middle/2-End_Wall_Thickness/2-.5, 0, 0])
                 rotate([0, 0, 60])
                 cylinder(h = 10+.1, d1 = 8+.1, d2 = 0, $fn = 3);
+                    
+                rotate([0, 0, - 90 - 55])
+                translate([starter_pipe_d_middle/2-End_Wall_Thickness/2-.5, 0, 0])
+                rotate([0, 0, 60])
+                cylinder(h = 10, d1 = 8, d2 = 0, $fn = 3);
             }
             
             translate([0, 0, 0])
