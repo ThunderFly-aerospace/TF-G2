@@ -173,7 +173,7 @@ module bearing_house(breaking_groove = true, draft = true){
         cylinder(d = 9, h = 5, $fn = draft?16:120);
 
     // hollows slicing bug workaround hole
-    translate([rod_size/2+Vyska_sloupku+H_mill_disc-Pin_slot_height/2, 0, bearing_outer_diameter + Bwall*2+2])
+    translate([rod_size/2+Vyska_sloupku+H_mill_disc-Pin_slot_height/2, 0, bearing_outer_diameter + Bwall*2+1.3])
         sphere(d = 6, $fn = draft?16:120);
         
 /*         translate([rod_size/2+Vyska_sloupku+H_mill_disc-Pin_slot_height/2, 0, bearing_outer_diameter + Bwall*2-6])
