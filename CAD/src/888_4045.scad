@@ -163,7 +163,7 @@ module mill_rot(draft = true){
     }
 
     // Mill butterfly
-module Mill_butterfly(draft){
+module Mill_butterfly(draft, offset = 0){
 
     Mill_Butterfly_count = 2;
           translate([0,0,-2])
@@ -187,7 +187,7 @@ module Mill_butterfly(draft){
 
             }
          R_zaobleni = 2;
-          cylinder(r=R_zaobleni, h= 20, , $fn = draft?6:30);
+          cylinder(r=R_zaobleni+offset, h= 20, , $fn = draft?6:30);
             }
 }
 
@@ -280,14 +280,15 @@ R_zaobleni = 0.3;
 butteryfly_interconnection_thickness = 0.5 - R_zaobleni; // tloustka cesticky mezi elektrodami
 butteryfly_interconnection_offset = 18; // Jak moc hluboko (oproti vnitrni hrane elektrod) ma byt veden propoj
 propojeni = 0;
-
- module Cu_butterfly(draft = true){
+    
+    
+ module Cu_butterfly(draft = true, offset){
 
      intersection(){
           mill_static(draft);
 
             union(){
-               Mill_butterfly(draft);
+               Mill_butterfly(draft, offset);
 
                 Mill_Butterfly_count = 1;
                 if(propojeni) translate([0,0,-2])
@@ -325,8 +326,8 @@ propojeni = 0;
 }
 
 
-connection_from_edge = 6;
-connection_thickness = 0.4;
+connection_from_edge = 7;
+connection_thickness = 2.4;
 
 module Cu_butterfly_wire(draft){
     difference(){
@@ -343,7 +344,7 @@ module Cu_butterfly_wire(draft){
 
          minkowski(){
              union(){
-                 Cu_butterfly(draft);
+                 Cu_butterfly(draft, 0);
 
                   rotate([0, 0, Zero_angle])
                  translate([0,Zero_dist,0])
@@ -382,7 +383,8 @@ module Cu_unmasked(draft = true){
 //translate([0,0,-5])   mill_static(draft = true);
 translate([0, 0, -5]){
 projection() translate([0,0,0 ])   mill_static(draft = true);
-translate([0, 0, 0.1]) color("yellow") projection() Cu_butterfly(draft = true);
+translate([0, 0, 0.1]) color("yellow") projection() Cu_butterfly(draft = true, 0);
+translate([0, 0, 0.05]) color("red") projection() Cu_butterfly(draft = true, 1);
 translate([0, 0, 2]) color("gold") projection() Cu_butterfly_wire(draft = true);
 //# rotate([0,0, rotor_delta_angle]) projection() Cu_inv_butterfly(draft=true);
 //# Cu_unmasked(draft = true);
