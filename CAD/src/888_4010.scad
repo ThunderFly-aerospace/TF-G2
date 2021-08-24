@@ -1,7 +1,7 @@
 include <../parameters.scad>
 
 
-module 888_4010()
+module 888_4010(colective=-0.5)
 {
 
 ax_length=free_flap_ax_length;
@@ -40,7 +40,6 @@ blade_w=free_flap_blade_w;
 blade_first_screw=free_flap_blade_first_screw;
 
 blade_holder_radius=free_flap_blade_holder_radius;
-colective=free_flap_colective;
 
 difference()
 {

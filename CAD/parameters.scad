@@ -311,7 +311,7 @@ free_flap_blade_w=20.7;
 free_flap_blade_first_screw=blade_mount_screw_offset+0.5;
 
 free_flap_blade_holder_radius=0.7*free_flap_blade_holder_h;
-free_flap_colective=-0.5;
+
 
 //if(battery_type == "GensACE_3S_3300"){
 	// battery_case_height = 25;
