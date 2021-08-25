@@ -50,7 +50,10 @@ Depth_self_screw = 30;
 Number_of_holes = 3;
 
 // Groove for sensors
-Depth_Groove_Sensors = 3.5;  
+Depth_Groove_Sensors = 3.5;
+
+Wire_thickness = 1.5 + 0.2;
+
 
 // Mezikus
 Total_w_mezikus = 6;
@@ -146,6 +149,8 @@ module 888_4008(draft = true) {
                 
                 translate([0,0,top_thickness + M3_nut_height + 1.2*sensor_cap_height])
                 cylinder(h=sensor_cap_height, d1=starter_pipe_d_middle, d2 = starter_pipe_d_bottom, $fn=draft?rpm_sensor_count:120);
+                
+                
             }
             
             ////// INNER CLIFF                        
@@ -189,7 +194,17 @@ module 888_4008(draft = true) {
         
                 translate([0,0,top_thickness + M3_nut_height + sensor_cap_height/2+32.3])
                 cube([50,50,50], true);
-        
+                
+                // Groove for "grounded" wire
+                rotate([0, 0,60])
+                hull(){
+                    translate([starter_pipe_d_middle/2-End_Wall_Thickness+0, 0, 10])
+                    cylinder(h = 10, d = Wire_thickness, $fn = draft?6:20);
+                    translate([starter_pipe_d_middle/2-End_Wall_Thickness+1.5, 0, 10])
+                    cylinder(h = 10, d = Wire_thickness, $fn = draft?6:20);
+                }
+                
+      
                 // Drážka pro uchycení stuhy
                 //       rotate(90+360/Number_of_holes/2)
                 //      translate([0,starter_pipe_d_middle/2,top_thickness + M3_nut_height + sensor_cap_height/2+Ribbon_width/2+1.15])
@@ -304,6 +319,12 @@ module 888_4008(draft = true) {
                 cube([M3_nut_diameter, 8  ,  M3_nut_height], center = true);
             }
         }
+ 
+                // Hole for a wire
+                rotate([0, 90,60])                
+                    translate([-(top_thickness + M3_nut_height + sensor_cap_height/2+Ribbon_width/2)/2-2, 0, starter_pipe_d_middle/2-End_Wall_Thickness+0])
+                    cylinder(h = 10, d = Wire_thickness+1, $fn = draft?6:20);
+        
         // cross section for model construction
         //translate([-50,0,0])cube(100);
         
@@ -373,7 +394,16 @@ module Mezikus(draft=true){
             rotate([0, 0, i*360/4])
             translate([starter_pipe_d_middle/2-End_Wall_Thickness/2, 0, top_thickness + M3_nut_height + sensor_cap_height/2+Ribbon_width/2+0.15])
             cylinder(h = Depth_self_screw, d = Self_screw_diameter + 0.5, center = true, $fn=20); 
-        }            
+        } 
+
+        // Groove for "grounded" wire
+        rotate([0, 0,60])
+        hull(){
+                translate([starter_pipe_d_middle/2-End_Wall_Thickness+0, 0, 0])
+                cylinder(h = 10, d = Wire_thickness, $fn = draft?6:20);
+                translate([starter_pipe_d_middle/2-End_Wall_Thickness+1.5, 0, 0])
+                cylinder(h = 10, d = Wire_thickness, $fn = draft?6:20);
+        }
         
         // Groove for sensors
         translate([0, 0, Total_w_mezikus-Depth_Groove_Sensors+.01])
