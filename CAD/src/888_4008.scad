@@ -325,8 +325,7 @@ module 888_4008(draft = true) {
                     translate([-(top_thickness + M3_nut_height + sensor_cap_height/2+Ribbon_width/2)/2-2, 0, starter_pipe_d_middle/2-End_Wall_Thickness+0])
                     cylinder(h = 10, d = Wire_thickness+1, $fn = draft?6:20);
         
-        // cross section for model construction
-        //translate([-50,0,0])cube(100);
+      
         
     }
 }
@@ -351,6 +350,7 @@ module Mezikus(draft=true){
         cylinder(h=4, d1=starter_pipe_d_middle, d2 = starter_pipe_d_middle-End_Wall_Thickness*2, $fn = draft?16:120);
             
         // Triangular protrusions for the right compilation with the second part
+        translate([0, 0, 0.3])
         intersection() {
             union() {
                 rotate([0, 0, 90 + 55])
@@ -411,8 +411,10 @@ module Mezikus(draft=true){
             cylinder(d = D_mezikus-3, h = Depth_Groove_Sensors, $fn = draft?16:120);  
             
             cylinder(d = starter_pipe_d_middle+2.5, h = Depth_Groove_Sensors, $fn = draft?16:120);
-        }               
-    
+            
+        } 
+
+ 
     }
     
     // Cylinders for the right compilation with disc
@@ -436,9 +438,15 @@ module Mezikus(draft=true){
     */
 }
 
+difference(){
+    union(){
+        888_4008(draft=true);
 
-
-888_4008(draft=true);
-
-translate([0, 0, starter_bottom_h+Ribbon_width+rpm_sensor_h - 3.4 + 20])
-#Mezikus(draft=true);
+        translate([0, 0, starter_bottom_h+Ribbon_width+rpm_sensor_h - 3.4 + 20])
+       # Mezikus(draft=true);
+    
+    }
+ // cross section for model construction
+//    rotate([0,0,50]) translate([-100,0,-50])cube(200);
+    
+}
