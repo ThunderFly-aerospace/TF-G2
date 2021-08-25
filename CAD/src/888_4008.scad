@@ -404,6 +404,10 @@ module Mezikus(draft=true){
                 translate([starter_pipe_d_middle/2-End_Wall_Thickness+1.5, 0, 0])
                 cylinder(h = 10, d = Wire_thickness, $fn = draft?6:20);
         }
+        rotate([0, 0,60])
+        translate([starter_pipe_d_middle/2-End_Wall_Thickness/2, 0, Total_w_mezikus])
+        cube([End_Wall_Thickness+3, Wire_thickness ,  Wire_thickness*2], center = true);
+        
         
         // Groove for sensors
         translate([0, 0, Total_w_mezikus-Depth_Groove_Sensors+.01])
