@@ -346,7 +346,7 @@ module Mezikus(draft=true){
             }
         }
         
-        translate([0, 0, 6-4-1.6])
+        translate([0, 0, 6-4-1.6-.8])
         cylinder(h=4, d1=starter_pipe_d_middle+.2, d2 = starter_pipe_d_middle-End_Wall_Thickness*2+.2, $fn = draft?16:120);
             
         // Triangular protrusions for the right compilation with the second part
@@ -356,22 +356,22 @@ module Mezikus(draft=true){
                 rotate([0, 0, 90 + 55])
                 translate([starter_pipe_d_middle/2-End_Wall_Thickness/2-.5, 0, 0])
                 rotate([0, 0, 60])
-                cylinder(h = 10+.2, d1 = 8+.2, d2 = 0, $fn = 3);
+                cylinder(h = 10, d1 = 8, d2 = 0, $fn = 3);
                 
                 rotate([0, 0, 90 - 55])
                 translate([starter_pipe_d_middle/2-End_Wall_Thickness/2-.5, 0, 0])
                 rotate([0, 0, 60])
-                cylinder(h = 10+.2, d1 = 8+.2, d2 = 0, $fn = 3);
+                cylinder(h = 10, d1 = 8, d2 = 0, $fn = 3);
                 
                 rotate([0, 0, - 90 + 55])
                 translate([starter_pipe_d_middle/2-End_Wall_Thickness/2-.5, 0, 0])
                 rotate([0, 0, 60])
-                cylinder(h = 10+.2, d1 = 8+.2, d2 = 0, $fn = 3);
+                cylinder(h = 10, d1 = 8, d2 = 0, $fn = 3);
                     
                 rotate([0, 0, - 90 - 55])
                 translate([starter_pipe_d_middle/2-End_Wall_Thickness/2-.5, 0, 0])
                 rotate([0, 0, 60])
-                cylinder(h = 10+.2, d1 = 8+.2, d2 = 0, $fn = 3);
+                cylinder(h = 10, d1 = 8, d2 = 0, $fn = 3);
             }
             
             translate([0, 0, 0])
@@ -380,8 +380,8 @@ module Mezikus(draft=true){
         
         cylinder(d = starter_pipe_d_middle-End_Wall_Thickness*2+.2, h = Total_w_mezikus+.1, $fn = draft?16:120);
         
-        translate([0, 0, -1.6]) 
-        cylinder(d = starter_pipe_d_middle+0.2, h = Total_w_mezikus -4+.2, $fn = draft?16:120);
+//        translate([0, 0, -1.6]) 
+//        cylinder(d = starter_pipe_d_middle+0.2, h = Total_w_mezikus -4+.2, $fn = draft?16:120);
         
         // Holes for self-cutting screws  - ENLARGED
         for (i = [1:Number_of_holes]) {
