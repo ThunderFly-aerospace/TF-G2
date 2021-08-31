@@ -27,7 +27,7 @@ difference(){
 	union(){
   // zakladni tvar
 		hull(){
-  		#	translate([0, -base_width/2 - side_thickness, 0])
+  			translate([0, -base_width/2 - side_thickness, 0])
           cube([15, base_width + 2*side_thickness, pylon_holder_side_mount_height]);
 
         translate([0, -base_width/2 - side_thickness, 0])
@@ -40,10 +40,9 @@ difference(){
           rotate([0, 90 - motor_angle, 0])
               cylinder(d=motor_diameter+thickness*1, h=thickness, $fn=100);
 
-
-#        translate([0, 0,  motor_holder_side_mount_height + rantl_height/2 + M3_screw_diameter])
+        translate([0, 0,  (base_width + 2*side_thickness)/2])
           rotate([0, 90 - motor_angle, 0])
-              cylinder(d=base_width, h=thickness, $fn=100);
+              cylinder(d=base_width + 2*side_thickness, h=thickness, $fn=100);
 
 		}
 	}
@@ -76,8 +75,12 @@ difference(){
 
     difference(){
   		hull(){
-  			translate([-0.1, -base_width/2+thickness*1.5, thickness*2])
-  				cube([thickness*8, base_width-thickness*3, pylon_holder_side_mount_height*1.2]);
+	  			translate([-0.1, -base_width/2+thickness*1.5, thickness*2])
+	  				cube([thickness*8, base_width-thickness*3, pylon_holder_side_mount_height]);
+
+					translate([0, 0,  pylon_holder_side_mount_height*1.2])
+	          rotate([0, 90 - motor_angle, 0])
+	              cylinder(d= base_width-thickness*3, h=thickness, $fn=100);
 
   				translate([motor_x_shift-15, 0, thickness/3])
               cylinder(d = 20, h=2);
@@ -97,11 +100,16 @@ difference(){
         cube([30, rantl_thickness*1.5, rantl_height+5]);
     }
 
-
+  hull(){
     translate([-1,- base_width, motor_holder_side_mount_height + rantl_height/2 + M3_screw_diameter])
       cube([30, base_width*2, motor_holder_side_mount_height]);
 
+#		translate([0, 0,  pylon_holder_side_mount_height*1.2])
+			rotate([90, 0 - motor_angle, 0])
+					cylinder(d= thickness*3, h=base_width, center = true,  $fn=100);
 
+
+	}
   // Srouby do bocnic
   for(z = [[motor_holder_side_mount_height+rantl_height/2, 0, 6], [rantl_height/2, 0, 10], [rantl_height/2, 10, 10]])
 		translate([5+z[1], 0, z[0]])
