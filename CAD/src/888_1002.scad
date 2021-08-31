@@ -68,7 +68,7 @@ difference(){
 
     // spodni vyrez - odlehceni
     hull(){
-		     cube([thickness*16, base_width-thickness*4, 20], center = true);
+		     cube([thickness*17, base_width-thickness*4, 20], center = true);
 		     translate([motor_x_shift-15, 0, 0])
             cylinder(d = 20-thickness, h=10);
     }
@@ -76,7 +76,13 @@ difference(){
     difference(){
   		hull(){
 	  			translate([-0.1, -base_width/2+thickness*1.5, thickness*2])
-	  				cube([thickness*8, base_width-thickness*3, pylon_holder_side_mount_height]);
+	  				cube([thickness*8, base_width-thickness*3, pylon_holder_side_mount_height*0.8]);
+
+
+					translate([-0.1, -base_width/2+thickness*1.5, thickness*2])
+	  				cube([thickness*10, base_width-thickness*3, motor_holder_side_mount_height*0.8]);
+
+
 
 					translate([0, 0,  pylon_holder_side_mount_height*1.2])
 	          rotate([0, 90 - motor_angle, 0])
@@ -87,7 +93,7 @@ difference(){
   	      translate([motor_x_shift, 0, motor_holder_motor_height -(-rantl_height + base_thickness + 0.2)])
   	         rotate([0, 90 - motor_angle, 0])
                   hull(){
-                    cylinder(d=motor_diameter, h=0.1, $fn=100);
+                    cylinder(d=motor_diameter + 1.3*thickness, h=0.1, $fn=100);
                 //    translate([-3,0,0])
                 //        cylinder(d=motor_diameter, h=0.1, $fn=100);
                   }
@@ -100,13 +106,14 @@ difference(){
         cube([30, rantl_thickness*1.5, rantl_height+5]);
     }
 
+	// limit holder size from top
   hull(){
-    translate([-1,- base_width, motor_holder_side_mount_height + rantl_height/2 + M3_screw_diameter])
-      cube([30, base_width*2, motor_holder_side_mount_height]);
+    translate([-1,- base_width, motor_holder_side_mount_height + rantl_height/2 + 1.5*M3_screw_diameter])
+      cube([30, base_width*2, 2*motor_holder_side_mount_height]);
 
-#		translate([0, 0,  pylon_holder_side_mount_height*1.2])
+		translate([motor_x_shift-motor_holder_side_mount_height/2, 0,  pylon_holder_side_mount_height*1.2])
 			rotate([90, 0 - motor_angle, 0])
-					cylinder(d= thickness*3, h=base_width, center = true,  $fn=100);
+					cylinder(d= motor_holder_side_mount_height, h=base_width, center = true,  $fn=100);
 
 
 	}
@@ -183,5 +190,5 @@ difference(){
 
 difference(){
   888_1002();
-  translate([30, 0, 0]) cube(100);
+//  translate([30, 0, 0]) cube(100);
 }
