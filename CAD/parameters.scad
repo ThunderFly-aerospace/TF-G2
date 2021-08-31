@@ -200,7 +200,7 @@ Servo_screw = 1.5;
 Servo_nut_height = 1;
 Servo_nut_diameter = 2.7;
 
-tail_pipe_d = 10.3;
+tail_pipe_d = 13.04;
 
 // elevator parameters
 
@@ -211,6 +211,7 @@ elevator_pitch = 2; // elevator pitch relative to main fuselage axis
 rudder_height = 150;
 height_bottom_part = 130;
 rudder_depth_max = 200;
+rudder_inclination = 25;
 
 below_rudder_height = 30;
 rudder_depth = 60;
