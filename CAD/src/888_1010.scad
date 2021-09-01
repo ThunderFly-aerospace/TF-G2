@@ -31,7 +31,7 @@ module 888_1010() translate([40*0.3, 0, 0]) {
 
     difference(){
             union(){
-                translate([0, 0, 0]) rotate([180, 0, 180]) tfslot_888_1001(true);
+                translate([0, 0, 0]) rotate([180, 0, 180]) tfslot_888_1001(35, true);
 
                 for(m = [0, 1]) mirror([0,m,0]) difference(){
                     union(){
