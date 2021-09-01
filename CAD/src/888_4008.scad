@@ -422,11 +422,11 @@ module Mezikus(draft=true){
     }
     
     // Cylinders for the right compilation with disc
-    rotate([0, 0, 35])
+    rotate([0, 0, -45 +35])
     translate([starter_pipe_d_middle/2-End_Wall_Thickness/2, 0, Total_w_mezikus])
     cylinder(h = 2, d = 3, $fn = 20);
     
-    rotate([0, 0, 180+35])
+    rotate([0, 0, -45+180+35])
     translate([starter_pipe_d_middle/2-End_Wall_Thickness/2, 0, Total_w_mezikus])
     cylinder(h = 2, d = 3, $fn = 20);
     
