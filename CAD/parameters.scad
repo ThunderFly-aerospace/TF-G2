@@ -200,7 +200,7 @@ Servo_screw = 1.5;
 Servo_nut_height = 1;
 Servo_nut_diameter = 2.7;
 
-tail_pipe_d = 10.3;
+tail_pipe_d = 13.04;
 
 // elevator parameters
 

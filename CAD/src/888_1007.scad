@@ -50,7 +50,7 @@ module 888_1007(){
         for(x = [-0.5, 0.5], y=[-0.5, 0.5])
           translate([(pylon_silentblocks_base_distance)*x, (pylon_silentblocks_base_distance)*y, 0]){
             cylinder(d = 10, h = 20, $fn=25);
-            translate([0, 0, -5-0.1]) cylinder(d = M3_nut_diameter, h = 2.5, $fn=6);
+            //translate([0, 0, -5-0.1]) cylinder(d = M3_nut_diameter, h = 2.5, $fn=6);
             translate([0, 0, -5+2.5+0.1]) cylinder(d = M3_screw_diameter, h = 10, $fn=15);
           }
 
@@ -60,10 +60,12 @@ module 888_1007(){
             translate([x, 0, 0])
                 rotate([90, 0, 0]){
                     cylinder(d = M3_screw_diameter, h = base_width+1, center=true, $fn = 24);
-                    for(y=[-1, 1]) translate([0, 0, y*(base_width/2-3)]) hull(){
-                        cylinder(d = M3_nut_diameter, h = M3_nut_height, center=true, $fn = 6);
-                        translate([0, 10, 0]) cylinder(d = M3_nut_diameter, h = M3_nut_height, center=true, $fn = 6);
-                    }
+                    for(y=[-1, 1]) translate([0, 0, y*(base_width/2-3)])
+                        hull(){
+                            cylinder(d = M3_nut_diameter, h = M3_nut_height, center=true, $fn = 6);
+                            translate([0, 10, 0])
+                                cylinder(d = M3_nut_diameter, h = M3_nut_height, center=true, $fn = 6);
+                        }
                 }
     }
 }
