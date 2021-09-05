@@ -26,6 +26,8 @@ Autogyro model for UAV pilot training and learning purposes.
   * Micro payload load capacity
   * [Simulation model available](https://github.com/ThunderFly-aerospace/FlightGear-TF-G2)
 
+The main advantage of a fully tilting rotor is more controllable over its speed range. It can also be controlled down to zero forward airspeed, compared to classical rudder/elevator setup.
+
 ![TF-G2 on grass](./doc/img/TF-G2_grass_front.jpg "TF-G2 autogyro sitting on the grass before test")
 ![TF-G2 on grass side view](./doc/img/TF-G2_grass_side.jpg "TF-G2 autogyro sitting on the grass")
 
