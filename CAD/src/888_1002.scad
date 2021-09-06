@@ -114,9 +114,13 @@ difference(){
 		translate([motor_x_shift-motor_holder_side_mount_height/2, 0,  pylon_holder_side_mount_height*1.2])
 			rotate([90, 0 - motor_angle, 0])
 					cylinder(d= motor_holder_side_mount_height, h=base_width, center = true,  $fn=100);
-
-
 	}
+
+	// limit holder from back
+
+	translate([-15, -base_width/2 - side_thickness, 0])
+        cube([15, base_width + 2*side_thickness, pylon_holder_side_mount_height]);
+
   // Srouby do bocnic
   for(z = [[motor_holder_side_mount_height+rantl_height/2, 0, 6], [rantl_height/2, 0, 10], [rantl_height/2, 10, 10]])
 		translate([5+z[1], 0, z[0]])
