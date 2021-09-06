@@ -45,7 +45,7 @@ difference()
                         rotate([90,0,0])
                         {                   
          
-                            cylinder(d=bearings_outer_diameter+bearing_add,h=ax_length+1, center=true,$fn=circle_fn);
+                            cylinder(d=bearings_outer_diameter+bearing_add,h=ax_length+3, center=true,$fn=circle_fn);
                             translate([2,-desk_add,0])
                                 cylinder(d=bearings_outer_diameter+bearing_add,h=ax_length-2, center=true,$fn=circle_fn);
                         }
