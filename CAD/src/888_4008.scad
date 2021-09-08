@@ -155,7 +155,7 @@ module 888_4008(draft = true) {
             
             ////// INNER CLIFF                        
             difference() {
-                translate([0,0,top_thickness + M3_nut_height + sensor_cap_height/2-4.5])
+                translate([0,0,top_thickness + M3_nut_height + sensor_cap_height/2-4.5+1])
                 cylinder(h=sensor_cap_height*0.7+Ribbon_part_w+2.25-.01, d1=starter_pipe_d_middle-.01, d2 = starter_pipe_d_middle-.01, $fn = draft?16:120);
         
                 translate([0,0,top_thickness + M3_nut_height + sensor_cap_height/2-5.5])
@@ -164,7 +164,7 @@ module 888_4008(draft = true) {
                 translate([0,0,top_thickness + M3_nut_height + sensor_cap_height/2-3.5])
                 cylinder(h=sensor_cap_height*0.7+Ribbon_part_w+2.25, d = starter_pipe_d_middle-End_Wall_Thickness*2, $fn = draft?16:120);
                 
-                translate([0,0,top_thickness + M3_nut_height + sensor_cap_height/2-2.5+sensor_cap_height*0.7+Ribbon_part_w+0.25-4-0])
+                translate([0,0,top_thickness + M3_nut_height + sensor_cap_height/2-2.5+sensor_cap_height*0.7+Ribbon_part_w+0.25-4+1])
                 difference() {
                     cylinder(h=4, d=starter_pipe_d_middle, $fn = draft?16:120);
                     
@@ -268,21 +268,6 @@ module 888_4008(draft = true) {
         cube([starter_pipe_d_middle, starter_pipe_d_middle, starter_rope_diameter]);
         */
         
-        // Otvory pro senzor
-        translate([0,0,top_thickness + M3_nut_height + sensor_cap_height])
-        intersection() {
-            union(){  // sensor teeth outer rim
-                cylinder(d = starter_pipe_d_middle, h = rpm_hole_h/4, $fn = draft?rpm_sensor_count:120);
-                
-                translate([0, 0, - M3_nut_height - sensor_cap_height + rpm_sensor_h + starter_top_h - starter_rope_diameter])
-                cylinder(d1 = starter_pipe_d_middle, d2 = starter_rope_d - starter_rope_diameter/2, h = starter_rope_diameter, $fn = draft?rpm_sensor_count:120);
-            }
-        
-            for (i=[0:rpm_sensor_count]) rotate([0, 0, (360/rpm_sensor_count)*i]){
-                linear_extrude(height = rpm_hole_h)
-                polygon(points=[[0,0],[starter_rope_d/2, ((starter_rope_d/2) * sin(360/rpm_sensor_count/2))/2], [starter_rope_d/2, -((starter_rope_d/2) * sin(360/rpm_sensor_count/2))/2]]);
-            }
-        }
         
         // Rotor nut
         translate([0, 0, -.01])
@@ -387,13 +372,13 @@ module Mezikus(draft=true){
         for (i = [1:Number_of_holes]) {
             rotate([0, 0, i*360/Number_of_holes])
             translate([starter_pipe_d_middle/2-End_Wall_Thickness/2, 0, top_thickness + M3_nut_height + sensor_cap_height/2+Ribbon_width/2+0.15])
-            cylinder(h = Depth_self_screw, d = Self_screw_diameter+0.5, center = true, $fn=20);
+            cylinder(h = Depth_self_screw, d = Self_screw_diameter+0.7, center = true, $fn=20);
         }
         
         for (i = [1:4]) {
             rotate([0, 0, i*360/4])
             translate([starter_pipe_d_middle/2-End_Wall_Thickness/2, 0, top_thickness + M3_nut_height + sensor_cap_height/2+Ribbon_width/2+0.15])
-            cylinder(h = Depth_self_screw, d = Self_screw_diameter + 0.5, center = true, $fn=20); 
+            cylinder(h = Depth_self_screw, d = Self_screw_diameter+0.7, center = true, $fn=20); 
         } 
 
         // Groove for "grounded" wire
