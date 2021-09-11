@@ -81,7 +81,7 @@ module 888_2002(){
                     b = b - join_height/4/(cuts*0.7)) a];
         echo(rot);
         mirror_copy([0, 0, 1])
-        for (i = [0:cuts]) {
+        for (i = [1:cuts]) {
             m = i*(join_height/4/(cuts*2));
             rotate([0, 0, -90 + rot[i]]) {
                 if (i % 2 == 0) {
@@ -103,18 +103,48 @@ module 888_2002(){
     //koncovky - hranatá
     rotate ([0,0,90])
         difference(){
+          hull(){  // smooth connection to the leg
             translate([suspension_holder_thickness/2, suspension_bow_diameter/2 - join_height/2, 0])
-                cube([suspension_holder_thickness, join_height + 2*presah, 2*join_height], center=true);
+                cube([suspension_holder_thickness/2, join_height + 2*presah, 2*join_height], center=true);
+                intersection(){
+                    difference(){
+                        union(){
+                            cylinder (cylinder_h_1, suspension_bow_diameter_1/2,0);
+                            translate([0,0,-cylinder_h_1 + 0.001])
+                                cylinder(cylinder_h_1,0, suspension_bow_diameter_1/2);
+                        }
+
+                        translate([join_height_1/2 - zmenseni,-zmenseni, -join_height_1])
+                            cylinder(cylinder_h_1, suspension_bow_diameter_1/2,0);
+
+                        translate([join_height_1/2 - zmenseni,-zmenseni,+ join_height_1 - cylinder_h_1])
+                            cylinder(cylinder_h_1,0,suspension_bow_diameter_1/2);
+                    }
+                    translate([-suspension_holder_thickness/3, suspension_bow_diameter/2 - join_height/2, 0])
+                        cube([suspension_holder_thickness, join_height + 2*presah, 1.5*join_height], center=true);
+                }
+            }
+
 
             mirror_copy([0, 0, 1])
             translate([-0.1, suspension_bow_diameter/2 + presah/2 - M3_screw_diameter/2, suspension_join_screw_distance/2])
+            {
                 rotate([0, 90, 0])
                     cylinder(d= M3_screw_diameter, h = 30);
+                translate([global_clearance, 0, 0])
+                    rotate([0, 90, 180])
+                        cylinder(d= M3_head_diameter_ISO7380, h = 10);
+            }
 
             mirror_copy([0, 0, 1])
             translate([-0.1, suspension_bow_diameter/2 - join_height - M3_screw_diameter/2, suspension_join_screw_distance/2])
+            {
                 rotate([0, 90, 0])
                     cylinder(d= M3_screw_diameter, h = 30);
+                translate([global_clearance, 0, 0])
+                    rotate([0, 90, 180])
+                        cylinder(d= M3_head_diameter_ISO7380, h = 10);
+            }
         }
     // koncovky - oblá
     rotate([180, 0, -90])
@@ -132,7 +162,7 @@ module 888_2002(){
                     cylinder(d = M3_screw_diameter, h = suspension_bow_diameter, center = true);
                rotate([0, 90, 0])
                translate([0, 0, -suspension_bow_diameter-wheel_mount_thickness + 3])
-                cylinder(d = M3_nut_diameter, h = suspension_bow_diameter, $fn = 6, center = false);     
+                cylinder(d = M3_nut_diameter, h = suspension_bow_diameter, $fn = 6, center = false);
             }
     }
     mirror_copy([0, 0, 1])
@@ -142,5 +172,7 @@ module 888_2002(){
     }
 }
 
-
-888_2002();
+difference(){
+  888_2002();
+//  translate([0,100,-30]) rotate([0,0,180]) cube(150);
+}
