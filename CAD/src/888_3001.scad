@@ -74,6 +74,19 @@ module tail_center(){
                     cube([depth_max, 20, 2*below_height]);
 
 
+        // beveled bottom bellow rudder
+        translate([0, 0, -below_height/2])
+           rotate([90, 0, 0])
+              hull(){
+                    translate([depth_max - rudder_depth -17, 2, 0])
+                    cylinder(d = 15, h = rudder_depth, $fn=50, center = true);
+
+                    translate([depth_max - rudder_depth -40, -3, 0])
+                    cylinder(d = 19, h = rudder_depth, $fn=50, center = true);
+                }
+
+
+
         // Otvor pro svislou osu
         rotate([0, -rudder_inclination, 0])
             translate([depth_max - rudder_depth - 15, 0, -2.3*below_height])
@@ -139,26 +152,6 @@ module tail_center(){
 
 width = 320;
 tail_horizontal_depth = 130;
-
-module elevator(position = 0){
-    translate([0, 0, -25]*position)
-        rotate([90, -elevator_pitch, 0]*position)
-    sweep(gen_dat(M=width/2, dz=1,N=N), showslices = false);
-
-    // specific generator function
-    function gen_dat(M=10,dz=0.1,N=10) = [for (i=[0:dz:M/2])
-      let( L = extra_length_elevator(i))
-      let( af = vec3D(
-          airfoil_data([0,0,0.05+thickness_elevator(i)], L=extra_length_elevator(i), N = N)))
-      T_(edge_shift_elevator(i), 0, (i)*2, af)];  // translate airfoil
-
-    function edge_shift_elevator(i) = (i/55)^(11.5)+i*0.5;
-    //function edge_shift(i) = (i/60)^(10)+i*0.75;
-    function thickness_elevator(i) = 0.003;   //0.5*sin(i*i)+.1;
-    function extra_length_elevator(i) = tail_horizontal_depth - edge_shift_elevator(i);
-}
-
-
 
 tail_center();
 
