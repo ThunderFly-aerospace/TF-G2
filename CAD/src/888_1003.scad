@@ -2,7 +2,6 @@
 include <../parameters.scad>
 $fn = $preview? 10:30;
 
-sides_height = 90; //vyska sten
 bellow = 5;
 height = 20;
 front_overlap = 7;
@@ -165,6 +164,8 @@ module 888_1003(){
 
 
 888_1003();
+
+//888_1003_outline();
 
 module 888_1003_part(part = 0){
 
