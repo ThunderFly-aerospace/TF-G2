@@ -74,15 +74,22 @@ module tail_center(){
                     cube([depth_max, 20, 2*below_height]);
 
 
-        // beveled bottom bellow rudder
+        // lightennig and crash absorption hole
         translate([0, 0, -below_height/2])
            rotate([90, 0, 0])
               hull(){
-                    translate([depth_max - rudder_depth -17, 2, 0])
-                    cylinder(d = 15, h = rudder_depth, $fn=50, center = true);
+                hole1 = 15;
+                hole2 = 15;
+                hole3 = 22;
+                    translate([depth_max - rudder_depth -14, 2, 0])
+                        cylinder(d = hole1, h = rudder_depth, $fn=50, center = true);
 
-                    translate([depth_max - rudder_depth -40, -3, 0])
-                    cylinder(d = 19, h = rudder_depth, $fn=50, center = true);
+                    translate([depth_max - rudder_depth -24, hole2/2 - hole3/2 + (hole1/2+2-hole3/2), 0])
+                        cylinder(d = hole2, h = rudder_depth, $fn=50, center = true);
+
+
+                    translate([depth_max - rudder_depth -50, hole1/2+2-hole3/2, 0])
+                        cylinder(d = hole3, h = rudder_depth, $fn=50, center = true);
                 }
 
 
@@ -98,7 +105,7 @@ module tail_center(){
             translate([-23.5/2, -10.5/2, -40]) cube([23.5, 10.5, 35]);
             translate([-35/2, -10.5/2, -below_height+20+servo_z_shift]) cube([35, 10.5+5, 35]);
             translate([-23.5/2, -10.5/2, -20+3-42]) cube([23.5, 10.5, 35]);
-            translate([-35/2, -1.7/2, -below_height-1]) cube([35, 1.7, 35]);
+            translate([-35/2, -1.7/2, -below_height-1]) cube([35, 10.5/2 +1.7/2, 35]);
             translate([-35/2, -8/2, -below_height-1]) cube([20, 8, servo_z_shift+6]);
 
             for(i=[1, -1])
