@@ -12,7 +12,7 @@ drzak_height = 70; //spatny rozmer so far
 sides_split_positions = [-5, length/3-5, length/3*2, length];
 
 
-module 888_1003_outline(){
+module 888_1003_outline(battery_case_start_x = 25, battery_length = 150){
 		projection()
 			difference(){
 				union(){
