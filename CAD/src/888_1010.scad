@@ -1,15 +1,13 @@
 //// ThunderFly TF-G2 Rotor Head - Part 1
 /// Main parameters
 
+use <./lib/TFSLOT01/CAD/src/tfslot_888_1001.scad>
+use <./lib/stdlib/servos.scad>
+use <./lib/stdlib/naca4.scad>
+
+
 include <../parameters.scad>
 include <MCAD/servos.scad>
-use <lib/TFSLOT01/CAD/src/tfslot_888_1001.scad>
-use <lib/stdlib/servos.scad>
-use <lib/stdlib/naca4.scad>
-use <888_1011.scad>
-use <888_1012.scad>
-use <888_1009.scad> // data o pylonu
-
 
 servo_z_offset = 2.5;
 tfslot_dist = 19;
@@ -28,11 +26,12 @@ module 888_1010() translate([40*0.3, 0, 0]) {
         rotate([90, 0, 180])
             linear_extrude(1.6, center=true)
                 text(str("<", week), halign="center", valign="center", size=6);
-    #translate([-40, -2.5, -26]) cube([0.3, 5, 5]);
+    //print helper
+    translate([-40, -2.5, -26]) cube([0.3, 5, 5]);
 
     difference(){
             union(){
-                translate([0, 0, 0]) rotate([180, 0, 180]) tfslot_888_1001(airspeed_width);
+                translate([0, 0, 0]) rotate([180, 0, 180]) tfslot_888_1001(35, true);
 
                 for(m = [0, 1]) mirror([0,m,0]) difference(){
                     union(){
@@ -99,9 +98,8 @@ module 888_1010() translate([40*0.3, 0, 0]) {
             translate([-40*0.3, 0, -pylon_pipe_counterbore - airspeed_dist/2-0.1 + pylon_pipe_top_offset])
                 cylinder(d=pylon_pipe_d, h=pylon_pipe_counterbore);
 
-            translate([-40*0.3, 0, -pylon_pipe_counterbore - airspeed_dist/2-0.1])
-                translate([-20, -0.5, 0])
-                    cube([20, 1, pylon_pipe_counterbore]);
+            translate([-40*0.3-20-2, -0.5, -pylon_pipe_counterbore - airspeed_dist/2+2])
+                cube([25, 1, pylon_pipe_counterbore]);
 
             translate([0, 0, -pylon_pipe_counterbore - airspeed_dist/2 + pylon_pipe_top_offset])
                 rotate([0, 0, 180])
@@ -138,6 +136,15 @@ module 888_1010() translate([40*0.3, 0, 0]) {
                                     rotate([0, 90, 0])
                                         cylinder(d = 1.9, h = 20, $fn=20, center=true);
                             }
+
+        // airspeed senzor diry pro srouby
+        union() {
+            translate([-10, (15+6)/2, 8.01])
+            cylinder(d = 1.9, h = 10, $fn=20);
+
+            translate([-10, -(15+6)/2, 8.01])
+            cylinder(d = 1.9, h = 10, $fn=20);
+        }
     }
 
     // objekty pro sestavu
