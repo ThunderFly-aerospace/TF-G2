@@ -29,28 +29,12 @@ module tail_vertical(){
 }
 
 module tail_vertical_bottom(){
+
+  plast_screw_loose=2.5;
+  plast_screw_mount=2;
+
     difference(){
-      union(){
         tail_vertical();
-
-
-        translate([30, 0, 5])
-            rotate([90, 0, 0]){
-                translate([0, 0, -3.3])
-                    rotate([180, 0, 0])
-                        cylinder(d1=M3_nut_diameter*1.5, d2=M3_nut_diameter,  h=M3_nut_height, center=false, $fn = 6);
-            }
-
-
-
-        translate([30+80, 0, 5])
-            rotate([90, 0, 0]){
-                translate([0, 0, -3.3])
-                    rotate([180, 0, 0])
-                        cylinder(d1=M3_nut_diameter*1.5, d2=M3_nut_diameter,  h=M3_nut_height, center=false, $fn = 6);
-            }
-
-      }
 
     // space for rudder
     rotate([0, -rudder_inclination, 0])
@@ -72,29 +56,40 @@ module tail_vertical_bottom(){
         cylinder(d = 2.5, h = 2*height_bottom_part, $fn = 20);
 
 
-    translate([30, 0, 0]) cube([15, 5, 20], center = true);
-    translate([30+80, 0, 0]) cube([15, 5, 20], center = true);
+        // kostky na pripevneni smerovky
+            hull(){
+                translate([-(20+global_clearance)/2 + 30, -5/2, -0.1])
+                    cube([20+global_clearance, 5, 0.1]);
+                translate([30, 2.5 + global_clearance/2, 10+global_clearance])
+                    rotate([90, 0, 0])
+                        cylinder(d = 2, h = 5+global_clearance, $fn=50);
 
-    //mounting screws
-    translate([30, 0, 5])
-        rotate([90, 0, 0]){
-            cylinder(d=M3_screw_diameter, h=50, center=true, $fn = 60);
-            translate([0, 0, 3.3])
-                cylinder(d=M3_head_diameter_ISO7380, h=50, center=false, $fn = 60);
-            translate([0, 0, -3.3])
-                rotate([180, 0, 0])
-                    cylinder(d=M3_nut_diameter, h=50, center=false, $fn = 6);
-        }
-    translate([30+80, 0, 5])
-        rotate([90, 0, 0]){
-            cylinder(d=M3_screw_diameter, h=50, center=true, $fn = 60);
-            cylinder(d=M3_screw_diameter, h=50, center=true, $fn = 60);
-            translate([0, 0, 3.3])
-                cylinder(d=M3_head_diameter_ISO7380, h=50, center=false, $fn = 60);
-            translate([0, 0, -3.3])
-                rotate([180, 0, 0])
-                    cylinder(d=M3_nut_diameter, h=50, center=false, $fn = 6);
-        }
+            }
+
+            hull(){
+                translate([-(20)/2 + 30 + 80, -5/2, -0.1])
+                    cube([20+global_clearance, 5, 0.1]);
+                translate([30+80, 2.5 + global_clearance/2, 10+global_clearance])
+                    rotate([90, 0, 0])
+                        cylinder(d = 2, h = 5+global_clearance, $fn=50);
+
+            }
+
+
+                //mounting screws
+                translate([30, 0, 5])
+                    rotate([90, 0, 0]){
+                        cylinder(d=plast_screw_mount, h=8, center=true, $fn = 60);
+                        translate([0, 0, 2])
+                            cylinder(d1=plast_screw_loose, d2=4.6, h=2.5, center=false, $fn = 60);
+                    }
+                translate([30+80, 0, 5])
+                    rotate([90, 0, 0]){
+                        cylinder(d=plast_screw_mount, h=8, center=true, $fn = 60);
+                        translate([0, 0, 2])
+                            cylinder(d1=plast_screw_loose, d2=4.6, h=2.5, center=false, $fn = 60);
+                    }
+
     }
 }
 

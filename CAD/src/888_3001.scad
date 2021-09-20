@@ -19,6 +19,9 @@ N = 80;
 
 
 module tail_center(){
+
+plast_screw_loose=2.5;
+plast_screw_mount=2;
     difference(){
 
         union(){
@@ -36,8 +39,23 @@ module tail_center(){
         }
 
         // kostky na pripevneni smerovky
-            translate([-(15-0.5)/2 + 30, -(5-0.5)/2, 0]) cube([15-0.5, 5-0.5, 10-0.7]);
-            translate([-(15-0.5)/2 + 30 + 80, -(5-0.5)/2, 0]) cube([15-0.5, 5-0.5, 10-0.7]);
+            hull(){
+                translate([-(20)/2 + 30, -(5-0.5)/2, -0.1])
+                    cube([20, 5-0.5, 0.1]);
+                translate([30, 2.5, 10])
+                    rotate([90, 0, 0])
+                        cylinder(d = 2, h = 5, $fn=50);
+
+            }
+
+            hull(){
+                translate([-(20)/2 + 30 + 80, -(5-0.5)/2, -0.1])
+                    cube([20, 5-0.5, 0.1]);
+                translate([30+80, 2.5, 10])
+                    rotate([90, 0, 0])
+                        cylinder(d = 2, h = 5, $fn=50);
+
+            }
         }
 
         // tail pipe hole
@@ -81,10 +99,10 @@ module tail_center(){
                 hole1 = 15;
                 hole2 = 15;
                 hole3 = 22;
-                    translate([depth_max - rudder_depth -14, 2, 0])
+                    translate([depth_max - rudder_depth -16, 2, 0])
                         cylinder(d = hole1, h = rudder_depth, $fn=50, center = true);
 
-                    translate([depth_max - rudder_depth -24, hole2/2 - hole3/2 + (hole1/2+2-hole3/2), 0])
+                    translate([depth_max - rudder_depth -26, hole2/2 - hole3/2 + (hole1/2+2-hole3/2), 0])
                         cylinder(d = hole2, h = rudder_depth, $fn=50, center = true);
 
 
@@ -113,9 +131,9 @@ module tail_center(){
                 rotate([-90, 0, 0])
                 {
                 // mounting screw holes
-                    cylinder(d=2, h=13, center = true, $fn = 20);
+                    cylinder(d=plast_screw_mount, h=13, center = true, $fn = 20);
                     translate([0, 0, 6])
-                        cylinder(d=2.5, h=13, center = true, $fn = 20);
+                        cylinder(d=plast_screw_loose, h=13, center = true, $fn = 20);
                     translate([0, 0, 3])
                       cylinder(d=5.2, h=10, $fn = 20);
                 }
@@ -123,9 +141,7 @@ module tail_center(){
 
         // kostky na pripevneni smerovky, otvory v nich na sroub a vystuzeni
         for(x = [80+30, 30]) translate([x, 0, 5]){
-            rotate([90, 0, 0]) cylinder(d = M3_screw_diameter, h = 20, center = true, $fn = 30);
-            translate([13/3, 0, 0]) cylinder(d=1.5, h=20, center=true);
-            translate([-13/3, 0, 0]) cylinder(d=1.5, h=20, center=true);
+            rotate([90, 0, 0]) cylinder(d = plast_screw_loose, h = 20, center = true, $fn = 30);
         }
 
         // generate correct shape for moving rudder part
