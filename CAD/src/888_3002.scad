@@ -30,7 +30,27 @@ module tail_vertical(){
 
 module tail_vertical_bottom(){
     difference(){
+      union(){
         tail_vertical();
+
+
+        translate([30, 0, 5])
+            rotate([90, 0, 0]){
+                translate([0, 0, -3.3])
+                    rotate([180, 0, 0])
+                        cylinder(d1=M3_nut_diameter*1.5, d2=M3_nut_diameter,  h=M3_nut_height, center=false, $fn = 6);
+            }
+
+
+
+        translate([30+80, 0, 5])
+            rotate([90, 0, 0]){
+                translate([0, 0, -3.3])
+                    rotate([180, 0, 0])
+                        cylinder(d1=M3_nut_diameter*1.5, d2=M3_nut_diameter,  h=M3_nut_height, center=false, $fn = 6);
+            }
+
+      }
 
     // space for rudder
     rotate([0, -rudder_inclination, 0])
@@ -59,9 +79,9 @@ module tail_vertical_bottom(){
     translate([30, 0, 5])
         rotate([90, 0, 0]){
             cylinder(d=M3_screw_diameter, h=50, center=true, $fn = 60);
-            translate([0, 0, 4])
+            translate([0, 0, 3.3])
                 cylinder(d=M3_head_diameter_ISO7380, h=50, center=false, $fn = 60);
-            translate([0, 0, -3])
+            translate([0, 0, -3.3])
                 rotate([180, 0, 0])
                     cylinder(d=M3_nut_diameter, h=50, center=false, $fn = 6);
         }
@@ -69,9 +89,9 @@ module tail_vertical_bottom(){
         rotate([90, 0, 0]){
             cylinder(d=M3_screw_diameter, h=50, center=true, $fn = 60);
             cylinder(d=M3_screw_diameter, h=50, center=true, $fn = 60);
-            translate([0, 0, 4])
+            translate([0, 0, 3.3])
                 cylinder(d=M3_head_diameter_ISO7380, h=50, center=false, $fn = 60);
-            translate([0, 0, -3])
+            translate([0, 0, -3.3])
                 rotate([180, 0, 0])
                     cylinder(d=M3_nut_diameter, h=50, center=false, $fn = 6);
         }
