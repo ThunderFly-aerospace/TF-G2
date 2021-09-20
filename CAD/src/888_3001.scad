@@ -50,10 +50,10 @@ module tail_center(){
             cube([62.6, tail_pipe_d/10, tail_pipe_d ]);
 
         //tail mount screw
-        translate([42/3, 0, -below_height +  0.6* M3_nut_diameter])
+        translate([42/3, 0, -below_height +  M3_head_diameter_ISO7380/2])
             rotate([90, 0, 0]){
                 cylinder(d = M3_screw_diameter, h = 2*tail_pipe_d, $fn=50, center = true);
-                translate([0, 0, tail_pipe_d/3])
+                translate([0, 0, tail_pipe_d/4])
                     cylinder(d = M3_nut_diameter, h = 10, $fn=6);
                 translate([0, 0, -10-tail_pipe_d/3])
                     cylinder(d = M3_head_diameter_ISO7380, h = 10, $fn=60);
