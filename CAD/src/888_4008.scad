@@ -171,7 +171,7 @@ module 888_4008(draft = true) {
                 translate([0,-7.5,5])
                 rotate([atan2(starter_top_h,(16-edge_distance_from_center)),0,0])
                 translate([-15,0,-10])
-                cube([30,17,10]);
+                cube([30,30,10]);
             }
         
             angle=(rotor_blades_count/2 == round(rotor_blades_count/2))? (i*angle_between_blades):i*angle_between_blades - angle_between_blades/2;
