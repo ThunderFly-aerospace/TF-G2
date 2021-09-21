@@ -33,7 +33,7 @@ rpm_hole_h = 50;
 screws_h=14;
 
 Ribbon_width = 6 - 1.2;
-Ribbon_part_w = height_from_rotor_nut- (16.5 - 1.65) + Ribbon_width; // Auxiliary variable
+Ribbon_part_w = height_from_rotor_nut- (16.5 - 1.65) + Ribbon_width;
 
 /// Inner cliff
 End_Wall_Thickness = 5;
@@ -48,8 +48,9 @@ Depth_Groove_Sensors = 3.5;
 
 Wire_thickness = 1.5 + 0.2;
 
+Space_between_discs = 2;                /////// Changeable parameter //////
 
-pcb_holder_height = 3;
+pcb_holder_height = 3.2+(2-Space_between_discs)/2;
 pcb_holder_width = starter_pipe_d_middle+0.2-End_Wall_Thickness*2+34;
 
 total_height = top_thickness+starter_top_h+rpm_sensor_h+pcb_holder_height;
@@ -68,7 +69,7 @@ module 888_4008(draft = true) {
 				}
 
 				// Groove for sensors
-				translate([0, 0, top_thickness+starter_top_h+rpm_sensor_h+pcb_holder_height+3-Depth_Groove_Sensors+.01])
+				translate([0, 0, top_thickness+starter_top_h+rpm_sensor_h+2*pcb_holder_height-Depth_Groove_Sensors+.01])
 				difference(){
 					cylinder(d = pcb_holder_width-3, h = Depth_Groove_Sensors, $fn = draft?16:120);  
 					
@@ -115,8 +116,8 @@ module 888_4008(draft = true) {
 
 			////// INNER CLIFF                        
 			difference() {
-				translate([0,0,top_thickness + M3_nut_height + sensor_cap_height/2-4.5+1])
-				cylinder(h=sensor_cap_height*0.7+Ribbon_part_w+pcb_holder_height-0.545, d=starter_pipe_d_middle-.01, $fn = draft?16:120);
+				translate([0,0,top_thickness + M3_nut_height + sensor_cap_height/2+pcb_holder_height-8.5])
+				cylinder(h=sensor_cap_height*0.7+Ribbon_part_w+pcb_holder_height-0.545+2, d=starter_pipe_d_middle-.01, $fn = draft?16:120);
 
 				translate([0,0,top_thickness + M3_nut_height + sensor_cap_height/2-5.5])
 				cylinder(h=sensor_cap_height*0.7+Ribbon_part_w+2.25+pcb_holder_height+.5, d1=starter_pipe_d_middle-4.9, d2 = starter_pipe_d_middle-End_Wall_Thickness*2, $fn = draft?16:120);
@@ -149,11 +150,11 @@ module 888_4008(draft = true) {
 
 			// Cylinders for the right compilation with disc
 			rotate([0, 0, -45+35-rotor_delta_angle])
-			translate([starter_pipe_d_middle/2-End_Wall_Thickness/2, 0, total_height+3])
+			translate([starter_pipe_d_middle/2-End_Wall_Thickness/2, 0, total_height+pcb_holder_height])
 			cylinder(h = 2, d = 3, $fn = 20);
 			
 			rotate([0, 0, -45+180+35-rotor_delta_angle])
-			translate([starter_pipe_d_middle/2-End_Wall_Thickness/2, 0, total_height+3])
+			translate([starter_pipe_d_middle/2-End_Wall_Thickness/2, 0, total_height+pcb_holder_height])
 			cylinder(h = 2, d = 3, $fn = 20);
 		}
         
