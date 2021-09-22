@@ -267,11 +267,6 @@ pylon_base_length = 60;
 pylon_ring_length = 40;
 pylon_ring_thickness = 3;
 
-pylon_bottom_angle = atan2(pilot_height_separation,(base_width-pylon_ring_width)/2-pylon_thickness*1.5);
-echo(pylon_bottom_angle);
-pylon_top_angle = atan2(pylon_height - pilot_height_separation,(pylon_ring_width - rotor_head_width)/2 - pylon_thickness - pylon_ring_thickness);
-echo(pylon_top_angle);
-
 airspeed_width = 35;
 airspeed_naca = 0004;
 airspeed_dist = 20;
