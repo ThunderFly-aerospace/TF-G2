@@ -60,7 +60,7 @@ module 888_4010_cam() {
 	// photo screw
 	translate([0, -40.6/2+.1, 15])
 	rotate([90, 0, 0])
-	cylinder(d=6.3, h=10, $fn=30);
+	cylinder(d=6.5, h=10, $fn=30);
 
 	// record button
 	translate([-59.2/2+15, 40.6/2-.1, 14])
@@ -124,14 +124,14 @@ module 888_4010() {
 		union() {
 			difference() {
 				hull() {
-					translate([0, 1, (59.2+4)/2+18])
-					cube([20, 40.6+4+6, 59.2+4], true);
+					translate([0, 3.4, (59.2+4)/2+18])
+					cube([20, 40.6+4, 59.2+4], true);
 					
 					translate([0, 0, thickness*2+1.8])
 					888_4010_rotor_washer();
 				}
 
-				translate([-15-0.5, 4, 59.2/2+20])
+				translate([-15-0.75, 3.5, 59.2/2+20])
 				rotate([0, 90, 0])
 				888_4010_cam();
 
@@ -149,7 +149,8 @@ module 888_4010() {
 			translate([0, 0, 14])
 			cube([30, 25, 5], center=true);
 		}
-	
+		
+		/*
 		translate([0, -(40.6+6)/2+3, (59.2+4)/2+18])
 		cube([30, .6, 15], center=true);
 	
@@ -158,12 +159,13 @@ module 888_4010() {
 	
 		translate([0, -(40.6+6)/2+6-.3, (59.2+4)/2+18+7.5])
 		cube([30, 6, .6], center=true);
+		*/
 
-		translate([-25, 1, 59.2-5+20])
+		translate([-25, 3.4, 59.2-5+20])
 		rotate([0, 90, 0])
 		for(i=[0:1:1]) {
 			mirror([0, i, 0])
-			translate([0, -(40.6-10+6)/2, 0])
+			translate([0, -(40.6-10)/2, 0])
 			difference() {
 				cylinder(d=40, h=40, $fn=30);
 
@@ -183,7 +185,7 @@ module 888_4010() {
 
 888_4010();
 
-translate([-15, 0, 59.2/2+20])
+translate([-15-0.75, 3.4, 59.2/2+20])
 rotate([0, 90, 0])
 #888_4010_cam();
 
