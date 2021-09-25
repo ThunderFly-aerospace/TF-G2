@@ -64,7 +64,13 @@ difference(){
               translate([1.5, 0, 0]) cylinder(d = M6_screw_diameter, h = 20, $fn=20);
               translate([-1.5, 0, 0]) cylinder(d = M6_screw_diameter, h = 20, $fn=20);
             }
-    }
+    	}
+
+		//shell zip holder
+
+		translate([motor_x_shift + thickness, 0, motor_holder_motor_height - motor_diameter/2])
+      rotate([0, 45 - motor_angle, 0])
+        cube([5,8,6], center = true);
 
     // spodni vyrez - odlehceni
     hull(){
