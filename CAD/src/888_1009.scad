@@ -57,6 +57,9 @@ module 888_1009_bottom() {
                             cylinder(d=M3_screw_diameter, h=3);
                     }
                 }
+
+            translate([-pylon_silentblocks_base_distance/2,-(40*0.35)/4, 0])  // (40*0.35) is NACA profile width 
+                cube([pylon_silentblocks_base_distance/2,(40*0.35)/2,layer_thickness]);
         }
 
         //strenght decreasing scratches
