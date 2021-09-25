@@ -152,7 +152,15 @@ module 888_4008(draft = true){
               // rotor axis
               cylinder(d = M3_screw_diameter+0.1, h = 3* thickness+starter_top_h, center = true, $fn = 20);
               // Rotor nut
-              translate([0, 0, -0.1]) cylinder(d = M3_nut_diameter, h = 6+0.2, $fn = 6);
+              translate([0, 0, -0.1])
+                    union(){
+                        cylinder(d = M3_nut_diameter, h = 6+0.2, $fn = 6);
+                        translate([0, 0, 6-1]) cylinder(d2 = M3_nut_diameter+1, d1 = M3_nut_diameter, h = 1, $fn = 6);
+                        for(r = [1:6])
+                            rotate([0, 0, r*360/6])
+                                translate([M3_nut_diameter/2, 0, 0])
+                                    cylinder(d=1, h=6+0.2, $fn=3);
+                    }
 
 
               // Odecneni bocnych srazenych hran, Odecteni kapes pro matky

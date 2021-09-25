@@ -27,7 +27,7 @@ module tail_rudder(servo_hand = true, axis = true){
                 hull(){
                     rotate([0, rudder_inclination, 0])
                         translate([depth_max - rudder_depth, -10, height/2])
-                            cube([rudder_depth*2/3, 20, height]);
+                            cube([rudder_depth*2/3-7, 20, height]);
                     translate([depth_max - rudder_depth+10, -10, -20])
                         cube([rudder_depth/2, 20, 2*height]);
                     translate([depth_max - rudder_depth, 0, 0])
@@ -77,7 +77,7 @@ module 888_3004_modif_pipe(){
 
 
 module 888_3004_modif_hand(){
-    translate([depth_max - rudder_depth, 0, -rudder_below]) hull(){
+    translate([depth_max - rudder_depth, 0, 0]) hull(){
         translate([10, 0, 1]) cube([10, 2, 2], center = true);
         translate([0, 20, 0]) cylinder(d = 7, h=2, $fn=40);
     }
