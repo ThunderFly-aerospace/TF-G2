@@ -86,12 +86,12 @@ module 888_2002(){
             rotate([0, 0, -90 + rot[i]]) {
                 if (i % 2 == 0) {
                     translate([0, 0, (join_height/2 - m)/2 + 0])
-                        rotate([90,38,0])
+                        rotate([90,30+1.8,0])
                             cylinder(h = suspension_bow_diameter, r = join_height/3 - m - 1, $fn=3);
                 }
                 else {
                     translate([0, 0, (join_height/2 - m - 1)/2 + (join_height/2 * sqrt(3))/4 + 0])
-                        rotate([90,98,0])
+                        rotate([90,-30-1.8,0])
                             cylinder(h = suspension_bow_diameter, r = join_height/3 - m - 1, $fn=3);
                 }
             }
