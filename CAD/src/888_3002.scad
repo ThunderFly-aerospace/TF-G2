@@ -58,8 +58,8 @@ module tail_vertical_bottom(){
 
         // kostky na pripevneni smerovky
             hull(){
-                translate([-(20+global_clearance)/2 + 30, -5/2, -0.1])
-                    cube([20+global_clearance, 5, 0.1]);
+                translate([-(20+global_clearance)/2 + 30, -5/2 - global_clearance/2, -0.1])
+                    cube([20+global_clearance, 5 + global_clearance, 0.1]);
                 translate([30, 2.5 + global_clearance/2, 10+global_clearance])
                     rotate([90, 30, 0])
                         cylinder(d = 2 + 2*global_clearance, h = 5+global_clearance, $fn=3);
@@ -67,8 +67,8 @@ module tail_vertical_bottom(){
             }
 
             hull(){
-                translate([-(20)/2 + 30 + 80, -5/2, -0.1])
-                    cube([20+global_clearance, 5, 0.1]);
+                translate([-(20)/2 + 30 + 80, -5/2 - global_clearance/2, -0.1])
+                    cube([20+global_clearance, 5 + global_clearance, 0.1]);
                 translate([30+80, 2.5 + global_clearance/2, 10+global_clearance])
                     rotate([90, 30, 0])
                         cylinder(d = 2 + 2*global_clearance, h = 5+global_clearance, $fn=3);

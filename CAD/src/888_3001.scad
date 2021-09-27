@@ -40,18 +40,18 @@ plast_screw_mount=2;
 
         // kostky na pripevneni smerovky
             hull(){
-                translate([-(20)/2 + 30, -(5-0.5)/2, -0.1])
-                    cube([20, 5-0.5, 0.1]);
-                translate([30, 2.5, 10])
+                translate([-(20)/2 + 30, -5/2, -0.1])
+                    cube([20, 5, 0.1]);
+                translate([30, 5/2, 10])
                     rotate([90, 0, 0])
                         cylinder(d = 2, h = 5, $fn=50);
 
             }
 
             hull(){
-                translate([-(20)/2 + 30 + 80, -(5-0.5)/2, -0.1])
-                    cube([20, 5-0.5, 0.1]);
-                translate([30+80, 2.5, 10])
+                translate([-(20)/2 + 30 + 80, -5/2, -0.1])
+                    cube([20, 5, 0.1]);
+                translate([30+80, 5/2, 10])
                     rotate([90, 0, 0])
                         cylinder(d = 2, h = 5, $fn=50);
 
