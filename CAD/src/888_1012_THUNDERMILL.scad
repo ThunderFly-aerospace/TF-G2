@@ -45,6 +45,7 @@ starter_rope_d = 39.2;
     TloustkaDna = 6.6;   // V nejtlustším místě podstavy pro upevnění válce na trojúhleníkovém dílu
     PosunDerY = 3.6;
     PosunDerZ = 3.6;
+    rot_screw = 10;  // Natočení děr na šrouby spojující oba díly
 
   // Parametry pro západky na uchycení válce
     ZapadkaX = 2.2;
@@ -55,7 +56,7 @@ starter_rope_d = 39.2;
     PosunNahoru = 1.4;
 
 
-    ZmenseniTisk = 0.2;
+    ZmenseniTisk = 0.05;
 
     // Parametry sloupků pro upevnění disku mlýnku
         PosunZsl = 7.0;
@@ -83,8 +84,8 @@ starter_rope_d = 39.2;
 
 
 module bearing_house(breaking_groove = true, draft = true){
-    ZmenseniTisk = 0.1;
-    TloustkaDna = TloustkaDna+ZmenseniTisk;
+    ZmenseniTiskDno = 0.1;
+    TloustkaDna = TloustkaDna+ZmenseniTiskDno;
 
     // Groove on the main cylinder
     Groove_height = 1;
@@ -130,6 +131,7 @@ module bearing_house(breaking_groove = true, draft = true){
         }
 
      // Diry na sesroubovani obou casti
+        rotate([0, rot_screw, 0]){
     translate([-rod_size/2-1, -bearing_outer_diameter/2 - Bwall-PridavnaSirkaNaSpojeniDilu/2 + PosunDerY, -BaseThickness-(bearing_outer_diameter)/2+ 5 + PosunDerZ])
         rotate([0, 90, 0])
             cylinder(d = M3_screw_diameter, h = 100, $fn = draft?16:120);
@@ -147,7 +149,7 @@ module bearing_house(breaking_groove = true, draft = true){
         rotate([0, 90, 0])
             rotate([0, 0, 30])
                 cylinder(d = M3_head_diameter -0.6, h = M3_head_height+1.7, $fn = draft?16:120);
-
+        }
 
     // bottom bearing
     translate([bearing_shaft_shift + bearing_thickness, 0, bearing_outer_diameter/2 + Bwall])
@@ -356,7 +358,8 @@ difference(){
         cylinder(d = M3_screw_diameter, h = 100, $fn = draft?16:120);
 
  // Diry na sesroubovani obou casti
-translate([-rod_size/2+1.9, -bearing_outer_diameter/2 - Bwall-PridavnaSirkaNaSpojeniDilu/2 + PosunDerY, -BaseThickness-(bearing_outer_diameter)/2+ 5 + PosunDerZ])
+    rotate([0, rot_screw, 0]){
+        translate([-rod_size/2+1.9, -bearing_outer_diameter/2 - Bwall-PridavnaSirkaNaSpojeniDilu/2 + PosunDerY, -BaseThickness-(bearing_outer_diameter)/2+ 5 + PosunDerZ])
         rotate([0, 90, 0])
         cylinder(d = M3_screw_diameter, h = 100, $fn = draft?16:120);
 
@@ -364,16 +367,16 @@ translate([-rod_size/2+1.9, -bearing_outer_diameter/2 - Bwall-PridavnaSirkaNaSpo
         rotate([0, 90, 0])
         cylinder(d = M3_screw_diameter, h = 100, $fn = draft?16:120);
 
-    translate([-rod_size/2-1, -bearing_outer_diameter/2 - Bwall-PridavnaSirkaNaSpojeniDilu/2 + PosunDerY, -BaseThickness-(bearing_outer_diameter)/2+ 5 + PosunDerZ])
+    translate([-rod_size/2-2, -bearing_outer_diameter/2 - Bwall-PridavnaSirkaNaSpojeniDilu/2 + PosunDerY, -BaseThickness-(bearing_outer_diameter)/2+ 5 + PosunDerZ])
         rotate([0, 90, 0])
-     rotate([0, 0, 30])
-     cylinder(d = M3_nut_diameter, h = M3_nut_height, $fn = 6);
+     rotate([0, 0, 120])
+     cylinder(d = M3_nut_diameter, h = M3_nut_height+1, $fn = 6);
 
-    translate([-rod_size/2-1, -(-bearing_outer_diameter/2 - Bwall-PridavnaSirkaNaSpojeniDilu/2 +PosunDerY), -BaseThickness-(bearing_outer_diameter)/2+ 5 + PosunDerZ])
+    translate([-rod_size/2-2, -(-bearing_outer_diameter/2 - Bwall-PridavnaSirkaNaSpojeniDilu/2 +PosunDerY), -BaseThickness-(bearing_outer_diameter)/2+ 5 + PosunDerZ])
         rotate([0, 90, 0])
-     rotate([0, 0, 30])
-     cylinder(d = M3_nut_diameter, h = M3_nut_height, $fn = 6);
-
+     rotate([0, 0, 120])
+     cylinder(d = M3_nut_diameter, h = M3_nut_height+1, $fn = 6);
+    }
 
     // Rohy (Roh je označení pro sešikmené kvádry ve spojení obou dílů s dírami na šrouby)
        difference(){
