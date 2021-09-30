@@ -57,21 +57,34 @@ module 888_1009_bottom() {
                             cylinder(d=M3_screw_diameter, h=3);
                     }
                 }
+
+            // cable harness
+            translate([-pylon_silentblocks_base_distance/2,-3-global_clearance, 0])  // (40*0.35) is NACA profile width
+                cube([pylon_silentblocks_base_distance/2,3,layer_thickness]);
+
+            translate([-pylon_silentblocks_base_distance/2, global_clearance, 0])  // (40*0.35) is NACA profile width
+                cube([pylon_silentblocks_base_distance/2,3,layer_thickness]);
+
+
         }
 
         //strenght decreasing scratches
+        zero_scratch_shift = sqrt((pylon_silentblocks_base_distance/4)^2 + (pylon_silentblocks_base_distance/4)^2)/2; // distance of shifting scratching cubes to get exacly zero depth of scratch.
         for(r=[0,1,2,3])
             rotate([0,0,90*r])
               rotate([0,0,45])
-                translate([0, pylon_silentblocks_base_distance/3, - pylon_silentblocks_base_distance/8])
+                translate([0, pylon_silentblocks_base_distance/3, (zero_scratch_shift - pylon_silentblocks_base_distance/8)/2 - zero_scratch_shift ])
                   rotate([45,0,0])
                     cube(pylon_silentblocks_base_distance/4, center = true);
 
+        // Main pylon hole
         translate([0, 0, 2])
             cylinder(d= pylon_pipe_d, h = 50, $fn=30);
+        // bottom of pylon hole
         translate([0, 0, -2])
             cylinder(d= pylon_pipe_d-2, h = 50, $fn=30);
 
+        // cable shaft
         hull(){
             translate([12, 0, -2])
                 cylinder(d= 8, h = 50, $fn=30);
@@ -126,7 +139,6 @@ color("gray") pylon_pipes(below=0, above=0);
 %translate([0, 0, -8]) 888_1007();
 %rotate([0, 0, 180]) translate([0, 0, -13.5+180+3]) 888_1010();
 %translate([0, 0, -8]) pylon_silentblocks();
-
 
 
 module 888_1009_drill(){

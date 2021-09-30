@@ -1,7 +1,7 @@
 //@set_slicing_config(../../slicing/tail.ini)
 
 //@set_modificator(888_3004_modif_a)
-//@set_slicing_config(../../slicing/default.ini, 888_3004_modif_a)
+//@set_slicing_config(../../slicing/blade_center_parts.ini, 888_3004_modif_a)
 
 //@set_modificator(888_3004_modif_b)
 //@set_slicing_config(../../slicing/tail_center.ini, 888_3004_modif_b)
