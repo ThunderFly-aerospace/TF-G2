@@ -58,8 +58,14 @@ module 888_1009_bottom() {
                     }
                 }
 
-            translate([-pylon_silentblocks_base_distance/2,-(40*0.35)/4, 0])  // (40*0.35) is NACA profile width 
-                cube([pylon_silentblocks_base_distance/2,(40*0.35)/2,layer_thickness]);
+            // cable harness
+            translate([-pylon_silentblocks_base_distance/2,-3-global_clearance, 0])  // (40*0.35) is NACA profile width
+                cube([pylon_silentblocks_base_distance/2,3,layer_thickness]);
+
+            translate([-pylon_silentblocks_base_distance/2, global_clearance, 0])  // (40*0.35) is NACA profile width
+                cube([pylon_silentblocks_base_distance/2,3,layer_thickness]);
+
+
         }
 
         //strenght decreasing scratches
