@@ -125,14 +125,7 @@ module 888_4008(draft = true) {
 				translate([0,0,top_thickness + M3_nut_height + sensor_cap_height/2-3.5])
 				cylinder(h=sensor_cap_height*0.7+Ribbon_part_w+2.25+pcb_holder_height+.5, d = starter_pipe_d_middle-End_Wall_Thickness*2, $fn = draft?16:120);
 				
-				// Groove for "grounded" wire
-				rotate([0, 0,60])
-				hull(){
-					translate([starter_pipe_d_middle/2-End_Wall_Thickness+0, 0, 10])
-					cylinder(h = 20, d = Wire_thickness, $fn = draft?6:20);
-					translate([starter_pipe_d_middle/2-End_Wall_Thickness+1.5, 0, 10])
-					cylinder(h = 20, d = Wire_thickness, $fn = draft?6:20);
-				}
+                
 
 				// Holes for self-cutting screws
 				for (i = [1:Number_of_holes]) {
@@ -157,6 +150,18 @@ module 888_4008(draft = true) {
 			translate([starter_pipe_d_middle/2-End_Wall_Thickness/2, 0, total_height+pcb_holder_height])
 			cylinder(h = 2, d = 3, $fn = 20);
 		}
+        
+        // Groove for "grounded" wire
+			rotate([0, 0,60])
+			hull(){
+				translate([starter_pipe_d_middle/2-End_Wall_Thickness+0, 0, 10])
+				cylinder(h = 20, d = Wire_thickness, $fn = draft?6:20);
+				translate([starter_pipe_d_middle/2-End_Wall_Thickness+1.5, 0, 10])
+				cylinder(h = 20, d = Wire_thickness, $fn = draft?6:20);
+				}
+                rotate([0, 0,60])
+                translate([starter_pipe_d_middle/2-End_Wall_Thickness/2, 0, total_height+5-1])
+                cube([End_Wall_Thickness+3, Wire_thickness+5 ,  Wire_thickness*2], center = true);
         
         // Rotor nut
         translate([0, 0, -.01])
