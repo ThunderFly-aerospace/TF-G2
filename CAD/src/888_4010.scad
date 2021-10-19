@@ -171,6 +171,10 @@ difference()
         translate([blade_first_screw+blade_d,0,0])
             cylinder(d=blade_mount_screw,h=2* (blade_h+2*blade_holder_h),center=true,$fn=circle_fn);
 
+        translate([blade_first_screw+blade_d,0, 2* (blade_h+blade_holder_h)+1])
+            cylinder(d=M3_head_diameter_ISO7380,h=2* (blade_h+2*blade_holder_h),center=true,$fn=circle_fn);
+
+
         translate([blade_screw_distance+blade_first_screw+blade_d,0,0])
             cylinder(d=blade_mount_screw,h=2* (blade_h+2*blade_holder_h),center=true,$fn=circle_fn);
 
