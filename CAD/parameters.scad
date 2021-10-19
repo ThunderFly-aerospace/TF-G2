@@ -200,7 +200,7 @@ Servo_screw = 1.5;
 Servo_nut_height = 1;
 Servo_nut_diameter = 2.7;
 
-tail_pipe_d = 10.3;
+tail_pipe_d = 13.04;
 
 // elevator parameters
 
@@ -269,7 +269,7 @@ airspeed_dist = 20;
 
 // Parametry k akumulatoru
 
-battery_type = "Zippy_4S_3700";
+//battery_type = "Zippy_4S_3700";
 //  GensACE 3300 mAh
 
 //free-flap-head
@@ -329,9 +329,9 @@ free_flap_blade_holder_radius=0.7*free_flap_blade_holder_h;
 
 // ZIPPY 3700 mAh
 //if(battery_type == "Zippy_4S_3700"){
-	battery_case_height = 0;
-	battery_case_start_x = 25;
-	battery_case_wall = 0.4*3;
+	//battery_case_height = 0;
+	//battery_case_start_x = 25;
+	//battery_case_wall = 0.4*3;
 
 
 /* // ZIPPY 3700 mAh
@@ -350,10 +350,10 @@ free_flap_blade_holder_radius=0.7*free_flap_blade_holder_h;
 
 
 // ZIPPY 5000 mAh
-	battery_width = 48;
-	battery_height = 42;
-	battery_length = 165;
-	battery_capacity = 5000;
-	battery_cells = 4;
+	//battery_width = 48;
+	//battery_height = 42;
+	//battery_length = 165;
+	//battery_capacity = 5000;
+	//battery_cells = 4;
 
 //}

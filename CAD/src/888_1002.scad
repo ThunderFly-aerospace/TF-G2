@@ -12,13 +12,14 @@ motor_angle = engine_angle; //angle of proppler axis
 
 
 // nahled motoru
-if($preview)
+/*if($preview)
 %translate([motor_x_shift, 0, motor_holder_motor_height -(-rantl_height + base_thickness + 0.2)])
   rotate([0, -90 - motor_angle, 0]) translate([0, 0, thickness]) {
     cylinder(d = motor_diameter, h = 50);
     translate([0, 0, -20]) cylinder(d = 5, h = 50);
 
   }
+*/
 
 module 888_1002(motor_angle = motor_angle) translate([-5, 0, 0]) {
 //translate([0, -motor_holder_thickness/2, 0])
@@ -26,21 +27,25 @@ difference(){
 	union(){
   // zakladni tvar
 		hull(){
-			translate([0, -base_width/2 - side_thickness, 0])
-        cube([15, base_width + 2*side_thickness, motor_holder_side_mount_height + rantl_height/2 + M3_screw_diameter]);
+  			translate([0, -base_width/2 - side_thickness, 0])
+          cube([15, base_width + 2*side_thickness, pylon_holder_side_mount_height]);
 
-      translate([0, -base_width/2 - side_thickness, 0])
-        cube([25, base_width + 2*side_thickness, 10]);
+        translate([0, -base_width/2 - side_thickness, 0])
+          cube([25, base_width + 2*side_thickness, 10]);
 
-				translate([motor_x_shift-15, 0, 0]) cylinder(d = 20, h=2);
+				translate([motor_x_shift-15, 0, 0])
+          cylinder(d = 20, h=pylon_holder_side_mount_height);
 
-	        translate([motor_x_shift, 0, motor_holder_motor_height -(-rantl_height + base_thickness + 0.2)])
-	            rotate([0, 90 - motor_angle, 0]){
-	            	translate([0, 0, 0]) cylinder(d=motor_diameter+thickness*1, h=thickness, $fn=100);
-              }
+        translate([motor_x_shift, 0, motor_holder_motor_height -(-rantl_height + base_thickness + 0.2)])
+          rotate([0, 90 - motor_angle, 0])
+              cylinder(d=motor_diameter+thickness*1, h=thickness, $fn=100);
+
+        translate([0, 0,  (base_width + 2*side_thickness)/2])
+          rotate([0, 90 - motor_angle, 0])
+              cylinder(d=base_width + 2*side_thickness, h=thickness, $fn=100);
+
 		}
 	}
-
 
     // Otvory pro pripevneni a vetrani motoru
     translate([motor_x_shift, 0, motor_holder_motor_height -(-rantl_height + base_thickness + 0.2)])
@@ -59,30 +64,44 @@ difference(){
               translate([1.5, 0, 0]) cylinder(d = M6_screw_diameter, h = 20, $fn=20);
               translate([-1.5, 0, 0]) cylinder(d = M6_screw_diameter, h = 20, $fn=20);
             }
-    }
+    	}
+
+		//shell zip holder
+
+		translate([motor_x_shift + thickness, 0, motor_holder_motor_height - motor_diameter/2])
+      rotate([0, 45 - motor_angle, 0])
+        cube([5,8,6], center = true);
 
     // spodni vyrez - odlehceni
-    difference(){
-      hull(){
-			     cube([thickness*16, base_width-thickness*4, 20], center = true);
-			        translate([motor_x_shift-15, 0, 0]) cylinder(d = 20-thickness, h=10);
-      }
-
-      //translate([base_patern, 0, 0]) cube([2, base_width, 5*2], center=true);
-      //translate([base_patern, 0, 0]) cube([6, base_width, 2], center=true);
+    hull(){
+		     cube([thickness*17, base_width-thickness*4, 20], center = true);
+		     translate([motor_x_shift-15, 0, 0])
+            cylinder(d = 20-thickness, h=10);
     }
 
     difference(){
   		hull(){
-  			translate([-0.1, -base_width/2+thickness*1.5, thickness*2])
-  				cube([thickness*8, base_width-thickness*3, motor_holder_motor_height*1.5]);
+	  			translate([-0.1, -base_width/2+thickness*1.5, thickness*2])
+	  				cube([thickness*8, base_width-thickness*3, pylon_holder_side_mount_height*0.8]);
 
-  				translate([motor_x_shift-15, 0, thickness]) cylinder(d = 20, h=2);
-  	        translate([motor_x_shift, 0, motor_holder_motor_height -(-rantl_height + base_thickness + 0.2)])
-  	            rotate([0, 90 - motor_angle, 0])
+
+					translate([-0.1, -base_width/2+thickness*1.5, thickness*2])
+	  				cube([thickness*10, base_width-thickness*3, motor_holder_side_mount_height*0.8]);
+
+
+
+					translate([0, 0,  pylon_holder_side_mount_height*1.2])
+	          rotate([0, 90 - motor_angle, 0])
+	              cylinder(d= base_width-thickness*3, h=thickness, $fn=100);
+
+  				translate([motor_x_shift-15, 0, thickness/3])
+              cylinder(d = 20, h=2);
+  	      translate([motor_x_shift, 0, motor_holder_motor_height -(-rantl_height + base_thickness + 0.2)])
+  	         rotate([0, 90 - motor_angle, 0])
                   hull(){
-                    cylinder(d=motor_diameter, h=0.1, $fn=100);
-                    translate([-3,0,0]) cylinder(d=motor_diameter, h=0.1, $fn=100);
+                    cylinder(d=motor_diameter + 1.3*thickness, h=0.1, $fn=100);
+                //    translate([-3,0,0])
+                //        cylinder(d=motor_diameter, h=0.1, $fn=100);
                   }
   		}
 
@@ -93,6 +112,20 @@ difference(){
         cube([30, rantl_thickness*1.5, rantl_height+5]);
     }
 
+	// limit holder size from top
+  hull(){
+    translate([-1,- base_width, motor_holder_side_mount_height + rantl_height/2 + 1.5*M3_screw_diameter])
+      cube([30, base_width*2, 2*motor_holder_side_mount_height]);
+
+		translate([motor_x_shift-motor_holder_side_mount_height/2, 0,  pylon_holder_side_mount_height*1.2])
+			rotate([90, 0 - motor_angle, 0])
+					cylinder(d= motor_holder_side_mount_height, h=base_width, center = true,  $fn=100);
+	}
+
+	// limit holder from back
+
+	translate([-15, -base_width/2 - side_thickness, 0])
+        cube([15, base_width + 2*side_thickness, pylon_holder_side_mount_height]);
 
   // Srouby do bocnic
   for(z = [[motor_holder_side_mount_height+rantl_height/2, 0, 6], [rantl_height/2, 0, 10], [rantl_height/2, 10, 10]])
@@ -167,5 +200,5 @@ difference(){
 
 difference(){
   888_1002();
-  //translate([0, 0, 30]) cube(100);
+//  translate([30, 0, 0]) cube(100);
 }

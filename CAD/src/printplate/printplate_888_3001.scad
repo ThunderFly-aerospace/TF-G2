@@ -4,5 +4,5 @@
 include <../../parameters.scad>
 use <../888_3001.scad>
 
-rotate(0)
-888_3001();
+rotate([0,0,90])
+  888_3001();

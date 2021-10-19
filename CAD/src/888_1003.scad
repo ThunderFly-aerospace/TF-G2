@@ -2,7 +2,6 @@
 include <../parameters.scad>
 $fn = $preview? 10:30;
 
-sides_height = 90; //vyska sten
 bellow = 5;
 height = 20;
 front_overlap = 7;
@@ -13,7 +12,7 @@ drzak_height = 70; //spatny rozmer so far
 sides_split_positions = [-5, length/3-5, length/3*2, length];
 
 
-module 888_1003_outline(){
+module 888_1003_outline(battery_case_start_x = 25, battery_length = 150){
 		projection()
 			difference(){
 				union(){
@@ -165,6 +164,8 @@ module 888_1003(){
 
 
 888_1003();
+
+//888_1003_outline();
 
 module 888_1003_part(part = 0){
 
