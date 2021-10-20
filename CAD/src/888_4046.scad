@@ -51,9 +51,9 @@ echo("PCB INNER DIAMETER", pcb_inner_diameter);
 
 module Protective_cylinder(draft = true){
     difference(){
-        cylinder(h=H_protect, d=D_mezikus+2, $fn = draft?16:120);
+        cylinder(h=H_protect, d=D_mezikus, $fn = draft?16:120);
         
-         translate([0,0,Tloustka_placky]) cylinder(h=H_protect, d=D_mezikus, $fn = draft?16:120);
+         translate([0,0,Tloustka_placky]) cylinder(h=H_protect, d=D_mezikus-4, $fn = draft?16:120);
       
       //  Central hole  
         translate([0,0,-5])
@@ -72,6 +72,8 @@ module Protective_cylinder(draft = true){
 
      translate([0, 22.6, 0])
         cylinder(d1 = PrumerDirySloupek,d2 = PrumerDirySloupek+0.5, h = Tloustka_placky, $fn = 20);
+     translate([0, 22.6, Tloustka_placky])
+        cylinder(d1 = PrumerDirySloupek+0.6,d2 = PrumerDirySloupek+0.6, h = H_protect+0.1, $fn = 20);
        }
        
        // Holes for sensors
@@ -83,7 +85,7 @@ module Protective_cylinder(draft = true){
     tfprobe_width = 10;
     tfprobe_thickness = 1.5; // Not sure
 
-       rotate(180+52)
+       rotate(180+60)
          translate([R-1.94,-tfprobe_width/2+2.05,-0.1]){
        translate([1.94-1,3.05-1,-0.1])
           minkowski(){
