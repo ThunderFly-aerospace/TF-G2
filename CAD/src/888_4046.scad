@@ -51,13 +51,13 @@ echo("PCB INNER DIAMETER", pcb_inner_diameter);
 
 module Protective_cylinder(draft = true){
     difference(){
-        cylinder(h=H_protect, d=D_mezikus, $fn = draft?16:120);
+        cylinder(h=H_protect, d=D_mezikus-0.4, $fn = draft?16:120);
         
-         translate([0,0,Tloustka_placky]) cylinder(h=H_protect, d=D_mezikus-4, $fn = draft?16:120);
+         translate([0,0,Tloustka_placky]) cylinder(h=H_protect, d=D_mezikus-4.5, $fn = draft?16:120);
       
       //  Central hole  
         translate([0,0,-5])
-       cylinder(h=sensor_cap_height*0.7+Ribbon_part_w+0.25, d = bearing_outer_diameter + Bwall*2+2.7, $fn = draft?16:120);
+       cylinder(h=sensor_cap_height*0.7+Ribbon_part_w+0.25, d = bearing_outer_diameter + Bwall*2+2.7+7.6, $fn = draft?16:120);
         
          // Holes for self-cutting screws
          PosunZsl = 7.0;
@@ -90,7 +90,7 @@ module Protective_cylinder(draft = true){
        translate([1.94-1,3.05-1,-0.1])
           minkowski(){
             cube([2,2,1.7]);
-              cylinder(h = 7, r = 1, $fn = draft?5:30);
+              cylinder(h = 7, r = 1.3, $fn = draft?5:30);
         }
          }
          rotate(-90+20)
@@ -98,7 +98,7 @@ module Protective_cylinder(draft = true){
        translate([1.94-1,3.05-1,-0.1])
           minkowski(){
             cube([2,2,1.7]);
-             cylinder(h = 7, r = 1,$fn = draft?5:30);
+             cylinder(h = 7, r = 1.3,$fn = draft?5:30);
         }
          }
     
