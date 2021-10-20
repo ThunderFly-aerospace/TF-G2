@@ -50,7 +50,7 @@ Wire_thickness = 1.5 + 0.2;
 
 Space_between_discs = 2;                /////// Changeable parameter //////
 
-pcb_holder_height = 3.68+(2-Space_between_discs)/2;
+pcb_holder_height = 3.93+(2-Space_between_discs)/2;
 pcb_holder_width = starter_pipe_d_middle+0.2-End_Wall_Thickness*2+34;
 
 total_height = top_thickness+starter_top_h+rpm_sensor_h+pcb_holder_height;
