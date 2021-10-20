@@ -151,17 +151,35 @@ module 888_4008(draft = true) {
 			cylinder(h = 2, d = 3, $fn = 20);
 		}
         
-        // Groove for "grounded" wire
-			rotate([0, 0,60])
+        // Grooves for "grounded" wire
+        RotAngleWire = 30;
+			rotate([0, 0,RotAngleWire])
 			hull(){
 				translate([starter_pipe_d_middle/2-End_Wall_Thickness+0, 0, 10])
 				cylinder(h = 20, d = Wire_thickness, $fn = draft?6:20);
 				translate([starter_pipe_d_middle/2-End_Wall_Thickness+1.5, 0, 10])
 				cylinder(h = 20, d = Wire_thickness, $fn = draft?6:20);
 				}
-                rotate([0, 0,60])
+                rotate([0, 0,RotAngleWire])
                 translate([starter_pipe_d_middle/2-End_Wall_Thickness/2, 0, total_height+5-1])
                 cube([End_Wall_Thickness+3, Wire_thickness+5 ,  Wire_thickness*2], center = true);
+            rotate([0, 0,180+RotAngleWire])
+			hull(){
+				translate([starter_pipe_d_middle/2-End_Wall_Thickness+0, 0, 10])
+				cylinder(h = 20, d = Wire_thickness, $fn = draft?6:20);
+				translate([starter_pipe_d_middle/2-End_Wall_Thickness+1.5, 0, 10])
+				cylinder(h = 20, d = Wire_thickness, $fn = draft?6:20);
+				}
+                rotate([0, 0,180+RotAngleWire])
+                translate([starter_pipe_d_middle/2-End_Wall_Thickness/2, 0, total_height+5-1])
+                cube([End_Wall_Thickness+3, Wire_thickness+5 ,  Wire_thickness*2], center = true);
+        // Hole for a wire
+		rotate([0, 90,RotAngleWire])                
+		translate([-(top_thickness + M3_nut_height + sensor_cap_height/2+Ribbon_width/2)/2-2, 0, starter_pipe_d_middle/2-End_Wall_Thickness+0])
+		cylinder(h = 20, d = Wire_thickness+1, $fn = draft?6:20);
+        rotate([0, 90,180+RotAngleWire])                
+		translate([-(top_thickness + M3_nut_height + sensor_cap_height/2+Ribbon_width/2)/2-2, 0, starter_pipe_d_middle/2-End_Wall_Thickness+0])
+		cylinder(h = 20, d = Wire_thickness+1, $fn = draft?6:20);
         
         // Rotor nut
         translate([0, 0, -.01])
@@ -199,10 +217,6 @@ module 888_4008(draft = true) {
             }
         }
  
-		// Hole for a wire
-		rotate([0, 90,60])                
-		translate([-(top_thickness + M3_nut_height + sensor_cap_height/2+Ribbon_width/2)/2-2, 0, starter_pipe_d_middle/2-End_Wall_Thickness+0])
-		cylinder(h = 20, d = Wire_thickness+1, $fn = draft?6:20);
     }
 }
 
