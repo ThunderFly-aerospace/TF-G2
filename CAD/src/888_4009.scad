@@ -26,7 +26,7 @@ ax_offset=free_flap_ax_offset;
 shaft_l=free_flap_shaft_l;
 shaft_h=free_flap_shaft_h;
 shaft_neck_l=free_flap_shaft_neck_l;
-rubber_spring_d=5
+rubber_spring_d=5;
 
 difference()
 {
