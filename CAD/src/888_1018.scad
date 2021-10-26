@@ -16,7 +16,6 @@ module 888_1018(battery_case_height = 0, battery_case_start_x = 25, battery_widt
               text(str(week, " ^"), halign="center", valign="center", size=4);
     battery_case_holes = true;
     battery_case_wire_holes = true;
-    battery_balancer_connector_width = 4;
 
     difference(){
       union(){
@@ -90,12 +89,15 @@ module 888_1018(battery_case_height = 0, battery_case_start_x = 25, battery_widt
 
     mirror_copy([0, 1, 0])
       hull(){
-        translate([-battery_length/2,(base_width-6.5*battery_case_wall)/2-battery_balancer_connector_width/2, - 11])
+
+        ribbon_hole = base_width/2 - battery_width/2-5*battery_case_wall;
+        echo(ribbon_hole);
+        translate([-battery_length/2, battery_width/2 + (base_width/2 - (battery_width + battery_case_wall)/2)/2, -3 -ribbon_hole/2 - M3_screw_diameter/2 ])
             rotate([0,90,0])
-                cylinder(d=battery_balancer_connector_width*1.8, h=battery_length, $fn=30);
-        translate([-battery_length/2, (base_width-9*battery_case_wall)/2-battery_balancer_connector_width/2, -battery_height/2])
+                cylinder(d=ribbon_hole, h=battery_length, $fn=30);
+        translate([-battery_length/2, battery_width/2 + battery_case_wall + (base_width/2 - battery_width/2)/4, -battery_height/2])
             rotate([0,90,0])
-                cylinder(d=battery_balancer_connector_width, h=battery_length, $fn=30);
+                cylinder(d=ribbon_hole/2, h=battery_length, $fn=30);
       }
     }
 
