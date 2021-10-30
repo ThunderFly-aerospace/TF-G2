@@ -5,7 +5,7 @@
 
 
 [TF-G2](https://www.thunderfly.cz/tf-g2.html) autogyro is well-suited for training of pilots and for gaining experience with mission planning. TF-G2 is limited to light payloads and nice weather, but it shares all the specific properties of larger autogyros in our offering. It may find application in less demanding flight operations, however its main purpose is being a tool for low-cost pilot practice. The autogyro’s small size leads to easy transport, repairs and maintenance.
-To enhance the ease of learnig of autogyro technology, we made possible to [simulate TF-G2 flight](https://github.com/ThunderFly-aerospace/PX4-FlightGear-Bridge) prior the real flight training. 
+To enhance the ease of learnig of autogyro technology, we made possible to [simulate TF-G2 flight](https://github.com/ThunderFly-aerospace/PX4-FlightGear-Bridge) prior the real flight training.
 
 [![TF-G2 training autogyro prototype demonstration video](https://img.youtube.com/vi/6PtS-MwnM_8/0.jpg)](http://www.youtube.com/watch?v=6PtS-MwnM_8)
 
@@ -15,7 +15,7 @@ This repository contains open-source design files of the autogyro construction. 
 The support for the product could be obtained from [ThunderFly s.r.o.](https://www.thunderfly.cz/), via an email to info@thunderfly.cz .
 
 
-![TF-G2](/CAD/render_Img/TF-G2_004.png)
+![TF-G2 during flight](/doc/img/TF-G2_fly_clouds.jpg)
 
 
 Autogyro model for UAV pilot training and learning purposes.
@@ -33,4 +33,4 @@ The main advantage of a fully tilting rotor is more controllable over its speed 
 
 ### Contribution
 
-In case you want to contribute to the open-source project we have a [contribution guideline](https://github.com/ThunderFly-aerospace/TF-G2/blob/4s/CONTRIBUTING.md). Your contribution is very welcome! For a contribution, you can get access to the optimized and safe printable files (gcodes). 
+In case you want to contribute to the open-source project we have a [contribution guideline](https://github.com/ThunderFly-aerospace/TF-G2/blob/4s/CONTRIBUTING.md). Your contribution is very welcome! For a contribution, you can get access to the optimized and safe printable files (gcodes).
