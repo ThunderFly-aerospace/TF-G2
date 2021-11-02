@@ -92,10 +92,10 @@ module 888_1018(battery_case_height = 0, battery_case_start_x = 25, battery_widt
 
         ribbon_hole = base_width/2 - battery_width/2-5*battery_case_wall;
         echo(ribbon_hole);
-        translate([-battery_length/2, battery_width/2 + (base_width/2 - (battery_width + battery_case_wall)/2)/2, -ribbon_hole/2 - M3_screw_diameter/2 - M3_nut_diameter/2 ])
+        translate([-battery_length/2, battery_width/2  + 1.5*battery_case_wall + ribbon_hole/2, -ribbon_hole/2 - M3_screw_diameter/2 - M3_nut_diameter/2 ])
             rotate([0,90,0])
                 cylinder(d=ribbon_hole, h=battery_length, $fn=30);
-        translate([-battery_length/2, battery_width/2 + battery_case_wall + (base_width/2 - battery_width/2)/4, -battery_height/2])
+        translate([-battery_length/2, battery_width/2 + 1.5*battery_case_wall + ribbon_hole/4, -battery_height/2 - M3_screw_diameter/2 ])
             rotate([0,90,0])
                 cylinder(d=ribbon_hole/2, h=battery_length, $fn=30);
       }
