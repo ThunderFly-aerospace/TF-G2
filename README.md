@@ -1,4 +1,4 @@
-# TF-G2 training autogyro
+# TF-G2 unmanned training autogyro
 
 [![Render previews](https://github.com/ThunderFly-aerospace/TF-G2/actions/workflows/render_previews.yml/badge.svg)](https://github.com/ThunderFly-aerospace/TF-G2/actions/workflows/render_previews.yml)
 [![Build printable files](https://github.com/ThunderFly-aerospace/TF-G2/actions/workflows/printable_files.yml/badge.svg)](https://github.com/ThunderFly-aerospace/TF-G2/actions/workflows/printable_files.yml)
