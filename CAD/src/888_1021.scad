@@ -2,6 +2,7 @@
 include <../parameters.scad>
 
 module 888_1021(){
+    base_thickness = autopilot_base_thickness;
     translate([base_length - base_patern*8, 0, 0])
         difference(){
                 hull(){

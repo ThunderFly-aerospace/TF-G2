@@ -18,6 +18,7 @@ base_length = 290; //delka podlozky
 base_split_position = [0, 149, base_length];
 base_width = 70; //sirka podlozky - vnější šířka nosníku
 base_thickness = 3; //vyska podlozky
+autopilot_base_thickness = 4; // vyska podlozky vysuzujici prostor pod autopilotem
 rantl_thickness = 3; //sirka steny podlozky
 rantl_height = 6.5;
 niy=4; //pocet der podelne
