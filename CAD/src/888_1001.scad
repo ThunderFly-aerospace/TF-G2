@@ -1,5 +1,6 @@
 //nosna podlozka virniku1
 include <../parameters.scad>
+include <lib/bat_socket/bat_socket.scad>
 
 release_servo = 0;
 use_myxa = 1;
@@ -9,18 +10,26 @@ module 888_1001(){
     translate([0, 0, -base_thickness - rantl_height/2])
     difference(){
             union(){
-                //kvadr
+                //kvadr, spodni palcka
                 translate([0, -base_width/2, 0])
                     cube([base_length, base_width, base_thickness]);
-                //+2 kvadriky
+                //+2 kvadriky, bocni rantl
                 for (i=[-base_width/2, base_width/2 - rantl_thickness])
                     translate([0, i , 0])
                         cube([base_length, rantl_thickness, rantl_height + base_thickness]);
 
+                // zesileni boku
                 for (i=[-base_width/2 + rantl_thickness, base_width/2 - rantl_thickness])
                     translate([base_length/2 + 26/2, i , base_thickness])
                       rotate([45, 0, 0])
                         cube([base_length-26, 3, 3], center = true);
+
+                for(m = [1, 0]) mirror([0, m, 0])
+                for(x = [10:10:base_length-10])
+                    rotate([0, 0, 0])
+                        translate([x, base_width/2-2*rantl_thickness/3, 0]){
+                            scale([2, 1, 1]) cylinder(d = M3_screw_diameter, h = rantl_height+base_thickness, $fn = 50);
+                        }
             }
 
             // Srazeni spodnich hran
@@ -98,12 +107,11 @@ module 888_1001(){
             }
             //dirky v bocnich stenach
 
-                for(x = [10:10:base_length-10])
-                    rotate([90, 0, 0])
-                        translate([x, base_thickness + rantl_height/2, 0]){
-                            cylinder(d = M3_screw_diameter, h = base_width+0.2, center = true, $fn = 50);
-                            if(x>20) cylinder(d = M3_nut_diameter, h = base_width-4, center = true, $fn = 6);
-                        }
+            for(x = [10:10:base_length-10])
+                rotate([90, 0, 0])
+                    translate([x, base_thickness + rantl_height/3, 0]){
+                        cylinder(d = plastic_screw_diameter, h = base_width+0.2, center = true, $fn = 50);
+                    }
 
             for (i=[0:len(base_split_position)]) {
                 s = base_split_position[i];
@@ -112,6 +120,8 @@ module 888_1001(){
             }
 
     }
+
+    dovetail_socket(160, connector="XT60");
 
   translate([5, -10, -rantl_height/2])
     rotate([0, 0, -90])
@@ -143,4 +153,23 @@ module 888_1001_crop_visualisation(){
 
 
 888_1001();
-888_1001_crop_visualisation();
+//888_1001_crop_visualisation();
+
+
+
+
+
+module battery_slot(height = 5){
+
+    linear_extrude(height){
+
+        translate([0, -40]) square([3, 80]);
+        difference(){
+            square();
+            circle(r=3);
+        }
+
+    }
+}
+
+translate([0, 0, 50]) battery_slot();

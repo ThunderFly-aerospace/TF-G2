@@ -16,11 +16,11 @@ gliding_angle = 14;         // tenhle úhel by se zřejmě v budoucnu měl poč�
 ////Simoniny parametry pro nosník rotoru
 base_length = 290; //delka podlozky
 base_split_position = [0, 149, base_length];
-base_width = 70; //sirka podlozky - vnější šířka nosníku
-base_thickness = 3; //vyska podlozky
+base_width = 80; //sirka podlozky - vnější šířka nosníku
+base_thickness = 3.5; //vyska podlozky
 autopilot_base_thickness = 4; // vyska podlozky vysuzujici prostor pod autopilotem
 rantl_thickness = 3; //sirka steny podlozky
-rantl_height = 6.5;
+rantl_height = 2;
 niy=4; //pocet der podelne
 
 side_base_thickness = 0.2*6; // minimalni tlouska  u bocnic napr. sten

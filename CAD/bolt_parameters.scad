@@ -4,6 +4,9 @@
 // screw length step - minimum difference in length between two types of screws
 basic_screw_length = 5;
 
+
+plastic_screw_diameter = 2;
+
 //Screw diameter and nut for M6 [mm]
 M6_screw_diameter=6.5;
 M6_head_diameter = 10+0.5;
