@@ -48,12 +48,13 @@ module 888_4008(draft = true){
 
 
 
-    translate([0,0,-top_thickness])
+    //translate([0,0,-top_thickness])
         rotate([0,0, rotor_delta_angle]) {
             difference() {
                 union(){
                     difference()
                     {
+                            echo(top_thickness+starter_top_h+rpm_sensor_h)
                             union()
                             {
                                 cylinder(r1 = rotor_center_r, d2=starter_rope_d, h = top_thickness+starter_top_h, $fn = draft?rpm_sensor_count:120);
@@ -155,8 +156,9 @@ module 888_4008(draft = true){
               translate([0, 0, -0.1])
                     union(){
                         cylinder(d = M3_nut_diameter, h = 6+0.2, $fn = 6);
-                        translate([0, 0, 6-1]) cylinder(d2 = M3_nut_diameter+1, d1 = M3_nut_diameter, h = 1, $fn = 6);
-                        for(r = [1:6])
+                        translate([0, 0, 6-1]) 
+                            cylinder(d2 = M3_nut_diameter+1, d1 = M3_nut_diameter, h = 1, $fn = 6);
+                        #for(r = [1:6])
                             rotate([0, 0, r*360/6])
                                 translate([M3_nut_diameter/2, 0, 0])
                                     cylinder(d=1, h=6+0.2, $fn=3);
