@@ -1,7 +1,7 @@
 include <../parameters.scad>
 include <lib/stdlib/polyScrewThread_r1.scad>
 
-module 888_4008(draft = true){
+module 888_4008(draft = false){
 
 // TODO: Je potreba procistit parametry, po predelani na spulku zde urcite mnoho parametru je nevyuzitych. Pripadne je okomentovat. [Roman, 2020/11]
 
@@ -60,33 +60,24 @@ module 888_4008(draft = true){
                                 translate([0,0, top_thickness + starter_top_h])
                                     cylinder(h=rpm_sensor_h, d=starter_rope_d + starter_rope_diameter, $fn=draft?rpm_sensor_count:120);
                                 
-                                difference()
-                                {
-                                
-                                for(i=[0,180])
-                                    rotate([0,0,i])
-                                        translate([0,30,0])
-                                            rotate([45,0,0])
-                                                cylinder(d=11,h=30, $fn=120);
+
+                                n=6;
+                                for(i=[1:n])
+                                rotate([0,0,i*360/n+90])
+                                    translate([0,(starter_rope_d + starter_rope_diameter)/2,top_thickness + starter_top_h+rpm_sensor_h/2])
+                                        difference()
+                                        {          
+                                             size=rpm_sensor_h;
+                                             sphere(d=size, $fn=120);
+                                             sphere(d=size-3, $fn=120);
+                                             translate([-size,-size/2,-size/2])
+                                                cube([size,size,size]);
+                                        }
 
                                         
-                                translate([0,0,-50])
-                                    cube([100,100,100], center=true);
-                                                                
-                                }
+
                             }
                             
-                          for(i=[0,180])
-                              rotate([0,0,i])                              
-                                translate([0,30,0])
-                                {
-                                    rotate([45,0,0])
-                                        translate([0,0,4.5])
-                                            cylinder(d=8,h=30, $fn=120);
-                                    translate([0,-5, 5])
-                                        rotate([0,-90,0])
-                                            cylinder(d=4,h=30, $fn=120);  
-                                }
                             
                           difference(){
                             translate([0,0,top_thickness])
@@ -199,8 +190,8 @@ module 888_4008(draft = true){
                           cube([30, 15, 10], center = true);
                           translate([0,-7.5,5])
                               rotate([atan2(starter_top_h,(16-edge_distance_from_center)),0,0])
-                                  translate([-15,0,-10])
-                                      cube([30,17,10]);
+                                  translate([-13,0,-10])
+                                      cube([26,14.5,10]);
                       }
                   angle=(rotor_blades_count/2 == round(rotor_blades_count/2))? (i*angle_between_blades):i*angle_between_blades - angle_between_blades/2;
                   rotate([0,0, angle])
@@ -227,5 +218,11 @@ module 888_4008(draft = true){
         }
 }
 
+/*translate([25,0,17])
+    rotate([90,0,0])
+        translate([0,0,-50])
+            cylinder(d=8, h=100);
 
+rotate([0,0,-360*$t])
+    888_4008($preview);*/
 888_4008($preview);
