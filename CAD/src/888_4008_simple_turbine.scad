@@ -58,16 +58,16 @@ module 888_4008(draft = false){
                             {
                                 cylinder(r1 = rotor_center_r, d2=starter_rope_d, h = top_thickness+starter_top_h, $fn = draft?rpm_sensor_count:120);
                                 translate([0,0, top_thickness + starter_top_h])
-                                    cylinder(h=rpm_sensor_h, d=starter_rope_d + starter_rope_diameter, $fn=draft?rpm_sensor_count:120);
+                                    cylinder(h=rpm_sensor_h, d=starter_rope_d , $fn=draft?rpm_sensor_count:120);
                                 
 
                                 n=6;
                                 for(i=[1:n])
                                 rotate([0,0,i*360/n+90])
-                                    translate([0,(starter_rope_d + starter_rope_diameter)/2,top_thickness + starter_top_h+rpm_sensor_h/2])
+                                    translate([0,(starter_rope_d)/2,top_thickness + starter_top_h+rpm_sensor_h/2])
                                         difference()
                                         {          
-                                             size=rpm_sensor_h;
+                                             size=rpm_sensor_h-5;
                                              sphere(d=size, $fn=120);
                                              sphere(d=size-3, $fn=120);
                                              translate([-size,-size/2,-size/2])
@@ -191,7 +191,7 @@ module 888_4008(draft = false){
                           translate([0,-7.5,5])
                               rotate([atan2(starter_top_h,(16-edge_distance_from_center)),0,0])
                                   translate([-13,0,-10])
-                                      cube([26,14.5,10]);
+                                      cube([26,16,10]);
                       }
                   angle=(rotor_blades_count/2 == round(rotor_blades_count/2))? (i*angle_between_blades):i*angle_between_blades - angle_between_blades/2;
                   rotate([0,0, angle])
