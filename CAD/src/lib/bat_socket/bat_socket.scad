@@ -19,7 +19,7 @@ module dovetail_socket(h = 10, connector = 0){
 					import("dovetail_socket.dxf", layer="layer");
 
 		for(i=[1:2:5])
-		translate([25*i+3, -70/2, 1]) cube([25, 70, 15]);
+		translate([25*i+3, -70/2, 5]) cube([25, 70, 10]);
 	}
 
 	if(connector != 0){
