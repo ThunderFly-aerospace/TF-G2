@@ -37,7 +37,7 @@ prerotator_outer_diameter = 45;
 prerotator_thickness = 35;
 prerotator_shaft_rantl_diameter = 16.5;
 prerotator_shaft_diameter = 4;
-prerotator_mount_holes_diameter = 2;
+prerotator_mount_holes_diameter = 3.2;
 prerotator_mount_holes_distance = 22/2; // polomer kruznice, na ktere lezi 3 diry
 
 prerotator_holder_width = 30;
@@ -48,19 +48,21 @@ module 888_1015(draft = true){
 
     difference(){
     union(){
-        translate([-30, -prerotator_holder_width/2, -prerotator_holder_height+5]) cube([60, prerotator_holder_width, prerotator_holder_height]);
+        translate([-30, -60/2, -prerotator_holder_height+5]) cube([60, 60, prerotator_holder_height]);
     }
     union(){
-    translate([0, 0, -prerotator_thickness]) cylinder(d = prerotator_outer_diameter+5, h = prerotator_thickness);
+    translate([0, 0, -prerotator_thickness]) cylinder(d = prerotator_outer_diameter+6, h = prerotator_thickness);
     cylinder(d = prerotator_shaft_rantl_diameter, h =3);
     cylinder(d = prerotator_shaft_diameter+1, h =20);
     
     for(r = [0, 120, 240])
         rotate(r+30)
             translate([prerotator_mount_holes_distance, 0, 0])
-                cylinder(d = 2, h = 10);
+                cylinder(d = prerotator_mount_holes_diameter, h = 10);
     }
-}
+    
+    translate([-10, 0, -20]) cube([20, 40, 10]);
+    }
 }
 
 888_1015(draft=true);
