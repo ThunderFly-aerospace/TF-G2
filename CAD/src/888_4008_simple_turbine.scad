@@ -64,15 +64,18 @@ module 888_4008(draft = false){
                                 n=6;
                                 for(i=[1:n])
                                 rotate([0,0,i*360/n+90])
-                                    translate([0,(starter_rope_d)/2,top_thickness + starter_top_h+rpm_sensor_h/2])
+                                {
+                                    size=rpm_sensor_h;
+                                    translate([0,(starter_rope_d)/2,top_thickness + starter_top_h+rpm_sensor_h-size/2])
                                         difference()
                                         {          
-                                             size=rpm_sensor_h-5;
+                                             
                                              sphere(d=size, $fn=120);
                                              sphere(d=size-3, $fn=120);
                                              translate([-size,-size/2,-size/2])
                                                 cube([size,size,size]);
                                         }
+                                }
 
                                         
 
@@ -189,9 +192,9 @@ module 888_4008(draft = false){
                       {
                           cube([30, 15, 10], center = true);
                           translate([0,-7.5,5])
-                              rotate([atan2(starter_top_h,(16-edge_distance_from_center)),0,0])
-                                  translate([-13,0,-10])
-                                      cube([26,16,10]);
+                              rotate([atan2(starter_top_h,(18.5-edge_distance_from_center)),0,0])
+                                  translate([-13,0,-5])
+                                      cube([26,14,5]);
                       }
                   angle=(rotor_blades_count/2 == round(rotor_blades_count/2))? (i*angle_between_blades):i*angle_between_blades - angle_between_blades/2;
                   rotate([0,0, angle])
