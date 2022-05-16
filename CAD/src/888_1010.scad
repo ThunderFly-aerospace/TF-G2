@@ -20,6 +20,8 @@ side_wall = 2;
 
 pylon_mount_adapter_center_distance = airspeed_dist/2+4;
 
+function 888_1010_rotor_head_width()=airspeed_width-2*(side_wall+1);
+
 module 888_1010() translate([40*0.3, 0, 0]) {
 
      translate([-7, airspeed_width/2, 0])

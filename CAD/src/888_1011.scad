@@ -1,8 +1,9 @@
 //// ThunderFly - Rotor Head - Part 2
 
 include <../parameters.scad>
+use <888_1010.scad>
 
-length = rotor_head_width-2*0.5-0.15-0.55*2; // Length of the part
+length = 888_1010_rotor_head_width()-2*0.5-0.15-0.55*2; // Length of the part
 axis_diameter = M3_screw_diameter;
 space = 2; // Axis hole distance
 wall = 1;

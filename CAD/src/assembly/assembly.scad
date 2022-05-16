@@ -9,10 +9,10 @@ include <position/position_888_1003.scad> // Bocnice
 include <position/position_888_1006.scad> // Policka na payload
 include <position/position_888_1007.scad> // spodni pricka pylonu
 //include <position/position_888_1008.scad> // horni pricka pylonu
-include <position/position_888_1009.scad> // 
-include <position/position_888_1010.scad> // TFSLOT
-include <position/position_888_1011.scad>
-include <position/position_888_1012.scad>
+//include <position/position_888_1009.scad> // 
+//include <position/position_888_1010.scad> // TFSLOT
+//include <position/position_888_1011.scad>
+//include <position/position_888_1012.scad>
 //include <position/position_888_1009.scad>
 //include <position/position_888_1013.scad>
 //include <position/position_888_1018.scad>
