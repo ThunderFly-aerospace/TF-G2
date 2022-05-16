@@ -58,7 +58,7 @@ starter_rope_d = 39.2;
     ZmenseniTisk = 0.2;
 
 
-module bearing_house(breaking_groove = false, draft = true){
+module 888_1012_bearing_house(breaking_groove = false, draft = true){
     ZmenseniTisk = 0.1;
     TloustkaDna = TloustkaDna+ZmenseniTisk;
 
@@ -289,9 +289,12 @@ module 888_1012(draft = true){
 
 // Spojení s lámacím válcem
 translate([0, 0, -bearing_outer_diameter/2 - Bwall])
-difference(){
-      translate([-rod_size/2- bearing_outer_diameter+TloustkaDna, -bearing_outer_diameter/2 - Bwall-PridavnaSirkaNaSpojeniDilu/2, -BaseThickness])
-          cube([bearing_outer_diameter, bearing_outer_diameter + Bwall*2 +PridavnaSirkaNaSpojeniDilu, bearing_outer_diameter + Bwall*2+3]);
+difference(){        
+              
+      translate([-rod_size/2, -bearing_outer_diameter/2 - Bwall-PridavnaSirkaNaSpojeniDilu/2, -BaseThickness])
+          cube([TloustkaDna , bearing_outer_diameter + Bwall*2 +PridavnaSirkaNaSpojeniDilu+0.1, bearing_outer_diameter + Bwall*2+3+0.1]);
+          
+     
       
       // Dira pro ROLL osu.
       translate([0, 0, -10])
@@ -346,4 +349,4 @@ difference(){
 
 
  translate([0, 0, -bearing_outer_diameter/2 - Bwall - 20])
- bearing_house();
+ 888_1012_bearing_house();
