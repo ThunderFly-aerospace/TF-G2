@@ -58,19 +58,6 @@ starter_rope_d = 39.2;
     ZmenseniTisk = 0.2;
 
 
- // sloupky pro upevnění disku mlýnku
-       module Sloupek(draft = true){
-        PosunZ = 9.7;
-        PosunY = 12.2;
-        Vyska_sloupku = 4;
-      translate([rod_size/2, PosunY, bearing_outer_diameter/2 + Bwall+ PosunZ]) rotate([0, 90, 0])
-           difference(){
-                cylinder(d = 5, h = Vyska_sloupku, $fn = draft?16:120);
-               cylinder(d = 1.5, h = Vyska_sloupku, $fn = draft?16:120);
-
-     }
-        }
-
 module bearing_house(breaking_groove = false, draft = true){
     ZmenseniTisk = 0.1;
     TloustkaDna = TloustkaDna+ZmenseniTisk;
@@ -85,15 +72,13 @@ module bearing_house(breaking_groove = false, draft = true){
                 union(){
                        translate([-rod_size/2, 0, bearing_outer_diameter/2 + Bwall]) rotate([0, 90, 0])
                             cylinder(d = bearing_outer_diameter + Bwall*2, h = bearing_shaft_length + bearing_shaft_shift + rod_size/2, $fn = draft?16:120);
-                //       translate([-rod_size/2, -bearing_outer_diameter/2 - Bwall, -BaseThickness])
-                //            cube([bearing_shaft_length + bearing_shaft_shift + rod_size/2, bearing_outer_diameter + Bwall*2, bearing_outer_diameter/2 + Bwall]);
-
+                
                        translate([-rod_size/2, -bearing_outer_diameter/2 - Bwall-PridavnaSirkaNaSpojeniDilu/2, -BaseThickness])
                             cube([rod_size, bearing_outer_diameter + Bwall*2 +PridavnaSirkaNaSpojeniDilu, bearing_outer_diameter + Bwall*2+3]);
                 }
                 // Seriznuti podstavy
-                translate([-rod_size/2- bearing_outer_diameter+TloustkaDna, -bearing_outer_diameter/2 - Bwall-PridavnaSirkaNaSpojeniDilu/2, -BaseThickness])
-                    cube([bearing_outer_diameter, bearing_outer_diameter + Bwall*2 +PridavnaSirkaNaSpojeniDilu, bearing_outer_diameter + Bwall*2+3]);
+                translate([-rod_size/2- bearing_outer_diameter+TloustkaDna, -bearing_outer_diameter/2 - Bwall-PridavnaSirkaNaSpojeniDilu/2-0.025, -BaseThickness-0.025])
+                    cube([bearing_outer_diameter, bearing_outer_diameter + Bwall*2 +PridavnaSirkaNaSpojeniDilu+0.05, bearing_outer_diameter + Bwall*2+3+0.05]);
              }
 
               // Rohy (Roh je označení pro sešikmené kvádry ve spojení obou dílů s dírami na šrouby)
@@ -101,19 +86,19 @@ module bearing_house(breaking_groove = false, draft = true){
                   translate([-rod_size/2+TloustkaDna-VyskaRohu, -bearing_outer_diameter/2 - Bwall-PridavnaSirkaNaSpojeniDilu/2, -BaseThickness])
                       cube([VyskaRohu, bearing_outer_diameter + Bwall*2 +PridavnaSirkaNaSpojeniDilu, bearing_outer_diameter + Bwall*2+3]);
 
-                  translate([-rod_size/2+TloustkaDna-VyskaRohu, -bearing_outer_diameter/2 - Bwall-PridavnaSirkaNaSpojeniDilu/2+SirkaRohu, -BaseThickness])
-                      cube([VyskaRohu, bearing_outer_diameter + Bwall*2 +PridavnaSirkaNaSpojeniDilu - 2*SirkaRohu, bearing_outer_diameter + Bwall*2+3]);
+                  translate([-rod_size/2+TloustkaDna-VyskaRohu, -bearing_outer_diameter/2 - Bwall-PridavnaSirkaNaSpojeniDilu/2+SirkaRohu, -BaseThickness-0.005])
+                      cube([VyskaRohu, bearing_outer_diameter + Bwall*2 +PridavnaSirkaNaSpojeniDilu - 2*SirkaRohu, bearing_outer_diameter + Bwall*2+3+0.01]);
 
-                  translate([-rod_size/2+TloustkaDna-8, -bearing_outer_diameter/2 - Bwall-PridavnaSirkaNaSpojeniDilu/2+SirkaRohu, -BaseThickness])
+                  translate([-rod_size/2+TloustkaDna-8, -bearing_outer_diameter/2 - Bwall-PridavnaSirkaNaSpojeniDilu/2+SirkaRohu, -BaseThickness-0.005])
                      rotate([0,0,-45])
                         translate([0,-5,0])
-                            cube([6, 12, bearing_outer_diameter + Bwall*2+3]);
+                            cube([6, 12, bearing_outer_diameter + Bwall*2+3+0.01]);
 
               mirror([0,1,0])
-                   translate([-rod_size/2+TloustkaDna-8, -bearing_outer_diameter/2 - Bwall-PridavnaSirkaNaSpojeniDilu/2+SirkaRohu, -BaseThickness])
+                   translate([-rod_size/2+TloustkaDna-8, -bearing_outer_diameter/2 - Bwall-PridavnaSirkaNaSpojeniDilu/2+SirkaRohu, -BaseThickness-0.005])
                    rotate([0,0,-45])
                    translate([0,-5,0])
-                        cube([6, 12, bearing_outer_diameter + Bwall*2+3]);
+                        cube([6, 12, bearing_outer_diameter + Bwall*2+3+0.01]);
 
               }
         }
@@ -252,8 +237,8 @@ module 888_1012(draft = true){
         cylinder(d = M3_screw_diameter, h = 100, $fn = draft?16:120);
 
         // TFPROBE01 RPM sensor
-    translate([-rod_size/2, -9/2, bearing_outer_diameter + Bwall*4-0.2])
-        cube([rod_size + TFPROBE01_sensor_height/3,9,rod_y_distance]);
+    translate([-rod_size/2-0.001, -9/2, bearing_outer_diameter + Bwall*4-0.2])
+        cube([rod_size+0.002 + TFPROBE01_sensor_height/3,9,rod_y_distance]);
 
       // podlozka pod hlavu sroubu
     translate([0, 0, bearing_outer_diameter + Bwall*2+1])
@@ -276,8 +261,8 @@ module 888_1012(draft = true){
           cylinder(d = M2_nut_diameter, h = rod_y_distance - 2* Bwall, center = true, $fn=6);
 
      // Odečtení kvádru patřícího ke sloupku
-    translate([-rod_size/2, -bearing_outer_diameter/2 - Bwall-PridavnaSirkaNaSpojeniDilu/2, -BaseThickness])
-                cube([bearing_outer_diameter, bearing_outer_diameter + Bwall*2 +PridavnaSirkaNaSpojeniDilu, bearing_outer_diameter + Bwall*2+3]);
+    translate([-rod_size/2-0.005, -bearing_outer_diameter/2 - Bwall-PridavnaSirkaNaSpojeniDilu/2-0.005, -BaseThickness-0.005])
+                cube([bearing_outer_diameter+0.01, bearing_outer_diameter + Bwall*2 +PridavnaSirkaNaSpojeniDilu+0.01, bearing_outer_diameter + Bwall*2+3+0.01]);
 
 
     }
@@ -288,13 +273,13 @@ module 888_1012(draft = true){
         union(){
    translate([+rod_size/2+PosunNahoru, -bearing_outer_diameter/2 - Bwall-PridavnaSirkaNaSpojeniDilu/2-PosunZapadek, +BaseThickness+(bearing_outer_diameter)/2+0])
       rotate([0, -45, 0])
-    translate([0, 0,  PosunZ])
-    cube([ZapadkaX+1, ZapadkaY, ZapadkaZ+2]);
+        translate([0, 0,  PosunZ])
+           cube([ZapadkaX+1, ZapadkaY, ZapadkaZ+2]);
 
      translate([+rod_size/2+PosunNahoru, -(-bearing_outer_diameter/2 - Bwall-PridavnaSirkaNaSpojeniDilu/2-PosunZapadek)-ZapadkaY, +BaseThickness+(bearing_outer_diameter)/2+0])
-      rotate([0, -45, 0])
-    translate([0, 0,  PosunZ])
-    cube([ZapadkaX+1, ZapadkaY, ZapadkaZ+2]);
+      rotate([0, -45, 0])      
+        translate([0, 0,  PosunZ])
+            cube([ZapadkaX+1, ZapadkaY, ZapadkaZ+2]);
         }
      translate([+rod_size/2+5, 0, 0])
        cube([10, 50, 40], true);
@@ -305,18 +290,9 @@ module 888_1012(draft = true){
 // Spojení s lámacím válcem
 translate([0, 0, -bearing_outer_diameter/2 - Bwall])
 difference(){
-      intersection(){
-
-          translate([-rod_size/2, -bearing_outer_diameter/2 - Bwall-PridavnaSirkaNaSpojeniDilu/2, -BaseThickness])
-                cube([bearing_outer_diameter-ZmenseniTisk, bearing_outer_diameter + Bwall*2 +PridavnaSirkaNaSpojeniDilu, bearing_outer_diameter + Bwall*2+3]);
-
-          union(){
-              // Seriznuti podstavy
-              translate([-rod_size/2- bearing_outer_diameter+TloustkaDna, -bearing_outer_diameter/2 - Bwall-PridavnaSirkaNaSpojeniDilu/2, -BaseThickness])
-                  cube([bearing_outer_diameter, bearing_outer_diameter + Bwall*2 +PridavnaSirkaNaSpojeniDilu, bearing_outer_diameter + Bwall*2+3]);
-          }
-      }
-
+      translate([-rod_size/2- bearing_outer_diameter+TloustkaDna, -bearing_outer_diameter/2 - Bwall-PridavnaSirkaNaSpojeniDilu/2, -BaseThickness])
+          cube([bearing_outer_diameter, bearing_outer_diameter + Bwall*2 +PridavnaSirkaNaSpojeniDilu, bearing_outer_diameter + Bwall*2+3]);
+      
       // Dira pro ROLL osu.
       translate([0, 0, -10])
           cylinder(d = M3_screw_diameter, h = 100, $fn = draft?16:120);
@@ -343,22 +319,22 @@ difference(){
 
     // Rohy (Roh je označení pro sešikmené kvádry ve spojení obou dílů s dírami na šrouby)
        difference(){
-            translate([-rod_size/2+TloustkaDna-VyskaRohu, -bearing_outer_diameter/2 - Bwall-PridavnaSirkaNaSpojeniDilu/2, -BaseThickness])
-                cube([VyskaRohu, bearing_outer_diameter + Bwall*2 +PridavnaSirkaNaSpojeniDilu, bearing_outer_diameter + Bwall*2+3]);
+            translate([-rod_size/2+TloustkaDna-VyskaRohu-0.001, -bearing_outer_diameter/2 - Bwall-PridavnaSirkaNaSpojeniDilu/2-0.001, -BaseThickness-0.001])
+                cube([VyskaRohu+0.002, bearing_outer_diameter + Bwall*2 +PridavnaSirkaNaSpojeniDilu+0.002, bearing_outer_diameter + Bwall*2+3+0.002]);
 
-            translate([-rod_size/2+TloustkaDna-VyskaRohu, -bearing_outer_diameter/2 - Bwall-PridavnaSirkaNaSpojeniDilu/2+SirkaRohu, -BaseThickness])
-                cube([VyskaRohu, bearing_outer_diameter + Bwall*2 +PridavnaSirkaNaSpojeniDilu - 2*SirkaRohu, bearing_outer_diameter + Bwall*2+3]);
+            translate([-rod_size/2+TloustkaDna-VyskaRohu, -bearing_outer_diameter/2 - Bwall-PridavnaSirkaNaSpojeniDilu/2+SirkaRohu, -BaseThickness+0.005])
+                cube([VyskaRohu, bearing_outer_diameter + Bwall*2 +PridavnaSirkaNaSpojeniDilu - 2*SirkaRohu, bearing_outer_diameter + Bwall*2+3-0.01]);
 
-           translate([-rod_size/2+TloustkaDna-8, -bearing_outer_diameter/2 - Bwall-PridavnaSirkaNaSpojeniDilu/2+SirkaRohu, -BaseThickness])
+           translate([-rod_size/2+TloustkaDna-8, -bearing_outer_diameter/2 - Bwall-PridavnaSirkaNaSpojeniDilu/2+SirkaRohu, -BaseThickness+0.01])
            rotate([0,0,-45])
            translate([0,-5,0])
-                cube([6, 12, bearing_outer_diameter + Bwall*2+3]);
+                cube([6, 12, bearing_outer_diameter + Bwall*2+3-0.02]);
 
            mirror([0,1,0])
-               translate([-rod_size/2+TloustkaDna-8, -bearing_outer_diameter/2 - Bwall-PridavnaSirkaNaSpojeniDilu/2+SirkaRohu, -BaseThickness])
+               translate([-rod_size/2+TloustkaDna-8, -bearing_outer_diameter/2 - Bwall-PridavnaSirkaNaSpojeniDilu/2+SirkaRohu, -BaseThickness+0.01])
                rotate([0,0,-45])
                translate([0,-5,0])
-                    cube([6, 12, bearing_outer_diameter + Bwall*2+3]);
+                    cube([6, 12, bearing_outer_diameter + Bwall*2+3-0.02]);
         }
         // podlozka pod hlavu sroubu
         translate([0, 0, bearing_outer_diameter + Bwall*2+1])
