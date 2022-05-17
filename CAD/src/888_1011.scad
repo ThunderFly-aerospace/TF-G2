@@ -8,19 +8,64 @@ axis_diameter = M3_screw_diameter;
 space = 2; // Axis hole distance
 wall = 1;
 
-add = 8; // prodlouzeni osy ve smeru roll osy
+hrazda_w=10;
+hrazda_h=10;
+hrazda_t=3;
+hrazda_tw=10;
+
+add = hrazda_w+0.5+8; // prodlouzeni osy ve smeru roll osy
 
 $fn = 100;
 
 module 888_1011(){
   translate([0, 0, -wall-axis_diameter/2])
     difference(){
+    union(){
         hull(){
             translate([-length/2, -(axis_diameter + 2*wall)/2, 0])
                 cube([length, axis_diameter + 2*wall, axis_diameter + 2*wall]);
             translate([0, axis_diameter + space, 0])
                 cylinder(d = axis_diameter + 5*wall, h = axis_diameter + 2*wall + add, $fn=25);
         }
+        
+        //noha hrazdy
+        hull(){
+            translate([0, axis_diameter + space, axis_diameter + 2*wall + add-hrazda_w])
+               cylinder(d = axis_diameter + 5*wall, h = hrazda_w, $fn=25);
+               
+            translate([hrazda_tw/2-hrazda_t/2, axis_diameter + space+hrazda_h, axis_diameter + 2*wall + add-hrazda_t/2])
+                sphere(hrazda_t/2,$fn = 100);
+            translate([-(hrazda_tw/2-hrazda_t/2), axis_diameter + space+hrazda_h, axis_diameter + 2*wall + add-hrazda_t/2])
+                sphere(hrazda_t/2,$fn = 100);                
+        }
+        //vršek hrazdy
+        hull(){
+            translate([hrazda_tw/2-hrazda_t/2, axis_diameter + space+hrazda_h, axis_diameter + 2*wall + add-hrazda_t/2])
+                sphere(hrazda_t/2,$fn = 100);
+            translate([-(hrazda_tw/2-hrazda_t/2), axis_diameter + space+hrazda_h, axis_diameter + 2*wall + add-hrazda_t/2])
+                sphere(hrazda_t/2,$fn = 100);
+              
+            translate([hrazda_tw/2-hrazda_t/2, axis_diameter + space+hrazda_h+hrazda_tw/2, axis_diameter + 2*wall + add-hrazda_t/2])
+                sphere(hrazda_t/2,$fn = 100);
+            translate([-(hrazda_tw/2-hrazda_t/2), axis_diameter + space+hrazda_h+hrazda_tw/2, axis_diameter + 2*wall + add-hrazda_t/2])
+                sphere(hrazda_t/2,$fn = 100);   
+        }
+        
+        
+        }
+        
+    //vyýbrus hrazdy
+    translate([0, axis_diameter + space+hrazda_h+hrazda_tw/2, axis_diameter + 2*wall + add-hrazda_t/2])
+        difference()
+        {
+        translate([0,0,0])
+            cylinder(r=(hrazda_tw-hrazda_t)/2,h=hrazda_t+2,center=true);
+        rotate_extrude(convexity = 10,$fn = 100)
+            translate([hrazda_tw/2-hrazda_t/2, 0, 0])
+                circle(r = hrazda_t/2, $fn = 100);                
+            
+        }
+        
 
     translate([0, axis_diameter + space, axis_diameter + 2*wall + add - M3_nut_height*1.5])
         cylinder(d = M3_nut_diameter, h = 10, $fn=6);
