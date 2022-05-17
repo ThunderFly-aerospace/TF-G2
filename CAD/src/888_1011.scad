@@ -71,7 +71,7 @@ module 888_1011(){
         cylinder(d = M3_nut_diameter, h = 10, $fn=6);
     
     //roll
-    translate([0, axis_diameter + space, -0.1])
+    translate([0, axis_diameter + space, -0.2])
          cylinder(d = axis_diameter, h = axis_diameter + 2*wall + add - M3_nut_height*1.5, $fn=25);
          
     translate([0, axis_diameter + space, axis_diameter + 2*wall + add - M3_nut_height*1.5])
@@ -88,6 +88,9 @@ module 888_1011(){
  translate([0, 5.2, -9.5]) rotate([0, 0, rotor_head_roll]) rotate([0, 180, 0]) rotate([0, 0, 90]) children(0);
 }
 
-
+//intersection()
+//{
 888_1011();
+//cube([50,50,50]);
+//}
 
