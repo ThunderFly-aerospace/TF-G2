@@ -69,8 +69,15 @@ module 888_1011(){
 
     translate([0, axis_diameter + space, axis_diameter + 2*wall + add - M3_nut_height*1.5])
         cylinder(d = M3_nut_diameter, h = 10, $fn=6);
+    
+    //roll
     translate([0, axis_diameter + space, -0.1])
-        cylinder(d = axis_diameter, h = 100, $fn=25);
+         cylinder(d = axis_diameter, h = axis_diameter + 2*wall + add - M3_nut_height*1.5, $fn=25);
+         
+    translate([0, axis_diameter + space, axis_diameter + 2*wall + add - M3_nut_height*1.5])
+         cylinder(d = axis_diameter, h = 100, $fn=25);
+    
+    //pitch
     rotate([0, 90, 0])
         translate([-(axis_diameter + 2*wall)/2, 0, -50])
             cylinder(h = 100, d = axis_diameter, $fn=25);
@@ -81,4 +88,6 @@ module 888_1011(){
  translate([0, 5.2, -9.5]) rotate([0, 0, rotor_head_roll]) rotate([0, 180, 0]) rotate([0, 0, 90]) children(0);
 }
 
+
 888_1011();
+
