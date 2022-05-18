@@ -8,10 +8,14 @@ axis_diameter = M3_screw_diameter;
 space = 2; // Axis hole distance
 wall = 1;
 
-hrazda_w=10;
-hrazda_h=10;
-hrazda_t=3;
-hrazda_tw=10;
+roll_w=6;
+roll_d=10;
+
+hrazda_w=12;
+hrazda_h=15;
+hrazda_tw=3;
+
+
 
 add = hrazda_w+0.5+8; // prodlouzeni osy ve smeru roll osy
 
@@ -33,38 +37,36 @@ module 888_1011(){
             translate([0, axis_diameter + space, axis_diameter + 2*wall + add-hrazda_w])
                cylinder(d = axis_diameter + 5*wall, h = hrazda_w, $fn=25);
                
-            translate([hrazda_tw/2-hrazda_t/2, axis_diameter + space+hrazda_h, axis_diameter + 2*wall + add-hrazda_t/2])
-                sphere(hrazda_t/2,$fn = 100);
-            translate([-(hrazda_tw/2-hrazda_t/2), axis_diameter + space+hrazda_h, axis_diameter + 2*wall + add-hrazda_t/2])
-                sphere(hrazda_t/2,$fn = 100);                
+            translate([0, axis_diameter + space+hrazda_h, axis_diameter + 2*wall + add-roll_d/2])
+                rotate([0,90,0])
+                    cylinder(d=roll_d,h=roll_w+hrazda_tw*2, $fn=100,center=true);               
+            
         }
-        //vršek hrazdy
-        hull(){
-            translate([hrazda_tw/2-hrazda_t/2, axis_diameter + space+hrazda_h, axis_diameter + 2*wall + add-hrazda_t/2])
-                sphere(hrazda_t/2,$fn = 100);
-            translate([-(hrazda_tw/2-hrazda_t/2), axis_diameter + space+hrazda_h, axis_diameter + 2*wall + add-hrazda_t/2])
-                sphere(hrazda_t/2,$fn = 100);
-              
-            translate([hrazda_tw/2-hrazda_t/2, axis_diameter + space+hrazda_h+hrazda_tw/2, axis_diameter + 2*wall + add-hrazda_t/2])
-                sphere(hrazda_t/2,$fn = 100);
-            translate([-(hrazda_tw/2-hrazda_t/2), axis_diameter + space+hrazda_h+hrazda_tw/2, axis_diameter + 2*wall + add-hrazda_t/2])
-                sphere(hrazda_t/2,$fn = 100);   
-        }
-        
-        
+               
         }
         
     //vyýbrus hrazdy
-    translate([0, axis_diameter + space+hrazda_h+hrazda_tw/2, axis_diameter + 2*wall + add-hrazda_t/2])
-        difference()
+    translate([0, axis_diameter + space+hrazda_h, axis_diameter + 2*wall + add-roll_d/2])
+        rotate([0,90,0])
         {
-        translate([0,0,0])
-            cylinder(r=(hrazda_tw-hrazda_t)/2,h=hrazda_t+2,center=true);
-        rotate_extrude(convexity = 10,$fn = 100)
-            translate([hrazda_tw/2-hrazda_t/2, 0, 0])
-                circle(r = hrazda_t/2, $fn = 100);                
-            
+            hull()
+            rotate_extrude(convexity = 10,$fn = 100)
+                translate([(roll_d+3)/2+1, 0, 0])
+                    circle(r = (roll_w+0.5)/2, $fn = 100);            
         }
+    
+    //osička hrazdy
+    translate([0, axis_diameter + space+hrazda_h, axis_diameter + 2*wall + add-roll_d/2])
+        rotate([0,90,0])
+            cylinder(d = M3_screw_diameter, h = roll_w+hrazda_tw*2+1, $fn=100,center=true);
+    
+    //matička hrazdy
+    for(i=[-1,1])
+    translate([i*(roll_w/2+hrazda_tw+M3_nut_height/2-1), axis_diameter + space+hrazda_h, axis_diameter + 2*wall + add-roll_d/2])
+        rotate([0,90,0])
+            cylinder(d = M3_nut_diameter, h = M3_nut_height, $fn=6,center=true);
+    
+    
         
 
     translate([0, axis_diameter + space, axis_diameter + 2*wall + add - M3_nut_height*1.5])
@@ -88,9 +90,34 @@ module 888_1011(){
  translate([0, 5.2, -9.5]) rotate([0, 0, rotor_head_roll]) rotate([0, 180, 0]) rotate([0, 0, 90]) children(0);
 }
 
+module 888_1011_roll()
+{    
+        difference()
+        {
+        translate([0,0,0])
+            cylinder(r=roll_d/2,h=roll_w,center=true,$fn = 100);
+        rotate_extrude(convexity = 10,$fn = 100)
+            translate([roll_d/2, 0, 0])
+                circle(r = roll_d/2-2.5, $fn = 100);
+
+        cylinder(d=3.5,h=roll_w+1,center=true,$fn=50);
+            
+        }
+}
+
+
 //intersection()
-//{
-888_1011();
+{
+union()
+{
+    888_1011();
+    echo(axis_diameter + space+hrazda_h, axis_diameter + 2*wall + add-roll_d/2-wall-axis_diameter/2);
+    translate([0, axis_diameter + space+hrazda_h, axis_diameter + 2*wall + add-roll_d/2-wall-axis_diameter/2])
+        rotate([0,90,0])
+            888_1011_roll();
+}
 //cube([50,50,50]);
-//}
+}
+
+
 
