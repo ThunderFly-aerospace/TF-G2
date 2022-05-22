@@ -26,13 +26,12 @@ module 888_1001(){
 
                 translate([26, 0, base_thickness]) dovetail_socket(160, connector="XT60");
 
+                // vyztuzeni zadni strany
+                translate([base_length-2, -base_width/2, base_thickness]) cube([2, base_width, 2]);
 
-                /* for(m = [1, 0]) mirror([0, m, 0])
-                for(x = [10:10:base_length-10])
-                    rotate([0, 0, 0])
-                        translate([x, base_width/2-2*rantl_thickness/3, 0]){
-                            scale([2, 1, 1]) cylinder(d = M3_screw_diameter, h = rantl_height+base_thickness, $fn = 50);
-                        } */
+                for(x=[5, 8, 12])
+                translate([base_length-5.5 - base_patern*2*x, -base_width/2, base_thickness]) cube([1, base_width, 0.5]);
+
             }
 
             // Srazeni spodnich hran
@@ -66,7 +65,7 @@ module 888_1001(){
 
 
             //dirky ve dnu dvojitá řada
-            for (i=[190+5:base_patern*1:base_length-base_patern], j=[-1, 1])
+            for (i=[190+5:base_patern*1:base_length], j=[-1, 1])
                 if(i!=10 && (i!=10*11 && use_myxa))
                     translate([i,j*base_patern,-0.1])
                         cylinder(h=base_thickness+0.2, d=M3_screw_diameter, $fn=50);
@@ -85,16 +84,19 @@ module 888_1001(){
                 if(!(i==10&&j==1))
                 hull(){
                     translate([i +base_patern/2,j*base_patern/2,-0.1])
-                        cylinder(h=base_thickness+0.2, d=M4_screw_diameter, $fn=50);
+                        cylinder(h=base_thickness+0.2, d=M5_screw_diameter, $fn=50);
                     translate([i+base_patern +base_patern/2,j*base_patern/2,-0.1])
-                        cylinder(h=base_thickness+0.2, d=M4_screw_diameter, $fn=50);
+                        cylinder(h=base_thickness+0.2, d=M5_screw_diameter, $fn=50);
                     translate([i +base_patern/2,j*(base_width/2-10),-0.1])
-                        cylinder(h=base_thickness+0.2, d=M4_screw_diameter, $fn=50);
+                        cylinder(h=base_thickness+0.2, d=M5_screw_diameter, $fn=50);
                     translate([i+base_patern +base_patern/2,j*(base_width/2-10),-0.1])
-                        cylinder(h=base_thickness+0.2, d=M4_screw_diameter, $fn=50);
+                        cylinder(h=base_thickness+0.2, d=M5_screw_diameter, $fn=50);
                 }
                 
-                
+                // Rozsireni pricky pro puzzle spjku
+                lock_material_width = 11; // sirka materialu, ve kterem budou zamky
+                translate([base_split_position[1], 0, 0] + [-lock_material_width/2+1, -base_width/2, 0])
+                    cube([lock_material_width, base_width, base_thickness]);
                 
                 // Vyztuzeni okolo XT60 konektoru
                 if(use_xt60_flange)
@@ -105,15 +107,15 @@ module 888_1001(){
 
 
                 //Vyztuzeni okolo montaznich otvoru
-                for (i=[200+5:base_patern*2:base_length-base_patern], j=[-1, 1])
+                for (i=[200+5:base_patern*2:base_length], j=[-1, 1])
                     if(i!=10 && (i!=10*11 && use_myxa))
                         translate([i,j*base_patern,-0.1])
                             cylinder(h=base_thickness+0.2, d=M3_screw_diameter+5, $fn=50);
                             cylinder(h=base_thickness+0.2, d=M3_screw_diameter+5, $fn=50);
 
             }
-            //dirky v bocnich stenach
 
+            //dirky v bocnich stenach
             for(x = [10:10:base_length-10])
                 rotate([90, 0, 0])
                     translate([x, 2*base_thickness/3, 0]){
@@ -136,32 +138,59 @@ module 888_1001(){
         text(str(week), size = 5);
 }
 
-module 888_1001_part(part = 0){
-    x0 = base_split_position[part];
-    length = base_split_position[part+1] - base_split_position[part];
+// module 888_1001_part(part = 0){
+//     x0 = base_split_position[part];
+//     length = base_split_position[part+1] - base_split_position[part];
 
-    translate([-x0, 0, 0])
-        intersection(){
-            translate([x0, -base_width/2, -10])
-                translate([-2, 0, 0])
-                    cube([length, base_width+10, base_thickness+30]);
-            888_1001();
-        }
+//     translate([-x0, 0, 0])
+//         intersection(){
+//             translate([x0, -base_width/2, -10])
+//                 translate([-2, 0, 0])
+//                     cube([length, base_width+10, base_thickness+30]);
+//             888_1001();
+//         }
+// }
+
+module 888_1001_part_0(){
+    x0 = base_split_position[1];
+    difference(){
+        888_1001();
+        888_1001_crop(offset = 0.1);
+    }
 }
 
-module 888_1001_crop_visualisation(){
+module 888_1001_part_1(){
+    x0 = base_split_position[1];
+    intersection(){
+        888_1001();
+        888_1001_crop(offset = -0.1);
+    }
+}
+
+module 888_1001_crop_visualisation(offset = 0){
     %for (i=base_split_position) {
         translate([i, 0, 0])
             union(){
               cube([0.01, base_width+10, base_thickness+20], center = true);
             }
+
+            
     }
 }
 
 
+module 888_1001_crop(offset = 0) translate([base_split_position[1], 0, -10]) {
+            translate([3-offset, -50, 0]) cube([300, 100, 20]);
+            for(y = [-3:3]) translate([0, 15*y, 0]){
+                translate([0, 0, 0]) cylinder(d=5+offset, h=20, $fn=30);
+                translate([0, 0-3/2-offset/2, 0]) cube([10, 3+offset, 20]);
+            }
+
+}
+
 888_1001();
 888_1001_crop_visualisation();
-
+888_1001_crop();
 
 
 base_splitter_length = 45;
@@ -207,21 +236,19 @@ module 888_1001_splitter(){
 
 
 
-888_1001_splitter();
+//888_1001_splitter();
 
+// module battery_slot(height = 5){
 
+//     linear_extrude(height){
 
-module battery_slot(height = 5){
+//         translate([0, -40]) square([3, 80]);
+//         difference(){
+//             square();
+//             circle(r=3);
+//         }
 
-    linear_extrude(height){
-
-        translate([0, -40]) square([3, 80]);
-        difference(){
-            square();
-            circle(r=3);
-        }
-
-    }
-}
+//     }
+// }
 
 //translate([0, 0, 50]) battery_slot();
