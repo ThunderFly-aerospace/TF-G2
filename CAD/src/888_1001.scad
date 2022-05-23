@@ -18,6 +18,11 @@ module 888_1001(){
                     translate([0, i , 0])
                         cube([base_length, rantl_thickness, rantl_height + base_thickness]);
 
+                // Zvyseny rantl pro drzak motoru
+                for (i=[-base_width/2, base_width/2 - rantl_thickness])
+                    translate([0, i , 0])
+                        cube([base_patern*2.5, rantl_thickness, rantl_height*2 + base_thickness]);
+
                 // zesileni boku
                 for (i=[-base_width/2 + rantl_thickness, base_width/2 - rantl_thickness])
                     translate([base_length/2 + 26/2, i , base_thickness])
@@ -116,9 +121,16 @@ module 888_1001(){
             }
 
             //dirky v bocnich stenach
-            for(x = [10:10:base_length-10])
+            for(x = [10*2:10:base_length-10]) // Vynechat prvni dva otvory - ty budou vyse kvuli motorovemu drzaku
                 rotate([90, 0, 0])
                     translate([x, 2*base_thickness/3, 0]){
+                        translate([0, 0, base_width/2]) cylinder(d = plastic_screw_diameter, h = 2*7+0.2, center = true, $fn = 20);
+                        translate([0, 0, -base_width/2]) cylinder(d = plastic_screw_diameter, h = 2*7+0.2, center = true, $fn = 20);
+                    }
+
+            for(x = [10:10:base_patern*2]) // Vynechat prvni dva otvory - ty budou vyse kvuli motorovemu drzaku
+                rotate([90, 0, 0])
+                    translate([x, base_thickness+rantl_height, 0]){
                         translate([0, 0, base_width/2]) cylinder(d = plastic_screw_diameter, h = 2*7+0.2, center = true, $fn = 20);
                         translate([0, 0, -base_width/2]) cylinder(d = plastic_screw_diameter, h = 2*7+0.2, center = true, $fn = 20);
                     }

@@ -24,7 +24,7 @@ module 888_1003_outline(battery_case_start_x = 25, battery_length = 150){
 				union(){
 					hull(){
 	          //kvadrik ("spolecny s podlozkou")
-		        translate([10+15, -base_thickness -rantl_height/2, 0])
+		        translate([10+15, -base_thickness -rantl_height, 0])
 		        	cube([base_length+6-15, base_thickness + rantl_height, 1]);
 
 				       	// vepredu ve vysce prostrednich der na policky
@@ -46,7 +46,7 @@ module 888_1003_outline(battery_case_start_x = 25, battery_length = 150){
 		      translate([battery_case_start_x,0,0])
 			      hull(){
 		        //Spodni cast pro akumulator
-        			translate([0, -base_thickness -rantl_height/2, 0])
+        			translate([0, -base_thickness -rantl_height, 0])
         				cube([battery_length+20, base_thickness + rantl_height, 1]);
 
   		        translate([10, -bellow - 10, 0])
@@ -107,12 +107,15 @@ module 888_1003(){
 
 		// nedelat otvory pro srouby v mistech otvoru pro pripevneni bocnic
 		// rada sroubu pro podlozku
-		difference(){
-			for(x = [20:10:base_length])
-		        translate([x, 0, -0.1])
-	            	cylinder(d = plastic_screw_trought_diameter, h = 15, center = true, $fn = 50);
+		for(x = [40:10:base_length])
+			translate([x, -base_thickness+rantl_height/3*2, -0.1])
+				cylinder(d = plastic_screw_trought_diameter, h = 15, center = true, $fn = 50);
 
-		}
+		for(x = [30:10:30])
+			translate([x, rantl_height/2, -0.1])
+				cylinder(d = plastic_screw_trought_diameter, h = 15, center = true, $fn = 50);
+
+		
 
         //for(x = [10+base_patern, 10+base_patern*2])
 		for(x = [10*3:10:10*27])

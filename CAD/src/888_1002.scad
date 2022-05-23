@@ -12,14 +12,14 @@ motor_angle = engine_angle; //angle of proppler axis
 
 
 // nahled motoru
-/*if($preview)
+if($preview)
 %translate([motor_x_shift, 0, motor_holder_motor_height -(-rantl_height + base_thickness + 0.2)])
   rotate([0, -90 - motor_angle, 0]) translate([0, 0, thickness]) {
     cylinder(d = motor_diameter, h = 50);
     translate([0, 0, -20]) cylinder(d = 5, h = 50);
 
   }
-*/
+
 
 module 888_1002(motor_angle = motor_angle) translate([-5, 0, 0]) {
 //translate([0, -motor_holder_thickness/2, 0])
@@ -67,10 +67,10 @@ difference(){
     	}
 
 		//shell zip holder
-
-		translate([motor_x_shift + thickness, 0, motor_holder_motor_height - motor_diameter/2])
-      rotate([0, 45 - motor_angle, 0])
-        cube([5,8,6], center = true);
+    if(0)
+  		translate([motor_x_shift + thickness, 0, motor_holder_motor_height - motor_diameter/2])
+        rotate([0, 45 - motor_angle, 0])
+          cube([5,8,6], center = true);
 
     // spodni vyrez - odlehceni
     hull(){
@@ -79,16 +79,15 @@ difference(){
             cylinder(d = 20-thickness, h=10);
     }
 
+    // Odecet vritrniho prostoru. Tam, kde je motor
     difference(){
   		hull(){
 	  			translate([-0.1, -base_width/2+thickness*1.5, thickness*2])
-	  				cube([thickness*8, base_width-thickness*3, pylon_holder_side_mount_height*0.8]);
+	  				cube([thickness*5, base_width-thickness*3, pylon_holder_side_mount_height*0.8]);
 
 
 					translate([-0.1, -base_width/2+thickness*1.5, thickness*2])
-	  				cube([thickness*10, base_width-thickness*3, motor_holder_side_mount_height*0.8]);
-
-
+	  				cube([thickness*8, base_width-thickness*3, motor_holder_side_mount_height*0.8]);
 
 					translate([0, 0,  pylon_holder_side_mount_height*1.2])
 	          rotate([0, 90 - motor_angle, 0])
@@ -123,21 +122,16 @@ difference(){
 	}
 
 	// limit holder from back
-
 	translate([-15, -base_width/2 - side_thickness, 0])
         cube([15, base_width + 2*side_thickness, pylon_holder_side_mount_height]);
 
   // Srouby do bocnic
-  for(z = [[motor_holder_side_mount_height+rantl_height/2, 0, 6], [rantl_height/2, 0, 10], [rantl_height/2, 10, 10]])
+  for(z = [[motor_holder_side_mount_height+rantl_height/2, 0, 6], [rantl_height*2/2, 0, 10], [rantl_height*2/2, 10, 10]])
 		translate([5+z[1], 0, z[0]])
 			rotate([90, 0, 0]){
-				cylinder(d = M3_screw_diameter, h = base_width+10, $fn = 30, center = true);
-		    translate([0, 0, (base_width-z[2])/2 - 3])
-          cylinder(d = M3_nut_diameter, h = 6, $fn = 6, center = true);
+				cylinder(d = plastic_screw_diameter, h = base_width+10, $fn = 30, center = true);
         translate([0, 0,(base_width)/2  +rantl_thickness+0.1 + side_base_thickness])
           cylinder(d = M3_head_diameter, h = 6, $fn = 30, center = true);
-				translate([0, 0,-(base_width-z[2])/2 + 3])
-          cylinder(d = M3_nut_diameter, h = 6, $fn = 6, center = true);
         translate([0, 0,-(base_width)/2  -rantl_thickness-0.1 - side_base_thickness])
           cylinder(d = M3_head_diameter, h = 6, $fn = 30, center = true);
 				}
@@ -148,9 +142,9 @@ difference(){
     mirror([0, m, 0])
       translate([motor_protective_frame_x_shift, 0, motor_protective_frame_z_base]){
         translate([0, 0, 10])
-          cube([motor_protective_frame_beam_width, motor_protective_frame_width, 20], center=true);
+          cube([motor_protective_frame_beam_width+0.5, motor_protective_frame_width, 20], center=true);
         translate([0, motor_protective_frame_width/2-motor_protective_frame_plug_thickness/2, 0])
-          cube([motor_protective_frame_beam_width, motor_protective_frame_plug_thickness, motor_protective_frame_plug_length*2], center=true);
+          cube([motor_protective_frame_beam_width+0.5, motor_protective_frame_plug_thickness, motor_protective_frame_plug_length*2], center=true);
       }
 
   if($preview)
@@ -168,10 +162,10 @@ difference(){
     for(m = [0,1])
       mirror([0, m, 0])
         translate([-0.1, -base_width/2 -0.1, -0.1]){
-            cube([25.1, rantl_thickness+0.3, rantl_height+1]);
+            cube([25.1, rantl_thickness+0.3, rantl_height*2+1]);
 
           hull(){
-            cube([10+0.5, rantl_thickness+0.3, rantl_height+1]);
+            cube([10+0.5, rantl_thickness+0.3, rantl_height*2+1]);
             cube([10+0.5, 0.1, rantl_height+4]);
           }
       }
