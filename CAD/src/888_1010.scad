@@ -33,7 +33,10 @@ module 888_1010() translate([40*0.3, 0, 0]) {
 
     difference(){
             union(){
-                translate([0, 0, 0]) rotate([180, 0, 180]) tfslot_888_1001(35, true);
+                translate([0, 0, 0]) rotate([180, 0, 180]) 
+                //tfslot_888_1001(35, true);
+                tfslot_888_1001(one_part=true, plastfast_screw = 20, cap_hole = 1);
+
 
                 for(m = [0, 1]) mirror([0,m,0]) difference(){
                     union(){
