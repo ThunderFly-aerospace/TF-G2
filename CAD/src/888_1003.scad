@@ -10,6 +10,12 @@ length = base_length + front_overlap + back_overlap; //delka sten z vykresu, nep
 thickness = 1; //tloustka sten
 drzak_height = 70; //spatny rozmer so far
 sides_split_positions = [-5, length/3-5, length/3*2, length];
+sides_split_coordinations = [
+	[[0, 60], [0, -20]], // predek
+	[[95, -20], [95, 0], [93, 5], [105, 20], [105, 28], [93, 40], [97, 45], [97, 60]],
+	[[207, 60], [207, 45], [209, 42], [195, 25], [209, 5], [205, 0], [205, -20]],
+	[[310, -20], [310, 60]]
+];
 
 
 module 888_1003_outline(battery_case_start_x = 25, battery_length = 150){
@@ -97,23 +103,15 @@ module 888_1003(){
 					offset(delta=-0.4*3)
 						888_1003_outline();
 			}
-
-			for(x=platform_mount_points)
-				translate([x, 0, 0]){
-					cylinder(d = 8, h = 5, $fn=30);
-				}
 		}
 
 		// nedelat otvory pro srouby v mistech otvoru pro pripevneni bocnic
+		// rada sroubu pro podlozku
 		difference(){
 			for(x = [20:10:base_length])
 		        translate([x, 0, -0.1])
-	            	cylinder(d = M3_screw_diameter, h = 15, center = true, $fn = 50);
+	            	cylinder(d = plastic_screw_trought_diameter, h = 15, center = true, $fn = 50);
 
-			// Otvory pro kryt
-			for(x=platform_mount_points)
-				translate([x, 0, 0])
-					cylinder(d = 8, h = 5, $fn=30);
 		}
 
         //for(x = [10+base_patern, 10+base_patern*2])
@@ -149,12 +147,6 @@ module 888_1003(){
 	            cylinder(d = M3_screw_diameter, h = 10, center = true, $fn = 50);
 
 
-		// Otvory pro kryt
-		for(x=platform_mount_points)
-			translate([x, 0, -0.1]){
-				cylinder(d = M3_nut_diameter, h = M3_nut_height+0.1, $fn=6);
-				translate([0, 0, M3_nut_height+0.2+0.1]) cylinder(d = M3_screw_diameter, h = 10, $fn=30);
-			}
 	}
 
 	translate([28, 5, side_base_thickness-0.4])
@@ -169,13 +161,12 @@ module 888_1003(){
 
 module 888_1003_part(part = 0){
 
-    x0 = sides_split_positions[part];
-    length = sides_split_positions[part+1] - sides_split_positions[part];
+    x0 = sides_split_coordinations[part][0][0];
+    //length = sides_split_positions[part+1] - sides_split_positions[part];
 
     translate([-x0, 0, 0])
 	    intersection(){
-	        translate([x0, -100, -10])
-	        	cube([length, 200, base_thickness+30]);
+	        888_1003_crop(part);
 	        888_1003();
 	    }
 }
@@ -185,6 +176,28 @@ module 888_1003_crop_visualisation(){
         translate([i - front_overlap, 20, 0])
             cube([0.01, 80, 10], center = true);
     }
+
+	for (s=sides_split_coordinations){
+			for(p=s){
+				translate([p[0], p[1], 0]) color("red") cylinder(d=2, h=10);
+			}
+	}
+
+	// for (i = [0:len(sides_split_coordinations)-1]){
+	// 	echo("Rada", i);
+	// 	arr = concat(sides_split_coordinations[i-1], sides_split_coordinations[i] );
+	// 	echo(arr);
+	// 	linear_extrude(5) polygon(arr);
+	// }
+}
+
+module 888_1003_crop(i, offset=0.1){
+
+		arr = concat(sides_split_coordinations[i], sides_split_coordinations[i+1] );
+
+		translate([0, 0, -5])
+			linear_extrude(10)
+				offset(delta=-offset, chamfer = 1) polygon(arr);
 }
 
 888_1003_crop_visualisation();
