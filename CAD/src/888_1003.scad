@@ -118,15 +118,16 @@ module 888_1003(){
 		
 
         //for(x = [10+base_patern, 10+base_patern*2])
+		//prostedni vodorovna rada
 		for(x = [10*3:10:10*27])
 	        translate([x, motor_holder_side_mount_height, -0.1])
-	            cylinder(d = M3_screw_diameter, h = 10, center = true, $fn = 50);
+	            cylinder(d = plastic_screw_trought_diameter, h = 10, center = true, $fn = 50);
 	            //cylinder(d = 5.5, h = 10, center = true, $fn = 50);
 
 		// Horni rada sroubu pro pylon
 		for(x = [42:10:10*26+2])
 	        translate([x, pylon_holder_side_mount_height, -0.1])
-	            cylinder(d = M3_screw_diameter, h = 10, center = true, $fn = 50);
+	            cylinder(d = plastic_screw_trought_diameter, h = 10, center = true, $fn = 50);
 	            //cylinder(d = 5.5, h = 10, center = true, $fn = 50);
 
 		// Rada sroubu pro akumulator
@@ -140,14 +141,14 @@ module 888_1003(){
 	        rotate([0,0,-135])
 				for(x = [0:10:10*1])
 			        translate([x, 0, -0.1])
-			            cylinder(d = M3_screw_diameter, h = 10, center = true, $fn = 50);
+			            cylinder(d = plastic_screw_trought_diameter, h = 10, center = true, $fn = 50);
 
 		// Rada sroubu zadni sklonena hrana
         translate([10*26+2, pylon_holder_side_mount_height, 0])
         rotate([0,0,-48])
 		for(x = [0:10:10*5])
 	        translate([x, 0, -0.1])
-	            cylinder(d = M3_screw_diameter, h = 10, center = true, $fn = 50);
+	            cylinder(d = plastic_screw_trought_diameter, h = 10, center = true, $fn = 50);
 
 
 	}

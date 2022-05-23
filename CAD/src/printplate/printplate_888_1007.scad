@@ -1,6 +1,6 @@
 //@set_slicing_config(../../slicing/default.ini)
 
-//dil pro pripevneni tazneho motoru
+//Adapter pro pripevneni silentbloku pod pylon
 include <../../parameters.scad>
 use <../888_1007.scad>
 
