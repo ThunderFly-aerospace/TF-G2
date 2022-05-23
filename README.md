@@ -10,7 +10,7 @@ To enhance the ease of learnig of autogyro technology, we made possible to [simu
 
 ![TF-G2 during flight](/doc/img/TF-G2_fly_clouds.jpg)
 
-The main design highlights:
+## The main design highlights
 
   * High repairability and easy maintenance
   * Use of 3D printing flexibility
