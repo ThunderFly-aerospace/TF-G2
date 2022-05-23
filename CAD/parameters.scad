@@ -239,13 +239,16 @@ maximum_printable_size = 150;
 
 // pylon_height = 250 - pylon_holder_side_mount_height;
 
-pylon_pipe_counterbore = 24;  // delka zapusteni pylonove tyce do dilu nahore
+pylon_pipe_counterbore = 22;  // delka zapusteni pylonove tyce do dilu nahore
 pylon_pipe_counterbore_bottom = 20;  // delka zapusteni pylonove tyce do dilu dole
-pylon_pipe_screw_distance_from_top_end =  17;
-pylon_pipe_screw_distance_from_bottom_end =  10;
+pylon_pipe_screw_distance_from_top_end =  15;
+pylon_pipe_screw_distance_from_bottom_end =  7.5;
+
+pylon_pipe_offset = -4.5;
+pylon_case_naca_profile = 0040;
 
 
-pylon_pipe_top_offset = 6; // Jak hluboko do TFSLOTU lze tycku pylonu zapustit..
+pylon_pipe_top_offset = 4.5; // Jak hluboko do TFSLOTU lze tycku pylonu zapustit..
 pylon_airfoil_shell_overlap = 3;  // presah profilu (krytu) pylonu a montaznich casti (spodnyi a horni objimka)
 
 pylon_pipe_d = 10.3;

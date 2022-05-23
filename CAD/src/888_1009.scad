@@ -18,13 +18,15 @@ module 888_1009_bottom() {
         union(){
             difference(){
                 translate([-40*0.3, 0, 0])
-                    airfoil(naca = 0035, L = 40, N = 50, h= pylon_pipe_counterbore_bottom+3, open = false);
+                    airfoil(naca = pylon_case_naca_profile, L = 40, N = 50, h= pylon_pipe_counterbore_bottom+3, open = false);
 
                 // detach pylon profile from the outer rectangle
                 rotate([0,0,-90])
                   translate([0, pylon_silentblocks_base_distance/2, - pylon_silentblocks_base_distance/15])
                     rotate([45,0,0])
                       cube(pylon_silentblocks_base_distance/4, center = true);
+
+                translate([40-8+0.0, 0, 0]) cube([10, 10, 50], center=true);
             }
 
 
@@ -78,34 +80,38 @@ module 888_1009_bottom() {
                     cube(pylon_silentblocks_base_distance/4, center = true);
 
         // Main pylon hole
-        translate([0, 0, 2])
+        translate([pylon_pipe_offset, 0, 2])
             cylinder(d= pylon_pipe_d, h = 50, $fn=30);
         // bottom of pylon hole
-        translate([0, 0, -2])
+        translate([pylon_pipe_offset, 0, -2])
             cylinder(d= pylon_pipe_d-2, h = 50, $fn=30);
 
         // cable shaft
         hull(){
-            translate([12, 0, -2])
-                cylinder(d= 8, h = 50, $fn=30);
-            translate([20, 0, -2])
+            translate([5, 4, -2])
+                cylinder(d= 3, h = 50, $fn=30);
+            translate([5, -4, -2])
+                cylinder(d= 4, h = 50, $fn=30);
+            translate([22, 0, -2])
                 cylinder(d= 3, h = 50, $fn=30);
         }
 
+        // Otvor pro zajistovaci sroub
         translate([0, -1, 0])
             cube([20, 2, 50]);
-        translate([pylon_pipe_d/2, 0, 3 + pylon_pipe_screw_distance_from_bottom_end])
+        translate([pylon_pipe_d/2-0.5+pylon_pipe_offset, 0, 3 + pylon_pipe_screw_distance_from_bottom_end])
             rotate([-90, 30, 0]){
                 cylinder(d=M3_screw_diameter, h=20, center=true, $fn=60);
                 translate([0, 0, -10-5])
-                    cylinder(d=M3_head_diameter_ISO7380, h=20, center=true, $fn=60);
+                    //cylinder(d=M3_head_diameter_ISO7380, h=20, center=true, $fn=60);
+                    cylinder(d=M3_nut_diameter, h=20, center=true, $fn=6);
                 translate([0, 0, 10+5])
                     cylinder(d=M3_nut_diameter, h=20, center=true, $fn=6);
             }
 
 
             translate([-40*0.3, 0, 3 + pylon_pipe_counterbore_bottom - pylon_airfoil_shell_overlap])
-                hollow_airfoil(naca = 0035, L = 40, N = 50, h= 22, open = true, wall_thickness=0.8);
+                hollow_airfoil(naca = pylon_case_naca_profile, L = 40, N = 50, h= 22, open = true, wall_thickness=0.8);
 
         // otvory pro prisroubovani silentbloku
         for(x = [-0.5, 0.5], y=[-0.5, 0.5])

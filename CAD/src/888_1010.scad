@@ -9,7 +9,7 @@ use <./lib/stdlib/naca4.scad>
 include <../parameters.scad>
 include <MCAD/servos.scad>
 
-servo_z_offset = 2.5;
+servo_z_offset = 1;
 tfslot_dist = 19;
 rotor_head_pylon_adapter_z = - tfslot_dist/2 - 7;
 pitch_axis_z = 30;
@@ -89,26 +89,26 @@ module 888_1010() translate([40*0.3, 0, 0]) {
                 // NACA pro stredni tycku
                 translate([0, 0, -pylon_pipe_counterbore - airspeed_dist/2+0.5+pylon_pipe_top_offset])
                     rotate([0, 0, 180])
-                        airfoil(naca = 0035, L = 40, N = 50, h= pylon_pipe_counterbore - pylon_pipe_top_offset, open = false);
-
+                        airfoil(naca = pylon_case_naca_profile, L = 40, N = 100, h= pylon_pipe_counterbore - pylon_pipe_top_offset, open = false);
             }
 
-
             // NACA pro stredni tycku
-            translate([-40*0.3, 0, -pylon_pipe_counterbore - airspeed_dist/2-0.1 + pylon_pipe_top_offset])
-                cylinder(d=pylon_pipe_d, h=pylon_pipe_counterbore);
+            // otvor na tyc pylonu
+            translate([-40*0.3 - pylon_pipe_offset, 0, -pylon_pipe_counterbore - airspeed_dist/2-0.1 + pylon_pipe_top_offset])
+                cylinder(d=pylon_pipe_d, h=pylon_pipe_counterbore, $fn=60);
 
             translate([-40*0.3-20-2, -0.5, -pylon_pipe_counterbore - airspeed_dist/2+2])
                 cube([25, 1, pylon_pipe_counterbore]);
 
+            // Zajistovaci sroub pylonu
             translate([0, 0, -pylon_pipe_counterbore - airspeed_dist/2 + pylon_pipe_top_offset])
                 rotate([0, 0, 180])
                     difference(){
-                        hollow_airfoil(naca = 0035, L = 40, N = 50, h=pylon_airfoil_shell_overlap, open = true, wall_thickness=0.9);
+                        hollow_airfoil(naca = pylon_case_naca_profile, L = 40, N = 100, h=pylon_airfoil_shell_overlap, open = true, wall_thickness=0.9);
                         translate([40, 0, 0]) cube([4.5, 1, 2], center=true);
                     }
 
-            translate([-40*0.3 - pylon_pipe_d/2, 0,  - airspeed_dist/2-0.1 + pylon_pipe_top_offset])
+            translate([-40*0.3 - pylon_pipe_d/2 - pylon_pipe_offset +0.5, 0,  - airspeed_dist/2-0.1 + pylon_pipe_top_offset])
                 translate([0, 0, -pylon_pipe_screw_distance_from_top_end])
                     rotate([90, 30, 0]){
                         cylinder(d=M3_screw_diameter, h=pylon_pipe_counterbore, center=true, $fn=30);
@@ -119,6 +119,10 @@ module 888_1010() translate([40*0.3, 0, 0]) {
                         translate([0, 0, -pylon_pipe_counterbore/2-5])
                             cylinder(d=M3_nut_diameter, h=pylon_pipe_counterbore, center=true, $fn=30);
                     }
+
+            for(x=[1, 0]) mirror([0, x, 0])
+                translate([-40*0.3 - pylon_pipe_d/2 - pylon_pipe_offset - 40/3, 0,  - airspeed_dist/2 + pylon_pipe_top_offset - pylon_pipe_counterbore])
+                    translate([0, 5, -1]) rotate([-45, 0, 0]) scale([1.5, 1, 2]) sphere(5, $fn=40);
 
 
             // Odecteni serva

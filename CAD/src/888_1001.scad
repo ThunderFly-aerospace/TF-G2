@@ -37,6 +37,9 @@ module 888_1001(){
                 for(x=[5, 8, 12])
                 translate([base_length-5.5 - base_patern*2*x, -base_width/2, base_thickness]) cube([1, base_width, 0.5]);
 
+                // vyztuzeni zadni strany
+                translate([base_length/2-7/2, -base_width/2, base_thickness]) cube([7, base_width, 2]);
+
             }
 
             // Srazeni spodnich hran
@@ -121,7 +124,7 @@ module 888_1001(){
             }
 
             //dirky v bocnich stenach
-            for(x = [10*2:10:base_length-10]) // Vynechat prvni dva otvory - ty budou vyse kvuli motorovemu drzaku
+            for(x = [10*3:10:base_length-10]) // Vynechat prvni dva otvory - ty budou vyse kvuli motorovemu drzaku
                 rotate([90, 0, 0])
                     translate([x, 2*base_thickness/3, 0]){
                         translate([0, 0, base_width/2]) cylinder(d = plastic_screw_diameter, h = 2*7+0.2, center = true, $fn = 20);
@@ -194,7 +197,7 @@ module 888_1001_crop_visualisation(offset = 0){
 module 888_1001_crop(offset = 0) translate([base_split_position[1], 0, -10]) {
             translate([3-offset, -50, 0]) cube([300, 100, 20]);
             for(y = [-3:3]) translate([0, 15*y, 0]){
-                translate([0, 0, 0]) cylinder(d=5+offset, h=20, $fn=30);
+                translate([0, 0, 0]) scale([1, 1.2, 1]) cylinder(d=5+offset, h=20, $fn=30);
                 translate([0, 0-3/2-offset/2, 0]) cube([10, 3+offset, 20]);
             }
 
@@ -202,7 +205,7 @@ module 888_1001_crop(offset = 0) translate([base_split_position[1], 0, -10]) {
 
 888_1001();
 888_1001_crop_visualisation();
-888_1001_crop();
+%888_1001_crop();
 
 
 base_splitter_length = 45;
