@@ -10,13 +10,14 @@ To enhance the ease of learnig of autogyro technology, we made possible to [simu
 
 ![TF-G2 during flight](/doc/img/TF-G2_fly_clouds.jpg)
 
-Autogyro model for UAV pilot training and learning purposes.
+Unmanned Autogyro originally developed for UAV pilot training and learning purposes. The main design highlights:
 
   * High repairability and easy maintenance
   * Use of 3D printing flexibility
   * Predictable behavior in flight
-  * Micro payload load capacity suitable for multiple types of atmospheric sensors
+  * Micro payload load capacity suitable for multiple types of [atmospheric sensors](https://www.thunderfly.cz/tf-atmon.html)
   * [Simulation model available](https://github.com/ThunderFly-aerospace/FlightGear-TF-G2)
+  * [Car roof takeoff ready](https://github.com/ThunderFly-aerospace/TF-SIMPLEPLATFORM)
 
 Based on that features the TF-G2 is perfectly suitable for [atmospheric measurement applications](https://www.thunderfly.cz/tf-atmon.html). That could be ilustrated by sucessful instegration of multiple sensor types. 
 
