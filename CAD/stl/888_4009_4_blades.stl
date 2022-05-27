@@ -1781,6 +1781,20 @@ solid model
     outer loop
       vertex -11.0603 -13.2634 -1.5
       vertex -8.47428 -13.4466 -1.5
+      vertex -8.99629 -13.4096 -1.5
+    endloop
+  endfacet
+  facet normal 0 0 1
+    outer loop
+      vertex -11.0603 -13.2634 -1.5
+      vertex -8.99629 -13.4096 -1.5
+      vertex -9.66462 -13.3622 -1.5
+    endloop
+  endfacet
+  facet normal 0 0 -1
+    outer loop
+      vertex -11.0603 -13.2634 -1.5
+      vertex -9.66462 -13.3622 -1.5
       vertex -9.84143 -13.3497 -1.5
     endloop
   endfacet
@@ -23876,13 +23890,6 @@ solid model
       vertex -9.19361 21.2665 8.54706
     endloop
   endfacet
-  facet normal 0 0 -1
-    outer loop
-      vertex -9.38815 -13.3818 -1.5
-      vertex -8.47428 -13.4466 -1.5
-      vertex -8.99629 -13.4096 -1.5
-    endloop
-  endfacet
   facet normal 0.978146 -0.207918 -1.28674e-06
     outer loop
       vertex -9.42663 -20.5802 7.77877
@@ -23923,6 +23930,13 @@ solid model
       vertex -9.42663 -20.5802 7.77877
       vertex -9.28801 -19.9281 5.65191
       vertex -9.24025 -19.7034 5.92086
+    endloop
+  endfacet
+  facet normal 0 0 1
+    outer loop
+      vertex -9.66462 -13.3622 -1.5
+      vertex -8.99629 -13.4096 -1.5
+      vertex -9.38815 -13.3818 -1.5
     endloop
   endfacet
   facet normal 0.136463 -0.28928 0.947468
@@ -24441,20 +24455,6 @@ solid model
       vertex -9.83484 -17.34 8.55616
       vertex -8.90114 -18.108 8.6
       vertex -8.89599 -18.0837 8.59805
-    endloop
-  endfacet
-  facet normal 0 0 1
-    outer loop
-      vertex -9.84143 -13.3497 -1.5
-      vertex -8.47428 -13.4466 -1.5
-      vertex -9.38815 -13.3818 -1.5
-    endloop
-  endfacet
-  facet normal 0 0 1
-    outer loop
-      vertex -9.84143 -13.3497 -1.5
-      vertex -9.38815 -13.3818 -1.5
-      vertex -9.66462 -13.3622 -1.5
     endloop
   endfacet
   facet normal 0.978147 -0.207914 9.17437e-07
@@ -45604,7 +45604,7 @@ solid model
       vertex 8.99629 13.4096 -1.5
     endloop
   endfacet
-  facet normal -0 -0 -1
+  facet normal 0 0 -1
     outer loop
       vertex 8.47428 13.4466 -1.5
       vertex 8.99629 13.4096 -1.5
