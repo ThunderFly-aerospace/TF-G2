@@ -22,9 +22,15 @@ module 888_2006(draft=true)
     difference()
     //intersection()
     {
-        translate([top_leg_screw_pos_x-x_border,-box_h+(height_above_top_leg_screw+top_leg_screw_pos_y),1.2])
+        
+        union(){
+            translate([top_leg_screw_pos_x-x_border,-box_h+(height_above_top_leg_screw+top_leg_screw_pos_y),1.2])
                 cube([length,box_h,thickness]);
 
+            translate([top_leg_screw_pos_x-M3_screw_diameter/2, top_leg_screw_pos_y-leg_screw_dy-M3_screw_diameter/2,1.2])
+                cube([leg_screw_dy+M3_screw_diameter,leg_screw_dy+M3_screw_diameter,thickness+cover_rantl_thickness+0.2]);
+
+        }
 
         888_1003();
         translate([260,0,0])                     
