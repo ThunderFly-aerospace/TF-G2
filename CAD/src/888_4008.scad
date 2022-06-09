@@ -82,8 +82,8 @@ module 888_4008(draft = true){
                             }
 
                           }
-                          translate([0,0,top_thickness + M3_nut_height + sensor_cap_height/2])
-                                cylinder(h=sensor_cap_height*0.7, d1=starter_pipe_d_middle, d2 = starter_pipe_d_middle, $fn=draft?rpm_sensor_count:120);
+                          translate([0,0,top_thickness + M3_nut_height + sensor_cap_height/2-0.005])
+                                cylinder(h=sensor_cap_height*0.7+0.01, d1=starter_pipe_d_middle, d2 = starter_pipe_d_middle, $fn=draft?rpm_sensor_count:120);
                           translate([0,0,top_thickness + M3_nut_height + 1.2*sensor_cap_height])
                                 cylinder(h=sensor_cap_height, d1=starter_pipe_d_middle, d2 = starter_pipe_d_bottom, $fn=draft?rpm_sensor_count:120);
                     }
@@ -140,7 +140,7 @@ module 888_4008(draft = true){
                     union(){  // sensor teeth outer rim
                       cylinder(d = starter_pipe_d_middle, h = rpm_hole_h/4, $fn = draft?rpm_sensor_count:120);
                       translate([0, 0, - M3_nut_height - sensor_cap_height + rpm_sensor_h + starter_top_h - starter_rope_diameter])
-                        cylinder(d1 = starter_pipe_d_middle, d2 = starter_rope_d - starter_rope_diameter/2, h = starter_rope_diameter, $fn = draft?rpm_sensor_count:120);
+                        cylinder(d1 = starter_pipe_d_middle, d2 = starter_rope_d - starter_rope_diameter/2, h = starter_rope_diameter+0.01, $fn = draft?rpm_sensor_count:120);
                     }
 
                     for (i=[0:rpm_sensor_count]) rotate([0, 0, (360/rpm_sensor_count)*i]){
@@ -202,3 +202,9 @@ module 888_4008(draft = true){
 
 
 888_4008($preview);
+
+/*intersection()
+{
+    888_4008(false);
+    cube([50,50,50]);
+}*/
