@@ -3,7 +3,7 @@
 include <../parameters.scad>
 use <888_1010.scad>
 
-length = 888_1010_rotor_head_width()-2*0.5-0.15-0.55*2; // Length of the part
+length = 888_1010_rotor_head_width()-2*0.5-0.15; // Length of the part
 axis_diameter = M3_screw_diameter;
 space = 2; // Axis hole distance
 wall = 1;
@@ -17,7 +17,7 @@ hrazda_tw=3;
 
 
 
-add = hrazda_w+0.5+8; // prodlouzeni osy ve smeru roll osy
+add = hrazda_w+0.5+10; // prodlouzeni osy ve smeru roll osy
 
 $fn = 100;
 
@@ -69,8 +69,9 @@ module 888_1011(){
     
         
 
-    translate([0, axis_diameter + space, axis_diameter + 2*wall + add - M3_nut_height*1.5])
-        cylinder(d = M3_nut_diameter, h = 10, $fn=6);
+    //matička roll
+    translate([0, axis_diameter + space, axis_diameter + 2*wall+10 - M3_nut_height*1.5])
+        cylinder(d = M3_nut_diameter, h = 10+add, $fn=6);
     
     //roll
     translate([0, axis_diameter + space, -0.2])
