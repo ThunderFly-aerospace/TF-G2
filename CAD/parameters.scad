@@ -121,6 +121,10 @@ rotor_blade_part_list = [0, 50, 200, 350, 500];
 // Otvory pro pripevneni na platformu
 platform_mount_points = [base_patern*8, base_patern*26];
 
+cover_rantl_thickness = 0.8; // tloustka rantlu, ktery ma mit ramecek pro pripevneni a zpevneni oblecku.. 
+
+leg_screw_dy = 20; // Vzdalenost sroubu, na ktery se upevnuji podvozkove nohy
+
 /////
 // Parametry rotorové hlavy
 /////
