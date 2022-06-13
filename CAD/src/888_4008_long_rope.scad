@@ -62,22 +62,26 @@ module 888_4008(draft = false){
                                     cylinder(h=rpm_sensor_h, d=starter_rope_d , $fn=draft?rpm_sensor_count:120);
                           
                                 //špulka
-                                translate([0,0, top_thickness+starter_top_h+rpm_sensor_h/8+rpm_sensor_h/2-0.02])
-                                    cylinder(d1=starter_rope_d+10,d2=starter_rope_d,h=rpm_sensor_h/8, $fn=draft?rpm_sensor_count:120);
+                                translate([0,0, top_thickness+starter_top_h+rpm_sensor_h/8+rpm_sensor_h/2+2-0.02])
+                                    cylinder(d1=starter_rope_d+11,d2=starter_rope_d,h=rpm_sensor_h/8, $fn=draft?rpm_sensor_count:120);
                                 translate([0,0, top_thickness+starter_top_h+rpm_sensor_h/8-0.01])
-                                    cylinder(h=rpm_sensor_h/2, d=starter_rope_d+10 , $fn=draft?rpm_sensor_count:120);
+                                    cylinder(h=rpm_sensor_h/2+2, d=starter_rope_d+11 , $fn=draft?rpm_sensor_count:120);
                                 translate([0,0, top_thickness+starter_top_h])
-                                    cylinder(d1=starter_rope_d,d2=starter_rope_d+10,h=rpm_sensor_h/8, $fn=draft?rpm_sensor_count:120);
+                                    cylinder(d1=starter_rope_d,d2=starter_rope_d+11,h=rpm_sensor_h/8, $fn=draft?rpm_sensor_count:120);
                                 
                             }
                           
                           
                           //střed špulky
-                          sr=6;
-                          translate([0,0, top_thickness+starter_top_h+3*rpm_sensor_h/8])
+                          sr=6.25;
+                          translate([0,0, top_thickness+starter_top_h+3*rpm_sensor_h/8+1])
                           rotate_extrude(convexity = 10,$fn = 100)
-                            translate([(starter_rope_d+2*sr)/2, 0, 0])
-                                circle(r = sr, $fn = 100);
+                          hull()                            
+                          {
+                            for(i=[-1,1])
+                            translate([(starter_rope_d+1.5*sr)/2, 0.5*i, 0])                            
+                                    circle(r = sr, $fn = 100);
+                          }
                                 
                          //dírka na špagátek
                          translate([-starter_rope_d,0, top_thickness+starter_top_h+3*rpm_sensor_h/8])
@@ -179,7 +183,7 @@ module 888_4008(draft = false){
               // Rotor nut
               translate([0, 0, -0.1])
                     union(){
-                        cylinder(d = M3_nut_diameter, h = 6+0.2, $fn = 6);
+                        cylinder(d = M3_nut_diameter+0.1, h = 6+0.2, $fn = 6);
                         translate([0, 0, 6-1]) cylinder(d2 = M3_nut_diameter+1, d1 = M3_nut_diameter, h = 1, $fn = 6);
                         for(r = [1:6])
                             rotate([0, 0, r*360/6])
@@ -209,10 +213,10 @@ module 888_4008(draft = false){
                     translate([0, 3 + 4.5 + blade_mount_screw/2, 4])   // Tloušťka pomocné ucpávky v místě díry pro šroub je asi 0.35 mm (pro z = 3.6 už vede díra skrz)
                       cylinder(d = blade_mount_screw, h = 4, $fn = 20);
 
-                    translate([0, 3 + 4.5 + blade_mount_screw/2, screws_h/2+thickness/2-7])
-                      cylinder(d = M3_nut_diameter, h = 2.5, $fn = 6);
-                    translate([0, 3 + 4.5 + blade_mount_screw/2+4, screws_h/2+thickness/2-7+2.5/2])
-                      cube([M3_nut_diameter, 8  ,  2.5], center = true);
+                    translate([0, 3 + 4.5 + blade_mount_screw/2, screws_h/2+thickness/2-7-0.5])
+                      cylinder(d = M3_nut_diameter+0.5, h = 3, $fn = 6);
+                    translate([0, 3 + 4.5 + blade_mount_screw/2+4, screws_h/2+thickness/2-7+3/2-0.5])
+                      cube([M3_nut_diameter+0.5, 8  ,  3], center = true);
 
 
                   }
@@ -236,5 +240,5 @@ rotate([0,0,-360*$t])
 intersection()
 {
     888_4008(false);
-    cube([50,50,50]);
+    //cube([50,50,50]);
 }
