@@ -52,3 +52,4 @@ In case you want to contribute to the open-source project we have a [contributio
 ## References 
 
 * [TF-G2: PX4 powered autogyro](https://static.sched.com/hosted_files/px4summit2021/ca/TF-G2%20PX4%20powered%20autogyro.pdf)
+* ["Flight control system for a small autogyro" bachelor thesis](https://dspace.cvut.cz/handle/10467/101004)
