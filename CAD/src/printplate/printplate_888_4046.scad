@@ -2,8 +2,8 @@
 
 include <../../parameters.scad>
 
-use <../888_4046.scad>
+use <../888_4046_2.scad>
 
-Protective_cylinder(draft = false);
+888_4046();
 
 
