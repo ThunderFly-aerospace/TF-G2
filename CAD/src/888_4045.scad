@@ -187,7 +187,7 @@ module Mill_butterfly(draft, offset = 0){
 
             }
          R_zaobleni = 2;
-          cylinder(r=R_zaobleni+offset, h= 20, , $fn = draft?6:30);
+          cylinder(r=R_zaobleni+offset, h= 20,  $fn = draft?6:30);
             }
 }
 
@@ -317,7 +317,7 @@ propojeni = 0;
                                 }
                             }
                         }
-                        cylinder(r=R_zaobleni, h= 5, , $fn = draft?20:30);
+                        cylinder(r=R_zaobleni, h= 5,  $fn = draft?20:30);
                     }
 
 
@@ -354,7 +354,7 @@ module Cu_butterfly_wire(draft){
                  cube([3,3,10],center = true);
              }
              R_zaobleni = 1;
-             cylinder(r=R_zaobleni, h= 20, , $fn = draft?5:30);
+             cylinder(r=R_zaobleni, h= 20,  $fn = draft?5:30);
          }
          }
 
@@ -369,7 +369,7 @@ module Cu_unmasked(draft = true){
                Mill_butterfly(draft);
 
               R_zaobleni = 0.5;
-             cylinder(r=R_zaobleni, h= 20, , $fn = draft?5:30);
+             cylinder(r=R_zaobleni, h= 20,  $fn = draft?5:30);
 
 
            }

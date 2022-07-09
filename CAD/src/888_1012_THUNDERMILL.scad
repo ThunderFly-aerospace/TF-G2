@@ -70,19 +70,6 @@ starter_rope_d = 39.2;
         
       
 
-
- // sloupky pro upevnění disku mlýnku
-       module Sloupek(draft = true){
-              rotate([0, 90, 0])
-           difference(){
-                cylinder(d = 4.3, h = Vyska_sloupku, $fn = draft?16:120);
-               cylinder(d = Self_screw_diameter, h = Vyska_sloupku, $fn = draft?16:120);
-
-     }
-        }
-
-
-
 module bearing_house(breaking_groove = true, draft = true){
     ZmenseniTiskDno = 0.1;
     TloustkaDna = TloustkaDna+ZmenseniTiskDno;
@@ -282,16 +269,10 @@ module 888_1012(draft = true){
                 cube([bearing_outer_diameter, bearing_outer_diameter + Bwall*2 +PridavnaSirkaNaSpojeniDilu, bearing_outer_diameter + Bwall*2+3]);
 
       // Prodloužení děr ve sloupcích pro připevnění disku
-          rotate([0, 90, 0]){
-
-               translate([ -bearing_outer_diameter/2 - Bwall-PosunZsl,  PosunYsl, -5])
-             cylinder(d = Self_screw_diameter, h = Vyska_sloupku+10, $fn = draft?16:120);
-
-              translate([ -bearing_outer_diameter/2 - Bwall-PosunZsl,  -PosunYsl, -5])
-             cylinder(d = Self_screw_diameter, h = Vyska_sloupku+10, $fn = draft?16:120);
-         }
-
-
+          rotate([0, 90, 0])
+             for(i=[-1,1])
+                translate([ -bearing_outer_diameter/2 - Bwall-PosunZsl,  i*PosunYsl, -5])
+                    cylinder(d = Self_screw_diameter, h = Vyska_sloupku+10, $fn = draft?16:120);         
     }
 
   // Západky pro uchycení válce
@@ -312,20 +293,28 @@ module 888_1012(draft = true){
        cube([10, 50, 40], true);
 
     }
- //Sloupky pro uchycení mlýnku
-    translate([rod_size/2, PosunYsl,  PosunZsl])
-    Sloupek();
-    translate([rod_size/2, -PosunYsl,  PosunZsl])
-    Sloupek();
+    
+    //Sloupky pro uchycení mlýnku
+    for(i=[-1,1])
+    translate([rod_size/2, i*PosunYsl,  PosunZsl])
+        rotate([0, 90, 0])
+           difference(){
+                cylinder(d = 4.3, h = Vyska_sloupku, $fn = draft?16:120);
+                cylinder(d = Self_screw_diameter, h = Vyska_sloupku+0.2, $fn = draft?16:120);
 
+           }
+
+   //tretí sloupek
    translate([rod_size/2, 0, 22.6])
         rotate([0, 90, 0])
            difference(){
-               union(){
+               union()
+               {
+                
                 cylinder(d = 4.3, h = Vyska_sloupku, $fn = draft?16:120);
                 translate([0.1, 0, 1.3-4])
                 cube([4.5, 15, 7], true);
-                   }
+               }
                translate([0, 0, -7])
                cylinder(d = Self_screw_diameter, h = Vyska_sloupku+10, $fn = draft?16:120);
 
@@ -407,8 +396,9 @@ difference(){
 
 }
 
-888_1012(draft=true);
+888_1012(draft=false);
 
 
- translate([0, 0, -bearing_outer_diameter/2 - Bwall - 20])
- bearing_house();
+
+ /*translate([0, 0, -bearing_outer_diameter/2 - Bwall - 20])
+ bearing_house();*/
