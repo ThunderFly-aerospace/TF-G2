@@ -18,6 +18,7 @@ base_length = 290; //delka podlozky
 base_split_position = [0, 149, base_length];
 base_width = 70; //sirka podlozky - vnější šířka nosníku
 base_thickness = 3; //vyska podlozky
+autopilot_base_thickness = 4; // vyska podlozky vysuzujici prostor pod autopilotem
 rantl_thickness = 3; //sirka steny podlozky
 rantl_height = 6.5;
 niy=4; //pocet der podelne
@@ -120,6 +121,10 @@ rotor_blade_part_list = [0, 50, 200, 350, 500];
 // Otvory pro pripevneni na platformu
 platform_mount_points = [base_patern*8, base_patern*26];
 
+cover_rantl_thickness = 0.8; // tloustka rantlu, ktery ma mit ramecek pro pripevneni a zpevneni oblecku.. 
+
+leg_screw_dy = 20; // Vzdalenost sroubu, na ktery se upevnuji podvozkove nohy
+
 /////
 // Parametry rotorové hlavy
 /////
@@ -176,23 +181,23 @@ engine_offset = 53;			// Posun motoru v ose X (dopredu)
 
 
 // Parametry pro hacek na kabely od motoru
-motor_wire_holder_width = 5;
-motor_wire_holder_height = 10;
-motor_wire_holder_space = 3;
-motor_wire_holder_thickness = 2.5;
-motor_wire_holder_z_shift = 10;
-motor_wire_holder_x_shift = 19;
+	motor_wire_holder_width = 5;
+	motor_wire_holder_height = 10;
+	motor_wire_holder_space = 3;
+	motor_wire_holder_thickness = 2.5;
+	motor_wire_holder_z_shift = 10;
+	motor_wire_holder_x_shift = 19;
 
 // Parametry pro ochranny ram nad motorem
-motor_protective_frame_x_shift = 20;
-motor_protective_frame_z_base = 32;
-motor_protective_frame_beam_width = 5;
-motor_protective_frame_beam_thickness = 3;
-motor_protective_frame_width = base_width-3;
-motor_protective_frame_plug_thickness = 2;
-motor_protective_frame_plug_length = 4;
-motor_protective_frame_thickness = 5;
-motor_protective_frame_z_scale = 0.75;
+	motor_protective_frame_x_shift = 20;
+	motor_protective_frame_z_base = 32;
+	motor_protective_frame_beam_width = 5;
+	motor_protective_frame_beam_thickness = 3;
+	motor_protective_frame_width = base_width-3;
+	motor_protective_frame_plug_thickness = 2;
+	motor_protective_frame_plug_length = 4;
+	motor_protective_frame_thickness = 5;
+	motor_protective_frame_z_scale = 0.75;
 
 
 //sroub servo
@@ -250,6 +255,7 @@ pylon_airfoil_shell_overlap = 3;  // presah profilu (krytu) pylonu a montaznich 
 pylon_pipe_d = 10.3;
 pylon_suspension_height = 150;
 pylon_pipe_top_dist = 0;
+pylon_thickness = 0; // Netusim, co to je
 
 pylon_bottom_wall = 5;
 
@@ -260,21 +266,57 @@ pylon_screw_top_y_dist = 25;
 pylon_screw_top_x_dist = 15;
 
 pylon_height = 180 + 50 - pylon_holder_side_mount_height;
-pilot_height_separation = 120 + 30 - pylon_holder_side_mount_height;
-pylon_thickness = 3;
-pylon_beam_width = 10;
-pylon_base_length = 60;
-pylon_ring_length = 40;
-pylon_ring_thickness = 3;
 
 airspeed_width = 35;
 airspeed_naca = 0004;
 airspeed_dist = 20;
 
+
 // Parametry k akumulatoru
 
 //battery_type = "Zippy_4S_3700";
 //  GensACE 3300 mAh
+
+//free-flap-head
+free_flap_ax_length=28;
+free_flap_ax_diameter=3;
+
+free_flap_bearings_length=5;
+free_flap_bearings_outer_diameter=4.6;
+//free_flap_bearings_outer_diameter=3;
+free_flap_negativ_flap_limit=5;
+free_flap_bearing_add=4;
+free_flap_desk_add=1.5;
+free_flap_desk_h=2.5;
+free_flap_central_part_screw_cylinder_h=free_flap_desk_h+2;
+
+free_flap_delta_angle=-rotor_delta_angle;
+free_flap_blade_screw_distance=blade_mount_screw_distance;
+free_flap_central_part_screw=3;
+free_flap_central_part_screw_distance=3 + 4.5 + blade_mount_screw/2;
+
+free_flap_circle_fn=40;
+
+free_flap_ax_offset=6+free_flap_bearing_add/2+free_flap_bearings_outer_diameter/2;
+
+free_flap_shaft_l=free_flap_ax_length-2*free_flap_bearings_length;
+free_flap_shaft_h=free_flap_ax_diameter+free_flap_bearing_add;
+free_flap_shaft_neck_l=7;
+
+free_flap_cut_d=12;
+free_flap_cut_h=2;
+free_flap_cut_w=12;
+
+free_flap_blade_d=20;
+free_flap_blade_holder_h=3;
+
+free_flap_blade_holder_l=blade_mount_length;
+free_flap_blade_h=blade_mount_thickness+0.5;
+free_flap_blade_w=20.7;
+free_flap_blade_first_screw=blade_mount_screw_offset+0.5;
+
+free_flap_blade_holder_radius=0.7*free_flap_blade_holder_h;
+
 
 //if(battery_type == "GensACE_3S_3300"){
 	// battery_case_height = 25;

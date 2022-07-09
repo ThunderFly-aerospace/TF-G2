@@ -65,7 +65,7 @@ module 888_2003(){
 
     wheelWidth     = 6;     // The width (or thickness) of the wheel at the rim.
     tireCSDiameter = 4;     // Cross-sectional diameter (CS) -- How thick is the tire rubber?
-    tireID         = 45+2;    // Internal diameter (ID) -- How wide is the inside opening?
+    tireID         = 65+2;    // Internal diameter (ID) -- How wide is the inside opening?
     tireStretch    = 1.01;  // Circumferential stretch percentage (usually 1 + 0-5%, e.g. 1.02) -- How
                             //   much do you want to stretch it to get it on?
 
@@ -429,7 +429,7 @@ module 888_2003(){
     							circleSpokes( d, wheelWidth, spokeWidth, proportion, numberOfSpokes );
     						} else if ( spokeStyle == "spiral" ) {
     							spiralSpokes( d, wheelWidth, numberOfSpokes,
-    								spokeWidth, curvature, reverse, spiralSpoke);
+    								spokeWidth, curvature,max(hubDiameter,innerCircleDiameter), reverse);
     						}
     					}
 
@@ -588,7 +588,7 @@ module 888_2003(){
     		%cylinder(r=25, h=10, center=true);
     	// Extents
     	translate([knobSize[2]/2,0,0])
-    		rotate([90,90,90])
+//    		rotate([90,90,90]
     			%cube(knobSize, center=true);
     	// foundation
     	translate([-foundationHeight/2,0,0])
@@ -813,18 +813,20 @@ module 888_2003(){
     }
 
     // Spiral pattern spokes
-    module spiralSpokes( diameter, wheelWidth, number, spokeWidth, curvature, reverse ) {
+    module spiralSpokes( diameter, wheelWidth, number, spokeWidth, curvature,hubDiameter, reverse ) {
     	echo( "Spiral Style..." );
     	intersection() {
     		cylinder( h=wheelWidth, r=diameter/2, center = true );
 
-    		for (step = [0:number-1]) {
+    		for (step = [0:number-1])
+            //step=0;
+            {
     		    rotate( a = step*(360/number), v=[0, 0, 1])
-    			spiralSpoke( wheelWidth, spokeWidth, (diameter/4) * 1/curvature, reverse );
+    			spiralSpoke( wheelWidth, spokeWidth, (diameter/4) * 1/curvature,hubDiameter,number, reverse );
     		}
     	}
     }
-    module spiralSpoke( wheelWidth, spokeWidth, spokeRadius, reverse=false ) {
+    module spiralSpoke( wheelWidth, spokeWidth, spokeRadius, hubDiameter, spokeCount, reverse=false ) {
     	render()
     	intersection() {
     		translate ( [-spokeRadius, 0, 0] ) {
@@ -832,9 +834,13 @@ module 888_2003(){
     				cylinder( r=spokeRadius, h=wheelWidth, center=true );
     				cylinder( r=spokeRadius-(spokeWidth/2), h=wheelWidth+1, center=true );
     			}
-                rotate([0, 0, spokeAngle]) translate([spokeRadius - spokeWidth/2, 0, 0] )
-                    rotate([0, 0, 45-spokeAngle/3])
-                        cube([2,2, wheelWidth], center=true);
+                                    
+                  cubeA=hubDiameter*3.1415926/spokeCount;
+                  rotate([0, 0, 2*atan2(hubDiameter/4,spokeRadius)]) 
+                    translate ( [spokeRadius, 0, 0] )
+                      translate([-spokeWidth/4,0,0])
+                        rotate([0,0,45])
+                              cube([cubeA,cubeA, wheelWidth], center=true);
     		}
     		if ( reverse )
     			translate ( [-spokeRadius, -spokeRadius/2, 0] )

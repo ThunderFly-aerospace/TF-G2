@@ -116,10 +116,12 @@ difference(){
     translate([start_x + additional_x_move, start_y + additional_y_move, 6])
     rotate ([0,90,0])
         difference(){
-            translate([suspension_holder_thickness/2 - additional_thickness/2 , suspension_bow_diameter/2 - join_height/2 + additional_height_y_move, additional_width_x_move])
-                cube([suspension_holder_thickness + additional_thickness,
-     join_height + 2*presah + additional_height,
-     join_height + additional_width], center=true);
+            union(){
+                translate([suspension_holder_thickness/2 - additional_thickness/2 , suspension_bow_diameter/2 - join_height/2 + additional_height_y_move, additional_width_x_move])
+                    cube([suspension_holder_thickness + additional_thickness, join_height + 2*presah + additional_height, join_height + additional_width], center=true);
+                translate([suspension_holder_thickness/2 - additional_thickness/2 - cover_rantl_thickness - 0.2, suspension_bow_diameter/2 - join_height/2 + additional_height_y_move, additional_width_x_move])
+                    cube([suspension_holder_thickness + additional_thickness, suspension_join_screw_distance + M3_screw_diameter, suspension_join_screw_distance + M3_screw_diameter], center=true);
+            }
             translate([0,additional_height_y_move,additional_width_x_move])
             mirror_copy([0, 0, 1])
             translate([-0.1, suspension_bow_diameter/2 + presah/2 - M3_screw_diameter/2, suspension_join_screw_distance/2])
@@ -147,19 +149,14 @@ difference(){
     translate([0, -50, -0.5])
       cube([120,130,1.7]);
 
-    // Otvory pro kryt
-    //    - negativ difference (1003 has positive)
-	for(x=platform_mount_points)
-		translate([x, 0, 0])
-			cylinder(d = 8 + additional_edge_thickness/2, h = 20 + suspension_holder_thickness+0.1, $fn=30);
 
     // dolni rada
 	for(x = [20:10:base_length])
 		        translate([x, 0, -0.1 + additional_thickness]){
                     translate([0, 0, -additional_thickness/2])
 	            	cylinder(d = M3_screw_diameter, h = 10 - (M3_head_height + 1.2 + layer_thickness ) + additional_thickness, center = true, $fn = 50);
-    translate([0,0,4.6])
-                cylinder(d = M3_head_diameter, h = M3_head_height + 0.2, $fn = 30, center = true);
+    translate([0,0,4.6 +2])
+                cylinder(d = M3_head_diameter, h = M3_head_height + 0.2 +4, $fn = 30, center = true);
             }
 
 
@@ -168,8 +165,8 @@ difference(){
 	        translate([x, -bellow - 5, -0.1 +additional_thickness]){
                 translate([0, 0, -additional_thickness/2])
 	            cylinder(d = M3_screw_diameter, h = 10 - (M3_head_height + 1.2 + layer_thickness ) +  additional_thickness, center = true, $fn = 50);
-                translate([0,0,4.6])
-                cylinder(d = M3_head_diameter, h = M3_head_height + 0.2, $fn = 30, center = true);
+                translate([0,0,4.6+2])
+                cylinder(d = M3_head_diameter, h = M3_head_height + 0.2 +4, $fn = 30, center = true);
             }
      // box for week
      translate([28, 3.5, side_base_thickness-0.4])
@@ -189,13 +186,16 @@ difference(){
        }
    }
         }
-        // pojezdny prouzek     
-     translate([30, // FIXME
-            additional_y_move -35 + (fiberglass_gear? 0 : fiberglass_gear_additional_height) 
-        , 0.5])
-        rotate([45, 0 ,0])
-         cube([join_height + additional_width/2 + (long_slider?2*presah:0), 1 + (long_slider?0.1:0), 1 + (long_slider?0.1:0) // FIXME spravnou delku + presah pro odebrani z krytu
-]); 
+
+        
+
+//        // pojezdny prouzek     
+//     translate([30, // FIXME
+//            additional_y_move -35 + (fiberglass_gear? 0 : fiberglass_gear_additional_height) 
+//        , 0.5])
+//        rotate([45, 0 ,0])
+//         cube([join_height + additional_width/2 + (long_slider?2*presah:0), 1 + (long_slider?0.1:0), 1 + (long_slider?0.1:0) // FIXME spravnou delku + presah pro odebrani z krytu
+// ]); 
         
         // pro odebrani casti, ktera by se prekryvala s krytem 2005
     if(add_fiberglass_gear){

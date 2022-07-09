@@ -20,6 +20,8 @@ side_wall = 2;
 
 pylon_mount_adapter_center_distance = airspeed_dist/2+4;
 
+function 888_1010_rotor_head_width()=airspeed_width-2*(side_wall+1);
+
 module 888_1010() translate([40*0.3, 0, 0]) {
 
      translate([-7, airspeed_width/2, 0])
@@ -31,7 +33,10 @@ module 888_1010() translate([40*0.3, 0, 0]) {
 
     difference(){
             union(){
-                translate([0, 0, 0]) rotate([180, 0, 180]) tfslot_888_1001(bolts=false);
+                translate([0, 0, 0]) rotate([180, 0, 180]) 
+                //tfslot_888_1001(35, true);
+                tfslot_888_1001(one_part=true, plastfast_screw = 20, cap_hole = 1);
+
 
                 for(m = [0, 1]) mirror([0,m,0]) difference(){
                     union(){
@@ -163,44 +168,6 @@ module 888_1010() translate([40*0.3, 0, 0]) {
     }
 }
 
-module 888_1010_cap() {
-    difference() {
-        intersection() {
-            translate([12, 0, -7.5])
-            rotate([0, 180, 0])
-            tfslot_888_1002(bolts=false);
-            
-            translate([-10, 0, 15])
-            cube([50, 35-.02, 20], center=true);
-        }
-        
-        // airspeed senzor diry pro srouby
-        union() {
-            translate([2, (15+6)/2, 8.01+5])
-            union() {
-                cylinder(d = 2.5, h = 10, $fn=20);
-                translate([0, 0, 6])
-                cylinder(d = 8, h = 10, $fn=20);
-            }
-            
-            translate([2, -(15+6)/2, 8.01+5])
-            union() {
-                cylinder(d = 2.5, h = 10, $fn=20);
-                translate([0, 0, 6])
-                cylinder(d = 8, h = 10, $fn=20);
-            }
-        }
-        
-        translate([-10, -25-35/2+3.5, 15])
-        cube([50, 50, 50], center=true);
-        
-        translate([-10, 25+35/2-3.5, 15])
-        cube([50, 50, 50], center=true);
-    }
-}
-
 //difference(){
     888_1010();
 //translate([-100, 0, -100]) cube(200); }
-
-#888_1010_cap();

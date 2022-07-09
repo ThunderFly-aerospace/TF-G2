@@ -1,196 +1,236 @@
-
-//@set_slicing_config(../slicing/default.ini)
 include <../parameters.scad>
 
-use <./888_4002.scad>
-use <./888_4004.scad>
-use <./888_4005.scad>
-use <./888_4006.scad>
-use <./888_4007.scad>
+
+module 888_4010(colective=-0.5)
+{
+
+ax_length=free_flap_ax_length;
+ax_diameter=free_flap_ax_diameter;
+
+bearings_length=free_flap_bearings_length;
+bearings_outer_diameter=free_flap_bearings_outer_diameter;
+negativ_flap_limit=free_flap_negativ_flap_limit;
+bearing_add=free_flap_bearing_add;
+desk_add=free_flap_desk_add;
+desk_h=free_flap_desk_h;
+central_part_screw_cylinder_h=free_flap_central_part_screw_cylinder_h;
+
+delta_angle=free_flap_delta_angle;
+blade_screw_distance=free_flap_blade_screw_distance;
+central_part_screw=free_flap_central_part_screw;
+central_part_screw_distance=free_flap_central_part_screw_distance;
+
+circle_fn=free_flap_circle_fn;
+ax_offset=free_flap_ax_offset;
+
+shaft_l=free_flap_shaft_l-0.2;
+shaft_h=free_flap_shaft_h;
+shaft_neck_l=free_flap_shaft_neck_l;
+
+cut_d=free_flap_cut_d;
+cut_h=free_flap_cut_h;
+cut_w=free_flap_cut_w;
+
+blade_d=free_flap_blade_d;
+blade_holder_h=free_flap_blade_holder_h;
+
+blade_holder_l=free_flap_blade_holder_l;
+blade_h=free_flap_blade_h;
+blade_w=free_flap_blade_w;
+blade_first_screw=free_flap_blade_first_screw;
+
+blade_holder_radius=free_flap_blade_holder_radius;
+rubber_spring_d=5;
 
 
-angle_between_blades = 360 / rotor_blades_count;
-blade_holder_widh = blade_mount_width;
-rotor_center_plate_size = 30;
-rotor_mounting_plate_size = 20;
-shaft_diameter = 6.1;
-thickness = 2.3;
-blade_screws_distance = (16.47+11.86)/2;
+difference()
+{
+    union()
+    {
 
-edge_distance = 15;
-spacer_disc_diameter = 3 * blade_mount_screw;
-spare_disc_height = 0.6;
+        hull()
+        {
 
-module 888_4010_rotorhead_assembly() {
-	888_4002(); // trhaci podlozka
+        //shaft
+        rotate([0,0,delta_angle])
+            rotate([90,0,0])
+                cylinder(d=shaft_h,h=shaft_l,center=true,$fn=circle_fn);
 
-    for(r = [180, 0])
-		rotate([0, 0, r])
-		translate([-8.5, -36, 0])
-		rotate([180, 0, 90])
-		888_4004(); // podlozky rotoru spodni
+        //shaft neck
+        rotate([0,0,delta_angle])
+            translate([shaft_neck_l-0.05,0,0])
+                cube([.01,shaft_l,shaft_h],center=true);
+        }
 
-	translate([0, 0, 1.8])
-	rotate([0, 0, 90-25])
-	888_4005(); // pevna podlozka
+        hull()
+        {
 
-    for(r = [180, 0])
-		rotate([0, 0, r])
-		translate([0, 0, 1.8])
-		888_4006(); // podlozky rotoru horni
+            //shaft neck
+            rotate([0,0,delta_angle])
+                translate([shaft_neck_l-0.05,0,0])
+                    cube([.01,shaft_l,shaft_h],center=true);
 
-	translate([0, 0, 1.8+12.5])
-	rotate([0, 180, 0])
-	888_4007(); // utahovací matka
+
+            //printing support
+            rotate([colective,0,0])
+                translate([cut_d-2-cut_d/4,-blade_w/4,0])
+                    cube([cut_d/2,blade_w/2,cut_h],center=true);
+
+            /*//cut neck
+            translate([cut_d-0.5,0,0])
+                cube([1,cut_w,cut_h],center=true);
+            }
+
+            hull()
+            {*/
+            //cut neck
+            translate([cut_d-0.5,0,0])
+                cube([1,cut_w,cut_h],center=true);
+
+            //blade hodler
+            rotate([colective,0,0])
+                for(i=[-1,1])
+                    for(j=[-1,1])
+                        translate([blade_d+blade_holder_l/2,i*(blade_w/2-blade_holder_radius/2),j*((2*blade_holder_h+blade_h)/2-blade_holder_radius/2)])
+                            rotate([0,90,0])
+                                cylinder(d=blade_holder_radius,h=blade_holder_l,center=true,$fn=circle_fn);
+
+            /*translate([blade_d+blade_holder_l/2,0,0])
+                rotate([0,90,0])
+                    cylinder(d=2*blade_holder_h+blade_h,h=blade_holder_l,center=true,$fn=circle_fn);*/
+
+        }
+
+        // rotor blade spring
+        hull()
+        {
+            //shaft neck
+            rotate([0,0,delta_angle])
+                translate([shaft_neck_l-0.05,0,0])
+                    cube([.01,shaft_l,shaft_h],center=true);
+
+            //printing support
+            rotate([colective,0,0])
+                translate([cut_d-2-cut_d/4,-blade_w/4,0])
+                    cube([cut_d/2,blade_w/2,cut_h],center=true);
+
+            //rubber ring holder
+            rotate([colective,0,0])
+              translate([blade_d,-blade_holder_radius/2,((3*blade_holder_h+blade_h)/2)])
+                    rotate([90,0,0])
+                        cylinder(d=2*rubber_spring_d,h=blade_w-blade_holder_radius,center=true,$fn=circle_fn);
+        }
+
+        //blade hodler screw nuts cylnders
+        rotate([colective,0,0])
+        {
+            translate([blade_first_screw+blade_d,0,-(2*blade_holder_h+blade_h)/2])
+                cylinder(d=10,h=M3_nut_height,center=true,$fn=circle_fn);
+
+            translate([blade_screw_distance+blade_first_screw+blade_d,0,-(2*blade_holder_h+blade_h)/2])
+                cylinder(d=10,h=M3_nut_height,center=true,$fn=circle_fn);
+        }
+
+        //krčky pro matičky
+       rotate([0,0,delta_angle])
+       {
+          for(yy =[-4,4])
+             translate([ax_diameter/2+M3_screw_diameter/2,yy,3])
+             {
+                cylinder(d=M3_nut_diameter+1.5,h=M3_nut_height,center=true,$fn=100);
+             }
+       }
+    }
+
+
+    rotate([colective,0,0])
+      translate([blade_d,-blade_holder_radius/2,((3*blade_holder_h+blade_h)/2+1)])
+      {
+            rotate([90,0,0])
+                cylinder(d=rubber_spring_d,h=blade_w,center=true,$fn=circle_fn);
+            translate([rubber_spring_d/2,0,-rubber_spring_d/12])
+                cube([cut_d/2,blade_w,rubber_spring_d-rubber_spring_d/6],center=true);
+      }
+
+
+    //díra pro list
+    rotate([colective,0,0])
+    {
+        hull()
+        {
+            translate([blade_d+blade_holder_l/2,0,0])
+                cube([blade_holder_l+0.1,blade_w+0.1,blade_h],center=true);
+            translate([blade_d,0,0])
+                rotate([90,0,0])
+                    cylinder(d=blade_h,h=blade_w+0.1,center=true,$fn=100);
+            translate([blade_d-5,0,0])
+                sphere(d=blade_h*3/4, $fn=100);
+        }
+
+        //díry pro přišroubování listu
+        translate([blade_first_screw+blade_d,0,0])
+            cylinder(d=blade_mount_screw,h=2* (blade_h+2*blade_holder_h),center=true,$fn=circle_fn);
+
+        translate([blade_first_screw+blade_d,0, 2* (blade_h+blade_holder_h)+1])
+            cylinder(d=M3_head_diameter_ISO7380,h=2* (blade_h+2*blade_holder_h),center=true,$fn=circle_fn);
+
+
+        translate([blade_screw_distance+blade_first_screw+blade_d,0,0])
+            cylinder(d=blade_mount_screw,h=2* (blade_h+2*blade_holder_h),center=true,$fn=circle_fn);
+
+
+        //matičky
+        translate([blade_first_screw+blade_d,0,-(2*blade_holder_h+blade_h)/2-0.1])
+            cylinder(d=M3_nut_diameter,h=M3_nut_height,center=true,$fn=6);
+
+        translate([blade_screw_distance+blade_first_screw+blade_d,0,-(2*blade_holder_h+blade_h)/2-0.1])
+            cylinder(d=M3_nut_diameter,h=M3_nut_height,center=true,$fn=6);
+
+          //popisky
+        translate([blade_first_screw+blade_d+blade_screw_distance/2, 0, (2*blade_holder_h+blade_h)/2-0.1])
+          linear_extrude(4)
+                text(str(colective), size = 4, halign="center", valign="center");
+    }
+
+    //zabroušení usazení a díra pro osu
+    rotate([0,0,delta_angle])
+    {
+        translate([0,shaft_l,0])
+            cube([2*shaft_neck_l,shaft_l,2*shaft_h],center=true);
+        translate([0,-shaft_l,0])
+            //cube([4*shaft_neck_l,shaft_l,2*shaft_h],center=true);
+            cube([2*shaft_neck_l,shaft_l,2*shaft_h],center=true);
+
+        //díra pro osu
+        rotate([90,0,0])
+            cylinder(d=ax_diameter,h=shaft_l+1,center=true,$fn=circle_fn);
+        translate([ax_diameter/2+3.5-0.1,0,0])
+            cube([7,shaft_l+1,1],center=true);
+
+        //přitažení osičky
+        for(yy =[-4,4])
+            translate([ax_diameter/2+M3_screw_diameter/2,yy,0])
+            {
+                cylinder(d=M3_screw_diameter,h=15,center=true,$fn=100);
+                //matička
+                translate([0,0,4])
+                    rotate([0,0,30])
+                        cylinder(d=M3_nut_diameter,h=3,center=true,$fn=6);
+                //šroubek
+                translate([0,0,-4])
+                    cylinder(d=7.1,h=M3_head_height,center=true,$fn=100);
+            }
+    }
+
+}
 }
 
-module 888_4010_cam() {
-	// camera body
-	translate([-(59.2-10)/2, -(40.6-10)/2, 0])
-	minkowski() {
-		cylinder(d=10, h=30, $fn=30);
-
-		cube([59.2-10, 40.6-10, .01]);
-	}
-	
-	// camera view visual
-	translate([0, 0, 30])
-	cylinder(d1=12, d2=30, h=40, $fn=30);
-
-	// photo screw
-	translate([0, -40.6/2+.1, 15])
-	rotate([90, 0, 0])
-	cylinder(d=6.5, h=10, $fn=30);
-
-	// record button
-	translate([-59.2/2+15, 40.6/2-.1, 14])
-	rotate([-90, 0, 0])
-	cylinder(d=13.5, h=10, $fn=30);
-
-	// power button
-	translate([59.2/2-13, 40.6/2-.1, 14])
-	rotate([-90, 0, 0])
-	cylinder(d=10.5, h=10, $fn=30);
-}
-
-module 888_4010_rotor_washer(thickness=2.3) {
-	translate([0,0,thickness/2])
-	rotate([0,0, -rotor_delta_angle])
-	difference() {
-		union(){
-			rotate([0, 0, -90+rotor_delta_angle])
-			hull(){
-				cube([40, 20, thickness], center=true);
-
-				for (i = [0:rotor_blades_count]){
-					rotate([0,0, i*angle_between_blades])
-						translate([0, blade_screws_distance, 0])
-							cube([blade_holder_widh, blade_screws_distance/2, thickness], center = true);
-				}
-			}
-		}
-
-		cylinder(d = M3_screw_diameter, h = 3* thickness, center = true, $fn = 20);
-		for (i = [1:rotor_blades_count]){
-			rotate([0, 0, i*angle_between_blades + angle_between_blades/2 + 180])
-				translate([0, edge_distance, 0])
-					cube([50, 15, 10], center = true);
-
-			if (rotor_blades_count/2 == round(rotor_blades_count/2))  // check if there is even or odd blade number
-			{
-				rotate([0,0, i*angle_between_blades])
-					translate([0, 3 + 4.5 + blade_mount_screw/2, 0]) {
-						cylinder(d = blade_mount_screw, h = 10, center = true, $fn = 20);
-					}
-			}
-			else
-			{
-				rotate([0,0, i*angle_between_blades - angle_between_blades/2 ])
-					translate([0, 3 + 4.5 + blade_mount_screw/2, 0]) {
-						cylinder(d = blade_mount_screw, h = 10, center = true, $fn = 20);
-					}
-			}
-		}
-
-	// space for rotor fixing nut
-	translate([0,0,thickness-thickness/2+0.5])
-		cylinder(d = spacer_disc_diameter, h = thickness + 0.5, $fn = 100);
-
-	}
-}
-
-module 888_4010() {
-	difference() {
-		union() {
-			difference() {
-				hull() {
-					translate([0, 3.4, (59.2+4)/2+18])
-					cube([20, 40.6+4, 59.2+4], true);
-					
-					translate([0, 0, thickness*2+1.8])
-					888_4010_rotor_washer();
-				}
-
-				translate([-15-0.75, 3.5, 59.2/2+20])
-				rotate([0, 90, 0])
-				888_4010_cam();
-
-				cylinder(d=M3_screw_diameter, h=30, $fn=30);
-			}
-
-			888_4010_rotor_washer(thickness*2+2);
-		}
-
-		translate([0, 0, thickness])
-		hull() {
-			translate([0, 0, 2.5])
-			cube([30, 30, 5], center=true);
-
-			translate([0, 0, 14])
-			cube([30, 25, 5], center=true);
-		}
-		
-		/*
-		translate([0, -(40.6+6)/2+3, (59.2+4)/2+18])
-		cube([30, .6, 15], center=true);
-	
-		translate([0, -(40.6+6)/2+.3, (59.2+4)/2+18-7.5])
-		cube([30, 6, .6], center=true);
-	
-		translate([0, -(40.6+6)/2+6-.3, (59.2+4)/2+18+7.5])
-		cube([30, 6, .6], center=true);
-		*/
-
-		translate([-25, 3.4, 59.2-5+20])
-		rotate([0, 90, 0])
-		for(i=[0:1:1]) {
-			mirror([0, i, 0])
-			translate([0, -(40.6-10)/2, 0])
-			difference() {
-				cylinder(d=40, h=40, $fn=30);
-
-				translate([0, 0, -.01])
-				cylinder(d=14, h=50, $fn=30);
-
-				translate([0, 25, 25])
-				cube([50, 50, 60], center=true);
-
-				translate([25, 0, 25])
-				cube([50, 50, 60], center=true);
-			}
-		}
-	}
-}
-
+/*intersection()
+{
+    888_4010();
+    translate([0,46,0])
+        rotate([0,0,free_flap_delta_angle])
+            cube([100,100,100], center=true);
+}*/
 
 888_4010();
-
-translate([-15-0.75, 3.4, 59.2/2+20])
-rotate([0, 90, 0])
-#888_4010_cam();
-
-translate([0, 0, thickness])
-rotate([0, 0, 90])
-#888_4010_rotorhead_assembly();
-
-

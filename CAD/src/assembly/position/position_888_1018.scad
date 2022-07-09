@@ -9,5 +9,5 @@ use <../../888_1018.scad>
 //translate([0, battery_case_start_x + 70, -bellow])
 
 color("red")
-translate([90, 0, -6.5])
+translate([90, 0, -7])
     888_1018();

@@ -7,11 +7,11 @@ include <position/position_888_1001.scad>
 include <position/position_888_1002.scad>
 //include <position/position_888_1006.scad>
 include <position/position_888_1003.scad>
-/* include <position/position_888_1007.scad>
-include <position/position_888_1008.scad>
-include <position/position_888_1009.scad>
-include <position/position_888_1013.scad>
-include <position/position_888_1018.scad> */
+//include <position/position_888_1007.scad>
+//include <position/position_888_1008.scad>
+//include <position/position_888_1009.scad>
+//include <position/position_888_1013.scad>
+include <position/position_888_1018.scad>
 include <position/position_888_1021.scad>
 //include <position/position_rotor.scad>
 //include <../888_1016.scad>
