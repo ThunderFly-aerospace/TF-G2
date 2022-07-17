@@ -2,7 +2,7 @@ include <../parameters.scad>
 
 module 888_4008()
 {
-    h=21.4;
+    h=21.6;
     top_d=27;
     center_d=30;
     center_h=3;

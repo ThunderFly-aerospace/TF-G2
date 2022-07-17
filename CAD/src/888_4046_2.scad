@@ -7,7 +7,7 @@ module 888_4046()
 {
     outer_d=50;
     inner_d=28;
-    h=1.4;
+    h=1.0;
     
     rpm_outer_dst=24;
     rpm_inner_dst=20;
@@ -29,7 +29,7 @@ module 888_4046()
     
     pcb_h=2.0;
     key_b=1.4;
-    key_t=0.6;
+    key_t=0.4;
     key_h=pcb_h+key_b+key_t;
     key_l=10;
     key_dst=8;
@@ -80,8 +80,18 @@ module 888_4046()
     rotate([0,0,-pcb_screw1_to_rpm_angle])
     difference()
     {
-        translate([key_dst,-key_l/2,-(key_h-key_t)])
-               cube([key_d,key_l,key_h]);
+        union()
+        {
+            translate([key_dst,-key_l/2,-(key_h-key_t)])        
+                cube([key_d,key_l,key_h]);
+        
+            //rozširení spojení
+            ll=2.35*key_l;
+            translate([key_dst,-ll/2,0])        
+                cube([key_d,ll,key_t]);
+        }
+        
+        
         
         difference()
         {        
@@ -112,10 +122,10 @@ module 888_4046()
     rotate([0,0,-pcb_screw1_to_rpm_angle])
     {
         translate([key_dst,0,h/2])
-            cube([1,key_l,h],center=true);
+            cube([1,2.1*key_l,h],center=true);
    
         translate([key_dst+key_d/2,0,h/2])
-            cube([1,key_l,h],center=true);
+            cube([1,1.3*key_l,h],center=true);
     }
     
 }
