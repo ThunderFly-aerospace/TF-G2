@@ -236,6 +236,8 @@ uhel_x = 90 - 79;
 
 maximum_printable_size = 150;
 
+// FIXME: Jak zapnout figerglass z procesoru3d ?
+// fiberglass_gear = false;
 
 
 // Rotor pylon parameters

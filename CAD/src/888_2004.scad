@@ -17,6 +17,7 @@ sides_split_positions = [-5, length/3-5, length/3*2, length];
 side_base_thickness = 0.2*6;
 
 additional_edge_thickness = 0.1;
+additional_slider_thickness = 0.1;
 
 suspension_holder_thickness = 0.41*15;
 suspension_bow_diameter = 200;      //cylinder_r1
@@ -187,16 +188,18 @@ difference(){
    }
         }
 
-        
 
-//        // pojezdny prouzek     
-//     translate([30, // FIXME
-//            additional_y_move -35 + (fiberglass_gear? 0 : fiberglass_gear_additional_height) 
-//        , 0.5])
-//        rotate([45, 0 ,0])
-//         cube([join_height + additional_width/2 + (long_slider?2*presah:0), 1 + (long_slider?0.1:0), 1 + (long_slider?0.1:0) // FIXME spravnou delku + presah pro odebrani z krytu
-// ]); 
-        
+
+        // pojezdny prouzek  = slider
+     translate([30, // FIXME
+            additional_y_move -35 + (fiberglass_gear? 0 : fiberglass_gear_additional_height)
+        , 0.5])
+        rotate([45, 0 ,0])
+         cube([join_height + additional_width/2 + (long_slider?2*presah:0),
+               1 + (long_slider?additional_slider_thickness:0),
+               1 + (long_slider?additional_slider_thickness:0) // FIXME spravnou delku + presah pro odebrani z krytu
+              ]);
+
         // pro odebrani casti, ktera by se prekryvala s krytem 2005
     if(add_fiberglass_gear){
      rotate([fiberglass_gear_oblique_angle, 0 ,0])
