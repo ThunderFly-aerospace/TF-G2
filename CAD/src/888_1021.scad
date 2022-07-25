@@ -2,7 +2,7 @@
 include <../parameters.scad>
 
 module 888_1021(){
-    base_thickness = autopilot_base_thickness;
+    base_thickness = autopilot_base_thickness+0.4;
     translate([base_length - base_patern*8, 0, 0])
         difference(){
                 hull(){
@@ -16,9 +16,16 @@ module 888_1021(){
                 {
                         translate([i,j*base_patern,-0.1])
                             cylinder(h=base_thickness+0.2, d=M3_screw_diameter, $fn=50);
+                        
+                }               
+
+                for (i=[10:base_patern*2:base_patern*6], j=[-1, 1])
+                {
                         translate([i,j*base_patern,base_thickness-M3_nut_height])
                             cylinder(h=base_thickness, d=M3_nut_diameter, $fn=6);
-                }
+                }               
+
+
         }
 }
 
