@@ -11,8 +11,8 @@ suspension_holder_thickness = 0.41*15;
 suspension_camber = -2; // úhel zakončení, délka konstrukce
 suspension_join_length = 22;
 suspension_join_screw_distance = 20; // zvetsit na 20 nebo více po vyřešění: https://github.com/ThunderFly-aerospace/TF-G2/issues/86
-suspension_bow_diameter = 200;      //cylinder_r1
-suspension_bow_diameter_1 = 200 - 2*zmenseni;
+suspension_bow_diameter = 300;      //cylinder_r1
+suspension_bow_diameter_1 = 300 - 2*zmenseni;
 
 wheel_mount_thickness = 13;
 
@@ -51,14 +51,14 @@ module 888_2002(){
             cylinder(cylinder_h,0,suspension_bow_diameter/2);
 
         //odstranění zbylého kužele
-        translate([0,-100,-200])
-            cube([200,200,400]);
-        translate([-100,0,-200])
-            cube([200,200,400]);
-        translate([-100,-100,join_height - 0.1])
-            cube([200,200,400]);
-        translate([-100,-100,-400 - join_height + 0.1])
-            cube([200,200,400]);
+        translate([0,-suspension_bow_diameter/2,-suspension_bow_diameter])
+            cube([suspension_bow_diameter,suspension_bow_diameter,2*suspension_bow_diameter]);
+        translate([-suspension_bow_diameter/2,0,-suspension_bow_diameter])
+            cube([suspension_bow_diameter,suspension_bow_diameter,2*suspension_bow_diameter]);
+        translate([-suspension_bow_diameter/2,-suspension_bow_diameter/2,join_height - 0.1])
+            cube([suspension_bow_diameter,suspension_bow_diameter,2*suspension_bow_diameter]);
+        translate([-suspension_bow_diameter/2,-suspension_bow_diameter/2,-2*suspension_bow_diameter - join_height + 0.1])
+            cube([suspension_bow_diameter,suspension_bow_diameter,2*suspension_bow_diameter]);
 
         //dutý
         difference(){
@@ -85,12 +85,12 @@ module 888_2002(){
             m = i*(join_height/4/(cuts*2));
             rotate([0, 0, -90 + rot[i]]) {
                 if (i % 2 == 0) {
-                    translate([0, 0, (join_height/2 - m)/2 + 0])
+                    translate([0, 0, (join_height/2 - 1.5*m)/2 + 0])
                         rotate([90,30+1.8,0])
                             cylinder(h = suspension_bow_diameter, r = join_height/3 - m - 1, $fn=3);
                 }
                 else {
-                    translate([0, 0, (join_height/2 - m - 1)/2 + (join_height/2 * sqrt(3))/4 + 0])
+                    translate([0, 0, (join_height/2 - 4*m - 1)/2 + (join_height/2 * sqrt(3))/4 + 0])
                         rotate([90,-30-1.8,0])
                             cylinder(h = suspension_bow_diameter, r = join_height/3 - m - 1, $fn=3);
                 }

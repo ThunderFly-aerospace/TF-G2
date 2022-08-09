@@ -3,6 +3,8 @@
 include <../../parameters.scad>
 use <../888_2002.scad>
 
+$fn = 90;
+
 translate([0,0,0]) // odhadnute posunuti na podlozku
   rotate([1.8, 1.8, 0]) // naklon vytisku aby sedel na podlozku dle orezu v 888_2002.scad
     888_2002();
