@@ -822,7 +822,11 @@ module 888_2003(){
             //step=0;
             {
     		    rotate( a = step*(360/number), v=[0, 0, 1])
-    			spiralSpoke( wheelWidth, spokeWidth, (diameter/4) * 1/curvature,hubDiameter,number, reverse );
+                {
+                    spiralSpoke( wheelWidth, spokeWidth, (diameter/4) * 1/curvature,hubDiameter,number, reverse );
+                    rotate([0,0,20])
+                    spiralSpoke( wheelWidth, spokeWidth, (diameter/4) * 1/curvature,hubDiameter,number, true );
+                }
     		}
     	}
     }
