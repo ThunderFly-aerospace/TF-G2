@@ -256,7 +256,7 @@ module 888_2003(){
 
     // Quality Parameters:
 
-    $fn = 50;  // Default quality for most circle parts.
+    $fn = 240;  // Default quality for most circle parts.
 
 
     /////////////////////////////////////////////////////////////////////////////
@@ -824,7 +824,7 @@ module 888_2003(){
     		    rotate( a = step*(360/number), v=[0, 0, 1])
                 {
                     spiralSpoke( wheelWidth, spokeWidth, (diameter/4) * 1/curvature,hubDiameter,number, reverse );
-                    rotate([0,0,20])
+                    rotate([0,0,8])
                     spiralSpoke( wheelWidth, spokeWidth, (diameter/4) * 1/curvature,hubDiameter,number, true );
                 }
     		}
