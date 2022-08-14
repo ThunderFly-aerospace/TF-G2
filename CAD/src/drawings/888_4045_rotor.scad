@@ -3,7 +3,8 @@ include <../../parameters.scad>
 use <../888_4045.scad>
 
 
-projection() mill_rot(draft = false);
+//projection()
+mill_rot(draft = false, removable_teeth=true);
 
 
 //translate([0,0,-5])   mill_static(draft = true);

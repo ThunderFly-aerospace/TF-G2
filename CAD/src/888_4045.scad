@@ -59,7 +59,7 @@ use <888_4008.scad>;
 
 
 
-module mill_rot(draft = true){
+module mill_rot(draft = true, removable_teeth=false){
     rotate([0,0, rotor_delta_angle])
     difference(){
 
@@ -68,9 +68,10 @@ module mill_rot(draft = true){
 
        //  Central hole
              translate([0,0,-5])
-       cylinder(h=sensor_cap_height*0.7+Ribbon_part_w+0.25, d = bearing_outer_diameter + Bwall*2+2.7, $fn = draft?16:120);
+       cylinder(h=sensor_cap_height*0.7+Ribbon_part_w+0.25, d = 5.2, $fn = draft?16:120);
 
       // Holes for self-cutting screws  - ENLARGED
+	  /*
        for (i = [1:Number_of_holes]){
           rotate([0, 0, i*360/Number_of_holes])
           translate([starter_pipe_d_middle/2-End_Wall_Thickness/2, 0, top_thickness + M3_nut_height + sensor_cap_height/2+Ribbon_width/2+0.15])
@@ -81,7 +82,7 @@ module mill_rot(draft = true){
           rotate([0, 0, i*360/4])
           translate([starter_pipe_d_middle/2-End_Wall_Thickness/2, 0, top_thickness + M3_nut_height + sensor_cap_height/2+Ribbon_width/2+0.15])
               cylinder(h = Depth_self_screw, d = Self_screw_diameter + 0.5, center = true, $fn=20);
-                                }
+                                }*/
 
            Number_of_holes2 = 24;
          // Holes for rotation speed measurement
@@ -107,7 +108,7 @@ module mill_rot(draft = true){
 
 
             Number_of_holes3 = 2;
-         // Holes for zero postition sensor
+         // Holes for zero position sensor
       for (i = [1:Number_of_holes3]){
               s = 2;  // Vzdálenost děr stadionu
               R = Zero_dist - s/2;  // Vzdálenost bližších kruhů od středu
@@ -147,7 +148,6 @@ module mill_rot(draft = true){
                     }
                     cylinder(h=sensor_cap_height*0.7+Ribbon_part_w+0.25, d = starter_pipe_d_middle+0.2-End_Wall_Thickness*2);
                 }
-                */
 
            // Cylindrical holes for the right compilation with bell part 2
          rotate([0, 0, 35-rotor_delta_angle])
@@ -157,9 +157,29 @@ module mill_rot(draft = true){
        translate([starter_pipe_d_middle/2-End_Wall_Thickness/2, 0, -5])
         cylinder(h = 10, d = 3.2, $fn = 20);
 
+                */
+
             // Mill butterfly
             Mill_butterfly(draft);
             }
+
+		if(removable_teeth) {
+			number_of_teeth = 8;
+			for(i=[0:number_of_teeth-1]) {
+				rotate([0, 0, i*(360/number_of_teeth)])
+				translate([D_mill_disc/2+5, 0, 0])
+				difference() {
+					hull() {
+						cylinder(h=H_mill_disc, d=5, $fn=draft?6:30);
+						translate([-5, 0, 0])
+						cylinder(h=.2, d=3, $fn=draft?6:30);
+					}
+
+					translate([0, 0, -1])
+					cylinder(h=H_mill_disc*2, d=3.1, $fn=draft?6:30);
+				}
+			}
+		}
     }
 
     // Mill butterfly
