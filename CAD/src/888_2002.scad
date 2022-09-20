@@ -143,6 +143,21 @@ module 888_2002(){
                     rotate([0, 90, 180])
                         cylinder(d= M3_head_diameter_ISO7380, h = 10);
             }
+
+            // crop corners
+            // x ..  5 .. posun skrz desticku
+            // y .. -2 .. na kraj
+            // z .. +1 .. na kraj
+            mirror_copy([0, 0, 1])
+            translate([-0.1 + 5, suspension_bow_diameter/2 + presah/2 + M3_head_diameter/2 - 1, suspension_join_screw_distance/2 + M3_head_diameter/2 + 1])
+                translate([global_clearance, 0, 0])
+                    rotate([0, 90, 180])
+                        #cylinder(d= M3_head_diameter, h = 10);
+            mirror_copy([0, 0, 1])
+            translate([-0.1 + 5, suspension_bow_diameter/2 - join_height - M3_head_diameter/2 - 2, suspension_join_screw_distance/2 + M3_head_diameter/2 + 1])
+                translate([global_clearance, 0, 0])
+                    rotate([0, 90, 180])
+                       cylinder(d= M3_head_diameter, h = 10);
         }
     // koncovky - oblá
     rotate([180, 0, -90])
