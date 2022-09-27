@@ -5,7 +5,7 @@
 basic_screw_length = 5;
 
 
-plastic_screw_diameter = 2;
+plastic_screw_diameter = 2.2;
 plastic_screw_trought_diameter = 2.5; // otvor, kterym sroub lze prostrcit
 
 //Screw diameter and nut for M6 [mm]

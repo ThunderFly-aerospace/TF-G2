@@ -1,4 +1,4 @@
-//nosna podlozka virniku1
+// Vyztuzeni pod autopilota
 include <../parameters.scad>
 
 module 888_1021(){

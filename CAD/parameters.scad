@@ -258,7 +258,7 @@ pylon_thickness = 0; // Netusim, co to je
 
 pylon_bottom_wall = 5;
 
-pylon_silentblocks_base_distance = 58;    // vzdalenost silentblocku pylonu od sebe
+pylon_silentblocks_base_distance = 67;    // vzdalenost silentblocku pylonu od sebe
 pylon_pipe_top_y_dist = 25;
 pylon_pipe_top_x_dist = 30;
 pylon_screw_top_y_dist = 25;
