@@ -4,6 +4,11 @@ use <888_1007.scad>
 use <888_1010.scad>
 
 
+servo_width = 10.5;
+servo_length = 24;
+servo_length_flange = 33;
+servo_screw_distance = 28;
+servo_height = 20;
 
 module 888_1009_bottom() {
     translate([-pylon_silentblocks_base_distance/2, 0, 0])
@@ -14,17 +19,43 @@ module 888_1009_bottom() {
         rotate([0, 0, 90])
             linear_extrude(2+0.5)
                 text(week, halign="center", valign="center", size=4);
+    
     difference(){
         union(){
             difference(){
-                translate([-40*0.3, 0, 0])
-                    airfoil(naca = 0035, L = 40, N = 50, h= pylon_pipe_counterbore_bottom+3, open = false);
-
+                union(){
+                    translate([-40*0.3, 0, 0])
+                        airfoil(naca = 0035, L = 40, N = 50, h= pylon_pipe_counterbore_bottom+3, open = false);
+                    //aditional material for servo mount 
+                    hull(){
+                        translate([0, -servo_width/2-1.5, 0])
+                            cube([28, servo_width+3, servo_height+3]);
+                        translate([0, -servo_width/2-1.5, 0])
+                            cube([54, servo_width+3, servo_height-10]);
+                    }
+                }
                 // detach pylon profile from the outer rectangle
                 rotate([0,0,-90])
                   translate([0, pylon_silentblocks_base_distance/2, - pylon_silentblocks_base_distance/15])
                     rotate([45,0,0])
-                      cube(pylon_silentblocks_base_distance/4, center = true);
+                      cube(pylon_silentblocks_base_distance/4+2, center = true);
+                
+                // servo mount volume
+                translate([40, 0, 4])
+                    translate() {
+                        translate([-servo_length/2, -servo_width/2, 0])
+                            cube([servo_length, servo_width, servo_height]);
+                        translate([-servo_length_flange/2, -1, 10])
+                            cube([servo_length_flange, 2, 10]); // placka pro srouby
+                        for(screw_offest = [servo_screw_distance/2, -servo_screw_distance/2])
+                            translate([screw_offest, 0, 16])
+                                rotate([90, 0, 0]){
+                                    cylinder(d = 2, h = 30, center=true, $fn=30);
+                                    translate([0, 0, 4]) cylinder(d = 4, h = 30, $fn=30);
+                                }
+                        translate([-servo_length/2-15, -7/2, -10])
+                            cube([15.1, 7, 6+13]);
+                    }
             }
 
 
@@ -85,11 +116,11 @@ module 888_1009_bottom() {
             cylinder(d= pylon_pipe_d-2, h = 50, $fn=30);
 
         // cable shaft
-        hull(){
-            translate([12, 0, -2])
-                cylinder(d= 8, h = 50, $fn=30);
-            translate([20, 0, -2])
-                cylinder(d= 3, h = 50, $fn=30);
+        hull() for(sy=[-2.5, 2.5]){
+            translate([10, sy, -2])
+                cylinder(d= 5, h = 50, $fn=30);
+            translate([21, sy, -2])
+                cylinder(d= 5, h = 50, $fn=30);
         }
 
         translate([0, -1, 0])
@@ -104,8 +135,8 @@ module 888_1009_bottom() {
             }
 
 
-            translate([-40*0.3, 0, 3 + pylon_pipe_counterbore_bottom - pylon_airfoil_shell_overlap])
-                hollow_airfoil(naca = 0035, L = 40, N = 50, h= 22, open = true, wall_thickness=0.8);
+           //translate([-40*0.3, 0, 3 + pylon_pipe_counterbore_bottom - pylon_airfoil_shell_overlap])
+            //    hollow_airfoil(naca = 0035, L = 40, N = 50, h= 22, open = true, wall_thickness=0.8);
 
         // otvory pro prisroubovani silentbloku
         for(x = [-0.5, 0.5], y=[-0.5, 0.5])
@@ -118,11 +149,8 @@ module 888_1009_bottom() {
 
 pylon_adapter_top_width = 31;
 
-
 top_break_roof = 3;
 top_break_side = 2;
-
-
 
 
 module pylon_pipes(d = pylon_pipe_d, below = 10, above = 10, shift=2){
