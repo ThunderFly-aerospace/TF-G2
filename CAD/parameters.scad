@@ -64,7 +64,7 @@ rotor_blade_naca = 2412;
 rotor_blade_parts_count = 4;
 //rotor_blade_parts_count = 3;
 
-blade_transition_length = 10; // length of blade transition
+blade_transition_length = 15; // length of blade transition
 
 blade_mount_screw_distance = (16.47+11.86)/2;
 
