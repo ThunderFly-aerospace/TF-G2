@@ -24,8 +24,10 @@ module 888_1009_bottom() {
         union(){
             difference(){
                 union(){
-                    translate([-40*0.3, 0, 0])
-                        airfoil(naca = 0035, L = 40, N = 50, h= pylon_pipe_counterbore_bottom+3, open = false);
+                    //translate([-40*0.3, 0, 0])
+                    //    airfoil(naca = 0035, L = 40, N = 50, h= pylon_pipe_counterbore_bottom+3, open = false);
+                    cylinder(d = pylon_pipe_d+4, h=pylon_pipe_counterbore_bottom+3, $fn=80);
+                    cylinder(d = pylon_pipe_d+1.2*2, h=pylon_pipe_counterbore_bottom+3+8, $fn=80);
                     //aditional material for servo mount 
                     hull(){
                         translate([0, -servo_width/2-1.5, 0])
@@ -45,13 +47,13 @@ module 888_1009_bottom() {
                     translate() {
                         translate([-servo_length/2, -servo_width/2, 0])
                             cube([servo_length, servo_width, servo_height]);
-                        translate([-servo_length_flange/2, -1, 10])
-                            cube([servo_length_flange, 2, 10]); // placka pro srouby
+                        translate([-servo_length_flange/2, -1.5/2, 10])
+                            cube([servo_length_flange, 1.5, 10]); // placka pro srouby
                         for(screw_offest = [servo_screw_distance/2, -servo_screw_distance/2])
                             translate([screw_offest, 0, 16])
                                 rotate([90, 0, 0]){
                                     cylinder(d = 2, h = 30, center=true, $fn=30);
-                                    translate([0, 0, 4]) cylinder(d = 4, h = 30, $fn=30);
+                                    translate([0, 0, 5]) cylinder(d = 4, h = 30, $fn=30);
                                 }
                         translate([-servo_length/2-15, -7/2, -10])
                             cube([15.1, 7, 6+13]);
@@ -161,7 +163,7 @@ module pylon_pipes(d = pylon_pipe_d, below = 10, above = 10, shift=2){
             cylinder(d = d, h = 163+below+above, $fn=20);
 }
 
-color("gray") pylon_pipes(below=0, above=0);
+%color("gray") pylon_pipes(below=0, above=0);
 
 888_1009_bottom();
 %translate([0, 0, -8]) 888_1007();
@@ -186,16 +188,6 @@ module 888_1009_drill(){
           cylinder(d=3.1, h=20, center=true, $fn=20);
       }
     }
-    /* for(z = [5+10, 150-5-10]){
-      translate([0, 5, z])
-        rotate([0, 90, 0]) {
-            cylinder(d=M3_screw_diameter, h=20, center=true, $fn=20);
-            translate([0, 0, 3])
-                cylinder(d=M3_nut_diameter, h=20, $fn=6);
-            translate([0, 0, -3-20])
-                cylinder(d=M3_nut_diameter, h=20, $fn=6);
-      }
-    } */
   }
 
 
