@@ -34,7 +34,7 @@ rotor_blade_rod = true;  // generovat diru pro uhlikove tycky
 rotor_blade_length = 500;   // délka rotorového listu
 // rotor_blade_length = 450 - 15;   // délka rotorového listu -- nastaveni prvniho vytisku
 //rotor_blade_length = 460;   // délka rotorového listu
-rotor_blade_depth = 45.5+2;     // hloubka rotorového listu
+rotor_blade_depth = 50+2;     // hloubka rotorového listu
 rotor_balde_tip_cutoff = 15.5;
 
 blade_mount_length = 30;
@@ -99,12 +99,12 @@ blade_rod3_diameter = 2.45;
 
 // blade_rod1_position = [3.4, 0.3, 0];
 
-blade_rod1_xposition = rotor_blade_depth/4 - 8.9;
+blade_rod1_xposition = rotor_blade_depth/4 - 9.5;
 blade_rod1_yposition = rotor_blade_depth * camberY(naca = rotor_blade_naca, x = blade_rod1_xposition / rotor_blade_depth); // calculate airfoil chamber line y position
 
 blade_rod1_position = [blade_rod1_xposition, blade_rod1_yposition, 0];  // shift rod1 to chamber line location
-blade_rod2_position = [rotor_blade_depth/4 - 5.8, 0.5, 0];
-blade_rod3_position = [rotor_blade_depth/4 + 3.5, 0.5, 0];
+blade_rod2_position = [rotor_blade_depth/4 - 6.2, 0.5, 0];
+blade_rod3_position = [rotor_blade_depth/4 + 2.8, 0.5, 0];
 
 blade_glue_holes = 0;
 
