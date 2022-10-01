@@ -37,8 +37,8 @@ module 888_1001(){
                 for(x=[5, 8, 12])
                 translate([base_length-5.5 - base_patern*2*x, -base_width/2, base_thickness]) cube([1, base_width, 0.5]);
 
-                // vyztuzeni zadni strany
-                translate([base_length/2-7/2, -base_width/2, base_thickness]) cube([7, base_width, 2]);
+                // Zesileni podlozky v puzzle spoji
+                // translate([base_length/2-7/2, -base_width/2, base_thickness]) cube([7, base_width, 2]);
 
             }
 
@@ -170,7 +170,7 @@ module 888_1001_part_0(){
     x0 = base_split_position[1];
     difference(){
         888_1001();
-        888_1001_crop(offset = 0.1);
+        888_1001_crop(offset = 0.15);
     }
 }
 
@@ -178,7 +178,7 @@ module 888_1001_part_1(){
     x0 = base_split_position[1];
     intersection(){
         888_1001();
-        888_1001_crop(offset = -0.1);
+        888_1001_crop(offset = -0.15);
     }
 }
 
@@ -205,7 +205,7 @@ module 888_1001_crop(offset = 0) translate([base_split_position[1], 0, -10]) {
 
 888_1001();
 888_1001_crop_visualisation();
-%888_1001_crop();
+%888_1001_crop(offset = 0);
 
 
 base_splitter_length = 45;
