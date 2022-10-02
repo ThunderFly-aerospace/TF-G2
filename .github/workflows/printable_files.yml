@@ -35,7 +35,7 @@ jobs:
         chmod +x /home/runner/PrusaSlicer.AppImage
         wget https://files.openscad.org/snapshots/OpenSCAD-2022.10.01.ai12213-x86_64.AppImage -O ~/OpenSCAD.AppImage
         chmod +x ~/OpenSCAD.AppImage
-        sudo apt-get install libc-bin python3-setuptools xvfb libopengl0
+        sudo apt-get install libc-bin python3-setuptools xvfb libopengl0 libglu1
         sudo python3 -m pip install --upgrade pip
         sudo python3 -m pip install stlsort lxml thumby
         sudo python3 -m pip install git+https://github.com/ThunderFly-aerospace/yagv@a541869d11d3c094f1d7a3ed4d3c0c30489398e9
