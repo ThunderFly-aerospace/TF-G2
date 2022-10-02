@@ -51,9 +51,9 @@ jobs:
         name: 'render_amf'
         path: './**/*.amf'
 
-    - name: 'Anonymize gcode'
-      run: |
-        for f in CAD/gcode/*.gcode; do sed -e 's/; .*$//g' -e '/^$/d' -i $f; done
+     #- name: 'Anonymize gcode'
+     #  run: |
+     #    for f in CAD/gcode/*.gcode; do sed -e 's/; .*$//g' -e '/^$/d' -i $f; done
 
     - name: Upload gcodes
       uses:  MLAB-project/push-generated-file@master
