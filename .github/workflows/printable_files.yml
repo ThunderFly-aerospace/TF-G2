@@ -32,7 +32,7 @@ jobs:
       run: |
         sudo apt-get update
         wget https://github.com/prusa3d/PrusaSlicer/releases/download/version_2.5.0/PrusaSlicer-2.5.0+linux-x64-GTK3-202209060725.AppImage -O ~/PrusaSlicer.AppImage
-        chmod +x ~/Slic3r.AppImage
+        chmod +x ~/PrusaSlicer.AppImage
         wget https://files.openscad.org/snapshots/OpenSCAD-2022.10.01.ai12213-x86_64.AppImage -O ~/OpenSCAD.AppImage
         chmod +x ~/OpenSCAD.AppImage
         sudo apt-get install libc-bin python3-setuptools xvfb
