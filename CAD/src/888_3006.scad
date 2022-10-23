@@ -18,7 +18,7 @@ module 888_3006(){
         }
 
         translate([0, 0, tail_pipe_d/2 +mount_h/2+offset ])
-            cube([11, 1, tail_pipe_d], center=true);
+            cube([11, 2, tail_pipe_d], center=true);
 
         translate([0, 0, offset])
             rotate([0, 90, 0])
