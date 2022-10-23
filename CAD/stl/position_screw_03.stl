@@ -2708,18 +2708,11 @@ solid model
       vertex 28.9141 37.1561 27.4389
     endloop
   endfacet
-  facet normal 0.866044 0 -0.499967
-    outer loop
-      vertex 28.8453 37.11 25
-      vertex 28.8453 38.15 25
-      vertex 29.4226 37.11 26
-    endloop
-  endfacet
-  facet normal 0.866044 0 0.499967
+  facet normal 0 -1 0
     outer loop
       vertex 28.8453 37.11 25
       vertex 29.4226 37.11 24
-      vertex 29.4226 38.15 24
+      vertex 31.1547 37.11 25
     endloop
   endfacet
   facet normal 0 1 0
@@ -2729,18 +2722,18 @@ solid model
       vertex 31.1547 37.11 25
     endloop
   endfacet
-  facet normal 0.866044 -0 0.499967
-    outer loop
-      vertex 28.8453 37.11 25
-      vertex 29.4226 38.15 24
-      vertex 28.8453 38.15 25
-    endloop
-  endfacet
   facet normal 0 1 0
     outer loop
       vertex 28.8453 37.11 25
       vertex 30.5774 37.11 24
       vertex 29.4226 37.11 24
+    endloop
+  endfacet
+  facet normal 0 -1 0
+    outer loop
+      vertex 28.8453 37.11 25
+      vertex 30.5774 37.11 26
+      vertex 29.4226 37.11 26
     endloop
   endfacet
   facet normal 0 1 -0
@@ -2748,6 +2741,55 @@ solid model
       vertex 28.8453 37.11 25
       vertex 31.1547 37.11 25
       vertex 30.5774 37.11 24
+    endloop
+  endfacet
+  facet normal 0 -1 0
+    outer loop
+      vertex 28.8453 37.11 25
+      vertex 31.1547 37.11 25
+      vertex 30.5774 37.11 26
+    endloop
+  endfacet
+  facet normal 0.866044 0 -0.499967
+    outer loop
+      vertex 28.8453 37.1256 25
+      vertex 28.8453 38.15 25
+      vertex 29.4226 37.1256 26
+    endloop
+  endfacet
+  facet normal 0.866044 0 0.499967
+    outer loop
+      vertex 28.8453 37.1256 25
+      vertex 29.4226 37.1256 24
+      vertex 29.4226 38.15 24
+    endloop
+  endfacet
+  facet normal 0 1 0
+    outer loop
+      vertex 28.8453 37.1256 25
+      vertex 29.4226 37.1256 26
+      vertex 31.1547 37.1256 25
+    endloop
+  endfacet
+  facet normal 0.866044 -0 0.499967
+    outer loop
+      vertex 28.8453 37.1256 25
+      vertex 29.4226 38.15 24
+      vertex 28.8453 38.15 25
+    endloop
+  endfacet
+  facet normal 0 1 0
+    outer loop
+      vertex 28.8453 37.1256 25
+      vertex 30.5774 37.1256 24
+      vertex 29.4226 37.1256 24
+    endloop
+  endfacet
+  facet normal 0 1 -0
+    outer loop
+      vertex 28.8453 37.1256 25
+      vertex 31.1547 37.1256 25
+      vertex 30.5774 37.1256 24
     endloop
   endfacet
   facet normal 0 1 0
@@ -2789,7 +2831,7 @@ solid model
     outer loop
       vertex 28.8453 38.15 25
       vertex 29.4226 38.15 26
-      vertex 29.4226 37.11 26
+      vertex 29.4226 37.1256 26
     endloop
   endfacet
   facet normal 0 1 0
@@ -3737,11 +3779,11 @@ solid model
       vertex 29.4227 38.15 26
     endloop
   endfacet
-  facet normal 0 0 1
+  facet normal 0 0 0
     outer loop
       vertex 29.4226 37.11 24
       vertex 29.4227 37.11 24
-      vertex 29.4226 38.15 24
+      vertex 30.5774 37.11 24
     endloop
   endfacet
   facet normal 0 0 0
@@ -3758,11 +3800,11 @@ solid model
       vertex 30.5773 37.11 24
     endloop
   endfacet
-  facet normal -0 0 -1
+  facet normal 0 -1 0
     outer loop
-      vertex 29.4226 37.11 26
-      vertex 29.4226 38.15 26
-      vertex 29.4227 38.15 26
+      vertex 29.4226 37.11 24
+      vertex 30.5774 37.11 24
+      vertex 31.1547 37.11 25
     endloop
   endfacet
   facet normal 0 0 0
@@ -3772,11 +3814,18 @@ solid model
       vertex 30.5774 37.11 26
     endloop
   endfacet
-  facet normal 0 0 -1
+  facet normal 0 0 0
     outer loop
       vertex 29.4226 37.11 26
-      vertex 29.4227 38.15 26
+      vertex 30.5773 37.11 26
       vertex 29.4227 37.11 26
+    endloop
+  endfacet
+  facet normal 0 0 0
+    outer loop
+      vertex 29.4226 37.11 26
+      vertex 30.5774 37.11 26
+      vertex 30.5773 37.11 26
     endloop
   endfacet
   facet normal 0 1 0
@@ -3786,25 +3835,67 @@ solid model
       vertex 31.1547 37.11 25
     endloop
   endfacet
-  facet normal -0 0 1
-    outer loop
-      vertex 29.4226 38.15 24
-      vertex 29.4227 37.11 24
-      vertex 29.4227 38.15 24
-    endloop
-  endfacet
   facet normal 0 0 1
     outer loop
-      vertex 29.4227 37.11 24
-      vertex 30.5773 37.11 24
-      vertex 29.4227 38.15 24
+      vertex 29.4226 37.1256 24
+      vertex 29.4227 37.1256 24
+      vertex 29.4226 38.15 24
+    endloop
+  endfacet
+  facet normal 0 0 0
+    outer loop
+      vertex 29.4226 37.1256 24
+      vertex 30.5773 37.1256 24
+      vertex 29.4227 37.1256 24
+    endloop
+  endfacet
+  facet normal 0 0 0
+    outer loop
+      vertex 29.4226 37.1256 24
+      vertex 30.5774 37.1256 24
+      vertex 30.5773 37.1256 24
+    endloop
+  endfacet
+  facet normal -0 0 -1
+    outer loop
+      vertex 29.4226 37.1256 26
+      vertex 29.4226 38.15 26
+      vertex 29.4227 38.15 26
+    endloop
+  endfacet
+  facet normal 0 0 0
+    outer loop
+      vertex 29.4226 37.1256 26
+      vertex 29.4227 37.1256 26
+      vertex 30.5774 37.1256 26
     endloop
   endfacet
   facet normal 0 0 -1
     outer loop
-      vertex 29.4227 37.11 26
+      vertex 29.4226 37.1256 26
       vertex 29.4227 38.15 26
-      vertex 30.5773 38.15 26
+      vertex 29.4227 37.1256 26
+    endloop
+  endfacet
+  facet normal 0 1 0
+    outer loop
+      vertex 29.4226 37.1256 26
+      vertex 30.5774 37.1256 26
+      vertex 31.1547 37.1256 25
+    endloop
+  endfacet
+  facet normal -0 0 1
+    outer loop
+      vertex 29.4226 38.15 24
+      vertex 29.4227 37.1256 24
+      vertex 29.4227 38.15 24
+    endloop
+  endfacet
+  facet normal 0 0 0
+    outer loop
+      vertex 29.4227 37.11 24
+      vertex 30.5773 37.11 24
+      vertex 30.5774 37.11 24
     endloop
   endfacet
   facet normal 0 0 0
@@ -3814,11 +3905,32 @@ solid model
       vertex 30.5774 37.11 26
     endloop
   endfacet
+  facet normal 0 0 1
+    outer loop
+      vertex 29.4227 37.1256 24
+      vertex 30.5773 37.1256 24
+      vertex 29.4227 38.15 24
+    endloop
+  endfacet
   facet normal 0 0 -1
     outer loop
-      vertex 29.4227 37.11 26
+      vertex 29.4227 37.1256 26
+      vertex 29.4227 38.15 26
       vertex 30.5773 38.15 26
-      vertex 30.5773 37.11 26
+    endloop
+  endfacet
+  facet normal 0 0 0
+    outer loop
+      vertex 29.4227 37.1256 26
+      vertex 30.5773 37.1256 26
+      vertex 30.5774 37.1256 26
+    endloop
+  endfacet
+  facet normal 0 0 -1
+    outer loop
+      vertex 29.4227 37.1256 26
+      vertex 30.5773 38.15 26
+      vertex 30.5773 37.1256 26
     endloop
   endfacet
   facet normal 0 1 0
@@ -3838,7 +3950,7 @@ solid model
   facet normal 0 0 1
     outer loop
       vertex 29.4227 38.15 24
-      vertex 30.5773 37.11 24
+      vertex 30.5773 37.1256 24
       vertex 30.5773 38.15 24
     endloop
   endfacet
@@ -5279,29 +5391,29 @@ solid model
   endfacet
   facet normal 0 0 1
     outer loop
-      vertex 30.5773 37.11 24
-      vertex 30.5774 37.11 24
+      vertex 30.5773 37.1256 24
+      vertex 30.5774 37.1256 24
       vertex 30.5773 38.15 24
     endloop
   endfacet
   facet normal -0 0 -1
     outer loop
-      vertex 30.5773 37.11 26
+      vertex 30.5773 37.1256 26
       vertex 30.5773 38.15 26
       vertex 30.5774 38.15 26
     endloop
   endfacet
   facet normal 0 0 -1
     outer loop
-      vertex 30.5773 37.11 26
+      vertex 30.5773 37.1256 26
       vertex 30.5774 38.15 26
-      vertex 30.5774 37.11 26
+      vertex 30.5774 37.1256 26
     endloop
   endfacet
   facet normal -0 0 1
     outer loop
       vertex 30.5773 38.15 24
-      vertex 30.5774 37.11 24
+      vertex 30.5774 37.1256 24
       vertex 30.5774 38.15 24
     endloop
   endfacet
@@ -5370,30 +5482,30 @@ solid model
   endfacet
   facet normal -0.866044 0 0.499967
     outer loop
-      vertex 30.5774 37.11 24
-      vertex 31.1547 37.11 25
+      vertex 30.5774 37.1256 24
+      vertex 31.1547 37.1256 25
       vertex 31.1547 38.15 25
     endloop
   endfacet
   facet normal -0.866044 0 0.499967
     outer loop
-      vertex 30.5774 37.11 24
+      vertex 30.5774 37.1256 24
       vertex 31.1547 38.15 25
       vertex 30.5774 38.15 24
     endloop
   endfacet
   facet normal -0.866044 -0 -0.499967
     outer loop
-      vertex 30.5774 37.11 26
+      vertex 30.5774 37.1256 26
       vertex 30.5774 38.15 26
-      vertex 31.1547 37.11 25
+      vertex 31.1547 37.1256 25
     endloop
   endfacet
   facet normal -0.866044 0 -0.499967
     outer loop
       vertex 30.5774 38.15 26
       vertex 31.1547 38.15 25
-      vertex 31.1547 37.11 25
+      vertex 31.1547 37.1256 25
     endloop
   endfacet
   facet normal 0 1 -0
