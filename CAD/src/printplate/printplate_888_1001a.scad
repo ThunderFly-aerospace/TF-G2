@@ -2,7 +2,7 @@
 
 //dil pro pripevneni tazneho motoru
 include <../../parameters.scad>
-use <../888_1001.scad>
+use <../888_1001_frontpart.scad>
 
 
-888_1001_part(0);
+888_1001_frontpart();
