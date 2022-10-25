@@ -21,7 +21,16 @@ module 888_1001(){
                     translate([base_length/2 + 26/2, i , base_thickness])
                       rotate([45, 0, 0])
                         cube([base_length-26, 3, 3], center = true);
+                        
+                //zepvnění zadku
+                translate([290-1.5,0,(rantl_height+base_thickness)/2])
+                cube([3,base_width,rantl_height+base_thickness],center=true);
+                
             }
+            
+            //zpevnění u uchycení ocasu
+            translate([200,0,base_thickness/2])
+                cube([20,0.5,2*base_thickness],center=true);
 
             // Srazeni spodnich hran
             for(y=[-base_width/2, base_width/2])
