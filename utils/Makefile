@@ -27,9 +27,9 @@ prepare_config:
 
 default: $(AMF_TARGETS)
 $(AMF_DIR)/%.amf: $(SRC_DIR)/%.scad
-	@echo "\n\n"
+	@echo -e "\n\n"
 	@echo $<
-	@echo "\n"
+	@echo -e "\n"
 	-processor3D \
 		--output_folder $(GIT_ROOT)/$(OUTPUT_FOLDER) \
 		--name_prefix $(NAME_PREFIX) \
@@ -38,6 +38,24 @@ $(AMF_DIR)/%.amf: $(SRC_DIR)/%.scad
 finish:
 	cd $(GIT_ROOT)/CAD/slicing/; rm ./*.ini 2> /dev/null
 	
+PRINT_TARGETS =
+ifdef AMF_DIR
+PRINT_TARGETS += targets-amf
+endif
+ifdef GCD_DIR
+PRINT_TARGETS += targets-gcd
+endif
+
+targets: ${PRINT_TARGETS}
+
+targets-amf:
+	@echo "AMF_TARGETS:"
+	@echo " $(AMF_TARGETS)" | sed 's#  #\n  #g'
+
+targets-gcd:
+	@echo "GCD_TARGETS:"
+	@echo " $(GCD_TARGETS)" | sed 's#  #\n  #g'
+
 # gdefault: $(TARGETS)
 # $(GCD_DIR)/%.gcode: $(SRC_DIR)/%.scad
 # #     @echo ============== $<
