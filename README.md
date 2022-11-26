@@ -3,6 +3,7 @@
 [![Render previews](https://github.com/ThunderFly-aerospace/TF-G2/actions/workflows/render_previews.yml/badge.svg)](https://github.com/ThunderFly-aerospace/TF-G2/actions/workflows/render_previews.yml)
 [![Build printable files](https://github.com/ThunderFly-aerospace/TF-G2/actions/workflows/printable_files.yml/badge.svg)](https://github.com/ThunderFly-aerospace/TF-G2/actions/workflows/printable_files.yml)
 
+Click on the following video to quickly get an overview: 
 [![ThuderFly_TFG2_training_autogyro_prototype](https://user-images.githubusercontent.com/5196729/144823035-37a70a1a-de21-4eb6-ab80-2aa2d4ea78db.gif)](http://www.youtube.com/watch?v=6PtS-MwnM_8)
 
 [TF-G2](https://www.thunderfly.cz/tf-g2.html) autogyro is well-suited for training of UAV operators and for gaining experience with autogyro mission planning. TF-G2 is limited to light payloads, but it shares all the specific properties of larger autogyros in our offering. It may find application in less demanding flight operations, however its main purpose is being a tool for low-cost application practice. The autogyro’s small size leads to easy transport, repairs and maintenance.
