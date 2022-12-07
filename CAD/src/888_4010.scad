@@ -74,18 +74,18 @@ difference()
             //printing support
             rotate([colective,0,0])
                 translate([cut_d-2-cut_d/4,-blade_w/4,0])
-                    cube([cut_d/2,blade_w/2,cut_h],center=true);
+                    cube([cut_d/2,blade_w/2,shaft_h],center=true);
 
-            /*//cut neck
+            //cut neck
             translate([cut_d-0.5,0,0])
-                cube([1,cut_w,cut_h],center=true);
+                #cube([0.1,cut_w,cut_h],center=true);
             }
 
             hull()
-            {*/
+            {
             //cut neck
             translate([cut_d-0.5,0,0])
-                cube([1,cut_w,cut_h],center=true);
+                cube([0.1,cut_w,cut_h],center=true);
 
             //blade hodler
             rotate([colective,0,0])
@@ -95,24 +95,14 @@ difference()
                             rotate([0,90,0])
                                 cylinder(d=blade_holder_radius,h=blade_holder_l,center=true,$fn=circle_fn);
 
-            /*translate([blade_d+blade_holder_l/2,0,0])
-                rotate([0,90,0])
-                    cylinder(d=2*blade_holder_h+blade_h,h=blade_holder_l,center=true,$fn=circle_fn);*/
-
         }
 
         // rotor blade spring
         hull()
         {
-            //shaft neck
-            rotate([0,0,delta_angle])
-                translate([shaft_neck_l-0.05,0,0])
-                    cube([.01,shaft_l,shaft_h],center=true);
-
-            //printing support
-            rotate([colective,0,0])
-                translate([cut_d-2-cut_d/4,-blade_w/4,0])
-                    cube([cut_d/2,blade_w/2,cut_h],center=true);
+            //cut neck
+            translate([cut_d-0.5,0,0])
+                cube([0.1,cut_w,cut_h],center=true);
 
             //rubber ring holder
             rotate([colective,0,0])
@@ -187,7 +177,7 @@ difference()
             cylinder(d=M3_nut_diameter,h=M3_nut_height,center=true,$fn=6);
 
           //popisky
-        translate([blade_first_screw+blade_d+blade_screw_distance/2, 0, (2*blade_holder_h+blade_h)/2-0.1])
+        translate([blade_first_screw+blade_d+blade_screw_distance/2, 0, (2*blade_holder_h+blade_h)/2-0.5])
           linear_extrude(4)
                 text(str(colective), size = 4, halign="center", valign="center");
     }
