@@ -27,7 +27,7 @@ module 18650_8_pack(space=10,d=18.5,h=65)
     }
 }
 
-module 888_1018(battery_case_height = 0, battery_case_start_x = 25, battery_width = 70, battery_case_wall = 0.4*3, battery_height = 20.5, battery_length = 152, balancer_clip = true, draft=true)
+module 888_1018(battery_case_height = 0, battery_case_start_x = 25, battery_width = 70, battery_case_wall = 0.4*3, battery_height = 36.5, battery_length = 88, balancer_clip = true, draft=true)
 {
 
     translate([battery_length/2-10, battery_width*3/8, -battery_height])
@@ -94,7 +94,7 @@ module 888_1018(battery_case_height = 0, battery_case_start_x = 25, battery_widt
               translate([0, 0, -battery_height/2+(15/2+3)]) rotate([90, 0, 0]) cylinder(d = 15, h=battery_width+10, center = true, $fn=6);
             }
 
-        for(x=[-45,0,45]){
+        for(x=[0]){
           translate([x, 0, -battery_height/2])
             hull(){
               minkowski(){
@@ -135,7 +135,7 @@ module 888_1018(battery_case_height = 0, battery_case_start_x = 25, battery_widt
 
 
 //články
-space=18.5;
+space=0;
 plength=pack_length(4,18.5,space);
 echo(plength);
 pheight=pack_height(18.5,space);
