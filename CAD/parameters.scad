@@ -280,17 +280,19 @@ airspeed_dist = 20;
 //  GensACE 3300 mAh
 
 //free-flap-head
-free_flap_ax_length=28;
+free_flap_ax_length=36;
 free_flap_ax_diameter=3;
 
-free_flap_bearings_length=5;
-free_flap_bearings_outer_diameter=4.6;
+free_flap_bearings_length=9.8;
+free_flap_bearings_outer_diameter=6.2;
+free_flap_bearings_ring_diameter=9;
+free_flap_bearings_ring_h=1.5;
 //free_flap_bearings_outer_diameter=3;
 free_flap_negativ_flap_limit=5;
 free_flap_bearing_add=4;
 free_flap_desk_add=1.5;
-free_flap_desk_h=2.5;
-free_flap_central_part_screw_cylinder_h=free_flap_desk_h+2;
+free_flap_desk_h=4;
+free_flap_central_part_screw_cylinder_h=free_flap_desk_h;
 
 free_flap_delta_angle=-rotor_delta_angle;
 free_flap_blade_screw_distance=blade_mount_screw_distance;
@@ -314,7 +316,7 @@ free_flap_blade_holder_h=3;
 
 free_flap_blade_holder_l=blade_mount_length;
 free_flap_blade_h=blade_mount_thickness+0.5;
-free_flap_blade_w=20.7;
+free_flap_blade_w=19;
 free_flap_blade_first_screw=blade_mount_screw_offset+0.5;
 
 free_flap_blade_holder_radius=0.7*free_flap_blade_holder_h;

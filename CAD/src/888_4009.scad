@@ -9,6 +9,10 @@ ax_diameter=free_flap_ax_diameter;
 
 bearings_length=free_flap_bearings_length;
 bearings_outer_diameter=free_flap_bearings_outer_diameter;
+bearings_ring_diameter=free_flap_bearings_ring_diameter;
+bearings_ring_h=free_flap_bearings_ring_h;
+
+
 negativ_flap_limit=free_flap_negativ_flap_limit;
 bearing_add=free_flap_bearing_add;
 desk_add=free_flap_desk_add;
@@ -30,15 +34,14 @@ rubber_spring_d=5;
 
 difference()
 {
-union()//dodani sloupků pro maticky
-{
-difference()
-{
 
+    union()
+    {
     for(r=[0,180])
         hull()
         {
             rotate([0,0,r])
+            {
                 translate([ax_offset,0,(bearings_outer_diameter+bearing_add)/2])
                     rotate([0,0,delta_angle])
                         rotate([90,0,0])
@@ -55,10 +58,15 @@ difference()
                     cube([desk_l,desk_w,desk_h],center=true);*/
                 for(i=[-1,1])
                 {
-                    translate([0,i*central_part_screw_distance,desk_h/4-desk_add])
+                    translate([4,i*(central_part_screw_distance-1),desk_h/4-desk_add])
                         cylinder(d=10,h=desk_h/2, center=true,$fn=circle_fn);
                 }
+           }
         }
+        
+        //materiál pod matičkou
+        cylinder(d=11,h=2*desk_h, $fn=circle_fn);
+     }
 
     for(r=[0,180])
         rotate([0,0,r])
@@ -71,8 +79,8 @@ difference()
                         cylinder(d=ax_diameter+0.1,h=ax_length+5, center=true,$fn=circle_fn);
 
                     //díra pro list
-                    translate([(bearings_outer_diameter+bearing_add)/2,0,shaft_h/2])
-                        cube([2*(bearings_outer_diameter+bearing_add)+0.1,shaft_l+0.1,2*shaft_h],center=true);
+                    translate([(bearings_outer_diameter+bearing_add)/2,0,shaft_h*3/2])
+                        cube([2*(bearings_outer_diameter+bearing_add)+0.1,shaft_l+0.1,3*shaft_h],center=true);
                     //díra pro list v záporném flappingu
                     rotate([0,negativ_flap_limit,0])
                     {
@@ -98,11 +106,20 @@ difference()
                         translate([0,i*(shaft_l/2+bearings_length/2),0])
                             rotate([90,0,0])
                                 cylinder(d=bearings_outer_diameter,h=bearings_length, center=true, $fn=circle_fn);
+                                
+           //díra pro hranu ložiska
+           for(i=[-1,1])
+                translate([ax_offset,0,(bearings_outer_diameter+bearing_add)/2])
+                    rotate([0,0,delta_angle])
+                        translate([0,i*(shaft_l/2+bearings_ring_h/2-5),0])
+                            rotate([90,0,0])
+                                cylinder(d=bearings_ring_diameter,h=bearings_ring_h+10, center=true, $fn=circle_fn);
+                                
             //hacek pro gumu
             translate([ax_offset,0,(bearings_outer_diameter+bearing_add)/2])
                 rotate([0,0,delta_angle])
                     rotate([90,0,0])
-                        translate([-3,bearings_outer_diameter+1.5,0])
+                        translate([-2.5,bearings_outer_diameter+1.5,0])
                             cylinder(d=rubber_spring_d,h=ax_length+6, center=true,$fn=circle_fn);
         }
 
@@ -140,35 +157,25 @@ difference()
                     }
                }
         }
+        
+        
+        for(i=[-1,1])
+        {
+         rotate([0,0,delta_angle])
+            translate([0,i*central_part_screw_distance,0])
+            {
+                cylinder(d = M3_screw_diameter, h =  30, center=true, $fn = circle_fn);
+                translate([0,0,central_part_screw_cylinder_h-M3_nut_height+0.5])
+                    cylinder(d = M3_nut_diameter, h =  30, $fn = 6);
+            }
+        }
+
+        translate([0,0,5+desk_h])
+            cylinder(d=11,h=10, center=true, $fn=circle_fn);
+
+        cylinder(d=M3_screw_diameter,h=10, center=true, $fn=circle_fn);
 }
 
-for(i=[-1,1])
-{
- rotate([0,0,delta_angle])
-    translate([0,i*central_part_screw_distance,central_part_screw_cylinder_h/2-desk_add])
-        cylinder(d=10,h=central_part_screw_cylinder_h, center=true,$fn=circle_fn);
-
-}
-
-}
-
-for(i=[-1,1])
-{
- rotate([0,0,delta_angle])
-    translate([0,i*central_part_screw_distance,0])
-    {
-        cylinder(d = M3_screw_diameter, h =  30, center=true, $fn = circle_fn);
-        translate([0,0,central_part_screw_cylinder_h-M3_nut_height+0.5])
-            cylinder(d = M3_nut_diameter, h =  30, $fn = 6);
-    }
-}
-
-translate([0,0,5+desk_h])
-    cylinder(d=11,h=10, center=true, $fn=circle_fn);
-
-cylinder(d=M3_screw_diameter,h=10, center=true, $fn=circle_fn);
-
-}
 
 }
 
