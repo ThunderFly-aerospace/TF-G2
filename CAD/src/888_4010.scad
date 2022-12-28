@@ -13,7 +13,6 @@ negativ_flap_limit=free_flap_negativ_flap_limit;
 bearing_add=free_flap_bearing_add;
 desk_add=free_flap_desk_add;
 desk_h=free_flap_desk_h;
-central_part_screw_cylinder_h=free_flap_central_part_screw_cylinder_h;
 
 delta_angle=free_flap_delta_angle;
 blade_screw_distance=free_flap_blade_screw_distance;
@@ -78,7 +77,7 @@ difference()
 
             //cut neck
             translate([cut_d-0.5,0,0])
-                #cube([0.1,cut_w,cut_h],center=true);
+                cube([0.1,cut_w,cut_h],center=true);
             }
 
             hull()
@@ -98,7 +97,7 @@ difference()
         }
 
         // rotor blade spring
-        hull()
+        /*hull()
         {
             //cut neck
             translate([cut_d-0.5,0,0])
@@ -109,7 +108,7 @@ difference()
               translate([blade_d,-blade_holder_radius/2,((3*blade_holder_h+blade_h)/2)])
                     rotate([90,0,0])
                         cylinder(d=2*rubber_spring_d,h=blade_w-blade_holder_radius,center=true,$fn=circle_fn);
-        }
+        }*/
 
         //blade hodler screw nuts cylnders
         rotate([colective,0,0])
@@ -132,8 +131,8 @@ difference()
        }
     }
 
-
-    rotate([colective,0,0])
+    //gumičky
+    /*rotate([colective,0,0])
       translate([blade_d,-blade_holder_radius/2,((3*blade_holder_h+blade_h)/2+1)])
       {
             rotate([90,0,0])
@@ -141,6 +140,7 @@ difference()
             translate([rubber_spring_d/2,0,-rubber_spring_d/12])
                 cube([cut_d/2,blade_w,rubber_spring_d-rubber_spring_d/6],center=true);
       }
+    */
 
 
     //díra pro list

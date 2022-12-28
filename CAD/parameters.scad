@@ -290,9 +290,8 @@ free_flap_bearings_ring_h=1.5;
 //free_flap_bearings_outer_diameter=3;
 free_flap_negativ_flap_limit=5;
 free_flap_bearing_add=4;
-free_flap_desk_add=1.5;
-free_flap_desk_h=4;
-free_flap_central_part_screw_cylinder_h=free_flap_desk_h;
+free_flap_desk_add=0.5;
+free_flap_desk_h=2;
 
 free_flap_delta_angle=-rotor_delta_angle;
 free_flap_blade_screw_distance=blade_mount_screw_distance;
@@ -309,7 +308,7 @@ free_flap_shaft_neck_l=7;
 
 free_flap_cut_d=12;
 free_flap_cut_h=10;
-free_flap_cut_w=6;
+free_flap_cut_w=5;
 
 free_flap_blade_d=20;
 free_flap_blade_holder_h=3;

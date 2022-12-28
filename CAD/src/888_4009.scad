@@ -17,7 +17,6 @@ negativ_flap_limit=free_flap_negativ_flap_limit;
 bearing_add=free_flap_bearing_add;
 desk_add=free_flap_desk_add;
 desk_h=free_flap_desk_h;
-central_part_screw_cylinder_h=free_flap_central_part_screw_cylinder_h;
 
 delta_angle=free_flap_delta_angle;
 blade_screw_distance=free_flap_delta_angle;
@@ -46,11 +45,13 @@ difference()
                     rotate([0,0,delta_angle])
                         rotate([90,0,0])
                         {
-                            cylinder(d=bearings_outer_diameter+bearing_add,h=ax_length+3, center=true,$fn=circle_fn);
-                            translate([0,bearings_outer_diameter,0])
-                              cylinder(d=bearings_outer_diameter+bearing_add,h=ax_length+3, center=true,$fn=circle_fn);
+                            cylinder(d=bearings_outer_diameter+bearing_add,h=ax_length-0.01, center=true,$fn=circle_fn);
                             translate([2,-desk_add,0])
                                 cylinder(d=bearings_outer_diameter+bearing_add,h=ax_length-2, center=true,$fn=circle_fn);
+                            //hacek
+                            /*translate([0,bearings_outer_diameter,0])
+                              cylinder(d=bearings_outer_diameter+bearing_add,h=ax_length+3, center=true,$fn=circle_fn);*/
+
                         }
 
             rotate([0,0,delta_angle])
@@ -65,7 +66,7 @@ difference()
         }
         
         //materiál pod matičkou
-        cylinder(d=11,h=2*desk_h, $fn=circle_fn);
+        cylinder(d=11,h=desk_h, $fn=circle_fn);
      }
 
     for(r=[0,180])
@@ -116,17 +117,17 @@ difference()
                                 cylinder(d=bearings_ring_diameter,h=bearings_ring_h+10, center=true, $fn=circle_fn);
                                 
             //hacek pro gumu
-            translate([ax_offset,0,(bearings_outer_diameter+bearing_add)/2])
+            /*translate([ax_offset,0,(bearings_outer_diameter+bearing_add)/2])
                 rotate([0,0,delta_angle])
                     rotate([90,0,0])
                         translate([-2.5,bearings_outer_diameter+1.5,0])
-                            cylinder(d=rubber_spring_d,h=ax_length+6, center=true,$fn=circle_fn);
+                            cylinder(d=rubber_spring_d,h=ax_length+6, center=true,$fn=circle_fn);*/
         }
 
         //díra pro matičku rotoru
         hull()
         {
-            translate([0,0,5+desk_h])
+            translate([0,0,5+desk_h/2])
                         cylinder(d=11,h=10, center=true, $fn=circle_fn);
 
             //elegance
@@ -165,14 +166,12 @@ difference()
             translate([0,i*central_part_screw_distance,0])
             {
                 cylinder(d = M3_screw_diameter, h =  30, center=true, $fn = circle_fn);
-                translate([0,0,central_part_screw_cylinder_h-M3_nut_height+0.5])
-                    cylinder(d = M3_nut_diameter, h =  30, $fn = 6);
+                translate([0,0,desk_h/2])
+                    cylinder(d = M3_head_diameter, h =  30, $fn = circle_fn);
             }
         }
 
-        translate([0,0,5+desk_h])
-            cylinder(d=11,h=10, center=true, $fn=circle_fn);
-
+        
         cylinder(d=M3_screw_diameter,h=10, center=true, $fn=circle_fn);
 }
 
