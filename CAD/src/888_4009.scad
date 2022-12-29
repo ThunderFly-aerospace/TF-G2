@@ -167,7 +167,7 @@ difference()
             {
                 cylinder(d = M3_screw_diameter, h =  30, center=true, $fn = circle_fn);
                 translate([0,0,desk_h/2])
-                    cylinder(d = M3_head_diameter, h =  30, $fn = circle_fn);
+                    cylinder(d = M3_nut_diameter, h =  30, $fn = 6);
             }
         }
 
