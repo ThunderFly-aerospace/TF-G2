@@ -290,8 +290,8 @@ free_flap_bearings_ring_h=1.5;
 //free_flap_bearings_outer_diameter=3;
 free_flap_negativ_flap_limit=5;
 free_flap_bearing_add=4;
-free_flap_desk_add=0.5;
-free_flap_desk_h=2;
+free_flap_desk_add=1;
+free_flap_desk_h=2.5;
 
 free_flap_delta_angle=-rotor_delta_angle;
 free_flap_blade_screw_distance=blade_mount_screw_distance;

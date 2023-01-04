@@ -1,7 +1,7 @@
 include <../parameters.scad>
 
 
-module 888_4010(colective=-0.5)
+module 888_4010(colective=1.5)
 {
 
 ax_length=free_flap_ax_length;

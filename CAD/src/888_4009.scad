@@ -59,8 +59,8 @@ difference()
                     cube([desk_l,desk_w,desk_h],center=true);*/
                 for(i=[-1,1])
                 {
-                    translate([4,i*(central_part_screw_distance-1),desk_h/4-desk_add])
-                        cylinder(d=10,h=desk_h/2, center=true,$fn=circle_fn);
+                    translate([0,i*(central_part_screw_distance-1),desk_h/4-desk_add])
+                        cylinder(d=10,h=desk_h, center=true,$fn=circle_fn);
                 }
            }
         }
@@ -114,7 +114,16 @@ difference()
                     rotate([0,0,delta_angle])
                         translate([0,i*(shaft_l/2+bearings_ring_h/2-5),0])
                             rotate([90,0,0])
+                              hull()
+                              {
                                 cylinder(d=bearings_ring_diameter,h=bearings_ring_h+10, center=true, $fn=circle_fn);
+                                translate([bearings_ring_diameter,0,0])
+                                   cylinder(d=bearings_ring_diameter,h=bearings_ring_h+10, center=true, $fn=circle_fn);
+                                translate([0,bearings_ring_diameter,0])
+                                   cylinder(d=bearings_ring_diameter,h=bearings_ring_h+10, center=true, $fn=circle_fn);
+                              }
+
+              
                                 
             //hacek pro gumu
             /*translate([ax_offset,0,(bearings_outer_diameter+bearing_add)/2])
@@ -139,7 +148,7 @@ difference()
                         translate([ax_offset,0,(bearings_outer_diameter+bearing_add)/2])
                             rotate([0,0,delta_angle])
                                 translate([-(bearings_outer_diameter+bearing_add)/4,0,shaft_h])
-                                    cube([(bearings_outer_diameter+bearing_add)/2,shaft_l+0.1,2*shaft_h],center=true);
+                                    cube([(bearings_outer_diameter+bearing_add)/2,shaft_l+2*bearings_ring_h+0.1,2*shaft_h],center=true);
 
                         hull()
                         {
