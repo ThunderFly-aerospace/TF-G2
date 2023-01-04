@@ -59,7 +59,7 @@ difference()
                     cube([desk_l,desk_w,desk_h],center=true);*/
                 for(i=[-1,1])
                 {
-                    translate([0,i*(central_part_screw_distance-1),desk_h/4-desk_add])
+                    translate([0,i*(central_part_screw_distance-1),desk_h/2-desk_add])
                         cylinder(d=10,h=desk_h, center=true,$fn=circle_fn);
                 }
            }
@@ -80,13 +80,13 @@ difference()
                         cylinder(d=ax_diameter+0.1,h=ax_length+5, center=true,$fn=circle_fn);
 
                     //díra pro list
-                    translate([(bearings_outer_diameter+bearing_add)/2,0,shaft_h*3/2])
-                        cube([2*(bearings_outer_diameter+bearing_add)+0.1,shaft_l+0.1,3*shaft_h],center=true);
+                    /*#translate([(bearings_outer_diameter+bearing_add)/2,0,shaft_h*3/2])
+                        cube([2*(bearings_outer_diameter+bearing_add)+0.1,shaft_l+0.1,3*shaft_h],center=true);*/
                     //díra pro list v záporném flappingu
                     rotate([0,negativ_flap_limit,0])
                     {
-                        translate([(bearings_outer_diameter+bearing_add)/2,0,shaft_h/2])
-                            cube([2*(bearings_outer_diameter+bearing_add),shaft_l+0.2,2*shaft_h+0.2],center=true);
+                        /*translate([(bearings_outer_diameter+bearing_add)/2+1,0,shaft_h/2])
+                            cube([2*(bearings_outer_diameter+bearing_add),shaft_l+0.2,2*shaft_h+0.2],center=true);*/
 
                         hull()
                         {
@@ -94,7 +94,7 @@ difference()
                                 translate([ax_diameter/2+M3_screw_diameter/2,yy*4,0])
                                     cylinder(d=M3_head_diameter,h=20,center=true,$fn=100);
                            translate([ax_diameter/2+M3_screw_diameter/2+5,0,-0])
-                                cube([M3_head_diameter,ax_length-2*bearings_length+0.2,20],center=true);
+                                cube([M3_head_diameter,ax_length-2*bearings_length+2*bearings_ring_h,20],center=true);
                         }
                     }
 
@@ -113,6 +113,7 @@ difference()
                 translate([ax_offset,0,(bearings_outer_diameter+bearing_add)/2])
                     rotate([0,0,delta_angle])
                         translate([0,i*(shaft_l/2+bearings_ring_h/2-5),0])
+                            rotate([0,negativ_flap_limit,0])
                             rotate([90,0,0])
                               hull()
                               {
