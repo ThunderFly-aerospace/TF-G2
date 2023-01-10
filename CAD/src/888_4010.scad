@@ -60,7 +60,7 @@ difference()
             translate([shaft_neck_l-0.05,0,0])
                 cube([.01,shaft_l,shaft_h],center=true);
         }
-
+        
         hull()
         {
 
@@ -71,36 +71,41 @@ difference()
 
 
             //printing support
-            #rotate([colective,0,0])
+            rotate([colective,0,0])
                 translate([cut_d/2-0.5,-blade_w/2+0.05,0])
                     cube([0.1,0.1,shaft_h],center=true);                   
-            #rotate([colective,0,0])
+            rotate([colective,0,0])
                 translate([cut_d-0.1,-blade_w/2+0.05,0])
                     cube([0.1,0.1,cut_h],center=true);
 
             //cut neck
             translate([cut_d-0.5,0,0])
                 cube([0.1,cut_w,cut_h],center=true);
-            }
+        }
+        
+        //printing support between part
+        rotate([colective,0,0])
+                translate([cut_d+1.5,-blade_w/2+0.4,0])
+                    cube([16,0.8,2*blade_holder_h+blade_h],center=true);   
 
-            hull()
-            {
-            //cut neck
-            translate([cut_d-0.5,0,0])
-                cube([0.1,cut_w,cut_h],center=true);
+        hull()
+        {
+        //cut neck
+        translate([cut_d-0.5,0,0])
+            cube([0.1,cut_w,cut_h],center=true);
 
-            //blade hodler
-            rotate([colective,0,0])                
-               for(j=[-1,1])
-               {               
-                  translate([blade_d+blade_holder_l/2,(blade_w/2-blade_holder_radius/2),j*((2*blade_holder_h+blade_h)/2-blade_holder_radius/2)])
-                      rotate([0,90,0])
-                                cylinder(d=blade_holder_radius,h=blade_holder_l,center=true,$fn=circle_fn);
-                                
-                  #translate([blade_d+blade_holder_l/2,-1*(blade_w/2-0.1/2),j*((2*blade_holder_h+blade_h)/2-0.1/2)])
-                      rotate([0,90,0])
-                                cylinder(d=0.1,h=blade_holder_l,center=true,$fn=circle_fn);
-               }
+        //blade hodler
+        rotate([colective,0,0])                
+           for(j=[-1,1])
+           {               
+              translate([blade_d+blade_holder_l/2,(blade_w/2-blade_holder_radius/2),j*((2*blade_holder_h+blade_h)/2-blade_holder_radius/2)])
+                  rotate([0,90,0])
+                            cylinder(d=blade_holder_radius,h=blade_holder_l,center=true,$fn=circle_fn);
+                            
+              #translate([blade_d+blade_holder_l/2,-1*(blade_w/2-0.1/2),j*((2*blade_holder_h+blade_h)/2-0.1/2)])
+                  rotate([0,90,0])
+                            cylinder(d=0.1,h=blade_holder_l,center=true,$fn=circle_fn);
+           }
 
         }
 
