@@ -22,7 +22,7 @@ module 888_1003_outline(battery_case_start_x = 25, battery_length = 150){
 		        	cube([base_length+6-15, base_thickness + rantl_height, 1]);
 
 				       	// vepredu ve vysce prostrednich der na policky
-				    translate([10*3, motor_holder_side_mount_height, 0])
+				       translate([10*3, motor_holder_side_mount_height, 0])
 				    	cube([M3_screw_diameter+7, M3_screw_diameter+15, 1], center = true);
 							//cylinder(d = M3_screw_diameter+7, h = 1);
 

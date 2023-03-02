@@ -3,7 +3,9 @@
 include <../../parameters.scad>
 // include <yasim.scad>
 
-include <position/position_888_1001.scad>
+//include <position/position_888_1001.scad>
+include <position/position_888_1001_frontpart.scad>
+include <position/position_888_1001_rearpart.scad>
 include <position/position_888_1002.scad>
 //include <position/position_888_1006.scad>
 include <position/position_888_1003.scad>
