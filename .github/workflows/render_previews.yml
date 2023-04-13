@@ -37,7 +37,7 @@ jobs:
         sudo python3 -m pip install --upgrade pip
         sudo python3 -m pip install stlsort lxml
         sudo python3 -m pip install git+https://github.com/ThunderFly-aerospace/yagv
-        sudo python3 -m pip install git+https://${{ secrets.AUTH_USER }}:${{ secrets.GITHUBPAT }}@github.com/ThunderFly-aerospace/processor3D.git
+        sudo python3 -m pip install git+https://${{ secrets.AUTH_USER }}:${{ secrets.GITHUBPAT }}@github.com/ThunderFly-aerospace/processor3D.git@blender
         wget https://files.openscad.org/snapshots/OpenSCAD-2023.06.30.ai15629-x86_64.AppImage -O ~/OpenSCAD.AppImage
         chmod +x ~/OpenSCAD.AppImage
         ~/OpenSCAD.AppImage --version
