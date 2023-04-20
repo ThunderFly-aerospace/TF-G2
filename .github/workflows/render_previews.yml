@@ -48,16 +48,21 @@ jobs:
         rm CAD/stl/*.stl ||:
         rm CAD/amf/*.amf ||:
 
-    - name: Make
+    - name: Make -d CAD/src
       run: |
         cd CAD/src
         make
 
-    - name: Make
+    - name: Make -d CAD/src/assembly (position)
       run: |
         cd CAD/src/assembly
         make
-        
+
+    - name: Make -d CAD/src/assembly (test blender)
+      run: |
+        cd CAD/src/assembly/test
+        make
+
     - name: Upload a PNG Artifact
       uses: actions/upload-artifact@v2.2.2
       with:
