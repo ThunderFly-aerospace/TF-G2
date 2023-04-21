@@ -1371,13 +1371,6 @@ solid model
       vertex 0.506356 9.70114 -1
     endloop
   endfacet
-  facet normal 0 0 1
-    outer loop
-      vertex -10.2083 -14.7308 -1
-      vertex -8.24931 -14.5409 -1
-      vertex -8.9127 -14.6052 -1
-    endloop
-  endfacet
   facet normal 0.350353 0.468174 0.811213
     outer loop
       vertex -10.2695 -16.2059 9.95039
@@ -1417,6 +1410,13 @@ solid model
     outer loop
       vertex -11.2577 -14.8326 -1
       vertex -8.24931 -14.5409 -1
+      vertex -8.9127 -14.6052 -1
+    endloop
+  endfacet
+  facet normal 0 0 1
+    outer loop
+      vertex -11.2577 -14.8326 -1
+      vertex -8.9127 -14.6052 -1
       vertex -10.2083 -14.7308 -1
     endloop
   endfacet
@@ -1807,21 +1807,14 @@ solid model
   endfacet
   facet normal 0 0 -1
     outer loop
-      vertex -13.7771 16.3333 -0.999999
-      vertex -13.7498 16.2304 -0.999999
       vertex -13.768 16.2988 -0.999999
-    endloop
-  endfacet
-  facet normal 0 0 1
-    outer loop
-      vertex -13.7782 16.337 -0.999999
       vertex -13.6968 16.031 -0.999999
       vertex -13.7218 16.125 -0.999999
     endloop
   endfacet
   facet normal 0 0 1
     outer loop
-      vertex -13.7782 16.337 -0.999999
+      vertex -13.768 16.2988 -0.999999
       vertex -13.7218 16.125 -0.999999
       vertex -13.7498 16.2304 -0.999999
     endloop
@@ -1829,7 +1822,7 @@ solid model
   facet normal 0 0 1
     outer loop
       vertex -13.7782 16.337 -0.999999
-      vertex -13.7498 16.2304 -0.999999
+      vertex -13.768 16.2988 -0.999999
       vertex -13.7771 16.3333 -0.999999
     endloop
   endfacet
@@ -3352,10 +3345,17 @@ solid model
       vertex -13.6968 16.031 -0.999999
     endloop
   endfacet
-  facet normal 0 0 -1
+  facet normal 0 0 1
     outer loop
       vertex -16.2127 25.4908 -0.999999
       vertex -13.6968 16.031 -0.999999
+      vertex -13.768 16.2988 -0.999999
+    endloop
+  endfacet
+  facet normal 0 0 -1
+    outer loop
+      vertex -16.2127 25.4908 -0.999999
+      vertex -13.768 16.2988 -0.999999
       vertex -13.7782 16.337 -0.999999
     endloop
   endfacet
@@ -24667,6 +24667,13 @@ solid model
       vertex 16.2127 -25.4908 -0.999999
     endloop
   endfacet
+  facet normal 0.000155982 -0.00160793 -0.999999
+    outer loop
+      vertex 10.2083 14.7308 -1
+      vertex 11.2577 14.8326 -1
+      vertex 25.4908 16.2127 -0.999999
+    endloop
+  endfacet
   facet normal -3.20385e-08 3.30267e-07 -1
     outer loop
       vertex 10.2083 14.7308 -1
@@ -25700,20 +25707,6 @@ solid model
     outer loop
       vertex 13.6968 -16.031 -0.999999
       vertex 13.7218 -16.125 -0.999999
-      vertex 13.7498 -16.2304 -0.999999
-    endloop
-  endfacet
-  facet normal 0 0 1
-    outer loop
-      vertex 13.6968 -16.031 -0.999999
-      vertex 13.7498 -16.2304 -0.999999
-      vertex 13.768 -16.2988 -0.999999
-    endloop
-  endfacet
-  facet normal 0 0 -1
-    outer loop
-      vertex 13.6968 -16.031 -0.999999
-      vertex 13.768 -16.2988 -0.999999
       vertex 13.7771 -16.3333 -0.999999
     endloop
   endfacet
@@ -25729,6 +25722,20 @@ solid model
       vertex 13.6968 -16.031 -0.999999
       vertex 18.4218 -17.0443 -0.999999
       vertex 13.7218 -16.125 -0.999999
+    endloop
+  endfacet
+  facet normal 0 0 1
+    outer loop
+      vertex 13.7218 -16.125 -0.999999
+      vertex 13.7498 -16.2304 -0.999999
+      vertex 13.768 -16.2988 -0.999999
+    endloop
+  endfacet
+  facet normal 0 0 -1
+    outer loop
+      vertex 13.7218 -16.125 -0.999999
+      vertex 13.768 -16.2988 -0.999999
+      vertex 13.7771 -16.3333 -0.999999
     endloop
   endfacet
   facet normal 0 0 -1
@@ -43889,17 +43896,10 @@ solid model
       vertex 8.2845 19.0547 10.1372
     endloop
   endfacet
-  facet normal 0 0 1
+  facet normal 0.000215665 -0.00222478 0.999998
     outer loop
       vertex 8.24931 14.5409 -1
       vertex 10.2083 14.7308 -1
-      vertex 11.2577 14.8326 -1
-    endloop
-  endfacet
-  facet normal 0.00347993 -0.0358896 0.99935
-    outer loop
-      vertex 8.24931 14.5409 -1
-      vertex 11.2577 14.8326 -1
       vertex 25.4908 16.2127 -0.999999
     endloop
   endfacet
