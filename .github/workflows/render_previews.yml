@@ -34,6 +34,13 @@ jobs:
         uname -p
         sudo apt update
         sudo apt-get install libc-bin python3-setuptools xvfb
+        # HOW TO SPEED UP
+        # processor3d now can call it # FIXME: maybe we should prepare image for run multiple action instead of
+        # install requirements again in every job!
+        # see: https://docs.docker.com/build/ci/github-actions/share-image-jobs/
+        # even better reuse artifact (runner image) from previous run
+        # see: https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts
+        sudo apt-get install blender
         sudo python3 -m pip install --upgrade pip
         sudo python3 -m pip install stlsort lxml
         sudo python3 -m pip install git+https://github.com/ThunderFly-aerospace/yagv
