@@ -6,7 +6,8 @@ SRC_DIR=../../../src/assembly/test
 # GCD_DIR=../../../gcode
 # INI_DIR=../../../slicing
 GIT_ROOT=../../../../
-OUTPUT_FOLDER=.
+# FIXME: this is due to SRC+OUTPUT is at GIT ROOT
+OUTPUT_FOLDER=CAD
 NAME_PREFIX=TF-G2_assembly
 PROCESSOR3D_PARAM=--no_gcode --no_amf
 
