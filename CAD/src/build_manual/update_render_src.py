@@ -52,6 +52,7 @@ def set_material(object_name, material = "basic_light_gray"):
     bpy.data.objects[object_name].data.materials.append(mat)
 
 def save_blender_file(filename):
+	print("Saving blender: {}".format(os.path.abspath(filename)))
 	bpy.ops.wm.save_as_mainfile(filepath=filename)
 
 def render_png(filename, frame = 0):
@@ -83,7 +84,13 @@ for part_k in config.get('parts', {}):
 	part['name'] = part_k
 
 	if 'stl' in part:
+		if not os.path.exists(part['stl']):
+			# FIXME: continue only if config.pedant=False
+			print("Missing stl file: {}".format(part['stl']))
+			continue
 		pass
+                #TODO: some files are at CAD/stl/
+                #      this happens if SRC_DIR in makefile is not at level
 		#TODO: check if file is exists and is valid
 		part['stl'] = os.path.abspath(part['stl'])
 
@@ -115,4 +122,4 @@ if config['render']['type'] == 'png':
 	render_png(render_file)
 
 if config.get('save_blend', False):
-	save_blender_file(os.path.abspath(config_file.split('.')[0]+'.blend'))
+	save_blender_file(os.path.abspath(config_name+'.blend'))
