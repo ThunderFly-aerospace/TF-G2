@@ -13,10 +13,11 @@ To enhance the ease of learnig of autogyro technology, we made possible to [simu
 
 ## The main design highlights
 
+  * Micro payload load capacity suitable for multiple types of [TF-ATMON atmospheric sensors](https://www.thunderfly.cz/tf-atmon.html)
+  * Low audible noise
+  * Predictable behavior in flight
   * High repairability and easy maintenance
   * Use of 3D printing flexibility
-  * Predictable behavior in flight
-  * Micro payload load capacity suitable for multiple types of [TF-ATMON atmospheric sensors](https://www.thunderfly.cz/tf-atmon.html)
   * [Simulation model available](https://github.com/ThunderFly-aerospace/FlightGear-TF-G2)
   * [Car roof takeoff ready](https://github.com/ThunderFly-aerospace/TF-SIMPLEPLATFORM)
 
@@ -34,6 +35,7 @@ In contrast to well known [VTOL](https://en.wikipedia.org/wiki/VTOL) aircrafts. 
 * Ability to take off and land using only a very short runway (almost zero lenght).
 * High resistance to weather conditions, especially gusts of wind or thermals.
 * A unpowered rotor enabling it to operate in an autorotation mode (one of the helicopter’s emergency modes as well). Consequently, it does not need to actively change a flight mode in case of failure (it does not need a parachute or other actively working devices). Its flight is thus inherently stable at all times.
+* Autogyro has significantly reduced audible noise due to the slowly rotating rotor and propeller. 
 * Absence of a downwash - during take-off or landing the creating an unwanted swirling of dust is eliminated.
 * Low lift-to-drag ratio that can be adjusted by construction parameters. This ability can be useful because while an unmanned autogyro cannot fly very far in the case of failure (as is the case of a conventional airplane), the flight is still safe and aircraft does not fall (as is typical for multicopter or helicopter).
 
