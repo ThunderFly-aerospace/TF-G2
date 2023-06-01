@@ -41,11 +41,14 @@ include <../position/position_888_1006.scad> // Policka na payload
 
 use <../../888_1004.scad>
 color([0.3,0.3,0.3])
+rotate([0, 90, 0])
+rotate([0, -90, 0]) // @blender-skip
   888_1004();
 //use <../888_1004.scad>
 //use <../888_1005.scad>
-//use <../888_1005.scad>
 
+//use <../../888_1007.scad>
+//888_1007();
 
 // include <position/position_888_1016_rear_difference.scad>
 
