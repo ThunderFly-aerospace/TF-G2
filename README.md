@@ -28,9 +28,10 @@ Here are some examples of existing use cases for TF-G2 as a lightweight sensor c
 
 ### Particulate matter sensing
 
-Particulate matter sensing in the atmosphere is a scientific technique used to monitor and measure the concentration of small solid and liquid particles suspended in air, often termed as aerosols. These particles, typically categorized by their size - such as PM2.5 and PM10 - can originate from various sources including combustion processes, industrial emissions, vehicle exhausts, and natural phenomena like dust storms. Sensing and monitoring particulate matter is crucial for environmental health and public safety, as high levels can severely impact air quality, contributing to respiratory and cardiovascular diseases. Moreover, this data aids meteorological predictions and climate models, as particulates influence atmospheric visibility, and can affect the earth's radiation balance, hence playing a role in climate change.
+Particulate matter sensing in the atmosphere is a scientific technique used to monitor and measure the concentration of small solid particles suspended in air, often termed as aerosols. These particles, typically categorized by their size - such as PM2.5 and PM10 - can originate from various sources including combustion processes, industrial emissions, vehicle exhausts, and natural phenomena like dust storms. Sensing and monitoring particulate matter is crucial for environmental health and public safety, as high levels can severely impact air quality, contributing to respiratory and cardiovascular diseases. Moreover, this data aids meteorological predictions and climate models, as particulates influence atmospheric visibility, and can affect the earth's radiation balance, hence playing a role in climate change. The TF-G2 autogyro could be equipped by [TFPM01](https://github.com/ThunderFly-aerospace/TFPM01) particulate matter sensor to measure the concentration of particulate matter in the specified air volume. 
 
-The TF-G2 autogyro could be equipped by [TFPM01](https://github.com/ThunderFly-aerospace/TFPM01) particulate matter sensor. 
+[ ![Watch the video](https://img.youtube.com/vi/KUhktPDEi8I/hqdefault.jpg) ](https://www.youtube.com/watch?v=KUhktPDEi8I)
+
 
 ### Humidity and temperature sensing
 
