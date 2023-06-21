@@ -6,8 +6,8 @@
 Click on the following video to quickly get an overview: 
 [![ThuderFly_TFG2_training_autogyro_prototype](https://user-images.githubusercontent.com/5196729/144823035-37a70a1a-de21-4eb6-ab80-2aa2d4ea78db.gif)](http://www.youtube.com/watch?v=6PtS-MwnM_8)
 
-[TF-G2](https://www.thunderfly.cz/tf-g2.html) autogyro is well-suited for training of UAV operators and for gaining experience with autogyro mission planning. TF-G2 is limited to light payloads, but it shares all the specific properties of larger autogyros in our offering. It may find application in less demanding flight operations, however its main purpose is being a tool for low-cost application practice. The autogyro’s small size leads to easy transport, repairs and maintenance.
-To enhance the ease of learnig of autogyro technology, we made possible to [simulate TF-G2 flight](https://github.com/ThunderFly-aerospace/PX4-FlightGear-Bridge) prior the real flight training.
+[TF-G2](https://www.thunderfly.cz/tf-g2.html) autogyro is well-suited for training UAV operators and for gaining experience with autogyro mission planning. TF-G2 is limited to light payloads, but it shares all the specific properties of larger autogyros in our offering. It may find application in less demanding flight operations, however, its main purpose is to be a tool for low-cost application practice. The autogyro’s small size leads to easy transport, repairs, and maintenance.
+To enhance the ease of learning autogyro technology, we made it possible to [simulate TF-G2 flight](https://github.com/ThunderFly-aerospace/PX4-FlightGear-Bridge) prior to the real flight training.
 
 ![TF-G2 during flight](/doc/img/TF-G2_fly_clouds.jpg)
 
@@ -21,32 +21,33 @@ To enhance the ease of learnig of autogyro technology, we made possible to [simu
   * [Simulation model available](https://github.com/ThunderFly-aerospace/FlightGear-TF-G2)
   * [Car roof takeoff ready](https://github.com/ThunderFly-aerospace/TF-SIMPLEPLATFORM)
 
-Based on that features the TF-G2 is perfectly suitable for [atmospheric measurement applications](https://www.thunderfly.cz/tf-atmon.html). That could be ilustrated by sucessful instegration of multiple sensor types. 
+Based on that features the TF-G2 is perfectly suitable for [atmospheric measurement applications](https://www.thunderfly.cz/tf-atmon.html). That could be illustrated by the successful integration of multiple sensor types. 
 
 ![TF-G2 in hangar](./doc/img/TF-G2_hangar.png)
+
+
 ![TF-G2 with installed THUNDERMILL electric field sensor](./doc/img/TF-G2_THUNDERMILL.jpg)
 
 ## Why autogyro? 
 
 ![Autogyro](https://imgs.xkcd.com/comics/autogyros.png)
 
-In contrast to well known [VTOL](https://en.wikipedia.org/wiki/VTOL) aircrafts. The autogyro could be considered as a short take-off and vertical landing aircraft ([STOVL](https://en.wikipedia.org/wiki/STOVL)). Therefore it is suitable for large wide range of different applications. The main advantages to other well known arframes: 
+In contrast to the well-known [VTOL](https://en.wikipedia.org/wiki/VTOL) aircraft designs. The autogyro could be considered a short take-off and vertical landing aircraft ([STOVL](https://en.wikipedia.org/wiki/STOVL)). Therefore it is suitable for a wide range of different applications. The main advantages to other well-known airframes: 
 
-* Ability to take off and land using only a very short runway (almost zero lenght).
+* Ability to take off and land using only a very short runway (almost zero length).
 * High resistance to weather conditions, especially gusts of wind or thermals.
-* A unpowered rotor enabling it to operate in an autorotation mode (one of the helicopter’s emergency modes as well). Consequently, it does not need to actively change a flight mode in case of failure (it does not need a parachute or other actively working devices). Its flight is thus inherently stable at all times.
+* A unpowered rotor enabling it to operate in an autorotation mode (one of the helicopter’s emergency modes as well). Consequently, it does not need to actively change a flight mode in case of failure (it does not need a parachute or other actively working devices). Its flight is thus inherently stable and safe at all times.
 * Autogyro has significantly reduced audible noise due to the slowly rotating rotor and propeller. 
-* Absence of a downwash - during take-off or landing the creating an unwanted swirling of dust is eliminated.
-* Low lift-to-drag ratio that can be adjusted by construction parameters. This ability can be useful because while an unmanned autogyro cannot fly very far in the case of failure (as is the case of a conventional airplane), the flight is still safe and aircraft does not fall (as is typical for multicopter or helicopter).
+* Absence of a downwash - during take-off or landing the creation of an unwanted swirling of dust is eliminated.
+* Low lift-to-drag ratio that can be adjusted by construction parameters. This ability can be useful because an unmanned autogyro cannot fly very far in the case of controls failure (as is the case of a conventional airplane), the flight is still safe and the autogyro cannot fall (as is typical for multi-copters or wrongly piloted helicopters).
 
-The outogyro has generally many construction variants. The one, which is in the scope of this repository has a fully tilted rotor. The main advantage of this construction feature is obtaining better controlabillity over its speed range. It can also be controlled down to zero forward airspeed, compared to classical rudder/elevator setup.
+The autogyro has generally many construction variants. The one, which is in the scope of this repository has a fully tilted rotor. The main advantage of this construction feature is obtaining better controllability over its wide airspeed range. It can also be controlled down to zero forward airspeeds, compared to a classical rudder/elevator setup.
 
 ## Repository content
 
-This repository contains open-source design files of the autogyro construction. The most components are 3D-printed. However the printable data (gcodes) are generated by our special software suite - processor3D. It is required that parts are sliced properly according to material to make sure that resulted 3D printed parts could be used safely for the flight. **Therefore for safety reasons we do not recommend to attempt to slice the parts yourself. It is better to contact us.**
+This repository contains open-source design files of the autogyro construction. Most components are 3D-printed. However, the printable data (gcodes) are generated by our special software suite - processor3D. It is required that parts are sliced properly according to the material to make sure that resulted in 3D-printed parts could be used safely for the flight. **Therefore for safety reasons we do not recommend attempting to slice the parts yourself. It is better to contact us.**
 
-The product, support or accesories could be obtained from [ThunderFly s.r.o.](https://www.thunderfly.cz/), via an email to info@thunderfly.cz .
-
+The product, support, or accessories could be obtained from [ThunderFly s.r.o.](https://www.thunderfly.cz/), via an email to info@thunderfly.cz .
 
 ### Contribution
 
