@@ -201,7 +201,10 @@ Servo_screw = 1.5;
 Servo_nut_height = 1;
 Servo_nut_diameter = 2.7;
 
-tail_pipe_d = 13.04;
+tail_pipe_d = 13.04;  // tail rudder tube diameter
+mount_tube_in_d=7.5;  // landing gear mount tube inner diameter
+mount_tube_out_d=10.4; // landing gear mount tube outer diameter
+skid_tube_d=6.3;  // landing gear skid tube outer diameter
 
 // elevator parameters
 
