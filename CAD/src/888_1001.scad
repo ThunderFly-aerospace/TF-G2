@@ -100,12 +100,12 @@ module 888_1001(){
                     translate([i+base_patern +base_patern/2,j*(base_width/2-10),-0.1])
                         cylinder(h=base_thickness+0.2, d=M5_screw_diameter, $fn=50);
                 }
-                
+
                 // Rozsireni pricky pro puzzle spjku
                 lock_material_width = 11; // sirka materialu, ve kterem budou zamky
                 translate([base_split_position[1], 0, 0] + [-lock_material_width/2+1, -base_width/2, 0])
                     cube([lock_material_width, base_width, base_thickness]);
-                
+
                 // Vyztuzeni okolo XT60 konektoru
                 if(use_xt60_flange)
                 translate([15, base_width/4, 0])
@@ -189,7 +189,7 @@ module 888_1001_crop_visualisation(offset = 0){
               cube([0.01, base_width+10, base_thickness+20], center = true);
             }
 
-            
+
     }
 }
 
@@ -204,8 +204,8 @@ module 888_1001_crop(offset = 0) translate([base_split_position[1], 0, -10]) {
 }
 
 888_1001();
-888_1001_crop_visualisation();
-%888_1001_crop(offset = 0);
+//888_1001_crop_visualisation();
+//888_1001_crop(offset = 0);
 
 
 base_splitter_length = 45;
