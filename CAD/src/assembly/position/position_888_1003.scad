@@ -7,8 +7,6 @@ for(x = [1, 0])
 		translate([0, -base_width/2, 0])
 			rotate([90, 0, 0])
 			{
-
-    888_1003();
-	888_1003_crop_visualisation();
-
+		    888_1003();
+			//888_1003_crop_visualisation();
 			}

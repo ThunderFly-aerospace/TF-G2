@@ -115,7 +115,7 @@ module 888_1003(){
 			translate([x, rantl_height/2, -0.1])
 				cylinder(d = plastic_screw_trought_diameter, h = 15, center = true, $fn = 50);
 
-		
+
 
         //for(x = [10+base_patern, 10+base_patern*2])
 		//prostedni vodorovna rada
@@ -204,4 +204,4 @@ module 888_1003_crop(i, offset=0.1){
 				offset(delta=-offset, chamfer = 1) polygon(arr);
 }
 
-888_1003_crop_visualisation();
+//888_1003_crop_visualisation();
