@@ -42,7 +42,7 @@ module 888_2101(draft=true) // Skid holder
                   cylinder(d=skid_tube_d,h=tube_hole, center=true,$fn=circle_fn);
 
           // prorez tenké trubky
-          translate([joint_d+skid_tube_d/2,0,-joint_h/2 ])
+          translate([joint_d+skid_tube_d/2-global_clearance,0,-joint_h/2 ])
               rotate([90+sm_t_angle,0,0])
                   cube([2*joint_d,joint_d,4*global_clearance], center = true);
 
