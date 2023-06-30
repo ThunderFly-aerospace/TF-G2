@@ -14,14 +14,14 @@ jobs:
     runs-on: ubuntu-20.04
     strategy:
       matrix:
-        printer: [mini, edee, mlab3d]
+        printer: [mini] # [mini, edee, mlab3d]
     env:
       OPENSCAD_BIN: xvfb-run --auto-servernum ~/OpenSCAD.AppImage
       SLIC3R_BIN: ~/Slic3r.AppImage
       PRINTER: ${{ matrix.printer }}
     steps:
     - uses: FranzDiebold/github-env-vars-action@v2
-    
+
     - name: Checkout repository
       uses: actions/checkout@v2
       with:
