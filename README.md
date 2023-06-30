@@ -35,9 +35,11 @@ Particulate matter sensing in the atmosphere is a scientific technique used to m
 
 ### Humidity and temperature sensing
 
-Humidity and temperature sensing in atmospheric vertical sounding involve the measurement of atmospheric moisture content and temperature at various altitudes. Instruments like the [TFHT01 sensor](https://github.com/ThunderFly-aerospace/TFHT01)  from ThunderFly are pivotal in collecting this data. These compact and lightweight sensors, designed specifically for UAV applications, can withstand varied atmospheric conditions and provide accurate, high-resolution measurements. Acquiring this data is essential for meteorological forecasts and climate studies, as the vertical distribution of temperature and humidity influences weather patterns, storm development, and overall climate dynamics. The [TFHT01](https://github.com/ThunderFly-aerospace/TFHT01) sensor, with its specialized design and precise data, has become an instrumental tool in advancing our understanding of these complex atmospheric processes.
+Humidity and temperature sensing in [atmospheric vertical sounding](https://en.wikipedia.org/wiki/Atmospheric_sounding) involve the measurement of atmospheric moisture content and temperature at various altitudes. Instruments like the [TFHT01 sensor](https://github.com/ThunderFly-aerospace/TFHT01)  from ThunderFly are pivotal in collecting this data. These compact and lightweight sensors, designed specifically for UAV applications, can withstand varied atmospheric conditions and provide accurate, high-resolution measurements. Acquiring this data is essential for meteorological forecasts and climate studies, as the vertical distribution of temperature and humidity influences weather patterns, storm development, and overall climate dynamics. The [TFHT01](https://github.com/ThunderFly-aerospace/TFHT01) sensor, with its specialized design and precise data, has become an instrumental tool in advancing our understanding of these complex atmospheric processes.
 
 ![TF-G2 atmospheric sounding experiment](https://github.com/ThunderFly-aerospace/TFHT01/blob/TFHT01B/doc/img/TFHT_vertical_profile_measurement.png)
+
+An example of an atmospheric profiling experiment. The time difference between the reference and the experiment was around 6 hours. 
 
 ### Electric field monitoring
 
