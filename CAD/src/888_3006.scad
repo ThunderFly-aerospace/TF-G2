@@ -2,8 +2,8 @@
 
 include<../parameters.scad>
 module 888_3006(){
-    holder_wall_thickness = 2;
-    offset=tail_pipe_d/2+holder_wall_thickness+1.45;
+    holder_wall_thickness = 1.5;
+    offset=tail_pipe_d/2+holder_wall_thickness+1;
     mount_h=9;
  
     difference(){
@@ -54,14 +54,14 @@ module 888_3006(){
             cylinder(d=M3_screw_diameter,h=2*base_width,center=true,$fn=60);
         
         //lámač
-        translate([0,0,-5.5])
+        translate([0,0,-3.5])
             rotate([0,90,0])
-                cylinder(d=10,h=15,$fn=4,center=true);
+                #cylinder(d=10,h=15,$fn=4,center=true);
             #for(i=[-1,1])
-                translate([0,i*(base_width/2+2.7),-1.5])
+                translate([0,i*(base_width/2+2.2),-1.5])
                     rotate([i*30,0,0])
                     rotate([0,90,0])                    
-                    cylinder(h=12, d=2,center=true,$fn=3);
+                    cylinder(h=12, d=4,center=true,$fn=3);
 
         
     }
