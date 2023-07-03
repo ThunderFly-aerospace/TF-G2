@@ -36,7 +36,7 @@ jobs:
         chmod +x ~/prusa-slicer.AppImage
         wget https://files.openscad.org/OpenSCAD-2021.01-x86_64.AppImage -O ~/OpenSCAD.AppImage
         chmod +x ~/OpenSCAD.AppImage
-        sudo apt-get install libc-bin python3-setuptools xvfb
+        sudo apt-get install libc-bin python3-setuptools xvfb libglu1-mesa
         sudo python3 -m pip install --upgrade pip
         sudo python3 -m pip install stlsort lxml
         sudo python3 -m pip install git+https://github.com/ThunderFly-aerospace/yagv@a541869d11d3c094f1d7a3ed4d3c0c30489398e9
