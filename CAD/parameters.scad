@@ -1,5 +1,7 @@
 include <bolt_parameters.scad>
 use <./src/lib/stdlib/naca4.scad>
+use <./src/lib/stdlib/curvedPipe/curvedPipe.scad>
+
 
 week = "77";  // dummy value for visual rendering not used for printing.
 
