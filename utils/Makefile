@@ -11,7 +11,7 @@ NAME_PREFIX?=''
 SLIC3R_PROFILE?=''
 PROCESSOR3D_PARAM?=
 IMG_DIR?=''
-PRINTER?=edee
+PRINTER?=mini
 
 RED=" \e[91m "
 GRN=" \e[32m "
