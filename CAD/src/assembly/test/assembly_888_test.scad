@@ -1,7 +1,7 @@
 //@set_type(solid)
 include <../../../parameters.scad>
 //@blender_template(../../build_manual/blender/build_manual_template.blend)
-//@blender_updater= ../../build_manual/update_render_src.py
+//@blender_updater=../../build_manual/update_render_src.py
 $fn=10;
 // TODO: render viewport to position of camera
 //       e.g. see ../../build_manual/src/buildmanual_0001_c.json
@@ -41,8 +41,10 @@ include <../position/position_888_1006.scad> // Policka na payload
 
 use <../../888_1004.scad>
 color([0.3,0.3,0.3])
-rotate([0, 90, 0])
-rotate([0, -90, 0]) // @blender-skip
+rotate([0, 45, 0])
+// FIXME: cannot use parametr
+// @blender-skip translate([0, -base_width/2, 0])
+rotate([0, -90, 0]) // @blender-skip basic rotation from stl of module
   888_1004();
 //use <../888_1004.scad>
 //use <../888_1005.scad>

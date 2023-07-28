@@ -60,7 +60,12 @@ jobs:
         cd CAD/src
         make
 
-    - name: Make -d CAD/src/assembly (position)
+    - name: Make -d CAD/src/assembly/position
+      run: |
+        cd CAD/src/assembly/position
+        make
+
+    - name: Make -d CAD/src/assembly
       run: |
         cd CAD/src/assembly
         make
