@@ -37,6 +37,24 @@ $(AMF_DIR)/%.amf: $(SRC_DIR)/%.scad
 
 finish:
 	cd $(GIT_ROOT)/CAD/slicing/; rm ./*.ini 2> /dev/null
+
+LIST_TARGETS =
+ifdef AMF_DIR
+LIST_TARGETS += list-targets-amf
+endif
+ifdef GCD_DIR
+LIST_TARGETS += list-targets-gcd
+endif
+
+list-targets: ${LIST_TARGETS}
+
+list-targets-amf:
+	@echo "AMF_TARGETS:"
+	@echo " $(AMF_TARGETS)" | sed 's#  #\n  #g'
+
+list-targets-gcd:
+	@echo "GCD_TARGETS:"
+	@echo " $(GCD_TARGETS)" | sed 's#  #\n  #g'
 	
 # gdefault: $(TARGETS)
 # $(GCD_DIR)/%.gcode: $(SRC_DIR)/%.scad

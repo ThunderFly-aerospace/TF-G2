@@ -1,5 +1,7 @@
 
 //@set_slicing_config(../slicing/default.ini)
+//@blender_template(../build_manual/blender/build_manual_template.blend)
+
 include <../../parameters.scad>
 // include <yasim.scad>
 
