@@ -1,7 +1,11 @@
 STL_DIR=../../stl
 AMF_DIR=../../amf
 IMG_DIR=png
-SRC_DIR=../../src/assembly/position
+# FIXED: do only assembly targets
+# SRC_DIR=../../src/assembly/position
+#         must be done in itself directory
+# see ../../../.github/workflows/render_previews.yml
+SRC_DIR=../../src/assembly
 # DEP_DIR=../../dep
 # GCD_DIR=../../gcode
 # INI_DIR=../../slicing

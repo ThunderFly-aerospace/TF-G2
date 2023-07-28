@@ -1,4 +1,5 @@
-
+// FIXME: this may fails in generation PNG from blender
+//@blender_template(../build_manual/blender/build_manual_template.blend)
 //@set_slicing_config(../slicing/default.ini)
 include <../../parameters.scad>
 include <yasim.scad>
