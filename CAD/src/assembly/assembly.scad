@@ -1,8 +1,8 @@
+// This enable generation png from blender:
+//@blender_template(../build_manual/blender/build_manual_template.blend)
 include <../../parameters.scad>
 $fn=10;
 
-// This enable generation png from blender:
-//@blender_template(../build_manual/blender/build_manual_template.blend)
 
 // include <yasim.scad>
 

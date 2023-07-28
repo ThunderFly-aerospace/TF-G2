@@ -1,3 +1,4 @@
+//@blender_template(../build_manual/blender/build_manual_template.blend)
 include <../../parameters.scad>
 
 include <position/position_rotorhead.scad>
