@@ -1,4 +1,5 @@
 //@blender_template(../build_manual/blender/build_manual_template.blend)
+//@blender_updater=../build_manual/update_render_src.py
 //@set_slicing_config(../slicing/default.ini)
 include <../../parameters.scad>
 

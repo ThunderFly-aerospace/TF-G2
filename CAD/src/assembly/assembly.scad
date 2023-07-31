@@ -1,5 +1,6 @@
 // This enable generation png from blender:
 //@blender_template(../build_manual/blender/build_manual_template.blend)
+//@blender_updater=../build_manual/update_render_src.py
 include <../../parameters.scad>
 $fn=10;
 
