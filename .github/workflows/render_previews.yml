@@ -70,11 +70,6 @@ jobs:
         cd CAD/src/assembly
         make
 
-    - name: Make -d CAD/src/assembly (test blender)
-      run: |
-        cd CAD/src/assembly/test
-        make
-
     - name: Upload a PNG Artifact
       uses: actions/upload-artifact@v2.2.2
       with:
