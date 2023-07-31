@@ -8,7 +8,7 @@ SRC_DIR=../../../src/assembly/position
 GIT_ROOT=../../../../
 # FIXME: this is due to SRC+OUTPUT is at GIT ROOT
 OUTPUT_FOLDER=CAD
-NAME_PREFIX=TF-G2_assembly
+NAME_PREFIX=TF-G2
 PROCESSOR3D_PARAM=--no_gcode --no_amf --no_blend
 
 include ../../../../utils/Makefile
