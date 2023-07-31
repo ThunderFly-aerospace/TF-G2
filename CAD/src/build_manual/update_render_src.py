@@ -34,7 +34,7 @@ print("Konfigurační soubor", config_file)
 print("Cela cesta:", config_folder)
 print("Nazev konfigurace", config_name)
 
-
+# FIXME: add dep check
 
 def import_and_rename(stl, name = None):
     print("Importing file '{}' with name '{}'.".format(stl, name))
@@ -57,7 +57,15 @@ def save_blender_file(filename):
 
 def render_png(filename, frame = 0):
 	print("Rendering file")
+        # see https://docs.blender.org/api/current/bpy.types.RenderSettings.html
+        #  or https://blenderartists.org/
 	bpy.context.scene.render.filepath = filename
+	#bpy.ops.render.render(write_still=True)
+	# FIXME: set up from json
+	bpy.context.scene.render.resolution_x = 1024
+	bpy.context.scene.render.resolution_y = 1024
+	bpy.context.scene.render.fps = 1
+	bpy.context.scene.render.image_settings.compression = 100
 	bpy.ops.render.render(write_still=True)
 	print("Saving render")
 
