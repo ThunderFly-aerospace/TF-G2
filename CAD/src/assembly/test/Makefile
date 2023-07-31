@@ -1,6 +1,5 @@
 STL_DIR=../../../stl
 AMF_DIR=../../../amf
-IMG_DIR=png
 SRC_DIR=../../../src/assembly/test
 # DEP_DIR=../../../dep
 # GCD_DIR=../../../gcode
@@ -8,7 +7,9 @@ SRC_DIR=../../../src/assembly/test
 GIT_ROOT=../../../../
 # FIXME: this is due to SRC+OUTPUT is at GIT ROOT
 OUTPUT_FOLDER=CAD
-NAME_PREFIX=TF-G2_assembly
-PROCESSOR3D_PARAM=--no_gcode --no_amf
+# is taken from GIT_ROOT/OUTPUT_FOLDER
+IMG_FOLDER=../doc/assembly_guide/img
+NAME_PREFIX=TF-G2
+PROCESSOR3D_PARAM=--no_gcode --no_amf --img_folder "$(IMG_FOLDER)"
 
 include ../../../../utils/Makefile
