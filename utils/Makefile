@@ -18,6 +18,8 @@ GRN=" \e[32m "
 YEL=" \e[33m "
 DEF=" \e[39m "
 
+STRICT=-
+
 all: prepare_config default finish
 
 prepare_config:
@@ -30,7 +32,7 @@ $(AMF_DIR)/%.amf: $(SRC_DIR)/%.scad
 	@echo "\n\n"
 	@echo $<
 	@echo "\n"
-	-processor3D \
+	$(STRICT)processor3D \
 		--output_folder $(GIT_ROOT)/$(OUTPUT_FOLDER) \
 		--name_prefix $(NAME_PREFIX) \
 		$(PROCESSOR3D_PARAM) $<
@@ -45,6 +47,9 @@ endif
 ifdef GCD_DIR
 LIST_TARGETS += list-targets-gcd
 endif
+
+list:
+	@echo "OUTPUT_FOLDER: $$(cd $(GIT_ROOT) ; cd $(OUTPUT_FOLDER); pwd -P)"
 
 list-targets: ${LIST_TARGETS}
 
