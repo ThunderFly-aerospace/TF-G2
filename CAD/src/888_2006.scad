@@ -26,7 +26,14 @@ module 888_2006(draft=true)
                 cube([length,box_h,thickness]);
 
 
-        888_1003();
+        minkowski(){
+          cylinder(d=global_clearance/2, h = global_clearance,$fn=60);
+          intersection(){
+            translate([top_leg_screw_pos_x-x_border,-box_h+(height_above_top_leg_screw+top_leg_screw_pos_y),0])
+                    cube([length,box_h,thickness*2]);
+            888_1003();
+          }
+        }
         /*translate([260,0,0])
             cylinder(d=8, h = 8,$fn=60);*/
 
