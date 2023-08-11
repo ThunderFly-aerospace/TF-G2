@@ -77,9 +77,13 @@ module 888_1007(){
             for(x=[-1, 1]) translate([x*sqrt(20*20*2), 0, 0]) cylinder(d=M3_screw_diameter, h=5, center=true, $fn=30);
             }
             
-            
+           
+        // Otvory na LEDky 
         translate([0, 0, -1]) {
             for(x=[0:gps_rtk?3:1]) translate([-20+7.27+3.746*x, 20+0.84, 0]) cylinder(d=3, h=3, center=true, $fn=30);
+            }
+        translate([0, 0, -1]) {
+            translate([-20+16.845, -20-1.475, 0]) cylinder(d=3, h=3, center=true, $fn=30);
             }
     }
 }
