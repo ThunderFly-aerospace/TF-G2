@@ -4,6 +4,13 @@ use <lib/stdlib/silentblock.scad>
 
 pylon_bottom_wall = 5;
 
+
+gps = 1;            // Vytvorit prostor pro GPS pod pylonem
+gps_rtk = 0;        // 1 nebo 0 - pocet odkrytych LEDek
+gps_pcb_width = 51;
+gps_screw_dist = 40;
+
+
 module pylon_silentblocks(){
 for(x = [-0.5, 0.5], y=[-0.5, 0.5])
   translate([(pylon_silentblocks_base_distance)*x, (pylon_silentblocks_base_distance)*y, 4])
@@ -52,6 +59,28 @@ module 888_1007(){
                 rotate([90, 0, 0])
                     cylinder(d = plastic_screw_diameter, h = base_width+1, center=true, $fn = 24);
 
+    }
+    
+    difference(){
+        union(){
+        for(r=[-1, 1]) translate([0, 0, -1]) rotate([0, 0 ,r*45]) {
+            cube([sqrt(pylon_silentblocks_base_distance*pylon_silentblocks_base_distance*2)-10, 3, 3], center=true);
+            for(x=[-1, 1]) translate([x*sqrt(20*20*2), 0, 0]) cylinder(d=7, h=3, center=true);
+            }
+        translate([0, 0, -2.1]) cube([55, 55, 0.8], center=true);
+        
+        
+        translate([0, 0, -1]) cube([7, 7, 2], center=true);
+        }
+        
+        for(r=[-1, 1]) translate([0, 0, -1]) rotate([0, 0 ,r*45]) {
+            for(x=[-1, 1]) translate([x*sqrt(20*20*2), 0, 0]) cylinder(d=M3_screw_diameter, h=5, center=true, $fn=30);
+            }
+            
+            
+        translate([0, 0, -1]) {
+            for(x=[0:gps_rtk?3:1]) translate([-20+7.27+3.746*x, 20+0.84, 0]) cylinder(d=3, h=3, center=true, $fn=30);
+            }
     }
 }
 
