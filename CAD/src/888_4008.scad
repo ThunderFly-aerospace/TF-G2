@@ -41,6 +41,9 @@ module 888_4008(draft = true){
     rpm_sensor_base_h= 2;
     rpm_sensor_count=16;
     rpm_hole_h = 50;
+    rpm_sensor_magnet_diameter=1.5;
+    rpm_sensor_magnet_height=1.2;
+    rpm_sensor_magnet_r=13.5+2;    // teeth center: (rpm_sensor_inner_r+starter_rope_d/2) / 2;
     //rpm_hole_width = 7;
 
     screws_head_d=7;
@@ -123,9 +126,9 @@ module 888_4008(draft = true){
                */
               // screw_thread(15,4,55,100,PI/2,2);
 
-              // Otvor na zastrceni provazku
-              translate([0, 0, starter_top_h+top_thickness + rpm_sensor_h -1.65 ])
-                  rotate([-90, 0, -rotor_delta_angle - 45])
+              // Rope initial fix hole
+              translate([0, 0, starter_top_h+top_thickness + rpm_sensor_h -1.65 - starter_rope_d/2])
+                  rotate([-45, 0, -rotor_delta_angle - 45])
                     cylinder(d = starter_rope_diameter, h = 50, center = false, $fn = 10);
 
               // Cut for rope fix before start
@@ -135,7 +138,7 @@ module 888_4008(draft = true){
                       cube([starter_pipe_d_middle, starter_pipe_d_middle, starter_rope_diameter]);
 
 
-              // Otvory pro senzor
+              // Optical sensor teeth
               translate([0,0,top_thickness + M3_nut_height + sensor_cap_height])
                 intersection() {
                     union(){  // sensor teeth outer rim
@@ -149,6 +152,14 @@ module 888_4008(draft = true){
                         polygon(points=[[0,0],[starter_rope_d/2, ((starter_rope_d/2) * sin(360/rpm_sensor_count/2))/2], [starter_rope_d/2, -((starter_rope_d/2) * sin(360/rpm_sensor_count/2))/2]]);
                     }
                 }
+
+              // Magnetic sensor's magnets
+              for (i=[0:rpm_sensor_count]) rotate([0, 0, (360/rpm_sensor_count)*(i + 1/2)]){
+                  translate([0, rpm_sensor_magnet_r, top_thickness + rpm_sensor_h + starter_top_h-rpm_sensor_magnet_height])
+                  cylinder(d = rpm_sensor_magnet_diameter, h = rpm_sensor_magnet_height, $fn = draft?rpm_sensor_count:50);
+              }
+
+
 
               // rotor axis
               cylinder(d = M3_screw_diameter+0.1, h = 3* thickness+starter_top_h, center = true, $fn = 20);
