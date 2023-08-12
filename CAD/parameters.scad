@@ -117,7 +117,7 @@ rotor_blade_part_list = [0, 50, 200, 350, 500];
 
 
 // vzdalenosti der pro kryty
-//platform_mount_points = [base_patern*5, base_patern*13, base_patern*17, base_patern*26];
+// platform_mount_points = [base_patern*5, base_patern*13, base_patern*17, base_patern*26];
 // Otvory pro pripevneni na platformu
 platform_mount_points = [base_patern*8, base_patern*26];
 
@@ -258,7 +258,7 @@ pylon_thickness = 0; // Netusim, co to je
 
 pylon_bottom_wall = 5;
 
-pylon_silentblocks_base_distance = 67;    // vzdalenost silentblocku pylonu od sebe
+pylon_silentblocks_base_distance = 58;    // vzdalenost silentblocku pylonu od sebe
 pylon_pipe_top_y_dist = 25;
 pylon_pipe_top_x_dist = 30;
 pylon_screw_top_y_dist = 25;

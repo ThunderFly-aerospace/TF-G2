@@ -63,19 +63,19 @@ module 888_1007(){
     
     difference(){
         union(){
-        for(r=[-1, 1]) translate([0, 0, -1]) rotate([0, 0 ,r*45]) {
-            cube([sqrt(pylon_silentblocks_base_distance*pylon_silentblocks_base_distance*2)-10, 3, 3], center=true);
-            for(x=[-1, 1]) translate([x*sqrt(20*20*2), 0, 0]) cylinder(d=7, h=3, center=true);
+        for(r=[-1, 1]) translate([0, 0, -1.5]) rotate([0, 0 ,r*45]) {
+            cube([sqrt(pylon_silentblocks_base_distance*pylon_silentblocks_base_distance*2)-10, 3, 2], center=true);
+            for(x=[-1, 1]) translate([x*sqrt(20*20*2), 0, 0]) cylinder(d=7, h=2, center=true, $fn=30);
             }
         translate([0, 0, -2.1]) cube([55, 55, 0.8], center=true);
         
-        
-        translate([0, 0, -1]) cube([7, 7, 2], center=true);
+        translate([0, 0, -1.5]) cube([7, 7, 1], center=true);
         }
         
+        //  Montazni otvory pro GPS krabicku
         for(r=[-1, 1]) translate([0, 0, -1]) rotate([0, 0 ,r*45]) {
-            for(x=[-1, 1]) translate([x*sqrt(20*20*2), 0, 0]) cylinder(d=M3_screw_diameter, h=5, center=true, $fn=30);
-            }
+            for(x=[-1, 1]) translate([x*sqrt(20*20*2), 0, 0]) cylinder(d=2.6, h=5, center=true, $fn=30);
+        }
             
            
         // Otvory na LEDky 

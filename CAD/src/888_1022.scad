@@ -10,9 +10,9 @@ gps_rtk = 0;        // 1 nebo 0 - pocet odkrytych LEDek
 gps_pcb_width = 51;
 gps_screw_dist = 40;
 
-gps_conn_height = 5;
+gps_conn_height = 6;
 gps_pcb_height = 1.6;
-gps_patch_height = 6;
+gps_patch_height = 4.5;
 
 module 888_1022(){
 
@@ -31,8 +31,6 @@ module 888_1022(){
         for(m=[-1, 1]) translate([box_width/2*m, 0, 0]) rotate([0, 45, 0]) cube([1, 60, 1], center=true);
         for(x=[-1, 1], y=[-1, 1]) translate([box_width/2*x, box_width/2*y, 0]) rotate([0, 0, 45]) cube([1, 1, 30], center=true);
         
-        
-        
         translate([0, 0, box_height/2+0.8]) cube([gps_pcb_width+0.5, gps_pcb_width+0.5, box_height], center=true);
         
         for(r=[-1, 1]) translate([0, 0, -1]) rotate([0, 0 ,r*45]) {
@@ -43,11 +41,14 @@ module 888_1022(){
             // Konektory 
             
             
-            translate([-25, -10.854, 0.8+5.5/2]) cube([10, 9.44+0.5, 5.5], center=true);
-            translate([-25, 6.885, 0.8+5.5/2]) cube([10, 16.96+0.5, 5.5], center=true);
-            translate([25, -8.229, 0.8+5.5/2]) cube([10, 11.96+0.5, 5.5], center=true);
-            translate([25, 7.646, 0.8+5.5/2]) cube([10, 14.4+0.5, 5.5], center=true);
+            translate([-25, -10.854, 0.8+6/2]) cube([10, 9.44+0.5, 6], center=true);
+            translate([-25, 6.885, 0.8+6/2]) cube([10, 16.96+0.5, 6], center=true);
+            translate([25, -8.229, 0.8+6/2]) cube([10, 11.96+0.5, 6], center=true);
+            translate([25, 7.646, 0.8+6/2]) cube([10, 14.4+0.5, 6], center=true);
     }
+    
+    for(m=[-1, 1]) translate([(box_width/2-2.2)*m, 0, 1]) cube([4, box_width-1, 1], center=true);
+        
     
     
     for(x=[-20, 20], y=[-20, 20]) translate([x, y, 0]) difference() {
