@@ -48,21 +48,38 @@ translate([0, -base_width/2 - side_thickness, 0])
 
     // Otvory pro pripevneni a vetrani motoru
     translate([motor_x_shift, 0, motor_holder_motor_height -(-rantl_height + base_thickness + 0.2)])
-      rotate([0, 90 - motor_angle, 0]) rotate([0, 0, 45]){
+      rotate([0, 90 - motor_angle, 0]) rotate([0, 0, 90]){
 
-        cylinder(d=13, h=20, $fn=100);
+        difference(){
+          cylinder(d=23, h=20, $fn=100);
+
+          for(x = [1,2,3,4])
+            rotate([0, 0, 90*x+45])
+              translate([0, 25/2, 0])
+                cylinder(d = 7.5, h = 20, $fn=20);
+        }
 
         for(x = [1,2,3,4])
           rotate([0, 0, 90*x+45])
             translate([0, 25/2, 0])
               cylinder(d = M3_screw_diameter, h = 20, $fn=20);
 
-        for(x = [1,2,3,4])
-          rotate([0, 0, 90*x])
-            translate([0, 25/2, 0])hull(){
-              translate([1.5, 0, 0]) cylinder(d = M6_screw_diameter, h = 20, $fn=20);
-              translate([-1.5, 0, 0]) cylinder(d = M6_screw_diameter, h = 20, $fn=20);
-            }
+        for(x = [1,2]){
+          hull(){
+            rotate([0, 0, 90*x])
+              translate([0, 25/2, 0]){
+                  translate([1.5, -1, 0]) cylinder(d = 8, h = 20, $fn=20);
+                  translate([-1.5, -1, 0]) cylinder(d = 8, h = 20, $fn=20);
+              }
+
+              
+              rotate([0, 0, 90*(x +2) ])
+                translate([0, 25/2, 0]){
+                  translate([1.5, -1, 0]) cylinder(d = 8, h = 20, $fn=20);
+                  translate([-1.5, -1, 0]) cylinder(d = 8, h = 20, $fn=20);
+              }
+          }
+        }
     	}
 
         
