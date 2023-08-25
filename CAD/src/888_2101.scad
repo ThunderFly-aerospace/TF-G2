@@ -64,11 +64,11 @@ module 888_2101(draft=true) // Skid holder
 
           //šroubek tulsté trubky
           translate([mount_tube_out_d/2 + big_screw,0,tube_screw_l])
-              rotate([90,0,0])
+              rotate([-90,0,0])
                       cylinder(d=sm_screw,h=tube_hole, center=true,$fn=circle_fn);
 
           translate([mount_tube_out_d/2 + big_screw,0,tube_screw_l])
-              rotate([-90,0,0])
+              rotate([90,0,0])
                       cylinder(d=big_screw,h=tube_hole, center=false,$fn=circle_fn);
 
 
@@ -77,9 +77,9 @@ module 888_2101(draft=true) // Skid holder
               rotate([0,0,0])
                       cylinder(d=M3_head_diameter,h=4, center=true, $fn = circle_fn);
 
-         //matičky tlustá trubka
-         translate([mount_tube_out_d/2 + big_screw,joint_d/3,tube_screw_l])
-              rotate([90,0,0])
+         //hlava šroubu tlusta trubka
+         translate([mount_tube_out_d/2 + big_screw,-joint_d/3,tube_screw_l])
+              rotate([-90,0,0])
                    translate([0,0,0])
                       cylinder(d=M3_head_diameter,h=4, center=true, $fn = circle_fn);
     }
