@@ -22,7 +22,7 @@ jobs:
       PRINTER: ${{ matrix.printer }}
     steps:
     - uses: FranzDiebold/github-env-vars-action@v2
-    
+
     - name: Checkout repository
       uses: actions/checkout@v2
       with:

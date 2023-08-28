@@ -30,14 +30,14 @@ $(AMF_DIR)/%.amf: $(SRC_DIR)/%.scad
 	@echo "\n\n"
 	@echo $<
 	@echo "\n"
-	-processor3D \
+	processor3D \
 		--output_folder $(GIT_ROOT)/$(OUTPUT_FOLDER) \
 		--name_prefix $(NAME_PREFIX) \
 		$(PROCESSOR3D_PARAM) $<
 
 finish:
 	cd $(GIT_ROOT)/CAD/slicing/; rm ./*.ini 2> /dev/null
-	
+
 # gdefault: $(TARGETS)
 # $(GCD_DIR)/%.gcode: $(SRC_DIR)/%.scad
 # #     @echo ============== $<

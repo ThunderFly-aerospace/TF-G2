@@ -117,18 +117,16 @@ difference(){
     rotate ([0,90,0])
         difference(){
             translate([suspension_holder_thickness/2 - additional_thickness/2 , suspension_bow_diameter/2 - join_height/2 + additional_height_y_move, additional_width_x_move])
-                cube([suspension_holder_thickness + additional_thickness,
-     join_height + 2*presah + additional_height,
-     join_height + additional_width], center=true);
+                cube([suspension_holder_thickness + additional_thickness, join_height + 2*presah + additional_height, join_height + additional_width], center=true);
             translate([0,additional_height_y_move,additional_width_x_move])
             mirror_copy([0, 0, 1])
             translate([-0.1, suspension_bow_diameter/2 + presah/2 - M3_screw_diameter/2, suspension_join_screw_distance/2])
                 rotate([0, 90, 0]){
                     //translate([0,0,-additional_thickness])
                     translate([0,additional_y_move_holes,-30.3 + M3_nut_height - layer_thickness - additional_thickness])
-                    cylinder(d= M3_screw_diameter, h = 30 + additional_thickness,$fn = draft?10:50);
+                        cylinder(d= M3_screw_diameter, h = 30 + additional_thickness,$fn = draft?10:50);
                     translate([0,additional_y_move_holes,2.4 -  additional_height_nuts])
-                cylinder(d = M3_nut_diameter, h = M3_nut_height+0.2 + additional_height_nuts, $fn = 6);
+                        cylinder(d = M3_nut_diameter, h = M3_nut_height+0.2 + additional_height_nuts, $fn = 6);
             }
             translate([0,additional_height_y_move,additional_width_x_move])
             mirror_copy([0, 0, 1])
@@ -136,10 +134,13 @@ difference(){
                 rotate([0, 90, 0]){
                     //translate([0,0,-additional_thickness])
                     translate([0,additional_y_move_holes,-30.3 + M3_nut_height - layer_thickness - additional_thickness])
-                    cylinder(d= M3_screw_diameter, h = 30 + additional_thickness,$fn = draft?10:50);
+                        cylinder(d= M3_screw_diameter, h = 30 + additional_thickness,$fn = draft?10:50);
                     translate([0,additional_y_move_holes,2.4 - additional_height_nuts])
-                cylinder(d = M3_nut_diameter, h = M3_nut_height+0.2 + additional_height_nuts, $fn = 6);
+                        cylinder(d = M3_nut_diameter, h = M3_nut_height+0.2 + additional_height_nuts, $fn = 6);
                 }
+            rotate([0, -90, 0]) // neutralise rotation from line 117
+            translate([-0.1, suspension_bow_diameter/2 - join_height - M3_screw_diameter/2, -4+join_height - additional_width])
+                cylinder(d=mount_tube_out_d, h = 8,$fn=60);
         };
     888_1003();
 
@@ -155,26 +156,27 @@ difference(){
 
     // dolni rada
 	for(x = [20:10:base_length])
-		        translate([x, 0, -0.1 + additional_thickness]){
-                    translate([0, 0, -additional_thickness/2])
-	            	cylinder(d = M3_screw_diameter, h = 10 - (M3_head_height + 1.2 + layer_thickness ) + additional_thickness, center = true, $fn = 50);
-    translate([0,0,4.6])
-                cylinder(d = M3_head_diameter, h = M3_head_height + 0.2, $fn = 30, center = true);
-            }
+	  translate([x, -base_thickness+rantl_height/3*2, -0.1 + additional_thickness])
+    {
+        translate([0, 0, -additional_thickness/2])
+      	    cylinder(d = plastic_screw_trought_diameter, h = 10 - (M3_head_height + 1.2 + layer_thickness ) + additional_thickness, center = true, $fn = 50);
+        translate([0,0,4.6])
+            cylinder(d = M3_head_diameter, h = M3_head_height + 0.2, $fn = 30, center = true);
+    }
 
 
     // Rada sroubu pro akumulator
 	for(x = [40:10:10*18])
 	        translate([x, -bellow - 5, -0.1 +additional_thickness]){
                 translate([0, 0, -additional_thickness/2])
-	            cylinder(d = M3_screw_diameter, h = 10 - (M3_head_height + 1.2 + layer_thickness ) +  additional_thickness, center = true, $fn = 50);
+	            cylinder(d = plastic_screw_trought_diameter, h = 10 - (M3_head_height + 1.2 + layer_thickness ) +  additional_thickness, center = true, $fn = 50);
                 translate([0,0,4.6])
                 cylinder(d = M3_head_diameter, h = M3_head_height + 0.2, $fn = 30, center = true);
             }
-     // box for week
+     // box for week number on 888_1003
      translate([28, 3.5, side_base_thickness-0.4])
 		cube([9.2,6.5,1.3]);
-     if(fiberglass_gear){            
+     if(fiberglass_gear){
        // koupene podvozky ze skelnehovlakna
        translate([30, // FIXME
               additional_y_move -33, 0])
@@ -189,21 +191,21 @@ difference(){
        }
    }
         }
-        // pojezdny prouzek     
-     translate([30, // FIXME
-            additional_y_move -35 + (fiberglass_gear? 0 : fiberglass_gear_additional_height) 
+        // pojezdny prouzek - Tohle nejde vytisknout
+     *translate([30, // FIXME
+            additional_y_move -35 + (fiberglass_gear? 0 : fiberglass_gear_additional_height)
         , 0.5])
         rotate([45, 0 ,0])
          cube([join_height + additional_width/2 + (long_slider?2*presah:0), 1 + (long_slider?0.1:0), 1 + (long_slider?0.1:0) // FIXME spravnou delku + presah pro odebrani z krytu
-]); 
-        
+]);
+
         // pro odebrani casti, ktera by se prekryvala s krytem 2005
     if(add_fiberglass_gear){
      rotate([fiberglass_gear_oblique_angle, 0 ,0])
      translate([30, // FIXME
             additional_y_move -33, -40])
          cube([fiberglass_gear_width + 0.2 + additional_width, fiberglass_gear_thickness + 0.2, 50 // FIXME
-]);        
+]);
     }
 // dvojite odebrani der se pokusim znovu zakryt
 //   // matice
@@ -226,7 +228,7 @@ difference(){
 //                    cylinder(d= M3_screw_diameter + 1, h = layer_thickness);
 //                }
 
-                
+
 //     translate([start_x + additional_x_move, start_y + additional_y_move, 6])
 //    rotate ([0,90,0])
 //     translate([0,additional_height_y_move,additional_width_x_move])
@@ -235,8 +237,8 @@ difference(){
 //                rotate([0, 90, 0]){
 //                    translate([0,0,1.7+additional_height_nuts + M3_nut_height - layer_thickness - additional_thickness])
 //                    cylinder(d= M3_screw_diameter, h = layer_thickness);              }
-                     
-                
+
+
    }
 }
 
