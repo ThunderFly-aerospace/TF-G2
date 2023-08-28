@@ -11,7 +11,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     strategy:
       matrix:
         # printer: [mini, edee, mlab3d]
@@ -39,9 +39,9 @@ jobs:
         chmod +x ~/OpenSCAD.AppImage
         sudo apt-get install libc-bin python3-setuptools xvfb libglu1-mesa libglu1 libegl1
         sudo python3 -m pip install --upgrade pip
-        sudo python3 -m pip install stlsort lxml matplotlib thumby==0.2.3
+        sudo python3 -m pip install stlsort lxml matplotlib thumby
         sudo python3 -m pip install git+https://github.com/ThunderFly-aerospace/yagv@a541869d11d3c094f1d7a3ed4d3c0c30489398e9
-        sudo python3 -m pip install git+https://${{ secrets.AUTH_USER }}:${{ secrets.GITHUBPAT }}@github.com/ThunderFly-aerospace/processor3D.git@PrusaSlicer
+        sudo python3 -m pip install git+https://${{ secrets.AUTH_USER }}:${{ secrets.GITHUBPAT }}@github.com/ThunderFly-aerospace/processor3D.git
 
     - name: Make
       run: |
