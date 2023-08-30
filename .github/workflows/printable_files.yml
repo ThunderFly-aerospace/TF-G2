@@ -46,15 +46,9 @@ jobs:
       run: |
         cd CAD/src/printplate; make
 
-    - name: Upload a AMF Artifact
-      uses: actions/upload-artifact@v2.2.2
-      with:
-        name: 'render_amf'
-        path: './**/*.amf'
-
-    - name: 'Anonymize gcode'
-      run: |
-        for f in CAD/gcode/*.gcode; do sed -e 's/; .*$//g' -e '/^$/d' -i $f; done
+    #- name: 'Anonymize gcode'
+    #  run: |
+    #    for f in CAD/gcode/*.gcode; do sed -e 's/; .*$//g' -e '/^$/d' -i $f; done
 
     - name: Upload gcodes
       uses:  MLAB-project/push-generated-file@master
