@@ -15,8 +15,9 @@ To enhance the ease of learning autogyro technology, we made it possible to [sim
 
   * Micro payload load capacity suitable for multiple types of [TF-ATMON atmospheric sensors](https://www.thunderfly.cz/tf-atmon.html)
   * Low audible noise
-  * Predictable behavior in flight
-  * High repairability and easy maintenance
+  * High maneuverability and agility
+  * Extreme tolerance to rotor blade damage
+  * Repairabile and low maintenance
   * Use of 3D printing flexibility
   * [Simulation model available](https://github.com/ThunderFly-aerospace/FlightGear-TF-G2)
   * [Car roof takeoff ready](https://github.com/ThunderFly-aerospace/TF-SIMPLEPLATFORM)
