@@ -4,7 +4,7 @@
 // screw length step - minimum difference in length between two types of screws
 basic_screw_length = 5;
 
-
+plastic_screw_head = 5.2;
 plastic_screw_diameter = 2.2;
 plastic_screw_trought_diameter = 2.5; // otvor, kterym sroub lze prostrcit
 
