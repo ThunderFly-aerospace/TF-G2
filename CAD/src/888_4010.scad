@@ -1,7 +1,7 @@
 include <../parameters.scad>
 
 
-module 888_4010(colective=-0.5)
+module 888_4010(colective=1.5)
 {
 
 ax_length=free_flap_ax_length;
@@ -13,7 +13,6 @@ negativ_flap_limit=free_flap_negativ_flap_limit;
 bearing_add=free_flap_bearing_add;
 desk_add=free_flap_desk_add;
 desk_h=free_flap_desk_h;
-central_part_screw_cylinder_h=free_flap_central_part_screw_cylinder_h;
 
 delta_angle=free_flap_delta_angle;
 blade_screw_distance=free_flap_blade_screw_distance;
@@ -61,7 +60,7 @@ difference()
             translate([shaft_neck_l-0.05,0,0])
                 cube([.01,shaft_l,shaft_h],center=true);
         }
-
+        
         hull()
         {
 
@@ -73,53 +72,56 @@ difference()
 
             //printing support
             rotate([colective,0,0])
-                translate([cut_d-2-cut_d/4,-blade_w/4,0])
-                    cube([cut_d/2,blade_w/2,cut_h],center=true);
+                translate([cut_d/2-0.5,-blade_w/2+0.05,0])
+                    cube([0.1,0.1,shaft_h],center=true);                   
+            rotate([colective,0,0])
+                translate([cut_d-0.1,-blade_w/2+0.05,0])
+                    cube([0.1,0.1,cut_h],center=true);
 
-            /*//cut neck
-            translate([cut_d-0.5,0,0])
-                cube([1,cut_w,cut_h],center=true);
-            }
-
-            hull()
-            {*/
             //cut neck
             translate([cut_d-0.5,0,0])
-                cube([1,cut_w,cut_h],center=true);
+                cube([0.1,cut_w,cut_h],center=true);
+        }
+        
+        //printing support between part
+        rotate([colective,0,0])
+                translate([cut_d+1.5,-blade_w/2+0.4,0])
+                    cube([16,0.8,2*blade_holder_h+blade_h],center=true);   
 
-            //blade hodler
-            rotate([colective,0,0])
-                for(i=[-1,1])
-                    for(j=[-1,1])
-                        translate([blade_d+blade_holder_l/2,i*(blade_w/2-blade_holder_radius/2),j*((2*blade_holder_h+blade_h)/2-blade_holder_radius/2)])
-                            rotate([0,90,0])
-                                cylinder(d=blade_holder_radius,h=blade_holder_l,center=true,$fn=circle_fn);
+        hull()
+        {
+        //cut neck
+        translate([cut_d-0.5,0,0])
+            cube([0.1,cut_w,cut_h],center=true);
 
-            /*translate([blade_d+blade_holder_l/2,0,0])
-                rotate([0,90,0])
-                    cylinder(d=2*blade_holder_h+blade_h,h=blade_holder_l,center=true,$fn=circle_fn);*/
+        //blade hodler
+        rotate([colective,0,0])                
+           for(j=[-1,1])
+           {               
+              translate([blade_d+blade_holder_l/2,(blade_w/2-blade_holder_radius/2),j*((2*blade_holder_h+blade_h)/2-blade_holder_radius/2)])
+                  rotate([0,90,0])
+                            cylinder(d=blade_holder_radius,h=blade_holder_l,center=true,$fn=circle_fn);
+                            
+              #translate([blade_d+blade_holder_l/2,-1*(blade_w/2-0.1/2),j*((2*blade_holder_h+blade_h)/2-0.1/2)])
+                  rotate([0,90,0])
+                            cylinder(d=0.1,h=blade_holder_l,center=true,$fn=circle_fn);
+           }
 
         }
 
         // rotor blade spring
-        hull()
+        /*hull()
         {
-            //shaft neck
-            rotate([0,0,delta_angle])
-                translate([shaft_neck_l-0.05,0,0])
-                    cube([.01,shaft_l,shaft_h],center=true);
-
-            //printing support
-            rotate([colective,0,0])
-                translate([cut_d-2-cut_d/4,-blade_w/4,0])
-                    cube([cut_d/2,blade_w/2,cut_h],center=true);
+            //cut neck
+            translate([cut_d-0.5,0,0])
+                cube([0.1,cut_w,cut_h],center=true);
 
             //rubber ring holder
             rotate([colective,0,0])
               translate([blade_d,-blade_holder_radius/2,((3*blade_holder_h+blade_h)/2)])
                     rotate([90,0,0])
                         cylinder(d=2*rubber_spring_d,h=blade_w-blade_holder_radius,center=true,$fn=circle_fn);
-        }
+        }*/
 
         //blade hodler screw nuts cylnders
         rotate([colective,0,0])
@@ -142,8 +144,8 @@ difference()
        }
     }
 
-
-    rotate([colective,0,0])
+    //gumičky
+    /*rotate([colective,0,0])
       translate([blade_d,-blade_holder_radius/2,((3*blade_holder_h+blade_h)/2+1)])
       {
             rotate([90,0,0])
@@ -151,6 +153,7 @@ difference()
             translate([rubber_spring_d/2,0,-rubber_spring_d/12])
                 cube([cut_d/2,blade_w,rubber_spring_d-rubber_spring_d/6],center=true);
       }
+    */
 
 
     //díra pro list
@@ -187,7 +190,7 @@ difference()
             cylinder(d=M3_nut_diameter,h=M3_nut_height,center=true,$fn=6);
 
           //popisky
-        translate([blade_first_screw+blade_d+blade_screw_distance/2, 0, (2*blade_holder_h+blade_h)/2-0.1])
+        translate([blade_first_screw+blade_d+blade_screw_distance/2, 0, (2*blade_holder_h+blade_h)/2-0.5])
           linear_extrude(4)
                 text(str(colective), size = 4, halign="center", valign="center");
     }
