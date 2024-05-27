@@ -1,8 +1,9 @@
 include <../../parameters.scad>
 use <../888_4009.scad>
 use <../888_4010.scad>
+use <../888_4011.scad>
 
-flap=-5;
+flap=0;
 
 //intersection()
 union()
@@ -24,6 +25,8 @@ union()
                 rotate([0,0,-free_flap_delta_angle])
                 888_4010();
     }
+translate([0,0,-3])
+    888_4011();
     
 }
     
